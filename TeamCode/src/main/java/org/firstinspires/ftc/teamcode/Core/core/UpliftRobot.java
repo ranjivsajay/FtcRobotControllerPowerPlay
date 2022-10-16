@@ -5,11 +5,13 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class UpliftRobot {
-    DcMotor leftFront, rightFront, leftBack, rightBack;
+    DcMotor leftFront, rightFront, leftBack, rightBack, slides;
     BNO055IMU imu;
+    DistanceSensor distanceSensor;
 
 
     public LinearOpMode opMode;
@@ -34,6 +36,11 @@ public class UpliftRobot {
         parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
         imu.initialize(parameters);
 
+        distanceSensor = hardwareMap.get(DistanceSensor.class, "distance_sensor");
+
+        slides = hardwareMap.get(DcMotor.class, "slides");
+
+
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -56,5 +63,10 @@ public class UpliftRobot {
 
     public DcMotor getRightFront() {
         return rightFront;
+    }
+
+    public DcMotor getSlides()
+    {
+        return slides;
     }
 }
