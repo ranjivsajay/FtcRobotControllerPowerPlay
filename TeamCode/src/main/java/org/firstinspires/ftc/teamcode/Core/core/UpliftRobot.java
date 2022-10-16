@@ -7,11 +7,13 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 public class UpliftRobot {
-    DcMotor leftFront, rightFront, leftBack, rightBack, slides;
+    DcMotor leftFront, rightFront, leftBack, rightBack, slide1, slide2;
     BNO055IMU imu;
     DistanceSensor distanceSensor;
+    Servo grabber;
 
 
     public LinearOpMode opMode;
@@ -30,6 +32,12 @@ public class UpliftRobot {
         leftBack = hardwareMap.get(DcMotor.class, "left_back");
         rightBack = hardwareMap.get(DcMotor.class, "right_back");
 
+        slide1 = hardwareMap.get(DcMotor.class, "slide1");
+        slide2 = hardwareMap.get(DcMotor.class, "slide2");
+
+        grabber = hardwareMap.get(Servo.class, "grabber");
+
+
         imu = hardwareMap.get(BNO055IMU.class, "imu");
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
@@ -37,9 +45,6 @@ public class UpliftRobot {
         imu.initialize(parameters);
 
         distanceSensor = hardwareMap.get(DistanceSensor.class, "distance_sensor");
-
-        slides = hardwareMap.get(DcMotor.class, "slides");
-
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -49,6 +54,10 @@ public class UpliftRobot {
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
+    public Servo getGrabber()
+    {
+        return grabber;
+    }
     public DcMotor getLeftFront() {
         return leftFront;
     }
@@ -65,8 +74,18 @@ public class UpliftRobot {
         return rightFront;
     }
 
-    public DcMotor getSlides()
+    public DcMotor getSlide1()
     {
-        return slides;
+        return slide1;
+    }
+
+    public DcMotor getSlide2()
+    {
+        return slide2;
+    }
+
+    public DistanceSensor getDistanceSensor()
+    {
+        return distanceSensor;
     }
 }

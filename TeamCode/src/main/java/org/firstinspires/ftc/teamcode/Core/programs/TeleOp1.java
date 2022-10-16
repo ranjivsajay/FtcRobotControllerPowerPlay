@@ -26,6 +26,7 @@ public class TeleOp1 extends UpliftTele {
 
     @Override
     public void initAction(){
+        robot.getGrabber().setPosition(0);
 
     }
 
@@ -43,6 +44,12 @@ public class TeleOp1 extends UpliftTele {
 
         teleDrive(angle, magnitude, rightX, robot);
 
+//        slides(0.5, 200);
+        robot.getSlide1().setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
+        robot.getSlide2().setPower(Range.clip(-gamepad2.right_stick_y, -1, 1));
+
+        grab();
+
     }
 
     @Override
@@ -51,7 +58,7 @@ public class TeleOp1 extends UpliftTele {
     }
 
     public static void teleDrive ( double joystickAngle, double speedVal,
-                                   double turnVal, UpliftRobot robot){
+                                   double turnVal, UpliftRobot robot) {
         double lfPow = sin(toRadians(joystickAngle) + (0.25 * PI)) * speedVal + turnVal;
         double rfPow = sin(toRadians(joystickAngle) - (0.25 * PI)) * speedVal - turnVal;
         double lbPow = sin(toRadians(joystickAngle) - (0.25 * PI)) * speedVal + turnVal;
@@ -80,7 +87,23 @@ public class TeleOp1 extends UpliftTele {
         robot.getRightFront().setPower(rfPow / maxVal);
     }
 
+    public void slides(double power, double dist) {
+//        double initialPos = robot.getSlides().getCurrentPosition();
+//
+//        while (robot.getSlides().getCurrentPosition() < initialPos + dist) {
+//            robot.getSlides().setPower(power);
+//        }
+//        robot.getSlides().setPower(0);
 
+    }
+
+    public void grab()
+    {
+        if(gamepad2.a)
+        {
+            robot.getGrabber().setPosition(0.5);
+        }
+    }
 
 
 
