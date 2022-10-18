@@ -86,10 +86,10 @@ public class UpliftRobot {
         return webcam;
     }
 
-//    public Servo getGrabber()
-//    {
-//        return grabber;
-//    }
+    public CRServo getGrabber()
+    {
+        return grabber;
+    }
     public DcMotor getLeftFront() {
         return leftFront;
     }

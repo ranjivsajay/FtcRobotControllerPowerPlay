@@ -103,7 +103,7 @@ public class TeleOp1 extends UpliftTele {
     {
         if(gamepad2.a)
         {
-            robot.getGrabber().setPosition(0.5);
+            robot.getGrabber().setPower(0.5);
         }
     }
 
