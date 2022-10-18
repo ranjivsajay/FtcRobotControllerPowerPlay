@@ -50,7 +50,7 @@ public class TeleOp1 extends UpliftTele {
         robot.getSlide1().setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
         robot.getSlide2().setPower(Range.clip(-gamepad2.right_stick_y, -1, 1));
 
-//        grab();
+        grab();
 
     }
 
@@ -99,13 +99,13 @@ public class TeleOp1 extends UpliftTele {
 
     }
 
-//    public void grab()
-//    {
-//        if(gamepad2.a)
-//        {
-//            robot.getGrabber().setPosition(0.5);
-//        }
-//    }
+    public void grab()
+    {
+        if(gamepad2.a)
+        {
+            robot.getGrabber().setPosition(0.5);
+        }
+    }
 
 
 
