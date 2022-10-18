@@ -20,7 +20,7 @@ public class UpliftRobot {
     DcMotor leftFront, rightFront, leftBack, rightBack, slide1, slide2;
     BNO055IMU imu;
 //    DistanceSensor distanceSensor;
-    CRServo grabber;
+    Servo grabber;
     OpenCvCamera webcam;
 
 
@@ -45,7 +45,7 @@ public class UpliftRobot {
         slide1 = hardwareMap.get(DcMotor.class, "slide1");
         slide2 = hardwareMap.get(DcMotor.class, "slide2");
 
-        grabber = hardwareMap.get(CRServo.class, "grabber");
+        grabber = hardwareMap.get(Servo.class, "grabber");
 
 
         imu = hardwareMap.get(BNO055IMU.class, "imu");
@@ -86,7 +86,7 @@ public class UpliftRobot {
         return webcam;
     }
 
-    public CRServo getGrabber()
+    public Servo getGrabber()
     {
         return grabber;
     }

@@ -99,12 +99,11 @@ public class TeleOp1 extends UpliftTele {
 
     }
 
-    public void grab()
-    {
+    public void grab() throws InterruptedException {
         if(gamepad2.a)
         {
-            robot.getGrabber().setPower(.2);
-            
+            robot.getGrabber().setPosition(.2);
+
         }
     }
 
