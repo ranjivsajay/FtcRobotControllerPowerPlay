@@ -45,7 +45,7 @@ public class UpliftRobot {
         slide1 = hardwareMap.get(DcMotor.class, "slide1");
         slide2 = hardwareMap.get(DcMotor.class, "slide2");
 
-//        grabber = hardwareMap.get(Servo.class, "grabber");
+        grabber = hardwareMap.get(CRServo.class, "grabber");
 
 
         imu = hardwareMap.get(BNO055IMU.class, "imu");
