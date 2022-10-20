@@ -26,7 +26,7 @@ public class TeleOp1 extends UpliftTele {
 
     @Override
     public void initAction(){
-//        robot.getGrabber().setPosition(0);
+        robot.getGrabber().setPosition(0);
 //        robot.initializeCamera();
 
 
@@ -102,7 +102,7 @@ public class TeleOp1 extends UpliftTele {
     public void grab() throws InterruptedException {
         if(gamepad2.a)
         {
-            robot.getGrabber().setPosition(.2);
+            robot.getGrabber().setPosition(-.7);
 
         }
     }
