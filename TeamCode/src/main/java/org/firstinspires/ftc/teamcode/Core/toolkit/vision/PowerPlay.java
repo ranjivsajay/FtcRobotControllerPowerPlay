@@ -26,6 +26,7 @@ public class  PowerPlay extends OpenCvPipeline {
     public Mat processFrame(Mat input) {
         System.out.println("Thread2: " + Thread.currentThread().getName());
         Imgproc.cvtColor(input, mat, Imgproc.COLOR_RGB2HSV);
+        Mat box = mat.submat(ROI);
 
         Scalar purplelowHSV = new Scalar(90, 50, 70);
         Scalar purplehighHSV = new Scalar(128, 255, 255);
@@ -36,12 +37,16 @@ public class  PowerPlay extends OpenCvPipeline {
         Scalar orangelowHSV = new Scalar(10, 100, 20);
         Scalar orangehighHSV = new Scalar(25, 255, 255);
 
-        Core.inRange(mat, orangelowHSV, orangehighHSV, mat);
-        Core.inRange(mat, greenlowHSV, greenhighHSV, mat);
-        Core.inRange(mat, purplelowHSV, purplehighHSV, mat);
+        Mat purpleMat = new Mat();
+        Mat greenMat = new Mat();
+        Mat orangeMat = new Mat();
+
+        Core.inRange(box, orangelowHSV, orangehighHSV, orangeMat);
+        Core.inRange(box, greenlowHSV, greenhighHSV, greenMat);
+        Core.inRange(box, purplelowHSV, purplehighHSV, purpleMat);
 
 
-        Mat box = mat.submat(ROI);
+
 
 
         //rectangle(image, rect, Scalar(0,255,0), 1, 8, 0);
