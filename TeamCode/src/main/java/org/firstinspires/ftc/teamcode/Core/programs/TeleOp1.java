@@ -26,7 +26,7 @@ public class TeleOp1 extends UpliftTele {
 
     @Override
     public void initAction(){
-        robot.getGrabber().setPosition(0);
+        robot.getGrabber().setPosition(0.32);
 //        robot.initializeCamera();
 
 
@@ -40,17 +40,20 @@ public class TeleOp1 extends UpliftTele {
         double leftX = Range.clip(gamepad2.left_stick_x, -1, 1);
 
 
-//
+
         double angle = 90 - Math.toDegrees(UpliftMath.atan2UL(leftY, leftX));
         double magnitude = 0.8 * Range.clip(sqrt(Math.pow(leftX, 2) + Math.pow(leftY, 2)), -1, 1);
 
         teleDrive(angle, magnitude, rightX, robot);
 
-//        slides(0.5, 200);
         robot.getSlide1().setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
         robot.getSlide2().setPower(Range.clip(-gamepad2.right_stick_y, -1, 1));
 
         grab();
+        low();
+        medium();
+        high();
+        down();
 
     }
 
@@ -90,23 +93,57 @@ public class TeleOp1 extends UpliftTele {
     }
 
     public void slides(double power, double dist) {
-//        double initialPos = robot.getSlides().getCurrentPosition();
-//
-//        while (robot.getSlides().getCurrentPosition() < initialPos + dist) {
-//            robot.getSlides().setPower(power);
-//        }
-//        robot.getSlides().setPower(0);
+        double initialPos1 = robot.getSlide1().getCurrentPosition();
+        double initialPos2 = robot.getSlide2().getCurrentPosition();
+
+        while (robot.getSlide1().getCurrentPosition() < initialPos1 + dist) {
+            robot.getSlide1().setPower(power);
+            robot.getSlide2().setPower(power);
+        }
+        robot.getSlide1().setPower(0);
+        robot.getSlide2().setPower(0);
+
 
     }
 
     public void grab() throws InterruptedException {
-        if(gamepad2.a)
+        if(gamepad2.right_trigger > 0)
         {
-            robot.getGrabber().setPosition(-.7);
+            robot.getGrabber().setPosition(.23);
 
         }
     }
 
+    public void low() throws InterruptedException{
+        if(gamepad2.b){
+            slides(.75,1500 );
+        }
 
+    }
+    public void medium() throws InterruptedException{
+        if(gamepad2.y){
+            slides(.75,2500 );
+        }
 
+    }
+    public void high() throws InterruptedException{
+        if(gamepad2.x)
+        {
+            slides(.75,5000);
+        }
+    }
+
+    public void down()
+    {
+        if(gamepad2.a)
+        {
+            robot.getGrabber().setPosition(0.4);
+            while(robot.getDistanceSensor().equals(false))
+            {
+                robot.getSlide1().setPower(-0.2);
+                robot.getSlide1().setPower(-0.2);
+
+            }
+        }
+    }
 }

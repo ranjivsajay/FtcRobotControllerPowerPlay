@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -19,7 +20,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 public class UpliftRobot {
     DcMotor leftFront, rightFront, leftBack, rightBack, slide1, slide2;
     BNO055IMU imu;
-//    DistanceSensor distanceSensor;
+    OpticalDistanceSensor distanceSensor;
     Servo grabber;
     OpenCvCamera webcam;
 
@@ -54,7 +55,7 @@ public class UpliftRobot {
         parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
         imu.initialize(parameters);
 
-//        distanceSensor = hardwareMap.get(DistanceSensor.class, "distance_sensor");
+        distanceSensor = hardwareMap.get(OpticalDistanceSensor.class, "distance_sensor");
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -116,8 +117,8 @@ public class UpliftRobot {
         return slide2;
     }
 
-//    public DistanceSensor getDistanceSensor()
-//    {
-//        return distanceSensor;
-//    }
+    public OpticalDistanceSensor getDistanceSensor()
+    {
+        return distanceSensor;
+    }
 }
