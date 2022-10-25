@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.Core.toolkit.vision;
 
+import static org.opencv.imgproc.Imgproc.rectangle;
+
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -9,18 +11,16 @@ import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 import org.openftc.easyopencv.OpenCvPipeline;
 
-public class  PowerPlay extends OpenCvPipeline {
+public class  TestingVision extends OpenCvPipeline {
     Telemetry telemetry;
     Mat mat = new Mat();
     public int location = -1;
-//    static final Rect ROI = new Rect(
-//            new Point(90, 60),
-//            new Point(160, 120));
+    static final Rect ROI = new Rect(
+            new Point(90, 60),
+            new Point(160, 120));
 
-        static final Rect ROI = new Rect(
-            new Point(0, 0),
-            new Point(320, 240));
-    public PowerPlay(Telemetry t) {
+
+    public TestingVision(Telemetry t) {
         telemetry = t;
     }
 
@@ -30,14 +30,14 @@ public class  PowerPlay extends OpenCvPipeline {
         Imgproc.cvtColor(input, mat, Imgproc.COLOR_RGB2HSV);
         Mat box = mat.submat(ROI);
 
-        Scalar purplelowHSV = new Scalar(110, 80, 60);
-        Scalar purplehighHSV = new Scalar(140, 255, 255);
+        Scalar purplelowHSV = new Scalar(301, 50, 50);
+        Scalar purplehighHSV = new Scalar(360, 255, 255);
 
-        Scalar greenlowHSV = new Scalar(30, 80, 60);
-        Scalar greenhighHSV = new Scalar(60, 255, 255);
+        Scalar greenlowHSV = new Scalar(121, 50, 50);
+        Scalar greenhighHSV = new Scalar(180, 255, 255);
 
-        Scalar orangelowHSV = new Scalar(5, 140, 120);
-        Scalar orangehighHSV = new Scalar(35, 255, 255);
+        Scalar orangelowHSV = new Scalar(31, 50, 50);
+        Scalar orangehighHSV = new Scalar(90, 255, 255);
 
         Mat purpleMat = new Mat();
         Mat greenMat = new Mat();
@@ -51,7 +51,7 @@ public class  PowerPlay extends OpenCvPipeline {
 
 
 
-        //rectangle(image, rect, Scalar(0,255,0), 1, 8, 0);
+//        rectangle(input, rect, Scalar(0,255,0), 1, 8, 0);
 
 //        double OrangeValue = Core.sumElems(box).val[0] / ROI.area() / 255;
 //        double PurpleValue = Core.sumElems(box).val[0] / ROI.area() / 255;
@@ -88,8 +88,6 @@ public class  PowerPlay extends OpenCvPipeline {
 //        telemetry.addData("Location:", +location);
 //        return input;
 //    }
-    return orangeMat;
+        return input;
     }
 }
-
-
