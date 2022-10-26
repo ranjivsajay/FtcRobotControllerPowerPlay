@@ -26,7 +26,7 @@ public class TeleOp1 extends UpliftTele {
 
     @Override
     public void initAction(){
-        robot.getGrabber().setPosition(0.3);
+        robot.getGrabber().setPosition(0.25);
 //        robot.initializeCamera();
 
 

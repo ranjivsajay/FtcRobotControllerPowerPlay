@@ -12,8 +12,8 @@ import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-//import org.firstinspires.ftc.teamcode.Core.toolkit.vision.PowerPlay;
-import org.openftc.easyopencv.OpenCvCamera;
+import org.firstinspires.ftc.teamcode.Core.toolkit.vision.PowerPlay;
+//import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
@@ -22,7 +22,7 @@ public class UpliftRobot {
     BNO055IMU imu;
     OpticalDistanceSensor distanceSensor;
     Servo grabber;
-    OpenCvCamera webcam;
+//    OpenCvCamera webcam;
 
 
     public LinearOpMode opMode;
@@ -83,9 +83,9 @@ public class UpliftRobot {
 //        });
 //    }
 
-    public OpenCvCamera getWebcam() {
-        return webcam;
-    }
+//
+
+//    }
 
     public Servo getGrabber()
     {
