@@ -1,15 +1,16 @@
 package org.firstinspires.ftc.teamcode.Core.core;
 
 
+import android.media.ImageReader;
+
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.DistanceSensor;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.Core.toolkit.vision.PowerPlay;
@@ -20,8 +21,8 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 public class UpliftRobot {
     DcMotor leftFront, rightFront, leftBack, rightBack, slide1, slide2;
     BNO055IMU imu;
-    OpticalDistanceSensor distanceSensor;
     Servo grabber;
+    DigitalChannel magneticSensor;
 //    OpenCvCamera webcam;
 
 
@@ -55,7 +56,8 @@ public class UpliftRobot {
         parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
         imu.initialize(parameters);
 
-        distanceSensor = hardwareMap.get(OpticalDistanceSensor.class, "distance_sensor");
+        magneticSensor = hardwareMap.get(DigitalChannel.class, "magnetic_sensor");
+        magneticSensor.setMode(DigitalChannel.Mode.INPUT);
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -117,8 +119,8 @@ public class UpliftRobot {
         return slide2;
     }
 
-    public OpticalDistanceSensor getDistanceSensor()
+    public DigitalChannel getMagneticSensor()
     {
-        return distanceSensor;
+        return magneticSensor;
     }
 }

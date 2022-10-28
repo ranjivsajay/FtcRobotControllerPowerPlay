@@ -22,6 +22,7 @@ public class TeleOp1 extends UpliftTele {
     @Override
     public void initHardware() {
         robot = new UpliftRobot(this);
+//        robot.getMagneticSensor().setState(true);
     }
 
     @Override
@@ -35,6 +36,11 @@ public class TeleOp1 extends UpliftTele {
     @Override
     public void bodyLoop() throws InterruptedException {
 
+//        if(!robot.getMagneticSensor().getState())
+//        {
+//            robot.getMagneticSensor().setState(false);
+//        }
+
         double leftY = Range.clip(-gamepad2.left_stick_y, -1, 1);
         double rightX = Range.clip(gamepad2.right_stick_x, -1, 1);
         double leftX = Range.clip(gamepad2.left_stick_x, -1, 1);
@@ -46,7 +52,7 @@ public class TeleOp1 extends UpliftTele {
 
         teleDrive(angle, magnitude, rightX, robot);
 
-        robot.getSlide1().setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
+        robot.getSlide1().setPower(0.8 * Range.clip(gamepad2.right_stick_y, -1, 1));
         robot.getSlide2().setPower(Range.clip(-gamepad2.right_stick_y, -1, 1));
 
         grab();
@@ -93,11 +99,12 @@ public class TeleOp1 extends UpliftTele {
     }
 
     public void slides(double power, double dist) {
-        double initialPos1 = robot.getSlide1().getCurrentPosition();
+        double initialPos1 = robot.getSlide2().getCurrentPosition();
         double initialPos2 = robot.getSlide2().getCurrentPosition();
 
-        while (robot.getSlide1().getCurrentPosition() < initialPos1 + dist) {
-            robot.getSlide1().setPower(power);
+        while (robot.getSlide2().getCurrentPosition() < initialPos2 + dist)
+        {
+            robot.getSlide1().setPower(-power);
             robot.getSlide2().setPower(power);
         }
         robot.getSlide1().setPower(0);
@@ -116,20 +123,20 @@ public class TeleOp1 extends UpliftTele {
 
     public void low() throws InterruptedException{
         if(gamepad2.b){
-            slides(.75,1500 );
+            slides(0.25,1800);
         }
 
     }
     public void medium() throws InterruptedException{
         if(gamepad2.y){
-            slides(.75,2500 );
+            slides(0.25,2700 );
         }
 
     }
     public void high() throws InterruptedException{
         if(gamepad2.x)
         {
-            slides(.75,5000);
+            slides(0.25,3000);
         }
     }
 
@@ -137,13 +144,20 @@ public class TeleOp1 extends UpliftTele {
     {
         if(gamepad2.a)
         {
-            robot.getGrabber().setPosition(0.3);
-            while(robot.getDistanceSensor().equals(false))
+            robot.getGrabber().setPosition(0.25);
+            while(robot.getMagneticSensor().getState())
             {
                 robot.getSlide1().setPower(0.2);
-                robot.getSlide1().setPower(-0.2);
-
+                robot.getSlide2().setPower(-0.2);
+                if(robot.getMagneticSensor().getState() == false)
+                {
+                    break;
+                }
             }
+            robot.getSlide1().setPower(0);
+            robot.getSlide2().setPower(0);
+
+
         }
     }
 }
