@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Core.core;
 
 
 import android.media.ImageReader;
+import android.text.method.Touch;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -22,7 +23,7 @@ public class UpliftRobot {
     DcMotor leftFront, rightFront, leftBack, rightBack, slide1, slide2;
     BNO055IMU imu;
     Servo grabber;
-    DigitalChannel magneticSensor;
+    TouchSensor magneticSensor;
 //    OpenCvCamera webcam;
 
 
@@ -56,8 +57,7 @@ public class UpliftRobot {
         parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
         imu.initialize(parameters);
 
-        magneticSensor = hardwareMap.get(DigitalChannel.class, "magnetic_sensor");
-        magneticSensor.setMode(DigitalChannel.Mode.INPUT);
+        magneticSensor = hardwareMap.get(TouchSensor.class, "magnetic_sensor");
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -119,7 +119,7 @@ public class UpliftRobot {
         return slide2;
     }
 
-    public DigitalChannel getMagneticSensor()
+    public TouchSensor getMagneticSensor()
     {
         return magneticSensor;
     }
