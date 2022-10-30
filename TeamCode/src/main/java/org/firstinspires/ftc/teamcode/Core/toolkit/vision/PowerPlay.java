@@ -12,10 +12,10 @@ import org.openftc.easyopencv.OpenCvPipeline;
 public class  PowerPlay extends OpenCvPipeline {
     Telemetry telemetry;
     Mat mat = new Mat();
-    public int location = -1;
+    public int location;
     static final Rect ROI = new Rect(
-            new Point(90, 60),
-            new Point(160, 120));
+            new Point(90, 100),
+            new Point(160, 160));
 
     public PowerPlay(Telemetry t) {
         telemetry = t;
@@ -50,38 +50,41 @@ public class  PowerPlay extends OpenCvPipeline {
 
         //rectangle(image, rect, Scalar(0,255,0), 1, 8, 0);
 
-        double OrangeValue = Core.sumElems(orangeMat).val[0] / ROI.area() / 255;
-        double PurpleValue = Core.sumElems(purpleMat).val[0] / ROI.area() / 255;
-        double GreenValue = Core.sumElems(greenMat).val[0] / ROI.area() / 255;
+        double OrangeValue = (int) Core.sumElems(orangeMat).val[0];
+        double PurpleValue = (int) Core.sumElems(purpleMat).val[0];
+        double GreenValue = (int) Core.sumElems(greenMat).val[0];
 //
 //        box.release();
 //
 //
-        telemetry.addData("Orange Raw Value", (int) Core.sumElems(orangeMat).val[0]);
+//        telemetry.addData("Orange Raw Value", OrangeValue);
+//
+//        telemetry.addData("Orange Percentage", Math.round(OrangeValue * 100) + "%");
+//
+//        telemetry.addData("Purple Raw Value", (int) PurpleValue);
+//
+//        telemetry.addData("Purple Percentage", Math.round(PurpleValue * 100) + "%");
+//
+//        telemetry.addData("Green Raw Value", (int) GreenValue);
+//
+//        telemetry.addData("Green Percentage", Math.round(GreenValue * 100) + "%");
 
-        telemetry.addData("Orange Percentage", Math.round(OrangeValue * 100) + "%");
+//        Imgproc.rectangle(input, ROI, new Scalar(0, 255, 0), 4);
 
-        telemetry.addData("Purple Raw Value", (int) Core.sumElems(purpleMat).val[0]);
-
-        telemetry.addData("Purple Percentage", Math.round(PurpleValue * 100) + "%");
-
-        telemetry.addData("Green Raw Value", (int) Core.sumElems(greenMat).val[0]);
-
-        telemetry.addData("Green Percentage", Math.round(GreenValue * 100) + "%");
-
-        Imgproc.rectangle(input, ROI, new Scalar(0, 255, 0), 4);
-
-        telemetry.update();
 //
 //
-        if (PurpleValue > OrangeValue && PurpleValue > GreenValue) {
+        if (PurpleValue > OrangeValue && PurpleValue > GreenValue)
+        {
             location = 2;
-        } else if (GreenValue > PurpleValue && GreenValue > OrangeValue) {
-            location = 1;
-        } else {
+        } else if (OrangeValue > PurpleValue && OrangeValue > GreenValue)
+        {
             location = 3;
+        } else
+        {
+            location = 1;
         }
-        telemetry.addData("Location:", +location);
+//        telemetry.addData("Location:", location);
+//        telemetry.update();
         return input;
     }
 

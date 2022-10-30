@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Core.core;
 
 
 import android.media.ImageReader;
+import android.text.method.Touch;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -14,7 +15,7 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.Core.toolkit.vision.PowerPlay;
-//import org.openftc.easyopencv.OpenCvCamera;
+import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
@@ -22,10 +23,10 @@ public class UpliftRobot {
     DcMotor leftFront, rightFront, leftBack, rightBack, slide1, slide2;
     BNO055IMU imu;
     Servo grabber;
-    DigitalChannel magneticSensor;
-//    OpenCvCamera webcam;
+    TouchSensor magneticSensor;
+    OpenCvCamera webcam;
 
-
+    public PowerPlay pipeline;
     public LinearOpMode opMode;
     public HardwareMap hardwareMap;
 
@@ -37,7 +38,7 @@ public class UpliftRobot {
     public void getHardware() {
         hardwareMap = opMode.hardwareMap;
 
-//        initializeCamera();
+        initializeCamera();
 
         leftFront = hardwareMap.get(DcMotor.class, "left_front");
         rightFront = hardwareMap.get(DcMotor.class, "right_front");
@@ -56,8 +57,7 @@ public class UpliftRobot {
         parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
         imu.initialize(parameters);
 
-        magneticSensor = hardwareMap.get(DigitalChannel.class, "magnetic_sensor");
-        magneticSensor.setMode(DigitalChannel.Mode.INPUT);
+        magneticSensor = hardwareMap.get(TouchSensor.class, "magnetic_sensor");
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -67,23 +67,23 @@ public class UpliftRobot {
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
-//        public void initializeCamera() {
-//        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-//        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-//
-//        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
-//            @Override
-//            public void onOpened() {
-//                PowerPlay pipeline = new PowerPlay(opMode.telemetry);
-//                webcam.setPipeline(pipeline);
-//                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
-//            }
-//
-//            @Override
-//            public void onError(int errorCode) {
-//            }
-//        });
-//    }
+        public void initializeCamera() {
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+
+        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
+            @Override
+            public void onOpened() {
+                PowerPlay pipeline = new PowerPlay(opMode.telemetry);
+                webcam.setPipeline(pipeline);
+                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+            }
+
+            @Override
+            public void onError(int errorCode) {
+            }
+        });
+    }
 
 //
 
@@ -119,7 +119,7 @@ public class UpliftRobot {
         return slide2;
     }
 
-    public DigitalChannel getMagneticSensor()
+    public TouchSensor getMagneticSensor()
     {
         return magneticSensor;
     }
