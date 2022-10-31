@@ -14,6 +14,7 @@ public class UpliftAutoImpl extends UpliftAuto {
     @Override
     public void initHardware() {
         robot = new UpliftRobot(this);
+        robot.initializeCamera();
     }
 
     @Override

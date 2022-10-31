@@ -16,8 +16,8 @@
 //    Mat mat = new Mat();
 //    public int location = -1;
 //    static final Rect ROI = new Rect(
-//            new Point(90, 60),
-//            new Point(160, 120));
+//            new Point(0, 0),
+//            new Point(240, 320));
 //
 //
 //    public TestingVision(Telemetry t) {
@@ -53,41 +53,41 @@
 //
 ////        rectangle(input, rect, Scalar(0,255,0), 1, 8, 0);
 //
-////        double OrangeValue = Core.sumElems(box).val[0] / ROI.area() / 255;
-////        double PurpleValue = Core.sumElems(box).val[0] / ROI.area() / 255;
-////        double GreenValue = Core.sumElems(box).val[0] / ROI.area() / 255;
-////
+//        double OrangeValue = Core.sumElems(box).val[0] / ROI.area() / 255;
+//        double PurpleValue = Core.sumElems(box).val[0] / ROI.area() / 255;
+//        double GreenValue = Core.sumElems(box).val[0] / ROI.area() / 255;
+//
 ////        box.release();
-////
-////
-////        telemetry.addData("Orange Raw Value", (int) Core.sumElems(box).val[0]);
-////
-////        telemetry.addData("Orange Percentage", Math.round(OrangeValue * 100) + "%");
-////
-////        telemetry.addData("Purple Raw Value", (int) Core.sumElems(box).val[0]);
-////
-////        telemetry.addData("Purple Percentage", Math.round(PurpleValue * 100) + "%");
-////
-////        telemetry.addData("Green Raw Value", (int) Core.sumElems(box).val[0]);
-////
-////        telemetry.addData("Green Percentage", Math.round(GreenValue * 100) + "%");
-////
+//
+//
+//        telemetry.addData("Orange Raw Value", (int) Core.sumElems(box).val[0]);
+//
+//        telemetry.addData("Orange Percentage", Math.round(OrangeValue * 100) + "%");
+//
+//        telemetry.addData("Purple Raw Value", (int) Core.sumElems(box).val[0]);
+//
+//        telemetry.addData("Purple Percentage", Math.round(PurpleValue * 100) + "%");
+//
+//        telemetry.addData("Green Raw Value", (int) Core.sumElems(box).val[0]);
+//
+//        telemetry.addData("Green Percentage", Math.round(GreenValue * 100) + "%");
+//
 //        Imgproc.rectangle(input, ROI, new Scalar(0, 255, 0), 4);
-////
-//////        telemetry.addData("box", OrangeValue);
-////        telemetry.update();
-////
-////
-////        if (PurpleValue > OrangeValue && PurpleValue > GreenValue) {
-////            location = 2;
-////        } else if (GreenValue > PurpleValue && GreenValue > OrangeValue) {
-////            location = 1;
-////        } else if (OrangeValue > PurpleValue && OrangeValue > GreenValue) {
-////            location = 3;
-////        }
-////        telemetry.addData("Location:", +location);
+//
+//        telemetry.addData("box", OrangeValue);
+//        telemetry.update();
+//
+//
+//        if (PurpleValue > OrangeValue && PurpleValue > GreenValue) {
+//            location = 2;
+//        } else if (GreenValue > PurpleValue && GreenValue > OrangeValue) {
+//            location = 1;
+//        } else if (OrangeValue > PurpleValue && OrangeValue > GreenValue) {
+//            location = 3;
+//        }
+//        telemetry.addData("Location:", +location);
+//        return greenMat;
+//    }
 ////        return input;
 ////    }
-//        return input;
-//    }
 //}

@@ -20,15 +20,14 @@ public class TeleOp1 extends UpliftTele {
     UpliftRobot robot;
 
     @Override
-    public void initHardware() {
+    public void initHardware()
+    {
         robot = new UpliftRobot(this);
-//        robot.getMagneticSensor().setState(true);
     }
 
     @Override
     public void initAction(){
         robot.getGrabber().setPosition(0.25);
-//        robot.initializeCamera();
 
 
     }
@@ -39,9 +38,9 @@ public class TeleOp1 extends UpliftTele {
         telemetry.addData("magnetic sensor", robot.getMagneticSensor().isPressed());
         telemetry.update();
 
-        double leftY = Range.clip(-gamepad2.left_stick_y, -1, 1);
-        double rightX = Range.clip(gamepad2.right_stick_x, -1, 1);
-        double leftX = Range.clip(gamepad2.left_stick_x, -1, 1);
+        double leftY = Range.clip(-gamepad1.left_stick_y, -1, 1);
+        double rightX = Range.clip(gamepad1.right_stick_x, -1, 1);
+        double leftX = Range.clip(gamepad1.left_stick_x, -1, 1);
 
 
 
@@ -50,14 +49,14 @@ public class TeleOp1 extends UpliftTele {
 
         teleDrive(angle, magnitude, rightX, robot);
 
-        robot.getSlide1().setPower(0.8 * Range.clip(gamepad2.right_stick_y, -1, 1));
-        robot.getSlide2().setPower(Range.clip(-gamepad2.right_stick_y, -1, 1));
+        robot.getSlide1().setPower(Range.clip(gamepad2.right_stick_y, -.5, 1));
+        robot.getSlide2().setPower(Range.clip(-gamepad2.right_stick_y, -.5, 1));
 
         grab();
         low();
         medium();
         high();
-        down();
+        open();
 
     }
 
@@ -133,22 +132,19 @@ public class TeleOp1 extends UpliftTele {
     public void high() throws InterruptedException{
         if(gamepad2.x)
         {
-            slides(0.25,3000);
+            slides(0.25,3600);
         }
     }
 
-    public void down()
+    public void open()
     {
-        if(gamepad2.a)
-        {
+        if(gamepad2.a) {
             robot.getGrabber().setPosition(0.25);
-            robot.getSlide1().setPower(0.1);
-            robot.getSlide2().setPower(-0.1);
-
-            if(robot.getMagneticSensor().isPressed()) {
-                robot.getSlide1().setPower(0);
-                robot.getSlide2().setPower(0);
-            }
+        }
+//            if(robot.getMagneticSensor().isPressed()) {
+//                robot.getSlide1().setPower(0);
+//                robot.getSlide2().setPower(0);
+//            }
 
 //            while(robot.getMagneticSensor().isPressed())
 //            {
@@ -160,4 +156,3 @@ public class TeleOp1 extends UpliftTele {
 
         }
     }
-}
