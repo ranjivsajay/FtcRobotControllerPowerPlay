@@ -23,13 +23,11 @@ public class VisionAuto extends UpliftAutoImpl {
     {
         int location = robot.pipeline.location;
 
-//        robot.getWebcam().closeCameraDevice();
 
 
 
         if(location == 1)
         {
-
             moveBackward(0.5, 750);
             moveLeft(0.5, 1200);
         }

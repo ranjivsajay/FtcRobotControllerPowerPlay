@@ -78,7 +78,7 @@ public class UpliftRobot {
             @Override
             public void onOpened()
             {
-                PowerPlay pipeline = new PowerPlay(opMode.telemetry);
+                pipeline = new PowerPlay(opMode.telemetry);
                 webcam.setPipeline(pipeline);
                 webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
             }

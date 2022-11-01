@@ -22,43 +22,39 @@ public class VisionDropCone extends UpliftAutoImpl
 
         if(location == 1)
         {
-//            robot.getWebcam().stopStreaming();
-//            robot.getWebcam().closeCameraDevice();
 
-            moveForward(0.5, 500);
-            moveLeft(0.5, 500);
+            moveForward(0.5, 750);
+            moveLeft(0.5, 1200);
 
-            turnLeft(0.2, 20);
+//            turnLeft(0.2, 20);
             high();
 
-            turnRight(0.2, 20);
+//            turnRight(0.2, 20);
             moveBackward(0.5, 1000);
 
         }
         else if(location == 2)
         {
-//            robot.getWebcam().stopStreaming();
 
-            moveForward(0.5, 500);
-            moveLeft(0.5, 500);
+            moveForward(0.5, 750);
+            moveLeft(0.5, 1200);
 
-            turnLeft(0.2, 20);
+//            turnLeft(0.2, 20);
             high();
 
-            turnRight(0.2, 20);
+//            turnRight(0.2, 20);
             moveBackward(0.5, 600);
         }
         else if(location == 3)
         {
-//            robot.getWebcam().stopStreaming();
 
-            moveForward(0.5, 500);
-            moveLeft(0.5, 500);
+            moveForward(0.5, 750);
+            moveLeft(0.5, 1200);
 
-            turnLeft(0.2, 20);
+//            turnLeft(0.2, 20);
             high();
 
-            turnRight(0.2, 20);
+//            turnRight(0.2, 20);
 
         }
 
