@@ -9,19 +9,21 @@ import org.firstinspires.ftc.teamcode.Core.toolkit.vision.PowerPlay;
 @Autonomous(name = "VisionAuto", group = "Opmodes")
 public class VisionAuto extends UpliftAutoImpl {
 
-    int location;
+
 
     @Override
     public void initAction(){
         robot.getGrabber().setPosition(0.11);
-        location = robot.pipeline.location;
-        robot.getWebcam().closeCameraDevice();
+//        robot.getWebcam().closeCameraDevice();
 
 
     }
+    @Override
     public void body() throws InterruptedException
     {
-        robot.getWebcam().closeCameraDevice();
+        int location = robot.pipeline.location;
+
+//        robot.getWebcam().closeCameraDevice();
 
 
 

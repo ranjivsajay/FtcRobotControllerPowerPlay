@@ -17,7 +17,8 @@ public class UpliftAutoImpl extends UpliftAuto {
     public void initHardware()
     {
         robot = new UpliftRobot(this);
-        robot.getHardware();
+        robot.initializeCamera();
+
     }
 
     @Override
@@ -33,7 +34,7 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     @Override
     public void exit() throws InterruptedException {
-        
+
     }
 
     public void stopMotors() {

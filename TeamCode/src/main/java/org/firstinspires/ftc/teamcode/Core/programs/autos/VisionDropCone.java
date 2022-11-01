@@ -15,14 +15,15 @@ public class VisionDropCone extends UpliftAutoImpl
 
     }
 
+    @Override
     public void body() throws InterruptedException
     {
         int location = robot.pipeline.location;
 
         if(location == 1)
         {
-            robot.getWebcam().stopStreaming();
-            robot.getWebcam().closeCameraDevice();
+//            robot.getWebcam().stopStreaming();
+//            robot.getWebcam().closeCameraDevice();
 
             moveForward(0.5, 500);
             moveLeft(0.5, 500);
@@ -36,7 +37,7 @@ public class VisionDropCone extends UpliftAutoImpl
         }
         else if(location == 2)
         {
-            robot.getWebcam().stopStreaming();
+//            robot.getWebcam().stopStreaming();
 
             moveForward(0.5, 500);
             moveLeft(0.5, 500);
@@ -49,7 +50,7 @@ public class VisionDropCone extends UpliftAutoImpl
         }
         else if(location == 3)
         {
-            robot.getWebcam().stopStreaming();
+//            robot.getWebcam().stopStreaming();
 
             moveForward(0.5, 500);
             moveLeft(0.5, 500);
