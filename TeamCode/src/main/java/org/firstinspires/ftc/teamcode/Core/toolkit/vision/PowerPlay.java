@@ -33,8 +33,8 @@ public class  PowerPlay extends OpenCvPipeline {
         Scalar greenlowHSV = new Scalar(30, 80, 60);
         Scalar greenhighHSV = new Scalar(60, 255, 255);
 
-        Scalar orangelowHSV = new Scalar(0, 80, 60);
-        Scalar orangehighHSV = new Scalar(35, 255, 255);
+        Scalar orangelowHSV = new Scalar(10, 80, 60);
+        Scalar orangehighHSV = new Scalar(30, 255, 255);
 
         Mat purpleMat = new Mat();
         Mat greenMat = new Mat();

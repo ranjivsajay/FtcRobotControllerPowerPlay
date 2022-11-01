@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 public class UpliftAutoImpl extends UpliftAuto {
 
+
+
     private double previousAngle = 0;
     private double integratedAngle = 0;
 
@@ -12,9 +14,10 @@ public class UpliftAutoImpl extends UpliftAuto {
 
 
     @Override
-    public void initHardware() {
+    public void initHardware()
+    {
         robot = new UpliftRobot(this);
-        robot.initializeCamera();
+        robot.getHardware();
     }
 
     @Override
@@ -30,7 +33,7 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     @Override
     public void exit() throws InterruptedException {
-
+        
     }
 
     public void stopMotors() {

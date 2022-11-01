@@ -33,9 +33,11 @@ public class UpliftRobot {
     public UpliftRobot(LinearOpMode opMode) {
         this.opMode = opMode;
         getHardware();
+        PowerPlay pipeline = new PowerPlay(opMode.telemetry);
     }
 
     public void getHardware() {
+
         hardwareMap = opMode.hardwareMap;
 
         initializeCamera();
