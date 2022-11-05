@@ -171,7 +171,8 @@ public class UpliftAutoImpl extends UpliftAuto {
         return integratedAngle;
     }
 
-    public void slides(double power, double dist) {
+    public void slides(double power, double dist)
+    {
         double initialPos1 = robot.getSlide2().getCurrentPosition();
         double initialPos2 = robot.getSlide2().getCurrentPosition();
 
@@ -184,26 +185,27 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getSlide2().setPower(0);
 
 
+
     }
 
     public void low()
     {
         slides(0.25,1800);
-        robot.getGrabber().setPosition(0.25);
+//        robot.getGrabber().setPosition(0.25);
 
     }
 
     public void medium()
     {
-        slides(0.25,2700);
-        robot.getGrabber().setPosition(0.25);
+        slides(0.25,2600);
+//        robot.getGrabber().setPosition(0.25);
 
     }
 
     public void high()
     {
-        slides(0.25, 3000);
-        robot.getGrabber().setPosition(0.25);
+        slides(0.25, 3400);
+//        robot.getGrabber().setPosition(0.25);
 
     }
 }

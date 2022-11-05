@@ -28,7 +28,7 @@ public class VisionAuto extends UpliftAutoImpl {
 
         if(location == 1)
         {
-            moveBackward(0.5, 750);
+            moveBackward(0.5, 800);
             moveLeft(0.5, 1200);
         }
         else if(location == 2)
@@ -38,8 +38,8 @@ public class VisionAuto extends UpliftAutoImpl {
         else if(location == 3)
         {
 
-            moveForward(0.5, 750);
-            moveLeft(0.5, 1200);
+            moveForward(0.5, 700);
+            moveLeft(0.5, 1120);
 
         }
 
