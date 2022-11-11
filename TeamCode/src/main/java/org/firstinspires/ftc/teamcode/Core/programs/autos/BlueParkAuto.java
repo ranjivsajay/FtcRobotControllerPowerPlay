@@ -9,7 +9,7 @@ public class BlueParkAuto extends UpliftAutoImpl {
 
     public void body() throws InterruptedException
     {
-        moveRight(0.5, 10);
+        moveRight(0.5, 500);
         stopMotors();
 
     }

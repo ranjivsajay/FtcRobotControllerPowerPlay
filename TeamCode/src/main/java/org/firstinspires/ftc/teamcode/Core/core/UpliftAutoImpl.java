@@ -47,10 +47,10 @@ public class UpliftAutoImpl extends UpliftAuto {
         double initialPos = robot.getLeftFront().getCurrentPosition();
 
         while (robot.getLeftFront().getCurrentPosition() > initialPos - dist) {
-            robot.getRightFront().setPower(power);
+            robot.getRightFront().setPower(0.89 * power);
             robot.getRightBack().setPower(-power);
-            robot.getLeftFront().setPower(-power);
-            robot.getLeftBack().setPower(power);
+            robot.getLeftFront().setPower(0.89 * -power);
+            robot.getLeftBack().setPower(0.89 * power);
         }
         stopMotors();
     }
@@ -66,10 +66,10 @@ public class UpliftAutoImpl extends UpliftAuto {
         double initialPos = robot.getLeftFront().getCurrentPosition();
 
         while (robot.getLeftFront().getCurrentPosition() < initialPos + dist) {
-            robot.getRightFront().setPower(-power);
-            robot.getRightBack().setPower(power);
-            robot.getLeftFront().setPower(power);
-            robot.getLeftBack().setPower(-power);
+            robot.getRightFront().setPower(0.89 * -power);
+            robot.getRightBack().setPower( power);
+            robot.getLeftFront().setPower(0.89 * power);
+            robot.getLeftBack().setPower(0.89 * -power);
         }
         stopMotors();
     }
@@ -173,13 +173,16 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     public void slides(double power, double dist)
     {
-        double initialPos1 = robot.getSlide2().getCurrentPosition();
+//        double initialPos1 = robot.getSlide2().getCurrentPosition();
         double initialPos2 = robot.getSlide2().getCurrentPosition();
 
-        while (robot.getSlide2().getCurrentPosition() < initialPos2 + dist)
+        while (Math.abs(robot.getSlide2().getCurrentPosition() - (initialPos2 + dist)) > 50)
         {
             robot.getSlide1().setPower(-power);
             robot.getSlide2().setPower(power);
+
+            telemetry.addData("ting ", Math.abs(robot.getSlide2().getCurrentPosition() - (initialPos2 + dist)));
+            telemetry.update();
         }
         robot.getSlide1().setPower(0);
         robot.getSlide2().setPower(0);
@@ -190,22 +193,23 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     public void low()
     {
-        slides(0.25,1800);
+        slides(0.75,1800);
 //        robot.getGrabber().setPosition(0.25);
 
     }
 
     public void medium()
     {
-        slides(0.25,2600);
+        slides(0.75,2600);
 //        robot.getGrabber().setPosition(0.25);
 
     }
 
     public void high()
     {
-        slides(0.25, 3400);
+        slides(0.75, 3500);
 //        robot.getGrabber().setPosition(0.25);
+
 
     }
 }

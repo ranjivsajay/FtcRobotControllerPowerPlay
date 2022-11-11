@@ -8,6 +8,7 @@ import static java.lang.Math.sqrt;
 import static java.lang.Math.toRadians;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Core.core.UpliftRobot;
@@ -18,6 +19,9 @@ import org.firstinspires.ftc.teamcode.Core.toolkit.UpliftMath;
 public class TeleOp1 extends UpliftTele {
 
     UpliftRobot robot;
+    boolean grabberState = true;
+    boolean blockGrabberInput = false;
+    private double grabberOpenPosition = 0.25;
 
     @Override
     public void initHardware()
@@ -28,8 +32,9 @@ public class TeleOp1 extends UpliftTele {
     @Override
     public void initAction()
     {
-        robot.getGrabber().setPosition(0.2);
-
+        robot.getGrabber().setPosition(grabberOpenPosition);
+        robot.getSlide1().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.getSlide2().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
     @Override
@@ -49,52 +54,39 @@ public class TeleOp1 extends UpliftTele {
 
         teleDrive(angle, magnitude, rightX, gamepad1.right_trigger, robot);
 
-        robot.getSlide1().setPower(0.3 * Range.clip(gamepad2.right_stick_y, -.5, 1));
-        robot.getSlide2().setPower(0.3 * Range.clip(-gamepad2.right_stick_y, -.5, 1));
+        robot.getSlide1().setPower(
+                (1.0 - 0.8 * gamepad2.left_trigger) * Range.clip(gamepad2.right_stick_y, -1, 1));
+        robot.getSlide2().setPower(
+                (1.0 - 0.8 * gamepad2.left_trigger) * Range.clip(-gamepad2.right_stick_y, -1, 1));
+
+
 
 
         grab();
-        low();
-        medium();
-        high();
-        open();
+    //`     low();
+//        medium();
+//        high();
         cap();
 
+        if(gamepad2.dpad_left)
+        {
+            robot.getSlide1().setPower(.1);
+        }
 
+        if(gamepad2.dpad_up)
+        {
+            robot.getSlide1().setPower(-.1);
+        }
+        if(gamepad2.dpad_down)
+        {
+            robot.getSlide2().setPower(-.1);
+        }
 
-//
-//        if(gamepad1.dpad_down)
-//        {
-//            robot.getLeftFront().setPower(-0.4);
-//            robot.getLeftBack().setPower(-0.4);
-//            robot.getRightBack().setPower(-0.4);
-//            robot.getRightFront().setPower(-0.4);
-//        }
-//
-//        if(gamepad1.dpad_up)
-//        {
-//            robot.getLeftFront().setPower(0.4);
-//            robot.getLeftBack().setPower(0.4);
-//            robot.getRightBack().setPower(0.4);
-//            robot.getRightFront().setPower(0.4);
-//        }
-//
-//        if(gamepad1.dpad_right)
-//        {
-//            robot.getLeftFront().setPower(0.4);
-//            robot.getLeftBack().setPower(-0.4);
-//            robot.getRightBack().setPower(0.4);
-//            robot.getRightFront().setPower(-0.4);
-//        }
-//
-//        if(gamepad1.dpad_left)
-//        {
-//            robot.getLeftFront().setPower(-0.4);
-//            robot.getLeftBack().setPower(0.4);
-//            robot.getRightBack().setPower(-0.4);
-//            robot.getRightFront().setPower(0.4);
-//        }
-//
+        if(gamepad2.dpad_right)
+        {
+            robot.getSlide2().setPower(.1);
+        }
+
     }
 
     @Override
@@ -134,23 +126,9 @@ public class TeleOp1 extends UpliftTele {
         robot.getLeftBack().setPower(speedFactor * (lbPow / maxVal));
         robot.getRightBack().setPower(speedFactor * (rbPow / maxVal));
         robot.getRightFront().setPower(speedFactor * (rfPow / maxVal));
-
-
-//        // set the scaled powers
-//        robot.getLeftFront().setPower(lfPow / maxVal);
-//        robot.getLeftBack().setPower(lbPow / maxVal);
-//        robot.getRightBack().setPower(rbPow / maxVal);
-//        robot.getRightFront().setPower(rfPow / maxVal);
     }
-//    public void slowMode() throws InterruptedException
-//    {
-//        if(gamepad1.right_trigger > 0)
-//        {
-//
-//
-//
-//        }
-//    }
+
+
 
     public void slides(double power, double dist) {
         double initialPos1 = robot.getSlide2().getCurrentPosition();
@@ -166,56 +144,25 @@ public class TeleOp1 extends UpliftTele {
 
     }
 
-    public void grab() throws InterruptedException {
-        if(gamepad2.right_trigger > 0)
-        {
-            robot.getGrabber().setPosition(0.06);
 
+    public void grab() throws InterruptedException {
+        if(gamepad2.right_trigger > 0.1 && !blockGrabberInput)   
+        {
+            robot.getGrabber().setPosition(grabberState ? .1 : grabberOpenPosition);
+            grabberState = !grabberState;
+            blockGrabberInput = true;
+        }
+        else if (gamepad2.right_trigger < 0.1 && blockGrabberInput)
+        {
+            blockGrabberInput = false;
         }
     }
     public void cap() throws InterruptedException {
         if(gamepad2.left_trigger > 0)
         {
-            robot.getGrabber().setPosition(.14);
+            robot.getGrabber().setPosition(.06);
 
         }
     }
-    public void low() throws InterruptedException{
-        if(gamepad2.b){
-            slides(0.25,1800);
-        }
 
-    }
-    public void medium() throws InterruptedException{
-        if(gamepad2.y){
-            slides(0.25,2700 );
-        }
-
-    }
-    public void high() throws InterruptedException{
-        if(gamepad2.x)
-        {
-            slides(0.25,3300);
-        }
-    }
-
-    public void open()
-    {
-        if(gamepad2.a) {
-            robot.getGrabber().setPosition(0.2);
-        }
-//            if(robot.getMagneticSensor().isPressed()) {
-//                robot.getSlide1().setPower(0);
-//                robot.getSlide2().setPower(0);
-//            }
-
-//            while(robot.getMagneticSensor().isPressed())
-//            {
-//
-//
-//            }
-
-
-
-        }
     }

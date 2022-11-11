@@ -9,7 +9,7 @@ public class RedParkAuto extends UpliftAutoImpl {
 
     public void body() throws InterruptedException
     {
-        moveLeft(0.5, 100);
+        moveLeft(0.5, 500);
 
     }
 
