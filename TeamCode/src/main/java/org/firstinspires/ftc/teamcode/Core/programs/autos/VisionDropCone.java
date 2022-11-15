@@ -53,13 +53,63 @@ public class VisionDropCone extends UpliftAutoImpl
 
         else if(location == 2)
         {
-            moveRight(0.5,450);
+            moveRight(0.6,400);
+            turnRight(.6,160);
+            moveForward(.6,500);
+            slides(.5,500);
+            robot.getGrabber().setPosition(.25);
+            moveForward(.4,200);
+            Thread.sleep(500);
+            robot.getGrabber().setPosition(.08);
+            Thread.sleep(500);
+            slides(0.5, 500);
+            Thread.sleep(500);
+            moveBackward(.6,500);
+            turnRight(.5,162);
+            moveLeft(0.6,500);
+            slides(0.5, 2500);
+
+            moveForward(0.2, 90);
+            Thread.sleep(500);
+
+            robot.getGrabber().setPosition(0.25);
+            Thread.sleep(250);
+
+            moveBackward(0.2, 170);
+
+            slides(-0.5, -3450);
+            moveRight(.6,400);
+//            turnRight(.5,162);
+//            moveForward(.6,410);
+//            slides(.5,500);
+//            robot.getGrabber().setPosition(.25);
+//            moveForward(.4,200);
+//            Thread.sleep(500);
+//            robot.getGrabber().setPosition(.1);
+//            Thread.sleep(500);
+//            slides(0.5, 500);
+//            Thread.sleep(500);
+//            moveBackward(.6,500);
+//            turnRight(.5,165);
+//            moveLeft(0.6,475);
+//            slides(0.5, 2500);
+//
+//            moveForward(0.2, 200);
+//            Thread.sleep(500);
+//
+//            robot.getGrabber().setPosition(0.25);
+//            Thread.sleep(250);
+//
+//            moveBackward(0.2, 170);
+//
+//            slides(-0.5, -3450);
+//            moveRight(.5,400);
         }
 
         else if(location == 3)
         {
             moveRight(0.5, 450);
-            moveForward(0.5, 700);
+            moveForward(0.5, 800);
 
         }
 
