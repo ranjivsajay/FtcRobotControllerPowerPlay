@@ -27,6 +27,7 @@ public class UpliftRobot {
     TouchSensor magneticSensor;
     OpenCvCamera webcam;
 
+
     public PowerPlay pipeline;
     public LinearOpMode opMode;
     public HardwareMap hardwareMap;

@@ -47,10 +47,10 @@ public class UpliftAutoImpl extends UpliftAuto {
         double initialPos = robot.getLeftFront().getCurrentPosition();
 
         while (robot.getLeftFront().getCurrentPosition() > initialPos - dist) {
-            robot.getRightFront().setPower(0.89 * power);
+            robot.getRightFront().setPower(0.86 * power);
             robot.getRightBack().setPower(-power);
-            robot.getLeftFront().setPower(0.89 * -power);
-            robot.getLeftBack().setPower(0.89 * power);
+            robot.getLeftFront().setPower(0.86 * -power);
+            robot.getLeftBack().setPower(0.86 * power);
         }
         stopMotors();
     }
@@ -66,10 +66,10 @@ public class UpliftAutoImpl extends UpliftAuto {
         double initialPos = robot.getLeftFront().getCurrentPosition();
 
         while (robot.getLeftFront().getCurrentPosition() < initialPos + dist) {
-            robot.getRightFront().setPower(0.89 * -power);
+            robot.getRightFront().setPower(0.87 * -power);
             robot.getRightBack().setPower( power);
-            robot.getLeftFront().setPower(0.89 * power);
-            robot.getLeftBack().setPower(0.89 * -power);
+            robot.getLeftFront().setPower(0.87 * power);
+            robot.getLeftBack().setPower(0.87 * -power);
         }
         stopMotors();
     }

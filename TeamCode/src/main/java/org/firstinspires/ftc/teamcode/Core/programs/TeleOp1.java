@@ -21,7 +21,7 @@ public class TeleOp1 extends UpliftTele {
     UpliftRobot robot;
     boolean grabberState = true;
     boolean blockGrabberInput = false;
-    private double grabberOpenPosition = 0.25;
+    private double grabberOpenPosition = 0.24;
 
     @Override
     public void initHardware()
@@ -60,7 +60,13 @@ public class TeleOp1 extends UpliftTele {
                 (1.0 - 0.8 * gamepad2.left_trigger) * Range.clip(-gamepad2.right_stick_y, -1, 1));
 
 
-
+        if (gamepad1.dpad_up)
+        {
+            robot.getRightFront().setPower(.5);
+            robot.getRightBack().setPower(.5);
+            robot.getLeftFront().setPower(.5);
+            robot.getLeftBack().setPower(.5);
+        }
 
         grab();
         cap();
@@ -143,13 +149,13 @@ public class TeleOp1 extends UpliftTele {
 
 
     public void grab() throws InterruptedException {
-        if(gamepad2.right_trigger > 0.1 && !blockGrabberInput)
+        if(gamepad2.right_trigger > 0.05 && !blockGrabberInput)
         {
-            robot.getGrabber().setPosition(grabberState ? .1 : grabberOpenPosition);
+            robot.getGrabber().setPosition(grabberState ? .05 : grabberOpenPosition);
             grabberState = !grabberState;
             blockGrabberInput = true;
         }
-        else if (gamepad2.right_trigger < 0.1 && blockGrabberInput)
+        else if (gamepad2.right_trigger < 0.05 && blockGrabberInput)
         {
             blockGrabberInput = false;
         }
