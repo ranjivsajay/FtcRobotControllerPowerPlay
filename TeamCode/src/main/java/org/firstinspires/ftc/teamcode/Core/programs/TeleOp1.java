@@ -41,8 +41,16 @@ public class TeleOp1 extends UpliftTele {
     public void bodyLoop() throws InterruptedException {
 
         telemetry.addData("magnetic sensor", robot.getMagneticSensor().isPressed());
+       // telemetry.update();
+        telemetry.addData("left front motor" , robot.getLeftFront().getCurrentPosition());
+        telemetry.addData("right front motor" , robot.getRightFront().getCurrentPosition());
+        telemetry.addData("left back motor" , robot.getLeftBack().getCurrentPosition());
+        telemetry.addData("right back motor" , robot.getRightBack().getCurrentPosition());
+        telemetry.addData("left front power" , robot.getLeftFront().getPower());
+        telemetry.addData("right front power" , robot.getRightFront().getPower());
+        telemetry.addData("left back power" , robot.getLeftBack().getPower());
+        telemetry.addData("right back power" , robot.getRightBack().getPower());
         telemetry.update();
-
         double leftY =(.6 * Range.clip(-gamepad1.left_stick_y, -1, 1));
         double rightX = (.6 * Range.clip(gamepad1.right_stick_x, -1, 1));
         double leftX = ( .6 * Range.clip(gamepad1.left_stick_x, -1, 1));
@@ -62,10 +70,10 @@ public class TeleOp1 extends UpliftTele {
 
         if (gamepad1.dpad_up)
         {
-            robot.getRightFront().setPower(.5);
-            robot.getRightBack().setPower(.5);
-            robot.getLeftFront().setPower(.5);
-            robot.getLeftBack().setPower(.5);
+            robot.getRightFront().setPower(.1);
+            robot.getRightBack().setPower(.1);
+            robot.getLeftFront().setPower(.1);
+            robot.getLeftBack().setPower(.1);
         }
 
         grab();

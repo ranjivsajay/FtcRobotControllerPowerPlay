@@ -13,4 +13,3 @@ public class RedParkAuto extends UpliftAutoImpl {
 
     }
 
-}
