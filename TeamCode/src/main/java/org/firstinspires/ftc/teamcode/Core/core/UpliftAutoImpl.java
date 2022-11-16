@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class UpliftAutoImpl extends UpliftAuto {
 
 
-
     private double previousAngle = 0;
     private double integratedAngle = 0;
 
@@ -47,17 +46,17 @@ public class UpliftAutoImpl extends UpliftAuto {
         double initialPos = robot.getLeftFront().getCurrentPosition();
 
         while (robot.getLeftFront().getCurrentPosition() > initialPos - dist) {
-            robot.getRightFront().setPower(0.86 * power);
-            robot.getRightBack().setPower(-power);
-            robot.getLeftFront().setPower(0.86 * -power);
-            robot.getLeftBack().setPower(0.86 * power);
+            robot.getRightFront().setPower(0.56 * power);
+            robot.getRightBack().setPower(0.785 * -power);
+            robot.getLeftFront().setPower(-power);
+            robot.getLeftBack().setPower(power);
         }
         stopMotors();
     }
 
     public void moveLeft(double power) {
-        robot.getRightFront().setPower(power);
-        robot.getRightBack().setPower(-power);
+        robot.getRightFront().setPower(0.56 * power);
+        robot.getRightBack().setPower(0.785 * -power);
         robot.getLeftFront().setPower(-power);
         robot.getLeftBack().setPower(power);
     }
@@ -66,10 +65,10 @@ public class UpliftAutoImpl extends UpliftAuto {
         double initialPos = robot.getLeftFront().getCurrentPosition();
 
         while (robot.getLeftFront().getCurrentPosition() < initialPos + dist) {
-            robot.getRightFront().setPower(0.87 * -power);
-            robot.getRightBack().setPower( power);
-            robot.getLeftFront().setPower(0.87 * power);
-            robot.getLeftBack().setPower(0.87 * -power);
+            robot.getRightFront().setPower(0.56 * -power);
+            robot.getRightBack().setPower( 0.785 * power);
+            robot.getLeftFront().setPower(power);
+            robot.getLeftBack().setPower(-power);
         }
         stopMotors();
     }
