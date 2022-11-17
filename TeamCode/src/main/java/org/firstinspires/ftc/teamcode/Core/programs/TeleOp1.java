@@ -41,7 +41,7 @@ public class TeleOp1 extends UpliftTele {
     public void bodyLoop() throws InterruptedException {
 
         telemetry.addData("magnetic sensor", robot.getMagneticSensor().isPressed());
-       // telemetry.update();
+
         telemetry.addData("left front motor" , robot.getLeftFront().getCurrentPosition());
         telemetry.addData("right front motor" , robot.getRightFront().getCurrentPosition());
         telemetry.addData("left back motor" , robot.getLeftBack().getCurrentPosition());
@@ -157,13 +157,13 @@ public class TeleOp1 extends UpliftTele {
 
 
     public void grab() throws InterruptedException {
-        if(gamepad2.right_trigger > 0.05 && !blockGrabberInput)
+        if(gamepad2.right_trigger > 0.1 && !blockGrabberInput)
         {
-            robot.getGrabber().setPosition(grabberState ? .05 : grabberOpenPosition);
+            robot.getGrabber().setPosition(grabberState ? .1 : grabberOpenPosition);
             grabberState = !grabberState;
             blockGrabberInput = true;
         }
-        else if (gamepad2.right_trigger < 0.05 && blockGrabberInput)
+        else if (gamepad2.right_trigger < 0.1 && blockGrabberInput)
         {
             blockGrabberInput = false;
         }
