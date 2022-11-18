@@ -27,6 +27,10 @@ public class UpliftRobot {
     TouchSensor magneticSensor;
     OpenCvCamera webcam;
 
+    double grabberOpenPos = 0.23;
+    double grabberClosePos = 0.10;
+
+
     public PowerPlay pipeline;
     public LinearOpMode opMode;
     public HardwareMap hardwareMap;
@@ -68,6 +72,8 @@ public class UpliftRobot {
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
     }
 
         public void initializeCamera()
@@ -132,5 +138,15 @@ public class UpliftRobot {
     public TouchSensor getMagneticSensor()
     {
         return magneticSensor;
+    }
+
+    public double getGrabberOpenPos()
+    {
+        return grabberOpenPos;
+    }
+
+    public double getGrabberClosePos()
+    {
+        return grabberClosePos;
     }
 }

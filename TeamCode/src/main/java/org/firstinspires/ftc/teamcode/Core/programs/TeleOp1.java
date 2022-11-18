@@ -21,7 +21,6 @@ public class TeleOp1 extends UpliftTele {
     UpliftRobot robot;
     boolean grabberState = true;
     boolean blockGrabberInput = false;
-    private double grabberOpenPosition = 0.24;
 
     @Override
     public void initHardware()
@@ -32,7 +31,7 @@ public class TeleOp1 extends UpliftTele {
     @Override
     public void initAction()
     {
-        robot.getGrabber().setPosition(grabberOpenPosition);
+        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         robot.getSlide1().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         robot.getSlide2().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
@@ -51,9 +50,9 @@ public class TeleOp1 extends UpliftTele {
         telemetry.addData("left back power" , robot.getLeftBack().getPower());
         telemetry.addData("right back power" , robot.getRightBack().getPower());
         telemetry.update();
-        double leftY =(.6 * Range.clip(-gamepad1.left_stick_y, -1, 1));
-        double rightX = (.6 * Range.clip(gamepad1.right_stick_x, -1, 1));
-        double leftX = ( .6 * Range.clip(gamepad1.left_stick_x, -1, 1));
+        double leftY =(.7 * Range.clip(-gamepad1.left_stick_y, -1, 1));
+        double rightX = (.7 * Range.clip(gamepad1.right_stick_x, -1, 1));
+        double leftX = ( .7 * Range.clip(gamepad1.left_stick_x, -1, 1));
 
 
 
@@ -131,7 +130,7 @@ public class TeleOp1 extends UpliftTele {
         // set the scaled powers
         float speedFactor = 1.0f;
         if (slowModeInput > 0.1f)
-            speedFactor = 0.5f;
+            speedFactor = 0.8f;
 
         robot.getLeftFront().setPower(speedFactor * (lfPow / maxVal));
         robot.getLeftBack().setPower(speedFactor * (lbPow / maxVal));
@@ -157,13 +156,13 @@ public class TeleOp1 extends UpliftTele {
 
 
     public void grab() throws InterruptedException {
-        if(gamepad2.right_trigger > 0.1 && !blockGrabberInput)
+        if(gamepad2.right_trigger > robot.getGrabberClosePos() && !blockGrabberInput)
         {
-            robot.getGrabber().setPosition(grabberState ? .1 : grabberOpenPosition);
+            robot.getGrabber().setPosition(grabberState ? robot.getGrabberClosePos() : robot.getGrabberOpenPos());
             grabberState = !grabberState;
             blockGrabberInput = true;
         }
-        else if (gamepad2.right_trigger < 0.1 && blockGrabberInput)
+        else if (gamepad2.right_trigger < robot.getGrabberOpenPos() && blockGrabberInput)
         {
             blockGrabberInput = false;
         }
@@ -171,7 +170,7 @@ public class TeleOp1 extends UpliftTele {
     public void cap() throws InterruptedException {
         if(gamepad2.left_trigger > 0)
         {
-            robot.getGrabber().setPosition(.06);
+            robot.getGrabber().setPosition(.13);
 
         }
     }

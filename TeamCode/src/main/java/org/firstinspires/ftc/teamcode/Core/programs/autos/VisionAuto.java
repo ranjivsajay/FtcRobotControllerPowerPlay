@@ -13,7 +13,7 @@ public class VisionAuto extends UpliftAutoImpl {
 
     @Override
     public void initAction(){
-        robot.getGrabber().setPosition(0.11);
+        robot.getGrabber().setPosition(robot.getGrabberClosePos());
 //        robot.getWebcam().closeCameraDevice();
 
 

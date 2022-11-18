@@ -14,7 +14,7 @@ public class VisionDropCone extends UpliftAutoImpl
     @Override
     public void initAction()
     {
-        robot.getGrabber().setPosition(0.1);
+        robot.getGrabber().setPosition(robot.getGrabberClosePos());
         robot.getSlide1().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         robot.getSlide2().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -27,70 +27,83 @@ public class VisionDropCone extends UpliftAutoImpl
     {
         int location = robot.pipeline.location;
 
-        moveBackward(0.3, 20);
+        moveBackward(0.5, 100);
 
-        moveLeft(0.5, 2715);
+        moveLeft(0.6, 3400);
 
         high();
 
-        moveForward(0.2, 200);
+        moveForward(0.3, 165);
         Thread.sleep(500);
 
-        robot.getGrabber().setPosition(0.25);
+        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         Thread.sleep(250);
 
-        moveBackward(0.2, 175);
+        moveBackward(0.3, 175);
 
-        slides(-0.5, -3450);
+        slides(-0.6, -3450);
 
-        moveRight(0.6,310);
-        turnRight(.6,161);
-        moveForward(.6,505);
-        slides(.5,500);
-        robot.getGrabber().setPosition(.25);
-        moveForward(.4,200);
+        moveRight(0.6,500);
+        turnRight(.6,167);
+        moveForward(.6,950);
+        slides(.6,400);
+        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
+        moveForward(.6,200);
         Thread.sleep(500);
-        robot.getGrabber().setPosition(.08);
+        robot.getGrabber().setPosition(robot.getGrabberClosePos());
         Thread.sleep(500);
-        slides(0.5, 500);
+        slides(0.6, 500);
         Thread.sleep(500);
-        moveBackward(.6,500);
-        turnRight(.5,165);
-        moveLeft(0.6,400);
-        slides(0.5, 2500);
+        moveBackward(.6,950);
+        turnRight(.5,171);
+        moveLeft(0.7,570);
+        slides(0.6, 2600);
 
-        moveForward(0.2, 170);
+        moveForward(0.4, 150);
         Thread.sleep(500);
 
-        robot.getGrabber().setPosition(0.25);
+        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         Thread.sleep(250);
 
-        moveBackward(0.2, 170);
+        moveBackward(0.4, 170);
 
-        slides(-0.5, -3450);
+        slides(-0.6, -3450);
+
+//        moveRight(0.6,400);
+//        turnRight(.6,166);
+//        moveForward(.6,805);
+//        slides(.6,400);
+//        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
+//        moveForward(.4,200);
+//        Thread.sleep(500);
+//        robot.getGrabber().setPosition(robot.getGrabberClosePos());
+//        Thread.sleep(500);
+//        slides(0.6, 500);
+//        Thread.sleep(500);
+//        moveBackward(.6,450);
 
 
 
         if(location == 1)
         {
-            moveRight(0.5, 450);
-            moveBackward(0.5, 500);
+//            moveRight(0.5, 450);
+            moveBackward(0.5, 1);
 
         }
 
         else if(location == 2)
         {
 
-            moveRight(.6,500);
-
+//            moveRight(.6,500);
+            moveBackward(.5,600);
         }
 
         else if(location == 3)
         {
-            moveRight(0.5, 450);
-            moveForward(0.5, 800);
+//            moveRight(0.5, 450);
+            moveBackward(0.5, 1500);
 
-        }
+          }
 
     }
 }
