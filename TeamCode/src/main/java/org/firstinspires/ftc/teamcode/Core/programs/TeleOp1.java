@@ -31,7 +31,6 @@ public class TeleOp1 extends UpliftTele {
     @Override
     public void initAction()
     {
-        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         robot.getSlide1().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         robot.getSlide2().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
@@ -130,7 +129,7 @@ public class TeleOp1 extends UpliftTele {
         // set the scaled powers
         float speedFactor = 1.0f;
         if (slowModeInput > 0.1f)
-            speedFactor = 0.8f;
+            speedFactor = 0.5f;
 
         robot.getLeftFront().setPower(speedFactor * (lfPow / maxVal));
         robot.getLeftBack().setPower(speedFactor * (lbPow / maxVal));
