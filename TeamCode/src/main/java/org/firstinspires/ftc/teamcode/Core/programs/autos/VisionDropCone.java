@@ -29,11 +29,11 @@ public class VisionDropCone extends UpliftAutoImpl
 
         moveBackward(0.5, 100);
 
-        moveLeft(0.6, 3400);
+        moveLeft(0.6, 3500);
 
         high();
 
-        moveForward(0.3, 165);
+        moveForward(0.3, 240);
         Thread.sleep(500);
 
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
@@ -43,10 +43,10 @@ public class VisionDropCone extends UpliftAutoImpl
 
         slides(-0.6, -3450);
 
-        moveRight(0.6,500);
-        turnRight(.6,167);
-        moveForward(.6,950);
-        slides(.6,400);
+        moveRight(0.6,600);
+        turnRight(.6,162);
+        moveForward(.6,980);
+        slides(.6,550);
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         moveForward(.4,200);
         Thread.sleep(500);
@@ -55,11 +55,11 @@ public class VisionDropCone extends UpliftAutoImpl
         slides(0.6, 500);
         Thread.sleep(500);
         moveBackward(.6,950);
-        turnRight(.5,171);
-        moveLeft(0.5,570);
+        turnRight(.5,173);
+        moveLeft(0.5,600);
         slides(0.6, 2600);
 
-        moveForward(0.3, 250);
+        moveForward(0.3, 150);
         Thread.sleep(500);
 
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
@@ -102,8 +102,13 @@ public class VisionDropCone extends UpliftAutoImpl
         {
 //            moveRight(0.5, 450);
             moveForward(0.5, 1100);
+        }
 
-          }
+        //init
+        //robot.getSlide1().setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
+        //loop
+       // robot.getSlide1().setPower(0.5);
+        //robot.getSlide1().setTargetPosition(robot.getSlide1().getCurrentPosition() - 3000);
     }
 }
