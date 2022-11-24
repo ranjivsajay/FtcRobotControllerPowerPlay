@@ -1,6 +1,4 @@
-package org.firstinspires.ftc.teamcode.Core.core;
-
-import com.qualcomm.robotcore.hardware.DcMotor;
+package org.firstinspires.ftc.teamcode.Core.main;
 
 public class UpliftAutoImpl extends UpliftAuto {
 

@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread;
 import org.firstinspires.ftc.teamcode.Core.Threads.OperatorThread;
-import org.firstinspires.ftc.teamcode.Core.core.UpliftRobot;
-import org.firstinspires.ftc.teamcode.Core.core.UpliftTele;
+import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
+import org.firstinspires.ftc.teamcode.Core.main.UpliftTele;
 
 @TeleOp (name = "teleOp", group = "Opmodes")
 public class TeleOp1 extends UpliftTele {
@@ -34,9 +34,9 @@ public class TeleOp1 extends UpliftTele {
     @Override
     public void bodyLoop() throws InterruptedException {
 
-        Runnable Driver = new DriveThread(robot);
+        Runnable Driver = new DriveThread(robot, robot.opMode);
 
-        Runnable Operator = new OperatorThread(robot);
+        Runnable Operator = new OperatorThread(robot, robot.opMode);
 
         new Thread(Driver).start();
         new Thread(Operator).start();

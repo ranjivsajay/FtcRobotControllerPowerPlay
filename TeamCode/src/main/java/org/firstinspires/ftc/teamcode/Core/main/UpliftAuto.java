@@ -1,18 +1,17 @@
-package org.firstinspires.ftc.teamcode.Core.core;
+package org.firstinspires.ftc.teamcode.Core.main;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-public abstract class UpliftTele extends LinearOpMode {
-
-    public boolean isStarted, isLooping, isFinished;
+public abstract class UpliftAuto extends LinearOpMode {
 
     public abstract void initHardware();
 
     public abstract void initAction();
 
-    public abstract void bodyLoop() throws InterruptedException;
+    public abstract void body() throws InterruptedException;
 
-    public abstract void exit();
+    public abstract void exit() throws InterruptedException;
+
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -26,19 +25,16 @@ public abstract class UpliftTele extends LinearOpMode {
         telemetry.update();
 
         waitForStart();
-        isStarted = true;
 
         telemetry.addData("Body", "Started");
         telemetry.update();
 
-        while (!isStopRequested()) {
-            isLooping = true;
-            bodyLoop();
-        }
+        body();
 
         telemetry.addData("Body", "Finished");
         telemetry.update();
 
         exit();
     }
+
 }

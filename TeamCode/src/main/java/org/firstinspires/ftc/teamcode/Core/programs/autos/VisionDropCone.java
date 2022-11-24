@@ -2,9 +2,8 @@ package org.firstinspires.ftc.teamcode.Core.programs.autos;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.Core.core.UpliftAutoImpl;
+import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 
 @Autonomous(name = "VisionDropCone", group = "Opmodes")
 public class VisionDropCone extends UpliftAutoImpl

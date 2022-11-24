@@ -11,16 +11,18 @@ import static java.lang.Math.toRadians;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.teamcode.Core.core.UpliftRobot;
+import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.toolkit.UpliftMath;
 
 public class DriveThread implements Runnable
 {
     private UpliftRobot robot;
+    private LinearOpMode opMode;
 
-    public DriveThread(UpliftRobot robot)
+    public DriveThread(UpliftRobot robot, LinearOpMode opMode)
     {
         this.robot = robot;
+        this.opMode = opMode;
     }
 
     @Override

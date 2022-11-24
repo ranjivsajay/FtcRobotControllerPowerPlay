@@ -2,9 +2,7 @@ package org.firstinspires.ftc.teamcode.Core.programs.autos;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-import org.firstinspires.ftc.teamcode.Core.core.UpliftAutoImpl;
-import org.firstinspires.ftc.teamcode.Core.core.UpliftRobot;
-import org.firstinspires.ftc.teamcode.Core.toolkit.vision.PowerPlay;
+import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 
 @Autonomous(name = "VisionAuto", group = "Opmodes")
 public class VisionAuto extends UpliftAutoImpl {
