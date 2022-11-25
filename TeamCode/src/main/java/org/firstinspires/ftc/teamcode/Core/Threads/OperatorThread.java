@@ -32,23 +32,14 @@ public class OperatorThread implements Runnable
     public void run()
     {
 
-        if(gamepad2.dpad_left)
-        {
-            robot.getSlide1().setPower(.1);
-        }
-
         if(gamepad2.dpad_up)
         {
-            robot.getSlide1().setPower(-.1);
-        }
-        if(gamepad2.dpad_down)
-        {
-            robot.getSlide2().setPower(-.1);
-        }
-
-        if(gamepad2.dpad_right)
-        {
-            robot.getSlide2().setPower(.1);
+            double pos1 = robot.getArm1().getPosition();
+            double pos2 = robot.getArm2().getPosition();
+            double newPos1 = pos1 + 0.1;
+            double newPos2 = pos2 - 0.1;
+            robot.getArm1().setPosition(newPos1);
+            robot.getArm2().setPosition(newPos2);
         }
 
         robot.getSlide1().setPower(

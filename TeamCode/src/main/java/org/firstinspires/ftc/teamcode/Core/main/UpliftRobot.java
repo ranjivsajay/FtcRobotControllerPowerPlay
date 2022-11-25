@@ -18,7 +18,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 public class UpliftRobot {
     DcMotor leftFront, rightFront, leftBack, rightBack, slide1, slide2;
     BNO055IMU imu;
-    Servo grabber;
+    Servo grabber, arm1, arm2;
     TouchSensor magneticSensor;
     OpenCvCamera webcam;
 
@@ -51,6 +51,9 @@ public class UpliftRobot {
         slide2 = hardwareMap.get(DcMotor.class, "slide2");
 
         grabber = hardwareMap.get(Servo.class, "grabber");
+
+        arm1 = hardwareMap.get(Servo.class, "arm1");
+        arm2 = hardwareMap.get(Servo.class, "arm2");
 
 
         imu = hardwareMap.get(BNO055IMU.class, "imu");
@@ -104,6 +107,17 @@ public class UpliftRobot {
     {
         return grabber;
     }
+
+    public Servo getArm1()
+    {
+        return arm1;
+    }
+
+    public Servo getArm2()
+    {
+        return arm2;
+    }
+
     public DcMotor getLeftFront() {
         return leftFront;
     }
@@ -135,6 +149,8 @@ public class UpliftRobot {
         return magneticSensor;
     }
 
+
+
     public double getGrabberOpenPos()
     {
         return grabberOpenPos;
@@ -144,4 +160,6 @@ public class UpliftRobot {
     {
         return grabberClosePos;
     }
+
+
 }

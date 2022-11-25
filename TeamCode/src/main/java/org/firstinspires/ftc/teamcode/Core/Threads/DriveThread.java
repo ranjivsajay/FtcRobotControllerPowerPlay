@@ -49,13 +49,7 @@ public class DriveThread implements Runnable
 
         teleDrive(angle, magnitude, rightX, gamepad1.right_trigger, robot);
 
-        if (gamepad1.dpad_up)
-        {
-            robot.getRightFront().setPower(.1);
-            robot.getRightBack().setPower(.1);
-            robot.getLeftFront().setPower(.1);
-            robot.getLeftBack().setPower(.1);
-        }
+
 
     }
 
