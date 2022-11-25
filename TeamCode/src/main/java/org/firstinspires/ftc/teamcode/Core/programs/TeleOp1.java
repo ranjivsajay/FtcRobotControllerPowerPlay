@@ -24,6 +24,9 @@ public class TeleOp1 extends UpliftTele {
     boolean grabberState = true;
     boolean blockGrabberInput = false;
 
+    double arm1Pos = robot.getArm1().getPosition();
+    double arm2Pos = robot.getArm2().getPosition();
+
     @Override
     public void initHardware()
     {
@@ -86,15 +89,9 @@ public class TeleOp1 extends UpliftTele {
         grab();
         cap();
 
-        if(gamepad2.dpad_up)
-        {
-            double pos1 = robot.getArm1().getPosition();
-            double pos2 = robot.getArm2().getPosition();
-            double newPos1 = pos1 + 0.1;
-            double newPos2 = pos2 - 0.1;
-            robot.getArm1().setPosition(newPos1);
-            robot.getArm2().setPosition(newPos2);
-        }
+        armUp();
+
+
 
     }
 
@@ -171,6 +168,22 @@ public class TeleOp1 extends UpliftTele {
         if(gamepad2.left_trigger > 0)
         {
             robot.getGrabber().setPosition(.13);
+
+        }
+    }
+
+    public void armUp()
+    {
+        double currentPos1 = arm1Pos + 0.05;
+        double currentPos2 = arm2Pos - 0.05;
+
+        if(gamepad2.dpad_up)
+        {
+            robot.getArm1().setPosition(currentPos1);
+            robot.getArm2().setPosition(currentPos2);
+
+            arm1Pos = currentPos1;
+            arm2Pos = currentPos2;
 
         }
     }
