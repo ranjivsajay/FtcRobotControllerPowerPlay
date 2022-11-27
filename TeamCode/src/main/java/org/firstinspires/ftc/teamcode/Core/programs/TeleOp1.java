@@ -11,8 +11,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
-//import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread;
-//import org.firstinspires.ftc.teamcode.Core.Threads.OperatorThread;
+
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftTele;
 import org.firstinspires.ftc.teamcode.Core.toolkit.UpliftMath;
@@ -24,8 +23,8 @@ public class TeleOp1 extends UpliftTele {
     boolean grabberState = true;
     boolean blockGrabberInput = false;
 
-    double arm1Pos = robot.getArm1().getPosition();
-    double arm2Pos = robot.getArm2().getPosition();
+      double arm1HighPos = .4;
+      double arm2HighPos = .0;
 
     @Override
     public void initHardware()
@@ -38,29 +37,27 @@ public class TeleOp1 extends UpliftTele {
     {
         robot.getSlide1().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         robot.getSlide2().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+//        robot.getArm1().setPosition(arm1HighPos);
+//        robot .getArm2().setPosition(arm2HighPos);
+
+
     }
 
     @Override
     public void bodyLoop() throws InterruptedException {
 
-//        Runnable Driver = new DriveThread(robot, robot.opMode);
+//        DriveThread Driver = new DriveThread(robot);
+//        Thread myDriver = new Thread(Driver);
 //
-//        Runnable Operator = new OperatorThread(robot, robot.opMode);
+//        OperatorThread Operator = new OperatorThread(robot);
+//        Thread myOperator = new Thread(Operator);
 //
-//        new Thread(Driver).start();
-//        new Thread(Operator).start();
+//
+//        myDriver.start();
+//        myOperator.start();
 
-        telemetry.addData("magnetic sensor", robot.getMagneticSensor().isPressed());
 
-        telemetry.addData("left front motor" , robot.getLeftFront().getCurrentPosition());
-        telemetry.addData("right front motor" , robot.getRightFront().getCurrentPosition());
-        telemetry.addData("left back motor" , robot.getLeftBack().getCurrentPosition());
-        telemetry.addData("right back motor" , robot.getRightBack().getCurrentPosition());
-        telemetry.addData("left front power" , robot.getLeftFront().getPower());
-        telemetry.addData("right front power" , robot.getRightFront().getPower());
-        telemetry.addData("left back power" , robot.getLeftBack().getPower());
-        telemetry.addData("right back power" , robot.getRightBack().getPower());
-        telemetry.update();
         double leftY =(.7 * Range.clip(-gamepad1.left_stick_y, -1, 1));
         double rightX = (.7 * Range.clip(gamepad1.right_stick_x, -1, 1));
         double leftX = ( .7 * Range.clip(gamepad1.left_stick_x, -1, 1));
@@ -72,24 +69,15 @@ public class TeleOp1 extends UpliftTele {
 
         teleDrive(angle, magnitude, rightX, gamepad1.right_trigger, robot);
 
-        robot.getSlide1().setPower(
-                (1.0 - 0.8 * gamepad2.left_trigger) * Range.clip(gamepad2.right_stick_y, -1, 1));
-        robot.getSlide2().setPower(
-                (1.0 - 0.8 * gamepad2.left_trigger) * Range.clip(-gamepad2.right_stick_y, -1, 1));
+        robot.getSlide1().setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
+        robot.getSlide2().setPower(Range.clip(-gamepad2.right_stick_y, -1, 1));
 
-
-        if (gamepad1.dpad_up)
-        {
-            robot.getRightFront().setPower(.1);
-            robot.getRightBack().setPower(.1);
-            robot.getLeftFront().setPower(.1);
-            robot.getLeftBack().setPower(.1);
-        }
 
         grab();
-        cap();
 
-        armUp();
+        holdSlidePos();
+
+        armHigh();
 
 
 
@@ -136,13 +124,16 @@ public class TeleOp1 extends UpliftTele {
 
 
 
-    public void slides(double power, double dist) {
-        double initialPos1 = robot.getSlide2().getCurrentPosition();
+    public void slides(double power, double dist)
+    {
 
-        while (robot.getSlide2().getCurrentPosition() < initialPos1 + dist)
+        double initialPos2 = robot.getSlide2().getCurrentPosition();
+
+        while (Math.abs(robot.getSlide2().getCurrentPosition() - (initialPos2 + dist)) > 50)
         {
             robot.getSlide1().setPower(-power);
             robot.getSlide2().setPower(power);
+
         }
         robot.getSlide1().setPower(0);
         robot.getSlide2().setPower(0);
@@ -164,28 +155,30 @@ public class TeleOp1 extends UpliftTele {
         }
     }
 
-    public void cap() throws InterruptedException {
-        if(gamepad2.left_trigger > 0)
-        {
-            robot.getGrabber().setPosition(.13);
-
-        }
-    }
-
-    public void armUp()
+    public void armHigh()
     {
-        double currentPos1 = arm1Pos + 0.05;
-        double currentPos2 = arm2Pos - 0.05;
-
         if(gamepad2.dpad_up)
         {
-            robot.getArm1().setPosition(currentPos1);
-            robot.getArm2().setPosition(currentPos2);
 
-            arm1Pos = currentPos1;
-            arm2Pos = currentPos2;
+            robot.getArm2().setPosition(arm2HighPos);
+            robot.getArm1().setPosition(arm1HighPos);
+
+            slides(0.5, 953);
+
 
         }
     }
+
+    public void holdSlidePos()
+    {
+        if(gamepad2.left_trigger > 0)
+        {
+            robot.getSlide1().setPower(-0.1);
+            robot.getSlide2().setPower(0.1);
+        }
+    }
+
+
+
 
 }

@@ -12,33 +12,22 @@
 //import com.qualcomm.robotcore.util.Range;
 //
 //import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
+//import org.firstinspires.ftc.teamcode.Core.main.UpliftTele;
 //import org.firstinspires.ftc.teamcode.Core.toolkit.UpliftMath;
 //
 //public class DriveThread implements Runnable
 //{
 //    private UpliftRobot robot;
-//    private LinearOpMode opMode;
 //
-//    public DriveThread(UpliftRobot robot, LinearOpMode opMode)
+//    public DriveThread(UpliftRobot robot)
 //    {
 //        this.robot = robot;
-//        this.opMode = opMode;
 //    }
 //
 //    @Override
 //    public void run()
 //    {
-//        telemetry.addData("magnetic sensor", robot.getMagneticSensor().isPressed());
 //
-//        telemetry.addData("left front motor" , robot.getLeftFront().getCurrentPosition());
-//        telemetry.addData("right front motor" , robot.getRightFront().getCurrentPosition());
-//        telemetry.addData("left back motor" , robot.getLeftBack().getCurrentPosition());
-//        telemetry.addData("right back motor" , robot.getRightBack().getCurrentPosition());
-//        telemetry.addData("left front power" , robot.getLeftFront().getPower());
-//        telemetry.addData("right front power" , robot.getRightFront().getPower());
-//        telemetry.addData("left back power" , robot.getLeftBack().getPower());
-//        telemetry.addData("right back power" , robot.getRightBack().getPower());
-//        telemetry.update();
 //        double leftY =(.7 * Range.clip(-gamepad1.left_stick_y, -1, 1));
 //        double rightX = (.7 * Range.clip(gamepad1.right_stick_x, -1, 1));
 //        double leftX = ( .7 * Range.clip(gamepad1.left_stick_x, -1, 1));

@@ -13,39 +13,34 @@
 //
 //    private UpliftRobot robot;
 //
-//    private LinearOpMode opMode;
-//
-//
 //    private boolean grabberState;
 //    private boolean blockGrabberInput;
 //
+//    double arm1HighPos;
+//    double arm2HighPos;
 //
-//    public OperatorThread(UpliftRobot robot, LinearOpMode opMode)
+//
+//    public OperatorThread(UpliftRobot robot)
 //    {
 //        this.robot = robot;
+//
 //        this.grabberState = true;
 //        this.blockGrabberInput = false;
-//        this.opMode = opMode;
+//
+//
+//        this.arm1HighPos = .4;
+//        this.arm2HighPos = .0;
 //    }
 //
 //    @Override
 //    public void run()
 //    {
+//        armHigh();
 //
-//        if(gamepad2.dpad_up)
-//        {
-//            double pos1 = robot.getArm1().getPosition();
-//            double pos2 = robot.getArm2().getPosition();
-//            double newPos1 = pos1 + 0.1;
-//            double newPos2 = pos2 - 0.1;
-//            robot.getArm1().setPosition(newPos1);
-//            robot.getArm2().setPosition(newPos2);
-//        }
+//        holdSlidePos();
 //
-//        robot.getSlide1().setPower(
-//                (1.0 - 0.8 * gamepad2.left_trigger) * Range.clip(gamepad2.right_stick_y, -1, 1));
-//        robot.getSlide2().setPower(
-//                (1.0 - 0.8 * gamepad2.left_trigger) * Range.clip(-gamepad2.right_stick_y, -1, 1));
+//        robot.getSlide1().setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
+//        robot.getSlide2().setPower(Range.clip(-gamepad2.right_stick_y, -1, 1));
 //
 //        try {
 //            grab();
@@ -53,12 +48,25 @@
 //            e.printStackTrace();
 //        }
 //
-//        try {
-//            cap();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
 //    }
+//
+//    public void slides(double power, double dist)
+//    {
+//
+//        double initialPos2 = robot.getSlide2().getCurrentPosition();
+//
+//        while (Math.abs(robot.getSlide2().getCurrentPosition() - (initialPos2 + dist)) > 50)
+//        {
+//            robot.getSlide1().setPower(-power);
+//            robot.getSlide2().setPower(power);
+//
+//        }
+//        robot.getSlide1().setPower(0);
+//        robot.getSlide2().setPower(0);
+//
+//
+//    }
+//
 //
 //    public void grab() throws InterruptedException {
 //        if(gamepad2.right_trigger > robot.getGrabberClosePos() && !blockGrabberInput)
@@ -73,11 +81,28 @@
 //        }
 //    }
 //
-//    public void cap() throws InterruptedException {
-//        if(gamepad2.left_trigger > 0)
+//    public void armHigh()
+//    {
+//        if(gamepad2.dpad_up)
 //        {
-//            robot.getGrabber().setPosition(.13);
+//
+//            robot.getArm2().setPosition(arm2HighPos);
+//            robot.getArm1().setPosition(arm1HighPos);
+//
+//            slides(0.5, 953);
+//
 //
 //        }
 //    }
+//
+//    public void holdSlidePos()
+//    {
+//        if(gamepad2.left_trigger > 0)
+//        {
+//            robot.getSlide1().setPower(-0.1);
+//            robot.getSlide2().setPower(0.1);
+//        }
+//    }
+//
+//
 //}
