@@ -12,19 +12,21 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
 
+import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread;
+import org.firstinspires.ftc.teamcode.Core.Threads.OperatorThread;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftTele;
 import org.firstinspires.ftc.teamcode.Core.toolkit.UpliftMath;
 
 @TeleOp (name = "teleOp", group = "Opmodes")
-public class TeleOp1 extends UpliftTele {
+public class TeleOp1 extends UpliftTele{
 
     UpliftRobot robot;
     boolean grabberState = true;
     boolean blockGrabberInput = false;
 
-      double arm1HighPos = .4;
-      double arm2HighPos = .0;
+    double arm1HighPos = .4;
+    double arm2HighPos = .0;
 
     @Override
     public void initHardware()
@@ -47,15 +49,8 @@ public class TeleOp1 extends UpliftTele {
     @Override
     public void bodyLoop() throws InterruptedException {
 
-//        DriveThread Driver = new DriveThread(robot);
-//        Thread myDriver = new Thread(Driver);
-//
-//        OperatorThread Operator = new OperatorThread(robot);
-//        Thread myOperator = new Thread(Operator);
-//
-//
-//        myDriver.start();
-//        myOperator.start();
+        createDriveThread(robot);
+        createOperatorThread(robot);
 
 
         double leftY =(.7 * Range.clip(-gamepad1.left_stick_y, -1, 1));
@@ -87,6 +82,7 @@ public class TeleOp1 extends UpliftTele {
     public void exit() {
 
     }
+
 
     public static void teleDrive ( double joystickAngle, double speedVal,
                                    double turnVal, float slowModeInput, UpliftRobot robot) {
@@ -177,6 +173,28 @@ public class TeleOp1 extends UpliftTele {
             robot.getSlide2().setPower(0.1);
         }
     }
+
+    public static void createDriveThread(UpliftRobot robot1)
+    {
+        DriveThread Driver = new DriveThread(robot1);
+        Driver.start();
+    }
+
+    public static void createOperatorThread(UpliftRobot robot1)
+    {
+        OperatorThread Operator = new OperatorThread(robot1);
+
+        Operator.start();
+    }
+
+
+
+
+
+
+
+
+
 
 
 
