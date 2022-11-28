@@ -15,19 +15,32 @@ import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftTele;
 import org.firstinspires.ftc.teamcode.Core.toolkit.UpliftMath;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 public class DriveThread extends Thread
 {
     private UpliftRobot robot;
+    private static final String DRIVER_NAME = "DriverThreadName";
+
+    private boolean shutDown = false;
 
     public DriveThread(UpliftRobot robot)
     {
         this.robot = robot;
     }
 
+    public void end()
+    {
+        shutDown = true;
+
+        telemetry.addData("Driver Thread stopped ", shutDown);
+    }
+
     @Override
     public void run()
     {
-        while(!isInterrupted())
+        while(!shutDown)
         {
             try
             {
@@ -40,16 +53,21 @@ public class DriveThread extends Thread
                 double magnitude = 0.8 * Range.clip(sqrt(Math.pow(leftX, 2) + Math.pow(leftY, 2)), -1, 1);
 
                 teleDrive(angle, magnitude, rightX, gamepad1.right_trigger, robot);
+
+                // todo: validate user responsiveness and set sleep
+                sleep(50);
             } catch (Exception e) {
                 e.printStackTrace();
+
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                e.printStackTrace(pw);
+
+                telemetry.addData("Drive error", e.getMessage());
+                telemetry.addData("Drive error stack", sw.toString());
             }
-
-
         }
-
     }
-
-
 
     public static void teleDrive ( double joystickAngle, double speedVal,
                                    double turnVal, float slowModeInput, UpliftRobot robot) {
@@ -85,6 +103,10 @@ public class DriveThread extends Thread
         robot.getRightFront().setPower(speedFactor * (rfPow / maxVal));
     }
 
-
-
+    @Override
+    public String toString() {
+        return "DriveThread{" +
+                "name=" + DRIVER_NAME +
+                '}';
+    }
 }

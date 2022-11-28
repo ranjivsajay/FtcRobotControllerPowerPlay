@@ -21,12 +21,12 @@ import org.firstinspires.ftc.teamcode.Core.toolkit.UpliftMath;
 @TeleOp (name = "teleOp", group = "Opmodes")
 public class TeleOp1 extends UpliftTele{
 
-    UpliftRobot robot;
-    boolean grabberState = true;
-    boolean blockGrabberInput = false;
-
-    double arm1HighPos = .4;
-    double arm2HighPos = .0;
+//    UpliftRobot robot;
+//    boolean grabberState = true;
+//    boolean blockGrabberInput = false;
+//
+//    double arm1HighPos = .4;
+//    double arm2HighPos = .0;
 
     @Override
     public void initHardware()
@@ -49,30 +49,29 @@ public class TeleOp1 extends UpliftTele{
     @Override
     public void bodyLoop() throws InterruptedException {
 
-        createDriveThread(robot);
-        createOperatorThread(robot);
+        sleep(1000);
 
 
-        double leftY =(.7 * Range.clip(-gamepad1.left_stick_y, -1, 1));
-        double rightX = (.7 * Range.clip(gamepad1.right_stick_x, -1, 1));
-        double leftX = ( .7 * Range.clip(gamepad1.left_stick_x, -1, 1));
+//        double leftY =(.7 * Range.clip(-gamepad1.left_stick_y, -1, 1));
+//        double rightX = (.7 * Range.clip(gamepad1.right_stick_x, -1, 1));
+//        double leftX = ( .7 * Range.clip(gamepad1.left_stick_x, -1, 1));
+//
+//
+//
+//        double angle = 90 - Math.toDegrees(UpliftMath.atan2UL(leftY, leftX));
+//        double magnitude = 0.8 * Range.clip(sqrt(Math.pow(leftX, 2) + Math.pow(leftY, 2)), -1, 1);
+//
+//        teleDrive(angle, magnitude, rightX, gamepad1.right_trigger, robot);
 
-
-
-        double angle = 90 - Math.toDegrees(UpliftMath.atan2UL(leftY, leftX));
-        double magnitude = 0.8 * Range.clip(sqrt(Math.pow(leftX, 2) + Math.pow(leftY, 2)), -1, 1);
-
-        teleDrive(angle, magnitude, rightX, gamepad1.right_trigger, robot);
-
-        robot.getSlide1().setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
-        robot.getSlide2().setPower(Range.clip(-gamepad2.right_stick_y, -1, 1));
-
-
-        grab();
-
-        holdSlidePos();
-
-        armHigh();
+//        robot.getSlide1().setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
+//        robot.getSlide2().setPower(Range.clip(-gamepad2.right_stick_y, -1, 1));
+//
+//
+//        grab();
+//
+//        holdSlidePos();
+//
+//        armHigh();
 
 
 
@@ -83,7 +82,7 @@ public class TeleOp1 extends UpliftTele{
 
     }
 
-
+/*
     public static void teleDrive ( double joystickAngle, double speedVal,
                                    double turnVal, float slowModeInput, UpliftRobot robot) {
         double lfPow = sin(toRadians(joystickAngle) + (0.25 * PI)) * speedVal + turnVal;
@@ -173,30 +172,9 @@ public class TeleOp1 extends UpliftTele{
             robot.getSlide2().setPower(0.1);
         }
     }
-
-    public static void createDriveThread(UpliftRobot robot1)
-    {
-        DriveThread Driver = new DriveThread(robot1);
-        Driver.start();
-    }
-
-    public static void createOperatorThread(UpliftRobot robot1)
-    {
-        OperatorThread Operator = new OperatorThread(robot1);
-
-        Operator.start();
-    }
-
-
-
-
-
-
-
-
-
-
-
-
+*/
 
 }
+
+
+
