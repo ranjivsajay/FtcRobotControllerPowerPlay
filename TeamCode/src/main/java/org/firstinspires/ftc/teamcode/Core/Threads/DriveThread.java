@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.Core.Threads;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 import static java.lang.Math.PI;
 import static java.lang.Math.abs;
@@ -11,6 +10,7 @@ import static java.lang.Math.toRadians;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftTele;
 import org.firstinspires.ftc.teamcode.Core.toolkit.UpliftMath;
@@ -35,6 +35,7 @@ public class DriveThread extends Thread
         shutDown = true;
 
         telemetry.addData("Driver Thread stopped ", shutDown);
+        telemetry.update();
     }
 
     @Override
@@ -44,27 +45,27 @@ public class DriveThread extends Thread
         {
             try
             {
-                double leftY =(.7 * Range.clip(-gamepad1.left_stick_y, -1, 1));
-                double rightX = (.7 * Range.clip(gamepad1.right_stick_x, -1, 1));
-                double leftX = ( .7 * Range.clip(gamepad1.left_stick_x, -1, 1));
+                double leftY =(.7 * Range.clip(-robot.opMode.gamepad1.left_stick_y, -1, 1));
+                double rightX = (.7 * Range.clip(robot.opMode.gamepad1.right_stick_x, -1, 1));
+                double leftX = ( .7 * Range.clip(robot.opMode.gamepad1.left_stick_x, -1, 1));
 
 
                 double angle = 90 - Math.toDegrees(UpliftMath.atan2UL(leftY, leftX));
                 double magnitude = 0.8 * Range.clip(sqrt(Math.pow(leftX, 2) + Math.pow(leftY, 2)), -1, 1);
 
-                teleDrive(angle, magnitude, rightX, gamepad1.right_trigger, robot);
+                teleDrive(angle, magnitude, rightX, robot.opMode.gamepad1.right_trigger, robot);
 
                 // todo: validate user responsiveness and set sleep
                 sleep(50);
             } catch (Exception e) {
                 e.printStackTrace();
 
-                StringWriter sw = new StringWriter();
-                PrintWriter pw = new PrintWriter(sw);
-                e.printStackTrace(pw);
-
-                telemetry.addData("Drive error", e.getMessage());
-                telemetry.addData("Drive error stack", sw.toString());
+//                StringWriter sw = new StringWriter();
+//                PrintWriter pw = new PrintWriter(sw);
+//                e.printStackTrace(pw);
+//
+//                telemetry.addData("Drive error", e.getMessage());
+//                telemetry.addData("Drive error stack", sw.toString());
             }
         }
     }

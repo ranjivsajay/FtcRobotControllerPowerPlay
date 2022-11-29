@@ -14,8 +14,7 @@ public class VisionDropCone extends UpliftAutoImpl
     public void initAction()
     {
         robot.getGrabber().setPosition(robot.getGrabberClosePos());
-        robot.getSlide1().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        robot.getSlide2().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
 
 
 

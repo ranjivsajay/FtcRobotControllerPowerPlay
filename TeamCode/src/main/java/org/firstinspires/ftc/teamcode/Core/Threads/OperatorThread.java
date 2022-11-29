@@ -44,6 +44,8 @@ public class OperatorThread extends Thread
         shutDown = true;
 
         telemetry.addData("Operator Thread stopped ", shutDown);
+        telemetry.update();
+
     }
 
     @Override
@@ -60,21 +62,20 @@ public class OperatorThread extends Thread
 
                 holdSlidePos();
 
-                robot.getSlide1().setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
-                robot.getSlide2().setPower(Range.clip(-gamepad2.right_stick_y, -1, 1));
+                robot.getSlide1().setPower(Range.clip(robot.opMode.gamepad2.right_stick_y, -1, 1));
+                robot.getSlide2().setPower(Range.clip(-robot.opMode.gamepad2.right_stick_y, -1, 1));
 
                 // todo: validate user responsiveness and set sleep
                 sleep(50);
             } catch (Exception e) {
                 e.printStackTrace();
-                e.printStackTrace();
 
-                StringWriter sw = new StringWriter();
-                PrintWriter pw = new PrintWriter(sw);
-                e.printStackTrace(pw);
-
-                telemetry.addData("Operator error ", e.getMessage());
-                telemetry.addData("Operator error stack", sw.toString());
+//                StringWriter sw = new StringWriter();
+//                PrintWriter pw = new PrintWriter(sw);
+//                e.printStackTrace(pw);
+//
+//                telemetry.addData("Operator error ", e.getMessage());
+//                telemetry.addData("Operator error stack", sw.toString());
             }
         }
     }
@@ -94,13 +95,13 @@ public class OperatorThread extends Thread
 
 
     public void grab() throws InterruptedException {
-        if(gamepad2.right_trigger > robot.getGrabberClosePos() && !blockGrabberInput)
+        if(robot.opMode.gamepad2.right_trigger > robot.getGrabberClosePos() && !blockGrabberInput)
         {
             robot.getGrabber().setPosition(grabberState ? robot.getGrabberClosePos() : robot.getGrabberOpenPos());
             grabberState = !grabberState;
             blockGrabberInput = true;
         }
-        else if (gamepad2.right_trigger < robot.getGrabberOpenPos() && blockGrabberInput)
+        else if (robot.opMode.gamepad2.right_trigger < robot.getGrabberOpenPos() && blockGrabberInput)
         {
             blockGrabberInput = false;
         }
@@ -108,7 +109,7 @@ public class OperatorThread extends Thread
 
     public void armHigh()
     {
-        if(gamepad2.dpad_up)
+        if(robot.opMode.gamepad2.dpad_up)
         {
 
             robot.getArm2().setPosition(arm2HighPos);
@@ -122,10 +123,10 @@ public class OperatorThread extends Thread
 
     public void holdSlidePos()
     {
-        if(gamepad2.left_trigger > 0)
+        if(robot.opMode.gamepad2.left_trigger > 0)
         {
-            robot.getSlide1().setPower(-0.1);
-            robot.getSlide2().setPower(0.1);
+            robot.getSlide1().setPower(-0.15);
+            robot.getSlide2().setPower(0.15);
         }
     }
 
