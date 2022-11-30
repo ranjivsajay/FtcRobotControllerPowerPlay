@@ -1,19 +1,17 @@
 package org.firstinspires.ftc.teamcode.Core.main;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
-
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread;
-import org.firstinspires.ftc.teamcode.Core.Threads.OperatorThread;
+//import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread;
+//import org.firstinspires.ftc.teamcode.Core.Threads.OperatorThread;
 
 public abstract class UpliftTele extends LinearOpMode {
 
     protected UpliftRobot robot;
 
-    DriveThread driverThread;
-    OperatorThread operatorThread;
+//    DriveThread driverThread;
+//    OperatorThread operatorThread;
 
     public boolean isStarted, isLooping, isFinished;
 
@@ -33,11 +31,8 @@ public abstract class UpliftTele extends LinearOpMode {
         initHardware();
         initAction();
 
-        createDriveThread(robot);
-        createOperatorThread(robot);
-
-        driverThread.start();
-        operatorThread.start();
+//        createDriveThread(robot);
+//        createOperatorThread(robot);
 
 
         telemetry.addData("Initializing", "Finished");
@@ -46,11 +41,12 @@ public abstract class UpliftTele extends LinearOpMode {
         waitForStart();
         isStarted = true;
 
+//        driverThread.start();
+//        operatorThread.start();
 
 
         telemetry.addData("Body", "Started");
         telemetry.update();
-
 
 
         while (!isStopRequested()) {
@@ -60,8 +56,8 @@ public abstract class UpliftTele extends LinearOpMode {
 
         telemetry.addData("Body", "Finished");
 
-        driverThread.end();
-        operatorThread.end();
+//        driverThread.end();
+//        operatorThread.end();
 
         telemetry.update();
 
@@ -69,17 +65,16 @@ public abstract class UpliftTele extends LinearOpMode {
         exit();
     }
 
-    public void createDriveThread(UpliftRobot robot1)
-    {
-        driverThread = new DriveThread(robot1);
-
-        telemetry.addData("Driver Thread started", driverThread.toString());
-    }
-
-    public void createOperatorThread(UpliftRobot robot1) {
-        operatorThread = new OperatorThread(robot1);
-
-        telemetry.addData("Operator Thread started", operatorThread.toString());
-
-    }
+//    public void createDriveThread(UpliftRobot robot1) {
+//        driverThread = new DriveThread(robot1);
+//
+//        telemetry.addData("Driver Thread started", driverThread.toString());
+//    }
+//
+//    public void createOperatorThread(UpliftRobot robot1) {
+//        operatorThread = new OperatorThread(robot1);
+//
+//        telemetry.addData("Operator Thread started", operatorThread.toString());
+//
+//    }
 }
