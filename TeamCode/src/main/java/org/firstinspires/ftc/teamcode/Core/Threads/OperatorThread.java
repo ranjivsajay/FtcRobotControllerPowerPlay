@@ -125,8 +125,8 @@ public class OperatorThread extends Thread
     {
         if(robot.opMode.gamepad2.left_trigger > 0)
         {
-            robot.getSlide1().setPower(-0.15);
-            robot.getSlide2().setPower(0.15);
+            robot.getSlide1().setPower(-0.6);
+            robot.getSlide2().setPower(0.6);
         }
     }
 
