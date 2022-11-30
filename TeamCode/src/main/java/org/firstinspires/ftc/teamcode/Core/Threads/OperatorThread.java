@@ -54,7 +54,7 @@ public class OperatorThread extends Thread
             try
             {
 
-//                grab();
+                grab();
 
                 armHigh();
 

@@ -57,7 +57,7 @@ public class DriveThread extends Thread
                 // todo: validate user responsiveness and set sleep
                 sleep(50);
             } catch (Exception e) {
-//                e.printStackTrace();
+                e.printStackTrace();
 //
 //                StringWriter sw = new StringWriter();
 //                PrintWriter pw = new PrintWriter(sw);

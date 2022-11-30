@@ -18,22 +18,24 @@ import org.firstinspires.ftc.teamcode.Core.toolkit.UpliftMath;
 @TeleOp (name = "teleOp", group = "Opmodes")
 public class TeleOp1 extends UpliftTele {
 
-//    UpliftRobot robot;
+    UpliftRobot robot;
 //    boolean grabberState = true;
 //    boolean blockGrabberInput = false;
 //    boolean threadOn = false;
 //
-//
+
     double arm1HighPos = .4;
     double arm2HighPos = .0;
 
     @Override
     public void initHardware() {
-//        robot = new UpliftRobot(this);
+        robot = new UpliftRobot(this);
     }
 
     @Override
     public void initAction() {
+        robot.getTest().setPosition(0.5);
+
 //        robot.getTest().setPosition(0.5);
 
 //        robot.getArm1().setPosition(arm1HighPos);
