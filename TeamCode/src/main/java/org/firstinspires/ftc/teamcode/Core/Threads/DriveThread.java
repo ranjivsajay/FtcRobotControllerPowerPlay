@@ -35,6 +35,9 @@ public class DriveThread extends Thread
         shutDown = true;
 
         telemetry.addData("Driver Thread stopped ", shutDown);
+
+        telemetry.update();
+
     }
 
     @Override

@@ -21,7 +21,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 public class UpliftRobot {
     DcMotor leftFront, rightFront, leftBack, rightBack, slide1, slide2;
     BNO055IMU imu;
-    Servo grabber, arm1, arm2, test;
+    Servo grabber, arm1, arm2, fourBar1, fourBar2, twister;
     TouchSensor magneticSensor;
     OpenCvCamera webcam;
 
@@ -47,7 +47,10 @@ public class UpliftRobot {
 
         initializeCamera();
 
-        test = hardwareMap.get(Servo.class, "test");
+
+
+
+
 
         leftFront = hardwareMap.get(DcMotor.class, "left_front");
         rightFront = hardwareMap.get(DcMotor.class, "right_front");
@@ -58,6 +61,11 @@ public class UpliftRobot {
         slide2 = hardwareMap.get(DcMotor.class, "slide2");
 
         grabber = hardwareMap.get(Servo.class, "grabber");
+
+        fourBar1 = hardwareMap.get(Servo.class,"fourBar1");
+        fourBar2= hardwareMap.get(Servo.class,"fourBar2");
+
+        twister = hardwareMap.get(Servo.class,"twister");
 
         arm1 = hardwareMap.get(Servo.class, "arm1");
         arm2 = hardwareMap.get(Servo.class, "arm2");
@@ -105,8 +113,17 @@ public class UpliftRobot {
         });
     }
 
-    public Servo getTest() {
-        return test;
+    public Servo getFourBar1() {
+        return fourBar1;
+    }
+
+    public Servo getFourBar2() {
+        return fourBar2;
+    }
+
+    public Servo getTwister()
+    {
+        return twister;
     }
 
     public OpenCvCamera getWebcam()

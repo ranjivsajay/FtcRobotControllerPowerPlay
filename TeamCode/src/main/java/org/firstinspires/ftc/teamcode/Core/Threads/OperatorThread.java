@@ -35,7 +35,7 @@ public class OperatorThread extends Thread
         this.grabberState = true;
         this.blockGrabberInput = false;
 
-        this.arm1HighPos = .4;
+        this.arm1HighPos = 0.5;
         this.arm2HighPos = .0;
     }
 
@@ -44,6 +44,8 @@ public class OperatorThread extends Thread
         shutDown = true;
 
         telemetry.addData("Operator Thread stopped ", shutDown);
+
+        telemetry.update();
     }
 
     @Override
@@ -59,6 +61,8 @@ public class OperatorThread extends Thread
                 armHigh();
 
                 holdSlidePos();
+
+                twister();
 
                 robot.getSlide1().setPower(Range.clip(robot.opMode.gamepad2.right_stick_y, -1, 1));
                 robot.getSlide2().setPower(Range.clip(-robot.opMode.gamepad2.right_stick_y, -1, 1));
@@ -113,9 +117,17 @@ public class OperatorThread extends Thread
             robot.getArm2().setPosition(arm2HighPos);
             robot.getArm1().setPosition(arm1HighPos);
 
-            slides(0.5, 953);
+//            slides(0.5, 953);
 
 
+        }
+    }
+
+    public void twister()
+    {
+        if(robot.opMode.gamepad2.dpad_down)
+        {
+            robot.getTwister().setPosition(0.5);
         }
     }
 
@@ -123,8 +135,8 @@ public class OperatorThread extends Thread
     {
         if(robot.opMode.gamepad2.left_trigger > 0)
         {
-            robot.getSlide1().setPower(-0.15);
-            robot.getSlide2().setPower(0.15);
+            robot.getSlide1().setPower(-0.2);
+            robot.getSlide2().setPower(0.2);
         }
     }
 

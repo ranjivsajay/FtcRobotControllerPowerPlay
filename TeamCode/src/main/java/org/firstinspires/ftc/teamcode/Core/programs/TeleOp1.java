@@ -11,6 +11,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread;
+import org.firstinspires.ftc.teamcode.Core.Threads.OperatorThread;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftTele;
 import org.firstinspires.ftc.teamcode.Core.toolkit.UpliftMath;
@@ -18,7 +20,10 @@ import org.firstinspires.ftc.teamcode.Core.toolkit.UpliftMath;
 @TeleOp (name = "teleOp", group = "Opmodes")
 public class TeleOp1 extends UpliftTele {
 
-//    UpliftRobot robot;
+    UpliftRobot robot;
+
+    DriveThread driverThread;
+    OperatorThread operatorThread;
 //    boolean grabberState = true;
 //    boolean blockGrabberInput = false;
 //    boolean threadOn = false;
@@ -30,6 +35,9 @@ public class TeleOp1 extends UpliftTele {
     @Override
     public void initHardware() {
         robot = new UpliftRobot(this);
+
+        createDriveThread(robot);
+        createOperatorThread(robot);
     }
 
     @Override
@@ -41,6 +49,8 @@ public class TeleOp1 extends UpliftTele {
 //        robot.getArm1().setPosition(arm1HighPos);
 //        robot.getArm2().setPosition(arm2HighPos);
 
+        driverThread.start();
+        operatorThread.start();
 
     }
 
@@ -77,7 +87,7 @@ public class TeleOp1 extends UpliftTele {
 
 //        if(gamepad2.dpad_up)
 //        {
-////            thread1.start();
+//            thread1.start();
 //            threadOn = true;
 //        }
 //        else
@@ -106,7 +116,23 @@ public class TeleOp1 extends UpliftTele {
     }
 
     @Override
-    public void exit() {
+    public void exit()
+    {
+        operatorThread.end();
+        driverThread.end();
+
+    }
+
+    public void createDriveThread(UpliftRobot robot1)
+    {
+        driverThread = new DriveThread(robot1);
+        telemetry.addData("Driver Thread started", driverThread.toString());
+    }
+
+    public void createOperatorThread(UpliftRobot robot1) {
+        operatorThread = new OperatorThread(robot1);
+
+        telemetry.addData("Operator Thread started", operatorThread.toString());
 
     }
 
