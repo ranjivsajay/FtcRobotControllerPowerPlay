@@ -32,8 +32,8 @@ public abstract class UpliftTele extends LinearOpMode {
         initHardware();
         initAction();
 
-//        createDriveThread(robot);
-//        createOperatorThread(robot);
+        createDriveThread(robot);
+        createOperatorThread(robot);
 
 
         telemetry.addData("Initializing", "Finished");
@@ -42,8 +42,8 @@ public abstract class UpliftTele extends LinearOpMode {
         waitForStart();
         isStarted = true;
 
-//        driverThread.start();
-//        operatorThread.start();
+        driverThread.start();
+        operatorThread.start();
 
 
         telemetry.addData("Body", "Started");
@@ -62,22 +62,22 @@ public abstract class UpliftTele extends LinearOpMode {
 
         exit();
 
-//        driverThread.end();
-//        operatorThread.end();
-//
-//        telemetry.update();
+        driverThread.end();
+        operatorThread.end();
+
+        telemetry.update();
     }
 
-//    public void createDriveThread(UpliftRobot robot1) {
-//        driverThread = new DriveThread(robot1);
-//
-//        telemetry.addData("Driver Thread started", driverThread.toString());
-//    }
-//
-//    public void createOperatorThread(UpliftRobot robot1) {
-//        operatorThread = new OperatorThread(robot1);
-//
-//        telemetry.addData("Operator Thread started", operatorThread.toString());
-//
-//    }
+    public void createDriveThread(UpliftRobot robot1) {
+        driverThread = new DriveThread(robot1);
+
+        telemetry.addData("Driver Thread started", driverThread.toString());
+    }
+
+    public void createOperatorThread(UpliftRobot robot1) {
+        operatorThread = new OperatorThread(robot1);
+
+        telemetry.addData("Operator Thread started", operatorThread.toString());
+
+    }
 }
