@@ -33,6 +33,18 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     }
 
+    public void fourBarFront()
+    {
+        robot.getFourBar1().setPosition(robot.getBar1FrontPos());
+        robot.getFourBar2().setPosition(robot.getBar2FrontPos());
+    }
+
+    public void fourBarBack()
+    {
+        robot.getFourBar1().setPosition(robot.getBar1BackPos());
+        robot.getFourBar2().setPosition(robot.getBar2BackPos());
+    }
+
     public void stopMotors() {
         robot.getLeftFront().setPower(0);
         robot.getLeftBack().setPower(0);
@@ -41,9 +53,10 @@ public class UpliftAutoImpl extends UpliftAuto {
     }
 
     public void moveLeft(double power, double dist) {
-        double initialPos = robot.getLeftFront().getCurrentPosition();
+        double initialPos = robot.getRightFront().getCurrentPosition();
 
-        while (robot.getLeftFront().getCurrentPosition() > initialPos - dist) {
+        while (robot.getRightFront().getCurrentPosition() < initialPos + dist)
+        {
             robot.getRightFront().setPower(power);
             robot.getRightBack().setPower(-power);
             robot.getLeftFront().setPower(-power);
@@ -60,9 +73,9 @@ public class UpliftAutoImpl extends UpliftAuto {
     }
 
     public void moveRight(double power, double dist) {
-        double initialPos = robot.getLeftFront().getCurrentPosition();
+        double initialPos = robot.getRightFront().getCurrentPosition();
 
-        while (robot.getLeftFront().getCurrentPosition() < initialPos + dist) {
+        while (robot.getRightFront().getCurrentPosition() > initialPos - dist) {
             robot.getRightFront().setPower(-power);
             robot.getRightBack().setPower(power);
             robot.getLeftFront().setPower(power);
@@ -79,9 +92,9 @@ public class UpliftAutoImpl extends UpliftAuto {
     }
 
     public void moveForward(double power, double dist) {
-        double initialPos = robot.getLeftFront().getCurrentPosition();
+        double initialPos = robot.getRightFront().getCurrentPosition();
 
-        while (robot.getLeftFront().getCurrentPosition() < initialPos + dist) {
+        while (robot.getRightFront().getCurrentPosition() < initialPos + dist) {
             robot.getRightFront().setPower(power);
             robot.getRightBack().setPower(power);
             robot.getLeftFront().setPower(power);
@@ -100,7 +113,7 @@ public class UpliftAutoImpl extends UpliftAuto {
     public void moveBackward(double power, double dist) {
         double initialPos = robot.getLeftFront().getCurrentPosition();
 
-        while (robot.getLeftFront().getCurrentPosition() > initialPos - Math.abs(dist)) {
+        while (robot.getRightFront().getCurrentPosition() > initialPos - Math.abs(dist)) {
             robot.getRightFront().setPower(-power);
             robot.getRightBack().setPower(-power);
             robot.getLeftFront().setPower(-power);
@@ -143,6 +156,18 @@ public class UpliftAutoImpl extends UpliftAuto {
             telemetry.update();
         }
         stopMotors();
+    }
+
+    public void servoArmsHigh()
+    {
+        robot.getArm1().setPosition(robot.getArm1HighPos());
+        robot.getArm2().setPosition(robot.getArm2HighPos());
+    }
+
+    public void servoArmsDown()
+    {
+        robot.getArm1().setPosition(robot.getArm1LowPos());
+        robot.getArm2().setPosition(robot.getArm2LowPos());
     }
 
     /**
@@ -204,9 +229,26 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     public void high()
     {
-        slides(0.75, 3500);
-//        robot.getGrabber().setPosition(0.25);
+        servoArmsHigh();
 
+        slides(0.5, 953);
+
+        fourBarBack();
+
+        robot.getTwister().setPosition(robot.getTwisterDownPos());
 
     }
+
+    public void down(double slidePower, double slideDist)
+    {
+        robot.getTwister().setPosition(robot.getTwisterUpPos());
+
+        fourBarFront();
+
+        slides(-slidePower, -slideDist);
+
+        servoArmsDown();
+    }
+
+
 }

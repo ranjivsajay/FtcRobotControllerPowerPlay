@@ -3,13 +3,10 @@ package org.firstinspires.ftc.teamcode.Core.Threads;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad2;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
-import org.firstinspires.ftc.teamcode.Core.main.UpliftTele;
-
-import java.io.PrintWriter;
-import java.io.StringWriter;
 
 public class OperatorThread extends Thread
 {
@@ -23,9 +20,9 @@ public class OperatorThread extends Thread
 
     private boolean grabberState;
     private boolean blockGrabberInput;
+    private boolean twisterState;
+    private boolean blockTwisterInput;
 
-    double arm1HighPos;
-    double arm2HighPos;
 
 
     public OperatorThread(UpliftRobot robot)
@@ -35,18 +32,8 @@ public class OperatorThread extends Thread
         this.grabberState = true;
         this.blockGrabberInput = false;
 
-        this.arm1HighPos = 0.5;
-        this.arm2HighPos = .0;
     }
 
-    public void end()
-    {
-        shutDown = true;
-
-        robot.opMode.telemetry.addData("Operator Thread stopped ", shutDown);
-
-        robot.opMode.telemetry.update();
-    }
 
     @Override
     public void run()
@@ -56,16 +43,34 @@ public class OperatorThread extends Thread
             try
             {
 
+                servoTest();
+
                 grab();
 
-                armHigh();
+                if(robot.opMode.gamepad2.dpad_up)
+                {
+                    robot.getFourBar1().setPosition(robot.getBar1FrontPos());
+                    robot.getFourBar2().setPosition(robot.getBar2FrontPos());
+
+                }
+
+//                sixBarHigh();
+//
+//                sixBarMedium();
+//
+//                sixBarLow();
+//
+//                sixBarDown();
 
                 holdSlidePos();
 
-                twister();
 
-                robot.getSlide1().setPower(Range.clip(robot.opMode.gamepad2.right_stick_y, -1, 1));
-                robot.getSlide2().setPower(Range.clip(-robot.opMode.gamepad2.right_stick_y, -1, 1));
+                robot.getSlide1().setPower(0.75 * Range.clip(robot.opMode.gamepad2.right_stick_y, -1, 1));
+                robot.getSlide2().setPower(0.75 * Range.clip(-robot.opMode.gamepad2.right_stick_y, -1, 1));
+
+//                telemetry.addData("4bar1" , robot.getFourBar1().getPosition());
+//                telemetry.addData("4bar2" , robot.getFourBar2().getPosition());
+
 
                 // todo: validate user responsiveness and set sleep
                 sleep(50);
@@ -82,13 +87,24 @@ public class OperatorThread extends Thread
         }
     }
 
-    public void slides(double power, double dist)
+    public void end()
     {
+        shutDown = true;
+
+        robot.opMode.telemetry.addData("Operator Thread stopped ", shutDown);
+
+        robot.opMode.telemetry.update();
+    }
+
+
+    public void slides(double power, int dist)
+    {
+
         double initialPos2 = robot.getSlide2().getCurrentPosition();
 
         while (Math.abs(robot.getSlide2().getCurrentPosition() - (initialPos2 + dist)) > 50)
         {
-            robot.getSlide1().setPower(-power);
+            robot.getSlide1().setPower(-0.9 * power);
             robot.getSlide2().setPower(power);
         }
         robot.getSlide1().setPower(0);
@@ -96,7 +112,8 @@ public class OperatorThread extends Thread
     }
 
 
-    public void grab() throws InterruptedException {
+    public void grab() throws InterruptedException
+    {
         if(robot.opMode.gamepad2.right_trigger > robot.getGrabberClosePos() && !blockGrabberInput)
         {
             robot.getGrabber().setPosition(grabberState ? robot.getGrabberClosePos() : robot.getGrabberOpenPos());
@@ -107,29 +124,108 @@ public class OperatorThread extends Thread
         {
             blockGrabberInput = false;
         }
+
     }
 
-    public void armHigh()
+
+
+    public void servoArmsHigh()
+    {
+        robot.getArm1().setPosition(robot.getArm1HighPos());
+        robot.getArm2().setPosition(robot.getArm2HighPos());
+    }
+
+    public void servoArmsDown()
+    {
+        robot.getArm1().setPosition(robot.getArm1LowPos());
+        robot.getArm2().setPosition(robot.getArm2LowPos());
+    }
+
+
+    public void sixBarHigh()
     {
         if(robot.opMode.gamepad2.dpad_up)
         {
 
-            robot.getArm2().setPosition(arm2HighPos);
-            robot.getArm1().setPosition(arm1HighPos);
+            fourBarBack();
 
-//            slides(0.5, 953);
+            servoArmsHigh();
 
+            slides(0.5, 953);
+
+            robot.getTwister().setPosition(robot.getTwisterDownPos());
 
         }
     }
 
-    public void twister()
+    public void sixBarMedium()
+    {
+
+    }
+
+    public void sixBarLow()
+    {
+
+    }
+
+    public void servoTest()
+    {
+        if(robot.opMode.gamepad2.dpad_left)
+        {
+            robot.getFourBar1().setPosition(robot.getBar1BackPos());
+            robot.getFourBar2().setPosition(robot.getBar2BackPos());
+
+        }
+    }
+
+
+
+    public void sixBarDown()
     {
         if(robot.opMode.gamepad2.dpad_down)
         {
-            robot.getTwister().setPosition(0.5);
+
+            robot.getTwister().setPosition(robot.getTwisterUpPos());
+
+            fourBarFront();
+
+            slides(-0.5, -953);
+
+            servoArmsDown();
+
+
+
         }
     }
+
+
+    public void fourBarFront()
+    {
+        robot.getFourBar1().setPosition(robot.getBar1FrontPos());
+        robot.getFourBar2().setPosition(robot.getBar2FrontPos());
+    }
+
+    public void fourBarBack()
+    {
+        robot.getFourBar1().setPosition(robot.getBar1BackPos());
+        robot.getFourBar2().setPosition(robot.getBar2BackPos());
+    }
+
+//    public void twister()
+//    {
+//        if(robot.opMode.gamepad2.left_trigger > robot.getTwisterUpPos() && !blockTwisterInput)
+//        {
+//            robot.getTwister().setPosition(twisterState ? robot.getTwisterUpPos() : robot.getTwisterDownPos());
+//           twisterState = !twisterState;
+//            blockTwisterInput = true;
+//
+//        }else if (robot.opMode.gamepad2.left_trigger < robot.getTwisterUpPos() && blockTwisterInput)
+//        {
+//            blockTwisterInput = false;
+//        }
+//
+//    }
+
 
     public void holdSlidePos()
     {
@@ -141,7 +237,8 @@ public class OperatorThread extends Thread
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "OperatorThread{" +
                 "name=" + OPERATOR_NAME +
                 '}';

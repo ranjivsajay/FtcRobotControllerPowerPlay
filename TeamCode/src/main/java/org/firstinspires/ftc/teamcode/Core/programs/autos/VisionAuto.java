@@ -22,22 +22,22 @@ public class VisionAuto extends UpliftAutoImpl {
         int location = robot.pipeline.location;
 
 
-
-
         if(location == 1)
         {
-            moveBackward(0.5, 800);
             moveLeft(0.5, 1200);
+            moveForward(0.5, 1500);
         }
         else if(location == 2)
         {
-            moveLeft(0.5, 1200);
+            moveForward(0.5, 1500);
         }
         else if(location == 3)
         {
 
-            moveForward(0.5, 700);
-            moveLeft(0.5, 1120);
+            moveRight(0.5, 1200);
+            moveForward(0.5, 1500);
+
+
 
         }
 

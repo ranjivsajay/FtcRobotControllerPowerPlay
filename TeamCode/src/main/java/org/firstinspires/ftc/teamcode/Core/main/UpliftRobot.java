@@ -27,8 +27,24 @@ public class UpliftRobot {
 
 
 
-    double grabberOpenPos = 0.23;
-    double grabberClosePos = 0.10;
+    double arm1HighPos = 0.1;
+    double arm2HighPos = 0.1;
+
+    double arm1LowPos = 0.5;
+    double arm2LowPos = 0.5;
+
+    double bar1FrontPos = .8;
+    double bar2FrontPos = .2;
+
+    double bar1BackPos = 0.2;
+    double bar2BackPos = 0.8;
+
+    double grabberOpenPos = 0.15;
+    double grabberClosePos = 0.03;
+
+    double twisterUpPos = .82;
+    double twisterDownPos = .16;
+
 
 
     public PowerPlay pipeline;
@@ -81,6 +97,7 @@ public class UpliftRobot {
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
+
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -88,6 +105,8 @@ public class UpliftRobot {
 
         slide1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         slide2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        arm1.setDirection(Servo.Direction.REVERSE);
 
 
 
@@ -177,7 +196,14 @@ public class UpliftRobot {
         return magneticSensor;
     }
 
-
+    public double getTwisterUpPos()
+    {
+        return twisterUpPos;
+    }
+    public double getTwisterDownPos()
+    {
+        return twisterDownPos;
+    }
 
     public double getGrabberOpenPos()
     {
@@ -188,6 +214,47 @@ public class UpliftRobot {
     {
         return grabberClosePos;
     }
+
+    public double getArm1HighPos()
+    {
+        return arm1HighPos;
+    }
+
+    public double getArm2HighPos()
+    {
+        return arm2HighPos;
+    }
+
+    public double getArm1LowPos()
+    {
+        return arm1LowPos;
+    }
+
+    public double getArm2LowPos()
+    {
+        return arm2LowPos;
+    }
+
+    public double getBar1FrontPos()
+    {
+        return bar1FrontPos;
+    }
+
+    public double getBar2FrontPos()
+    {
+        return bar2FrontPos;
+    }
+
+    public double getBar1BackPos()
+    {
+        return bar1BackPos;
+    }
+
+    public double getBar2BackPos()
+    {
+        return bar2BackPos;
+    }
+
 
 
 

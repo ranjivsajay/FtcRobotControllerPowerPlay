@@ -30,15 +30,6 @@ public class DriveThread extends Thread
         this.robot = robot;
     }
 
-    public void end()
-    {
-        shutDown = true;
-
-        robot.opMode.telemetry.addData("Driver Thread stopped ", shutDown);
-
-        robot.opMode.telemetry.update();
-
-    }
 
     @Override
     public void run()
@@ -104,6 +95,16 @@ public class DriveThread extends Thread
         robot.getLeftBack().setPower(speedFactor * (lbPow / maxVal));
         robot.getRightBack().setPower(speedFactor * (rbPow / maxVal));
         robot.getRightFront().setPower(speedFactor * (rfPow / maxVal));
+    }
+
+    public void end()
+    {
+        shutDown = true;
+
+        robot.opMode.telemetry.addData("Driver Thread stopped ", shutDown);
+
+        robot.opMode.telemetry.update();
+
     }
 
     @Override

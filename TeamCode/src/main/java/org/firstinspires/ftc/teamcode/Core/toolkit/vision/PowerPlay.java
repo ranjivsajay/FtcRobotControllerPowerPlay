@@ -14,8 +14,8 @@ public class  PowerPlay extends OpenCvPipeline {
     Mat mat = new Mat();
     public int location;
     static final Rect ROI = new Rect(
-            new Point(75, 110),
-            new Point(145, 210));
+            new Point(180, 50),
+            new Point(260, 130));
 
     public PowerPlay(Telemetry t) {
         telemetry = t;
