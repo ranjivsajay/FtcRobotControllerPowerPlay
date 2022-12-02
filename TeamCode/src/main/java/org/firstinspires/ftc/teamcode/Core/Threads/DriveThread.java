@@ -34,9 +34,9 @@ public class DriveThread extends Thread
     {
         shutDown = true;
 
-        telemetry.addData("Driver Thread stopped ", shutDown);
+        robot.opMode.telemetry.addData("Driver Thread stopped ", shutDown);
 
-        telemetry.update();
+        robot.opMode.telemetry.update();
 
     }
 

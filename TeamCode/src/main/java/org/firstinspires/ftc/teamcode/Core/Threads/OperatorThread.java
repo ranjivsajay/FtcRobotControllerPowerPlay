@@ -43,9 +43,9 @@ public class OperatorThread extends Thread
     {
         shutDown = true;
 
-        telemetry.addData("Operator Thread stopped ", shutDown);
+        robot.opMode.telemetry.addData("Operator Thread stopped ", shutDown);
 
-        telemetry.update();
+        robot.opMode.telemetry.update();
     }
 
     @Override
@@ -76,8 +76,8 @@ public class OperatorThread extends Thread
 //                PrintWriter pw = new PrintWriter(sw);
 //                e.printStackTrace(pw);
 //
-//                telemetry.addData("Operator error ", e.getMessage());
-//                telemetry.addData("Operator error stack", sw.toString());
+//                robot.opMode.telemetry.addData("Operator error ", e.getMessage());
+//                robot.opMode.telemetry.addData("Operator error stack", sw.toString());
             }
         }
     }
