@@ -42,9 +42,10 @@ public class TeleOp1 extends UpliftTele {
 
     @Override
     public void initAction() {
-//        robot.getTest().setPosition(0.5);
+        robot.getFourBar1().setPosition(robot.getBar1FrontPos());
+        robot.getFourBar2().setPosition(robot.getBar2FrontPos());
 
-//        robot.getTest().setPosition(0.5);
+        robot.getGrabber().setPosition(robot.getGrabberClosePos());
 
 //        robot.getArm1().setPosition(arm1HighPos);
 //        robot.getArm2().setPosition(arm2HighPos);

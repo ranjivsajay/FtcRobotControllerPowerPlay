@@ -18,20 +18,20 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-public class UpliftRobot {
+public class UpliftRobot
+{
     DcMotor leftFront, rightFront, leftBack, rightBack, slide1, slide2;
-    BNO055IMU imu;
     Servo grabber, arm1, arm2, fourBar1, fourBar2, twister;
     TouchSensor magneticSensor;
     OpenCvCamera webcam;
+    BNO055IMU imu;
 
 
+    double arm1HighPos = 0.98;
+    double arm2HighPos = 0.98;
 
-    double arm1HighPos = 0.1;
-    double arm2HighPos = 0.1;
-
-    double arm1LowPos = 0.5;
-    double arm2LowPos = 0.5;
+    double arm1LowPos = .3;
+    double arm2LowPos = .3;
 
     double bar1FrontPos = .8;
     double bar2FrontPos = .2;
@@ -40,7 +40,7 @@ public class UpliftRobot {
     double bar2BackPos = 0.8;
 
     double grabberOpenPos = 0.15;
-    double grabberClosePos = 0.03;
+    double grabberClosePos = 0.0;
 
     double twisterUpPos = .82;
     double twisterDownPos = .16;
@@ -106,7 +106,7 @@ public class UpliftRobot {
         slide1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         slide2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        arm1.setDirection(Servo.Direction.REVERSE);
+        arm2 .setDirection(Servo.Direction.REVERSE);
 
 
 

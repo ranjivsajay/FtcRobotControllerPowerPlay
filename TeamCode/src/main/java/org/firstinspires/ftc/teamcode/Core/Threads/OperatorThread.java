@@ -34,7 +34,6 @@ public class OperatorThread extends Thread
 
     }
 
-
     @Override
     public void run()
     {
@@ -42,17 +41,52 @@ public class OperatorThread extends Thread
         {
             try
             {
-
-                servoTest();
-
                 grab();
+
+                if(robot.opMode.gamepad2.dpad_left)
+                {
+                    robot.getFourBar1().setPosition(robot.getBar1BackPos());
+                    robot.getFourBar2().setPosition(robot.getBar2BackPos());
+
+                    robot.getTwister().setPosition(robot.getTwisterUpPos());
+
+                }
 
                 if(robot.opMode.gamepad2.dpad_up)
                 {
                     robot.getFourBar1().setPosition(robot.getBar1FrontPos());
                     robot.getFourBar2().setPosition(robot.getBar2FrontPos());
 
+                    robot.getTwister().setPosition(robot.getTwisterDownPos());
+
+
                 }
+
+
+                if (robot.opMode.gamepad2.y)
+                {
+                    servoArmsHigh();
+                }
+
+                if(robot.opMode.gamepad2.x)
+                {
+                    servoArmsDown();
+                }
+
+                if (robot.opMode.gamepad2.dpad_down)
+                {
+                    robot.getTwister().setPosition(.16);
+                }
+
+                if(robot.opMode.gamepad2.a)
+                {
+//                    robot.getArm1().setPosition(robot.getArm1().getPosition() + 0.1);
+//                    robot.getArm2().setPosition(robot.getArm2().getPosition() + 0.1);
+
+                    robot.getTwister().setPosition(robot.getTwisterUpPos());
+
+                }
+
 
 //                sixBarHigh();
 //
@@ -67,6 +101,8 @@ public class OperatorThread extends Thread
 
                 robot.getSlide1().setPower(0.75 * Range.clip(robot.opMode.gamepad2.right_stick_y, -1, 1));
                 robot.getSlide2().setPower(0.75 * Range.clip(-robot.opMode.gamepad2.right_stick_y, -1, 1));
+
+
 
 //                telemetry.addData("4bar1" , robot.getFourBar1().getPosition());
 //                telemetry.addData("4bar2" , robot.getFourBar2().getPosition());
@@ -142,7 +178,7 @@ public class OperatorThread extends Thread
     }
 
 
-    public void sixBarHigh()
+     public void sixBarHigh()
     {
         if(robot.opMode.gamepad2.dpad_up)
         {
@@ -231,8 +267,8 @@ public class OperatorThread extends Thread
     {
         if(robot.opMode.gamepad2.left_trigger > 0)
         {
-            robot.getSlide1().setPower(-0.2);
-            robot.getSlide2().setPower(0.2);
+            robot.getSlide1().setPower(-0.9);
+            robot.getSlide2().setPower(0.9);
         }
     }
 
