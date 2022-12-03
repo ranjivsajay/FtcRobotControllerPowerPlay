@@ -45,28 +45,38 @@ public class OperatorThread extends Thread
 
                 if(robot.opMode.gamepad2.dpad_left)
                 {
-                    robot.getFourBar1().setPosition(robot.getBar1BackPos());
-                    robot.getFourBar2().setPosition(robot.getBar2BackPos());
 
-                    robot.getTwister().setPosition(robot.getTwisterUpPos());
+                    servoArmsDown();
 
-                }
-
-                if(robot.opMode.gamepad2.dpad_up)
-                {
                     robot.getFourBar1().setPosition(robot.getBar1FrontPos());
                     robot.getFourBar2().setPosition(robot.getBar2FrontPos());
 
                     robot.getTwister().setPosition(robot.getTwisterDownPos());
 
-
                 }
 
-
-                if (robot.opMode.gamepad2.y)
+                if(robot.opMode.gamepad2.dpad_up)
                 {
                     servoArmsHigh();
+
+                    robot.getFourBar1().setPosition(robot.getBar1BackPos());
+                    robot.getFourBar2().setPosition(robot.getBar2BackPos());
+
+                    robot.getTwister().setPosition(robot.getTwisterUpPos());
+
+
+
+
+
+
                 }
+
+
+//                if (robot.opMode.gamepad2.y)
+//                {
+//                    servoArmsHigh();
+//
+//                }
 
                 if(robot.opMode.gamepad2.x)
                 {
