@@ -25,19 +25,30 @@ public class VisionDropCone extends UpliftAutoImpl
     {
         int location = robot.pipeline.location;
 
+        moveRight(.5, 100);
 
-        moveForward(0.6, 3500);
+        moveForward(0.6);
         high();
+        robot.getSlide1().setPower(-0.7);
+        robot.getSlide2().setPower(0.7);
+        Thread.sleep(750);
 
-        turnLeft(.5,90);
 
-        moveForward(0.3, 240);
+        turnLeft(.5,98);
+
+        robot.getTwister().setPosition(robot.getTwisterUpPos());
+        Thread.sleep(500);
+//
+        moveBackward(0.3,170);
+
+
+        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         Thread.sleep(500);
 
-        fourBarBack();
-        robot.getTwisterDownPos();
-        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
-        Thread.sleep(250);
+//        fourBarBack();
+//        robot.getTwisterDownPos();
+//        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
+//        Thread.sleep(250);
 
 //        moveBackward(0.3, 175);
 //

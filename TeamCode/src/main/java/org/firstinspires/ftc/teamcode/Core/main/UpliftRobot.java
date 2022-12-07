@@ -27,23 +27,23 @@ public class UpliftRobot
     BNO055IMU imu;
 
 
-    double arm1HighPos = 1;
-    double arm2HighPos = 1;
+    double arm1HighPos = .6;
+    double arm2HighPos = .6;
 
-    double arm1LowPos = .35;
-    double arm2LowPos = .35;
+    double arm1LowPos = 0;
+    double arm2LowPos = 0;
 
     double bar1FrontPos = .78;
     double bar2FrontPos = .22;
 
-    double bar1BackPos = 0.2;
-    double bar2BackPos = 0.8;
+    double bar1BackPos = 0.175;
+    double bar2BackPos = 0.825;
 
-    double grabberOpenPos = 0.15;
-    double grabberClosePos = 0.0;
+    double grabberOpenPos = 0.0;
+    double grabberClosePos = 0.15;
 
     double twisterUpPos = .82;
-    double twisterDownPos = .16;
+    double twisterDownPos = .2;
 
 
 

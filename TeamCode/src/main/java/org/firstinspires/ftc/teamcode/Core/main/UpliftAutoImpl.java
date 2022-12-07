@@ -111,7 +111,7 @@ public class UpliftAutoImpl extends UpliftAuto {
     }
 
     public void moveBackward(double power, double dist) {
-        double initialPos = robot.getLeftFront().getCurrentPosition();
+        double initialPos = robot.getRightFront().getCurrentPosition();
 
         while (robot.getRightFront().getCurrentPosition() > initialPos - Math.abs(dist)) {
             robot.getRightFront().setPower(-power);

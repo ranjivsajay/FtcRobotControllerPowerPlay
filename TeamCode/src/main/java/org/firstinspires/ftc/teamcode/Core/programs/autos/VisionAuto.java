@@ -14,34 +14,34 @@ public class VisionAuto extends UpliftAutoImpl {
         robot.getGrabber().setPosition(robot.getGrabberClosePos());
 //        robot.getWebcam().closeCameraDevice();
 
-
+        moveBackward(.5,600);
     }
-    @Override
-    public void body() throws InterruptedException
-    {
-        int location = robot.pipeline.location;
-
-
-        if(location == 1)
-        {
-            moveLeft(0.5, 1200);
-            moveForward(0.5, 1500);
-        }
-        else if(location == 2)
-        {
-            moveForward(0.5, 1500);
-        }
-        else if(location == 3)
-        {
-
-            moveRight(0.5, 1200);
-            moveForward(0.5, 1500);
-
-
-
-        }
-
-
-    }
+//    @Override
+//    public void body() throws InterruptedException
+ //   {
+//        int location = robot.pipeline.location;
+//
+//
+//        if(location == 1)
+//        {
+//            moveLeft(0.5, 1200);
+//            moveForward(0.5, 1500);
+//        }
+//        else if(location == 2)
+//        {
+//            moveForward(0.5, 1500);
+//        }
+//        else if(location == 3)
+//        {
+//
+//            moveRight(0.5, 1200);
+//            moveForward(0.5, 1500);
+//
+//
+//
+//        }
+//
+//
+//    }
 
 }
