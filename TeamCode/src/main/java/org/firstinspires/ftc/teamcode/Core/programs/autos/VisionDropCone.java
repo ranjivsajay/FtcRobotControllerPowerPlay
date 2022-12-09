@@ -27,11 +27,12 @@ public class VisionDropCone extends UpliftAutoImpl
 
         moveRight(.5, 100);
 
-        moveForward(0.6);
+        moveForward(0.53,2800);
         high();
-        robot.getSlide1().setPower(-0.7);
-        robot.getSlide2().setPower(0.7);
-        Thread.sleep(750);
+        robot.getSlide1().setPower(-0.4);
+        robot.getSlide2().setPower(0.4);
+        Thread.sleep(500);
+//        robot.getTwister().setPosition(robot.getTwisterUpPos());
 
 
         turnLeft(.5,98);

@@ -30,8 +30,8 @@ public class UpliftRobot
     double arm1HighPos = .6;
     double arm2HighPos = .6;
 
-    double arm1LowPos = 0;
-    double arm2LowPos = 0;
+    double arm1LowPos = 0.3;
+    double arm2LowPos = 0.3;
 
     double bar1FrontPos = .78;
     double bar2FrontPos = .22;
