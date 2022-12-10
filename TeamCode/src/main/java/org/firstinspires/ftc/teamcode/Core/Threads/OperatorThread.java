@@ -46,7 +46,7 @@ public class OperatorThread extends Thread
                 if (robot.opMode.gamepad2.a) // reset grabber pos
                 {
                     //move 6 bar motors down
-
+                    servoArmsDown();
                     robot.getFourBar1().setPosition(robot.getBar1FrontPos());
                     robot.getFourBar2().setPosition(robot.getBar2FrontPos());
 

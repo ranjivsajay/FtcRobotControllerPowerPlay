@@ -231,7 +231,7 @@ public class UpliftAutoImpl extends UpliftAuto {
     {
         servoArmsHigh();
 
-        slides(0.5, 953);
+        slides(0.7, 953);
 
         fourBarBack();
 
