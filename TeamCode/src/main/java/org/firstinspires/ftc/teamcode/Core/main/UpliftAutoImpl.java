@@ -195,6 +195,7 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     public void slides(double power, double dist)
     {
+
 //        double initialPos1 = robot.getSlide2().getCurrentPosition();
         double initialPos2 = robot.getSlide2().getCurrentPosition();
 
@@ -236,7 +237,6 @@ public class UpliftAutoImpl extends UpliftAuto {
         fourBarBack();
 
         robot.getTwister().setPosition(robot.getTwisterDownPos());
-
     }
 
     public void down(double slidePower, double slideDist)

@@ -66,7 +66,8 @@ public class OperatorThread extends Thread
 
                 if(robot.opMode.gamepad2.dpad_up) // max height backwards
                 {
-//                     move motors to max height
+//                    robot.getSlide1().setTargetPosition(500);
+//                    robot.getSlide2().setTargetPosition();
                     servoArmsHigh();
 
                     robot.getFourBar1().setPosition(robot.getBar1BackPos());
@@ -110,37 +111,34 @@ public class OperatorThread extends Thread
                     robot.getTwister().setPosition(robot.getTwisterDownPos());
                 }
 
-//                if(robot.opMode.gamepad2.left_stick_y > .5) // 5 stack height
-//                {
-//                    robot.getArm1().setPosition(.5);
-//                }
-//
-//                if(robot.opMode.gamepad2.left_stick_x < -0.5) // 4 stack height
-//                {
-//                    robot.getArm1().setPosition(.4);
-//                }
-//
-//                if(robot.opMode.gamepad2.left_stick_x > 0.5) // 3 stack height
-//                {
-//                    robot.getArm1().setPosition(.3);
-//                }
-//
-//                if(robot.opMode.gamepad2.left_stick_y < -0.5) // 2 stack height
-//                {
-//                    robot.getArm1().setPosition(.2);
-//                }
+                if(robot.opMode.gamepad2.left_stick_y > .5) // 5 stack height
+                {
+                    robot.getArm1().setPosition(.5);
+                    robot.getArm2().setPosition(.5);
+                }
+
+                if(robot.opMode.gamepad2.left_stick_x < -0.5) // 4 stack height
+                {
+                    robot.getArm1().setPosition(.4);
+                    robot.getArm2().setPosition(.4);
+                }
+
+                if(robot.opMode.gamepad2.left_stick_x > 0.5) // 3 stack height
+                {
+                    robot.getArm1().setPosition(.3);
+                    robot.getArm2().setPosition(.3);
+                }
+
+                if(robot.opMode.gamepad2.left_stick_y < -0.5) // 2 stack height
+                {
+                    robot.getArm1().setPosition(.2);
+                    robot.getArm2().setPosition(.2);
+                }
 
 
-
-
-
-//                if (robot.opMode.gamepad2.y)
-//                {
-//                    servoArmsHigh();
-//
-//                }
-
-
+               robot.opMode.telemetry.addData("slide1" , robot.getSlide1().getCurrentPosition());
+               robot.opMode.telemetry.addData("slide2" , robot.getSlide2().getCurrentPosition());
+               robot.opMode.telemetry.update();
 
 
 

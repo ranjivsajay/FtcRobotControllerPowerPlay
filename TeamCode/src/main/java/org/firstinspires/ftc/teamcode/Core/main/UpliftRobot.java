@@ -5,6 +5,7 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -27,11 +28,11 @@ public class UpliftRobot
     BNO055IMU imu;
 
 
-    double arm1HighPos = .6;
-    double arm2HighPos = .6;
+    double arm1HighPos = .87;
+    double arm2HighPos = .13;
 
-    double arm1LowPos = 0.15;
-    double arm2LowPos = 0.15;
+    double arm1LowPos = 0.3;
+    double arm2LowPos = 0.72;
 
     double bar1FrontPos = .78;
     double bar2FrontPos = .22;
@@ -45,7 +46,8 @@ public class UpliftRobot
     double twisterUpPos = .82;
     double twisterDownPos = .2;
 
-
+    double arm1StackPos = .45;
+    double arm2StackPos = .55;
 
     public PowerPlay pipeline;
     public LinearOpMode opMode;
@@ -106,7 +108,8 @@ public class UpliftRobot
         slide1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         slide2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        arm2 .setDirection(Servo.Direction.REVERSE);
+        arm2.setDirection(Servo.Direction.REVERSE);
+        arm1.setDirection(Servo.Direction.REVERSE);
 
 
 
