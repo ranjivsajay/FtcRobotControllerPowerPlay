@@ -50,8 +50,8 @@ public class TeleOp1 extends UpliftTele {
 //        robot.getArm1().setPosition(arm1HighPos);
 //        robot.getArm2().setPosition(arm2HighPos);
 
-        robot.getArm1().setPosition(.45);
-        robot.getArm2().setPosition(.55);
+//        robot.getArm1().setPosition(.45);
+//        robot.getArm2().setPosition(.55);
 
         driverThread.start();
         operatorThread.start();

@@ -119,20 +119,29 @@ public class OperatorThread extends Thread
 
                 if(robot.opMode.gamepad2.left_stick_x < -0.5) // 4 stack height
                 {
-                    robot.getArm1().setPosition(.4);
-                    robot.getArm2().setPosition(.4);
+                    robot.getArm1().setPosition(.48);
+                    robot.getArm2().setPosition(.52);
                 }
 
                 if(robot.opMode.gamepad2.left_stick_x > 0.5) // 3 stack height
                 {
-                    robot.getArm1().setPosition(.3);
-                    robot.getArm2().setPosition(.3);
+
+                    robot.getArm1().setPosition(.45);
+                    robot.getArm2().setPosition(.55);
                 }
 
                 if(robot.opMode.gamepad2.left_stick_y < -0.5) // 2 stack height
                 {
-                    robot.getArm1().setPosition(.2);
-                    robot.getArm2().setPosition(.2);
+                    robot.getArm1().setPosition(.43);
+                    robot.getArm2().setPosition(.57);
+                }
+
+                if (robot.opMode.gamepad2.b)
+                {
+                    robot.getGrabber().setPosition(robot.getGrabberOpenPos());
+                }
+                if (robot.opMode.gamepad2.right_trigger > 0.1){
+                    robot.getGrabber().setPosition(robot.getGrabberClosePos());
                 }
 
 
@@ -161,6 +170,7 @@ public class OperatorThread extends Thread
 //                sixBarDown();
 
                 holdSlidePos();
+
 
 
                 robot.getSlide1().setPower(0.75 * Range.clip(robot.opMode.gamepad2.right_stick_y, -1, 1));

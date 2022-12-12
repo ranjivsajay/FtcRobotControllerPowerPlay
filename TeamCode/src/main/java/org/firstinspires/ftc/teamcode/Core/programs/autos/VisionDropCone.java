@@ -6,29 +6,25 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 
 @Autonomous(name = "VisionDropCone", group = "Opmodes")
-public class VisionDropCone extends UpliftAutoImpl
-{
+public class VisionDropCone extends UpliftAutoImpl {
 
 
     @Override
-    public void initAction()
-    {
+    public void initAction() {
         robot.getGrabber().setPosition(robot.getGrabberClosePos());
         robot.getFourBar1().setPosition(.28);
         robot.getFourBar2().setPosition(.72);
 
 
-
     }
 
     @Override
-    public void body() throws InterruptedException
-    {
+    public void body() throws InterruptedException {
         int location = robot.pipeline.location;
 
         moveRight(.5, 200);
 
-        moveForward(0.65,2780);
+        moveForward(0.65, 2780);
         high();
         robot.getSlide1().setPower(-0.4);
         robot.getSlide2().setPower(0.4);
@@ -36,12 +32,12 @@ public class VisionDropCone extends UpliftAutoImpl
 //        robot.getTwister().setPosition(robot.getTwisterUpPos());
 
 
-        turnLeft(.5,93);
+        turnLeft(.5, 93);
 
         robot.getTwister().setPosition(robot.getTwisterUpPos());
         Thread.sleep(400);
 //
-        moveBackward(0.3,250);
+        moveBackward(0.3, 170);
         Thread.sleep(500);
 
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
@@ -57,42 +53,42 @@ public class VisionDropCone extends UpliftAutoImpl
         Thread.sleep(750);
 
         moveForward(.5, 300);
-        moveBackward(.5,210);
-        moveForward(.6 , 200);
+        moveBackward(.5, 210);
+        moveForward(.6, 200);
 //
 
-        moveLeft(.5 , 600);
-        Thread  .sleep(250);
+        moveLeft(.5, 600);
+        Thread.sleep(250);
 
         robot.getArm1().setPosition(.48);
         robot.getArm2().setPosition(.52);
 //
         Thread.sleep(250);
-        turnLeft(.2, 7);
-        moveForward(.4, 1000);
+        turnLeft(.2, 9);
+        moveForward(.4, 930);
 
         robot.getGrabber().setPosition(robot.getGrabberClosePos());
         Thread.sleep(500);
 
         servoArmsHigh();
         Thread.sleep(250);
-        moveBackward(.5 , 950);
+        moveBackward(.5, 950);
 
-        turnLeft(.4 , 59);
+        turnLeft(.4, 61);
         high();
         robot.getSlide1().setPower(-0.4);
         robot.getSlide2().setPower(0.4);
         robot.getTwister().setPosition(robot.getTwisterUpPos());
         Thread.sleep(1700);
 //
-        moveBackward(0.4, 400);
+        moveBackward(0.4, 350);
         Thread.sleep(500);
 
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         Thread.sleep(500);
 //
         moveForward(.4, 330);
-        turnRight(.4,53);
+        turnRight(.4, 53);
 
         fourBarFront();
         Thread.sleep(750);
@@ -108,7 +104,7 @@ public class VisionDropCone extends UpliftAutoImpl
 
         Thread.sleep(1000);
 
-        moveForward(.5 , 1100);
+        moveForward(.5, 1100);
 
         robot.getGrabber().setPosition(robot.getGrabberClosePos());
         Thread.sleep(500);
@@ -117,9 +113,9 @@ public class VisionDropCone extends UpliftAutoImpl
 
         servoArmsHigh();
         Thread.sleep(250);
-        moveBackward(.5 , 850);
+        moveBackward(.5, 850);
 
-        turnLeft(.4 , 56);
+        turnLeft(.4, 54.5);
         high();
         robot.getSlide1().setPower(-0.4);
         robot.getSlide2().setPower(0.4);
@@ -132,13 +128,14 @@ public class VisionDropCone extends UpliftAutoImpl
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         Thread.sleep(500);
 
-        moveForward(.8, 500);
-        turnRight(.8,53);
+        moveForward(.8, 410);
+        turnRight(.8, 45);
+        Thread.sleep(300);
 
 
         if(location == 1)
         {
-            moveForward(1, 850);
+            moveForward(1, 1050);
 
         }
 
@@ -149,7 +146,7 @@ public class VisionDropCone extends UpliftAutoImpl
 
         else if(location == 3)
         {
-            moveBackward(1, 600);
+            moveBackward(1, 750);
 
         }
  }
