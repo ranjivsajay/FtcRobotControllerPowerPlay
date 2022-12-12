@@ -43,105 +43,34 @@ public class OperatorThread extends Thread
             {
                 grab();
 
-                if (robot.opMode.gamepad2.a) // reset grabber pos
-                {
-                    //move 6 bar motors down
-                    servoArmsDown();
-                    robot.getFourBar1().setPosition(robot.getBar1FrontPos());
-                    robot.getFourBar2().setPosition(robot.getBar2FrontPos());
+                reset();
 
-                    robot.getTwister().setPosition(robot.getTwisterDownPos());
-                }
+                servoArmsHigh();
+
+                highBackwards();
+
+                highForwards();
+
+                mediumBackwards();
+
+                mediumForwards();
+
+                stackHeight5();
+
+                stackHeight4();
+
+                stackHeight3();
+
+                stackHeight2();
+
+                openGrabber();
+
+                holdSlidePos();
 
                 if (robot.opMode.gamepad2.x) // bring 4bar up to drive
                 {
                     robot.getFourBar1().setPosition(.38);
                     robot.getFourBar2().setPosition(.62);
-                }
-
-                if (robot.opMode.gamepad2.y) // raise servo on 6bar
-                {
-                    servoArmsHigh();
-                }
-
-                if(robot.opMode.gamepad2.dpad_up) // max height backwards
-                {
-//                    robot.getSlide1().setTargetPosition(500);
-//                    robot.getSlide2().setTargetPosition();
-                    servoArmsHigh();
-
-                    robot.getFourBar1().setPosition(robot.getBar1BackPos());
-                    robot.getFourBar2().setPosition(robot.getBar2BackPos());
-
-                    robot.getTwister().setPosition(robot.getTwisterUpPos());
-
-                }
-
-                if(robot.opMode.gamepad2.dpad_left) // max height forwards
-                {
-//                    move motors to max height
-                    servoArmsHigh();
-
-                    robot.getFourBar1().setPosition(robot.getBar1FrontPos());
-                    robot.getFourBar2().setPosition(robot.getBar2FrontPos());
-
-                    robot.getTwister().setPosition(robot.getTwisterDownPos());
-                }
-
-                if(robot.opMode.gamepad2.dpad_right) //  medium height backwards
-                {
-//                     move motors to mid height
-                    servoArmsHigh();
-
-                    robot.getFourBar1().setPosition(robot.getBar1BackPos());
-                    robot.getFourBar2().setPosition(robot.getBar2BackPos());
-
-                    robot.getTwister().setPosition(robot.getTwisterUpPos());
-
-                }
-
-                if(robot.opMode.gamepad2.dpad_down) // medium height forwards
-                {
-//                    move motors to mid height
-                    servoArmsHigh();
-
-                    robot.getFourBar1().setPosition(robot.getBar1FrontPos());
-                    robot.getFourBar2().setPosition(robot.getBar2FrontPos());
-
-                    robot.getTwister().setPosition(robot.getTwisterDownPos());
-                }
-
-                if(robot.opMode.gamepad2.left_stick_y > .5) // 5 stack height
-                {
-                    robot.getArm1().setPosition(.5);
-                    robot.getArm2().setPosition(.5);
-                }
-
-                if(robot.opMode.gamepad2.left_stick_x < -0.5) // 4 stack height
-                {
-                    robot.getArm1().setPosition(.48);
-                    robot.getArm2().setPosition(.52);
-                }
-
-                if(robot.opMode.gamepad2.left_stick_x > 0.5) // 3 stack height
-                {
-
-                    robot.getArm1().setPosition(.45);
-                    robot.getArm2().setPosition(.55);
-                }
-
-                if(robot.opMode.gamepad2.left_stick_y < -0.5) // 2 stack height
-                {
-                    robot.getArm1().setPosition(.43);
-                    robot.getArm2().setPosition(.57);
-                }
-
-                if (robot.opMode.gamepad2.b)
-                {
-                    robot.getGrabber().setPosition(robot.getGrabberOpenPos());
-                }
-                if (robot.opMode.gamepad2.right_trigger > 0.1){
-                    robot.getGrabber().setPosition(robot.getGrabberClosePos());
                 }
 
 
@@ -151,35 +80,9 @@ public class OperatorThread extends Thread
 
 
 
-//                if(robot.opMode.gamepad2.a)
-//                {
-//                    robot.getArm1().setPosition(robot.getArm1().getPosition() + 0.1);
-//                    robot.getArm2().setPosition(robot.getArm2().getPosition() + 0.1);
-//
-//                    robot.getTwister().setPosition(robot.getTwisterUpPos());
-//
-//                }
-
-
-//                sixBarHigh();
-//
-//                sixBarMedium();
-//
-//                sixBarLow();
-//
-//                sixBarDown();
-
-                holdSlidePos();
-
-
 
                 robot.getSlide1().setPower(0.75 * Range.clip(robot.opMode.gamepad2.right_stick_y, -1, 1));
                 robot.getSlide2().setPower(0.75 * Range.clip(-robot.opMode.gamepad2.right_stick_y, -1, 1));
-
-
-
-//                telemetry.addData("4bar1" , robot.getFourBar1().getPosition());
-//                telemetry.addData("4bar2" , robot.getFourBar2().getPosition());
 
 
                 // todo: validate user responsiveness and set sleep
@@ -221,6 +124,21 @@ public class OperatorThread extends Thread
         robot.getSlide2().setPower(0);
     }
 
+    public void reset()
+    {
+        if (robot.opMode.gamepad2.a) // reset grabber pos
+        {
+            //move 6 bar motors down
+            slides(-0.4, -950);
+            robot.getArm1().setPosition(robot.getArm1LowPos());
+            robot.getArm2().setPosition(robot.getArm2LowPos());
+
+            robot.getFourBar1().setPosition(robot.getBar1FrontPos());
+            robot.getFourBar2().setPosition(robot.getBar2FrontPos());
+
+            robot.getTwister().setPosition(robot.getTwisterDownPos());
+        }
+    }
 
     public void grab() throws InterruptedException
     {
@@ -241,101 +159,120 @@ public class OperatorThread extends Thread
 
     public void servoArmsHigh()
     {
-        robot.getArm1().setPosition(robot.getArm1HighPos());
-        robot.getArm2().setPosition(robot.getArm2HighPos());
-    }
-
-    public void servoArmsDown()
-    {
-        robot.getArm1().setPosition(robot.getArm1LowPos());
-        robot.getArm2().setPosition(robot.getArm2LowPos());
-    }
-
-
-     public void sixBarHigh()
-    {
-        if(robot.opMode.gamepad2.dpad_up)
+        if (robot.opMode.gamepad2.y) // raise servo on 6bar
         {
+            robot.getArm1().setPosition(robot.getArm1HighPos());
+            robot.getArm2().setPosition(robot.getArm2HighPos());
+        }
 
-            fourBarBack();
+    }
 
-            servoArmsHigh();
+    public void highBackwards()
+    {
+        if(robot.opMode.gamepad2.dpad_up) // max height backwards
+        {
 
             slides(0.5, 953);
+            servoArmsHigh();
 
-            robot.getTwister().setPosition(robot.getTwisterDownPos());
-
-        }
-    }
-
-    public void sixBarMedium()
-    {
-
-    }
-
-    public void sixBarLow()
-    {
-
-    }
-
-    public void servoTest()
-    {
-        if(robot.opMode.gamepad2.dpad_left)
-        {
             robot.getFourBar1().setPosition(robot.getBar1BackPos());
             robot.getFourBar2().setPosition(robot.getBar2BackPos());
 
+            robot.getTwister().setPosition(robot.getTwisterUpPos());
+
         }
     }
 
-
-
-    public void sixBarDown()
+    public void highForwards()
     {
-        if(robot.opMode.gamepad2.dpad_down)
+        if(robot.opMode.gamepad2.dpad_left) // max height forwards
         {
+//                    move motors to max height
+            slides(0.5, 953);
+            servoArmsHigh();
+
+            robot.getFourBar1().setPosition(robot.getBar1FrontPos());
+            robot.getFourBar2().setPosition(robot.getBar2FrontPos());
+
+            robot.getTwister().setPosition(robot.getTwisterDownPos());
+        }
+    }
+
+    public void mediumBackwards()
+    {
+        if(robot.opMode.gamepad2.dpad_right) //  medium height backwards
+        {
+//                     move motors to mid height
+            slides(0.5, 700);
+            servoArmsHigh();
+
+            robot.getFourBar1().setPosition(robot.getBar1BackPos());
+            robot.getFourBar2().setPosition(robot.getBar2BackPos());
 
             robot.getTwister().setPosition(robot.getTwisterUpPos());
 
-            fourBarFront();
-
-            slides(-0.5, -953);
-
-            servoArmsDown();
-
-
-
         }
     }
 
-
-    public void fourBarFront()
+    public void mediumForwards()
     {
-        robot.getFourBar1().setPosition(robot.getBar1FrontPos());
-        robot.getFourBar2().setPosition(robot.getBar2FrontPos());
+        if(robot.opMode.gamepad2.dpad_down) // medium height forwards
+        {
+//                    move motors to mid height
+            slides(0.5, 700);
+            servoArmsHigh();
+
+            robot.getFourBar1().setPosition(robot.getBar1FrontPos());
+            robot.getFourBar2().setPosition(robot.getBar2FrontPos());
+
+            robot.getTwister().setPosition(robot.getTwisterDownPos());
+        }
     }
 
-    public void fourBarBack()
+    public void stackHeight5()
     {
-        robot.getFourBar1().setPosition(robot.getBar1BackPos());
-        robot.getFourBar2().setPosition(robot.getBar2BackPos());
+        if(robot.opMode.gamepad2.left_stick_y > .5) // 5 stack height
+        {
+            robot.getArm1().setPosition(.5);
+            robot.getArm2().setPosition(.5);
+        }
     }
 
-//    public void twister()
-//    {
-//        if(robot.opMode.gamepad2.left_trigger > robot.getTwisterUpPos() && !blockTwisterInput)
-//        {
-//            robot.getTwister().setPosition(twisterState ? robot.getTwisterUpPos() : robot.getTwisterDownPos());
-//           twisterState = !twisterState;
-//            blockTwisterInput = true;
-//
-//        }else if (robot.opMode.gamepad2.left_trigger < robot.getTwisterUpPos() && blockTwisterInput)
-//        {
-//            blockTwisterInput = false;
-//        }
-//
-//    }
+    public void stackHeight4()
+    {
+        if(robot.opMode.gamepad2.left_stick_x < -0.5) // 4 stack height
+        {
+            robot.getArm1().setPosition(.48);
+            robot.getArm2().setPosition(.52);
+        }
+    }
 
+    public void stackHeight3()
+    {
+        if(robot.opMode.gamepad2.left_stick_x > 0.5) // 3 stack height
+        {
+
+            robot.getArm1().setPosition(.45);
+            robot.getArm2().setPosition(.55);
+        }
+    }
+
+    public void stackHeight2()
+    {
+        if(robot.opMode.gamepad2.left_stick_y < -0.5) // 2 stack height
+        {
+            robot.getArm1().setPosition(.43);
+            robot.getArm2().setPosition(.57);
+        }
+    }
+
+    public void openGrabber()
+    {
+        if (robot.opMode.gamepad2.b)
+        {
+            robot.getGrabber().setPosition(robot.getGrabberOpenPos());
+        }
+    }
 
     public void holdSlidePos()
     {
