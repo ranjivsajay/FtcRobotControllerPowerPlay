@@ -142,13 +142,13 @@ public class OperatorThread extends Thread
 
     public void grab() throws InterruptedException
     {
-        if(robot.opMode.gamepad2.right_trigger > robot.getGrabberClosePos() && !blockGrabberInput)
+        if(robot.opMode.gamepad2.left_trigger > robot.getGrabberClosePos() && !blockGrabberInput)
         {
             robot.getGrabber().setPosition(grabberState ? robot.getGrabberClosePos() : robot.getGrabberOpenPos());
             grabberState = !grabberState;
             blockGrabberInput = true;
         }
-        else if (robot.opMode.gamepad2.right_trigger < robot.getGrabberOpenPos() && blockGrabberInput)
+        else if (robot.opMode.gamepad2.left_trigger < robot.getGrabberOpenPos() && blockGrabberInput)
         {
             blockGrabberInput = false;
         }

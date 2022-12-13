@@ -103,6 +103,7 @@ public class UpliftAutoImpl extends UpliftAuto {
         stopMotors();
     }
 
+
     public void moveForward(double power) {
         robot.getRightFront().setPower(power);
         robot.getRightBack().setPower(power);

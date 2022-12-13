@@ -42,7 +42,6 @@ public class DriveThread extends Thread
                 double rightX = (.7 * Range.clip(robot.opMode.gamepad1.right_stick_x, -1, 1));
                 double leftX = ( .7 * Range.clip(robot.opMode.gamepad1.left_stick_x, -1, 1));
 
-
                 double angle = 90 - Math.toDegrees(UpliftMath.atan2UL(leftY, leftX));
                 double magnitude = 0.8 * Range.clip(sqrt(Math.pow(leftX, 2) + Math.pow(leftY, 2)), -1, 1);
 

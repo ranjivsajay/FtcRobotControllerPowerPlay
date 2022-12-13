@@ -1,12 +1,11 @@
 package org.firstinspires.ftc.teamcode.Core.programs.autos;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 
-@Autonomous(name = "VisionDropCone", group = "Opmodes")
-public class VisionDropCone extends UpliftAutoImpl {
+@Autonomous(name = "3CycleLeft", group = "Opmodes")
+public class ThreeCycleLeft extends UpliftAutoImpl {
 
 
     @Override
@@ -24,7 +23,7 @@ public class VisionDropCone extends UpliftAutoImpl {
 
         moveRight(.5, 200);
 
-        moveForward(0.65, 2780);
+        moveForward(0.65, 2730);
         high();
         robot.getSlide1().setPower(-0.4);
         robot.getSlide2().setPower(0.4);
@@ -146,7 +145,7 @@ public class VisionDropCone extends UpliftAutoImpl {
 
         else if(location == 3)
         {
-            moveBackward(1, 750);
+            moveBackward(1, 650);
 
         }
  }

@@ -15,7 +15,9 @@ public class VisionAuto extends UpliftAutoImpl {
 //        robot.getWebcam().closeCameraDevice();
 
         moveBackward(.5,600);
+
     }
+
 //    @Override
 //    public void body() throws InterruptedException
  //   {
