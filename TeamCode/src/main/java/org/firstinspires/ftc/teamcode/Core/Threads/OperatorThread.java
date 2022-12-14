@@ -41,7 +41,7 @@ public class OperatorThread extends Thread
         {
             try
             {
-                grab();
+//                grab();
 
                 reset();
 
@@ -66,6 +66,11 @@ public class OperatorThread extends Thread
                 openGrabber();
 
                 holdSlidePos();
+                if (robot.opMode.gamepad2.right_trigger > 0.1){
+
+                    robot.getGrabber().setPosition(robot.getGrabberClosePos());
+                }
+
 
                 if (robot.opMode.gamepad2.x) // bring 4bar up to drive
                 {
@@ -129,7 +134,7 @@ public class OperatorThread extends Thread
         if (robot.opMode.gamepad2.a) // reset grabber pos
         {
             //move 6 bar motors down
-            slides(-0.4, -950);
+//            slides(-0.4, -950);
             robot.getArm1().setPosition(robot.getArm1LowPos());
             robot.getArm2().setPosition(robot.getArm2LowPos());
 
@@ -142,13 +147,13 @@ public class OperatorThread extends Thread
 
     public void grab() throws InterruptedException
     {
-        if(robot.opMode.gamepad2.left_trigger > robot.getGrabberClosePos() && !blockGrabberInput)
+        if(robot.opMode.gamepad2.right_trigger > robot.getGrabberClosePos() && !blockGrabberInput)
         {
             robot.getGrabber().setPosition(grabberState ? robot.getGrabberClosePos() : robot.getGrabberOpenPos());
             grabberState = !grabberState;
             blockGrabberInput = true;
         }
-        else if (robot.opMode.gamepad2.left_trigger < robot.getGrabberOpenPos() && blockGrabberInput)
+        else if (robot.opMode.gamepad2.right_trigger < robot.getGrabberOpenPos() && blockGrabberInput)
         {
             blockGrabberInput = false;
         }
@@ -172,8 +177,10 @@ public class OperatorThread extends Thread
         if(robot.opMode.gamepad2.dpad_up) // max height backwards
         {
 
-            slides(0.5, 953);
-            servoArmsHigh();
+//            slides(0.5, 953);
+            robot.getArm1().setPosition(robot.getArm1HighPos());
+            robot.getArm2().setPosition(robot.getArm2HighPos());
+
 
             robot.getFourBar1().setPosition(robot.getBar1BackPos());
             robot.getFourBar2().setPosition(robot.getBar2BackPos());
@@ -188,8 +195,9 @@ public class OperatorThread extends Thread
         if(robot.opMode.gamepad2.dpad_left) // max height forwards
         {
 //                    move motors to max height
-            slides(0.5, 953);
-            servoArmsHigh();
+//            slides(0.5, 953);
+            robot.getArm1().setPosition(robot.getArm1HighPos());
+            robot.getArm2().setPosition(robot.getArm2HighPos());
 
             robot.getFourBar1().setPosition(robot.getBar1FrontPos());
             robot.getFourBar2().setPosition(robot.getBar2FrontPos());
@@ -203,8 +211,9 @@ public class OperatorThread extends Thread
         if(robot.opMode.gamepad2.dpad_right) //  medium height backwards
         {
 //                     move motors to mid height
-            slides(0.5, 700);
-            servoArmsHigh();
+//            slides(0.5, 700);
+            robot.getArm1().setPosition(robot.getArm1HighPos());
+            robot.getArm2().setPosition(robot.getArm2HighPos());
 
             robot.getFourBar1().setPosition(robot.getBar1BackPos());
             robot.getFourBar2().setPosition(robot.getBar2BackPos());
@@ -219,8 +228,9 @@ public class OperatorThread extends Thread
         if(robot.opMode.gamepad2.dpad_down) // medium height forwards
         {
 //                    move motors to mid height
-            slides(0.5, 700);
-            servoArmsHigh();
+//            slides(0.5, 700);
+            robot.getArm1().setPosition(robot.getArm1HighPos());
+            robot.getArm2().setPosition(robot.getArm2HighPos());
 
             robot.getFourBar1().setPosition(robot.getBar1FrontPos());
             robot.getFourBar2().setPosition(robot.getBar2FrontPos());
