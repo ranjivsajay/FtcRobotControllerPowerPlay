@@ -38,7 +38,6 @@ public class DriveThread extends Thread
         {
             try
             {
-                //initializing axis used in controller
                 double leftY =(.7 * Range.clip(-robot.opMode.gamepad1.left_stick_y, -1, 1));
                 double rightX = (.7 * Range.clip(robot.opMode.gamepad1.right_stick_x, -1, 1));
                 double leftX = ( .7 * Range.clip(robot.opMode.gamepad1.left_stick_x, -1, 1));
@@ -69,7 +68,7 @@ public class DriveThread extends Thread
         double rfPow = sin(toRadians(joystickAngle) - (0.25 * PI)) * speedVal - turnVal;
         double lbPow = sin(toRadians(joystickAngle) - (0.25 * PI)) * speedVal + turnVal;
         double rbPow = sin(toRadians(joystickAngle) + (0.25 * PI)) * speedVal - turnVal;
-
+//
         // find max total input out of the 4 motors
         double maxVal = abs(lfPow);
         if (abs(rfPow) > maxVal) {
@@ -99,7 +98,6 @@ public class DriveThread extends Thread
 
     public void end()
     {
-        //stops thread
         shutDown = true;
 
         robot.opMode.telemetry.addData("Driver Thread stopped ", shutDown);

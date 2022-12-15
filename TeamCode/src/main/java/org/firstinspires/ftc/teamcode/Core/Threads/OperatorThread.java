@@ -20,9 +20,6 @@ public class OperatorThread extends Thread
 
     private boolean grabberState;
     private boolean blockGrabberInput;
-
-    private boolean fourBarState;
-
     private boolean twisterState;
     private boolean blockTwisterInput;
 
@@ -35,8 +32,6 @@ public class OperatorThread extends Thread
         this.grabberState = true;
         this.blockGrabberInput = false;
 
-        this.fourBarState = true;
-
     }
 
     @Override
@@ -46,7 +41,7 @@ public class OperatorThread extends Thread
         {
             try
             {
-                toggleGrab();
+//                grab();
 
                 reset();
 
@@ -68,17 +63,20 @@ public class OperatorThread extends Thread
 
                 stackHeight2();
 
-//                openGrabber();
+                openGrabber();
 
                 holdSlidePos();
+                if (robot.opMode.gamepad2.right_trigger > 0.1){
 
-                toggle4Bar();
+                    robot.getGrabber().setPosition(robot.getGrabberClosePos());
+                }
 
-//                if (robot.opMode.gamepad2.x) // bring 4bar up to drive
-//                {
-//                    robot.getFourBar1().setPosition(.38);
-//                    robot.getFourBar2().setPosition(.62);
-//                }
+
+                if (robot.opMode.gamepad2.x) // bring 4bar up to drive
+                {
+                    robot.getFourBar1().setPosition(.38);
+                    robot.getFourBar2().setPosition(.62);
+                }
 
 
                robot.opMode.telemetry.addData("slide1" , robot.getSlide1().getCurrentPosition());
@@ -109,7 +107,6 @@ public class OperatorThread extends Thread
 
     public void end()
     {
-        //stops thread
         shutDown = true;
 
         robot.opMode.telemetry.addData("Operator Thread stopped ", shutDown);
@@ -134,7 +131,7 @@ public class OperatorThread extends Thread
 
     public void reset()
     {
-        if (robot.opMode.gamepad2.a) // resets everything
+        if (robot.opMode.gamepad2.a) // reset grabber pos
         {
             //move 6 bar motors down
 //            slides(-0.4, -950);
@@ -148,27 +145,15 @@ public class OperatorThread extends Thread
         }
     }
 
-    public void toggle4Bar()
+    public void grab() throws InterruptedException
     {
-        //allows the 4bar to move to its forwards and backwards position with the same button
-        if(robot.opMode.gamepad2.x)
+        if(robot.opMode.gamepad2.right_trigger > robot.getGrabberClosePos() && !blockGrabberInput)
         {
-            robot.getFourBar1().setPosition(fourBarState ? robot.getBar1FrontPos() : robot.getBar1BackPos());
-            robot.getFourBar2().setPosition(fourBarState ? robot.getBar2FrontPos() : robot.getBar2BackPos());
-            fourBarState = !fourBarState;
-        }
-    }
-
-    public void toggleGrab() throws InterruptedException
-    {
-        //allows the claw to open and close with the same button
-        if(robot.opMode.gamepad2.right_trigger > robot.getGrabberOpenPos() && !blockGrabberInput)
-        {
-            robot.getGrabber().setPosition(grabberState ? robot.getGrabberOpenPos() : robot.getGrabberClosePos());
+            robot.getGrabber().setPosition(grabberState ? robot.getGrabberClosePos() : robot.getGrabberOpenPos());
             grabberState = !grabberState;
             blockGrabberInput = true;
         }
-        else if (robot.opMode.gamepad2.right_trigger < robot.getGrabberClosePos() && blockGrabberInput)
+        else if (robot.opMode.gamepad2.right_trigger < robot.getGrabberOpenPos() && blockGrabberInput)
         {
             blockGrabberInput = false;
         }
@@ -179,7 +164,7 @@ public class OperatorThread extends Thread
 
     public void servoArmsHigh()
     {
-        if (robot.opMode.gamepad2.y) // raise servo on 6bar to high
+        if (robot.opMode.gamepad2.y) // raise servo on 6bar
         {
             robot.getArm1().setPosition(robot.getArm1HighPos());
             robot.getArm2().setPosition(robot.getArm2HighPos());
@@ -301,7 +286,6 @@ public class OperatorThread extends Thread
 
     public void holdSlidePos()
     {
-        //holds the position of the slides
         if(robot.opMode.gamepad2.left_trigger > 0)
         {
             robot.getSlide1().setPower(-0.9);

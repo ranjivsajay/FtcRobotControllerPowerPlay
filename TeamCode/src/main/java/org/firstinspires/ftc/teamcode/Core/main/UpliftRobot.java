@@ -40,7 +40,7 @@ public class UpliftRobot
     double bar1BackPos = 0.175;
     double bar2BackPos = 0.825;
 
-    double grabberOpenPos = 0.01;
+    double grabberOpenPos = 0.0;
     double grabberClosePos = 0.21;
 
     double twisterUpPos = .82;
@@ -100,23 +100,13 @@ public class UpliftRobot
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-
-        slide1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        slide2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
         slide1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         slide2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
 
         arm2.setDirection(Servo.Direction.REVERSE);
         arm1.setDirection(Servo.Direction.REVERSE);
