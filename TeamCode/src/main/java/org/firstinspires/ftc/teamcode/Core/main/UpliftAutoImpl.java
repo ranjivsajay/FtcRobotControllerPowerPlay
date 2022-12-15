@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.Core.main;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
+
 public class UpliftAutoImpl extends UpliftAuto {
 
 
@@ -52,7 +54,23 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getRightBack().setPower(0);
     }
 
-    public void moveLeft(double power, double dist) {
+    public void moveLeft(double power, int dist) {
+//        robot.getLeftFront().setTargetPosition(dist);
+//        robot.getLeftBack().setTargetPosition(dist);
+//        robot.getRightFront().setTargetPosition(dist);
+//        robot.getRightBack().setTargetPosition(dist);
+//
+//        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//
+//        robot.getRightFront().setPower(power);
+//        robot.getRightBack().setPower(-power);
+//        robot.getLeftFront().setPower(-power);
+//        robot.getLeftBack().setPower(power);
+
+
         double initialPos = robot.getRightFront().getCurrentPosition();
 
         while (robot.getRightFront().getCurrentPosition() < initialPos + dist)
@@ -72,7 +90,23 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getLeftBack().setPower(power);
     }
 
-    public void moveRight(double power, double dist) {
+    public void moveRight(double power, int dist) {
+
+//        robot.getLeftFront().setTargetPosition(dist);
+//        robot.getLeftBack().setTargetPosition(dist);
+//        robot.getRightFront().setTargetPosition(dist);
+//        robot.getRightBack().setTargetPosition(dist);
+//
+//        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//
+//        robot.getRightFront().setPower(-power);
+//        robot.getRightBack().setPower(power);
+//        robot.getLeftFront().setPower(power);
+//        robot.getLeftBack().setPower(-power);
+
         double initialPos = robot.getRightFront().getCurrentPosition();
 
         while (robot.getRightFront().getCurrentPosition() > initialPos - dist) {
@@ -91,7 +125,50 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getLeftBack().setPower(-power);
     }
 
-    public void moveForward(double power, double dist) {
+    public void moveForwardHigh(double drivePower, double slidesPower, int driveDist, int slidesDist)
+    {
+        robot.getLeftFront().setTargetPosition(driveDist);
+        robot.getLeftBack().setTargetPosition(driveDist);
+        robot.getRightFront().setTargetPosition(driveDist);
+        robot.getRightBack().setTargetPosition(driveDist);
+
+        robot.getSlide1().setTargetPosition(-slidesDist);
+        robot.getSlide2().setTargetPosition(slidesDist);
+
+        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        robot.getSlide1().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.getSlide2().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        robot.getRightFront().setPower(drivePower);
+        robot.getRightBack().setPower(drivePower);
+        robot.getLeftFront().setPower(drivePower);
+        robot.getLeftBack().setPower(drivePower);
+
+        robot.getSlide1().setPower(-slidesPower);
+        robot.getSlide2().setPower(slidesPower);
+    }
+
+    public void moveForward(double power, int dist) {
+
+//        robot.getLeftFront().setTargetPosition(dist);
+//        robot.getLeftBack().setTargetPosition(dist);
+//        robot.getRightFront().setTargetPosition(dist);
+//        robot.getRightBack().setTargetPosition(dist);
+//
+//        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//
+//        robot.getRightFront().setPower(power);
+//        robot.getRightBack().setPower(power);
+//        robot.getLeftFront().setPower(power);
+//        robot.getLeftBack().setPower(power);
+
         double initialPos = robot.getRightFront().getCurrentPosition();
 
         while (robot.getRightFront().getCurrentPosition() < initialPos + dist) {
@@ -111,7 +188,23 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getLeftBack().setPower(power);
     }
 
-    public void moveBackward(double power, double dist) {
+    public void moveBackward(double power, int dist) {
+
+//        robot.getLeftFront().setTargetPosition(dist);
+//        robot.getLeftBack().setTargetPosition(dist);
+//        robot.getRightFront().setTargetPosition(dist);
+//        robot.getRightBack().setTargetPosition(dist);
+//
+//        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//
+//        robot.getRightFront().setPower(-power);
+//        robot.getRightBack().setPower(-power);
+//        robot.getLeftFront().setPower(-power);
+//        robot.getLeftBack().setPower(-power);
+
         double initialPos = robot.getRightFront().getCurrentPosition();
 
         while (robot.getRightFront().getCurrentPosition() > initialPos - Math.abs(dist)) {
