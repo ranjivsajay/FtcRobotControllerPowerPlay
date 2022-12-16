@@ -10,10 +10,10 @@ public class ThreeCycleLeft extends UpliftAutoImpl {
 
     @Override
     public void initAction() {
+
         robot.getGrabber().setPosition(robot.getGrabberClosePos());
         robot.getFourBar1().setPosition(.28);
         robot.getFourBar2().setPosition(.72);
-
 
     }
 
@@ -23,7 +23,7 @@ public class ThreeCycleLeft extends UpliftAutoImpl {
 
         moveRight(.5, 200);
 
-        moveForward(0.65, 2730);
+        moveForward(0.65, 2780);
         high();
         robot.getSlide1().setPower(-0.4);
         robot.getSlide2().setPower(0.4);

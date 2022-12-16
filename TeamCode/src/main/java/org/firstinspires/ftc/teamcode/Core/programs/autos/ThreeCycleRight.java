@@ -1,16 +1,25 @@
 package org.firstinspires.ftc.teamcode.Core.programs.autos;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.Core.Threads.DriveAuto;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 
 @Autonomous(name = "3CycleRight", group = "Opmodes")
 public class ThreeCycleRight extends UpliftAutoImpl {
 
-    DriveAuto driveAuto = new DriveAuto(robot);
     @Override
-    public void initAction() {
+    public void initAction()
+    {
+
+//        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.getRightFront().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.getLeftBack().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        robot.getRightBack().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+//        robot.getSlide1().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        robot.getSlide2().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
         robot.getGrabber().setPosition(robot.getGrabberClosePos());
         robot.getFourBar1().setPosition(.28);
         robot.getFourBar2().setPosition(.72);
@@ -21,16 +30,15 @@ public class ThreeCycleRight extends UpliftAutoImpl {
     public void body() throws InterruptedException
     {
 
+        moveForwardHigh(0.7, 0.8, 2300, 953);
 
+        high();
 
-//        moveRight(0.5, 200);
+        robot.getSlide1().setPower(-0.4);
+        robot.getSlide2().setPower(0.4);
+        Thread.sleep(500);
 
-        driveAuto.start();
-
-
-
-        driveAuto.end();
-//        moveForward(0.5, 2500);
+        turnRight(0.5, 93);
 
     }
 }

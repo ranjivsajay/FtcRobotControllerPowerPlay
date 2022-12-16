@@ -38,6 +38,7 @@ public class TeleOp1 extends UpliftTele {
 
         createDriveThread(robot);
         createOperatorThread(robot);
+
     }
 
     @Override
@@ -64,6 +65,7 @@ public class TeleOp1 extends UpliftTele {
     @Override
 
     public void bodyLoop() throws InterruptedException {
+
 
 //        test();
 
@@ -132,13 +134,15 @@ public class TeleOp1 extends UpliftTele {
 
     public void createDriveThread(UpliftRobot robot1)
     {
+
         driverThread = new DriveThread(robot1);
         telemetry.addData("Driver Thread started", driverThread.toString());
+
     }
 
     public void createOperatorThread(UpliftRobot robot1) {
-        operatorThread = new OperatorThread(robot1);
 
+        operatorThread = new OperatorThread(robot1);
         telemetry.addData("Operator Thread started", operatorThread.toString());
 
     }

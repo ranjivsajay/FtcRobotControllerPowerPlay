@@ -66,10 +66,6 @@ public class UpliftRobot
         initializeCamera();
 
 
-
-
-
-
         leftFront = hardwareMap.get(DcMotor.class, "left_front");
         rightFront = hardwareMap.get(DcMotor.class, "right_front");
         leftBack = hardwareMap.get(DcMotor.class, "left_back");

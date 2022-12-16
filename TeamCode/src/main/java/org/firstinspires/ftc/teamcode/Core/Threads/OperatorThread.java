@@ -20,6 +20,11 @@ public class OperatorThread extends Thread
 
     private boolean grabberState;
     private boolean blockGrabberInput;
+
+    private boolean fourBarState;
+
+
+
     private boolean twisterState;
     private boolean blockTwisterInput;
 
@@ -32,6 +37,8 @@ public class OperatorThread extends Thread
         this.grabberState = true;
         this.blockGrabberInput = false;
 
+        this.fourBarState = true;
+
     }
 
     @Override
@@ -41,7 +48,9 @@ public class OperatorThread extends Thread
         {
             try
             {
-//                grab();
+                toggleGrab();
+
+                toggle4Bar();
 
                 reset();
 
@@ -66,17 +75,9 @@ public class OperatorThread extends Thread
                 openGrabber();
 
                 holdSlidePos();
-                if (robot.opMode.gamepad2.right_trigger > 0.1){
-
-                    robot.getGrabber().setPosition(robot.getGrabberClosePos());
-                }
 
 
-                if (robot.opMode.gamepad2.x) // bring 4bar up to drive
-                {
-                    robot.getFourBar1().setPosition(.38);
-                    robot.getFourBar2().setPosition(.62);
-                }
+
 
 
                robot.opMode.telemetry.addData("slide1" , robot.getSlide1().getCurrentPosition());
@@ -129,6 +130,31 @@ public class OperatorThread extends Thread
         robot.getSlide2().setPower(0);
     }
 
+    public void toggle4Bar()
+    {
+        //allows the 4bar to move to its forwards and backwards position with the same button
+        if(robot.opMode.gamepad2.x)
+        {
+            robot.getFourBar1().setPosition(fourBarState ? robot.getBar1FrontPos() : 0.38);
+            robot.getFourBar2().setPosition(fourBarState ? robot.getBar2FrontPos() : 0.62);
+            fourBarState = !fourBarState;
+        }
+    }
+
+    public void toggleGrab() throws InterruptedException
+    {
+        if(robot.opMode.gamepad2.right_trigger > robot.getGrabberOpenPos() && !blockGrabberInput)
+        {
+        robot.getGrabber().setPosition(grabberState ? robot.getGrabberOpenPos() : robot.getGrabberClosePos());
+        grabberState = !grabberState;
+        blockGrabberInput = true;
+        }
+        else if (robot.opMode.gamepad2.right_trigger < robot.getGrabberClosePos() && blockGrabberInput)
+        {
+            blockGrabberInput = false;
+        }
+    }
+
     public void reset()
     {
         if (robot.opMode.gamepad2.a) // reset grabber pos
@@ -144,22 +170,6 @@ public class OperatorThread extends Thread
             robot.getTwister().setPosition(robot.getTwisterDownPos());
         }
     }
-
-    public void grab() throws InterruptedException
-    {
-        if(robot.opMode.gamepad2.right_trigger > robot.getGrabberClosePos() && !blockGrabberInput)
-        {
-            robot.getGrabber().setPosition(grabberState ? robot.getGrabberClosePos() : robot.getGrabberOpenPos());
-            grabberState = !grabberState;
-            blockGrabberInput = true;
-        }
-        else if (robot.opMode.gamepad2.right_trigger < robot.getGrabberOpenPos() && blockGrabberInput)
-        {
-            blockGrabberInput = false;
-        }
-
-    }
-
 
 
     public void servoArmsHigh()
