@@ -49,7 +49,7 @@ public class ThreeCycleLeft extends UpliftAutoImpl {
         robot.getSlide2().setPower(-0.4);
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
 
-        Thread.sleep(500);
+        Thread.sleep(750);
 
 
         moveForward(.5, 300);
@@ -120,7 +120,7 @@ public class ThreeCycleLeft extends UpliftAutoImpl {
         robot.getSlide1().setPower(-0.4);
         robot.getSlide2().setPower(0.4);
         robot.getTwister().setPosition(robot.getTwisterUpPos());
-        Thread.sleep(1700);
+        Thread.sleep(700);
 
         moveBackward(0.4, 410);
         Thread.sleep(500);
