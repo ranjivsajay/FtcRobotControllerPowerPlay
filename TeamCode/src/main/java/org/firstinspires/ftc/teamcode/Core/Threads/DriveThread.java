@@ -47,6 +47,12 @@ public class DriveThread extends Thread
 
                 teleDrive(angle, magnitude, rightX, robot.opMode.gamepad1.right_trigger, robot);
 
+                if(robot.opMode.gamepad1.left_trigger > 0)
+                {
+                    robot.getFourBar1().setPosition(.38);
+                    robot.getFourBar2().setPosition(.62);
+                }
+
                 // todo: validate user responsiveness and set sleep
                 sleep(50);
             } catch (Exception e) {

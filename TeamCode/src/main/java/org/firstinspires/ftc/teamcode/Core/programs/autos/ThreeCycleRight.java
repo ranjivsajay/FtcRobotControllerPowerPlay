@@ -30,15 +30,23 @@ public class ThreeCycleRight extends UpliftAutoImpl {
     public void body() throws InterruptedException
     {
 
-        moveForwardHigh(0.7, 0.8, 2300, 953);
+//        moveForwardHigh(0.7, 0.8, 2300, 953);
+//
+//        robot.getSlide1().setPower(-0.4);
+//        robot.getSlide2().setPower(0.4);
+//        Thread.sleep(500);
+//
+//        robot.getRightFront().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        robot.getLeftBack().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//
+//        turnRight(0.5, 93);
+//        Thread.sleep(400);
 
-        high();
+        moveBackwardHigh(0.5, 10000);
 
-        robot.getSlide1().setPower(-0.4);
-        robot.getSlide2().setPower(0.4);
-        Thread.sleep(500);
+//        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
+//        Thread.sleep(500);
 
-        turnRight(0.5, 93);
 
     }
 }

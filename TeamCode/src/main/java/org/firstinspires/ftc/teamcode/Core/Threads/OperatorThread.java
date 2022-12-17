@@ -22,6 +22,7 @@ public class OperatorThread extends Thread
     private boolean blockGrabberInput;
 
     private boolean fourBarState;
+    private boolean block4BarInput;
 
 
 
@@ -38,6 +39,7 @@ public class OperatorThread extends Thread
         this.blockGrabberInput = false;
 
         this.fourBarState = true;
+        this.block4BarInput = true;
 
     }
 
@@ -75,6 +77,18 @@ public class OperatorThread extends Thread
                 openGrabber();
 
                 holdSlidePos();
+
+                if(robot.opMode.gamepad2.left_bumper)
+                {
+                    robot.getFourBar1().setPosition(robot.getFourBar1().getPosition() + 0.05);
+                    robot.getFourBar2().setPosition(robot.getFourBar2().getPosition() - 0.05);
+                }
+
+                if(robot.opMode.gamepad2.right_bumper)
+                {
+                    robot.getFourBar1().setPosition(robot.getFourBar1().getPosition() - 0.05);
+                    robot.getFourBar2().setPosition(robot.getFourBar2().getPosition() + 0.05);
+                }
 
 
 
@@ -133,11 +147,16 @@ public class OperatorThread extends Thread
     public void toggle4Bar()
     {
         //allows the 4bar to move to its forwards and backwards position with the same button
-        if(robot.opMode.gamepad2.x)
+        if(robot.opMode.gamepad2.x && !block4BarInput)
         {
             robot.getFourBar1().setPosition(fourBarState ? robot.getBar1FrontPos() : 0.38);
             robot.getFourBar2().setPosition(fourBarState ? robot.getBar2FrontPos() : 0.62);
             fourBarState = !fourBarState;
+            block4BarInput = true;
+        }
+        else if(!robot.opMode.gamepad2.x && block4BarInput)
+        {
+            block4BarInput = false;
         }
     }
 
@@ -220,15 +239,18 @@ public class OperatorThread extends Thread
     {
         if(robot.opMode.gamepad2.dpad_right) //  medium height backwards
         {
-//                     move motors to mid height
-//            slides(0.5, 700);
-            robot.getArm1().setPosition(robot.getArm1HighPos());
-            robot.getArm2().setPosition(robot.getArm2HighPos());
+////                     move motors to mid height
+////            slides(0.5, 700);
+//            robot.getArm1().setPosition(robot.getArm1HighPos());
+//            robot.getArm2().setPosition(robot.getArm2HighPos());
+//
+//            robot.getFourBar1().setPosition(robot.getBar1BackPos());
+//            robot.getFourBar2().setPosition(robot.getBar2BackPos());
+//
+//            robot.getTwister().setPosition(robot.getTwisterUpPos());
 
-            robot.getFourBar1().setPosition(robot.getBar1BackPos());
-            robot.getFourBar2().setPosition(robot.getBar2BackPos());
-
-            robot.getTwister().setPosition(robot.getTwisterUpPos());
+            robot.getFourBar1().setPosition(robot.getBar1FrontPos());
+            robot.getFourBar2().setPosition(robot.getBar2FrontPos());
 
         }
     }
@@ -237,15 +259,18 @@ public class OperatorThread extends Thread
     {
         if(robot.opMode.gamepad2.dpad_down) // medium height forwards
         {
-//                    move motors to mid height
-//            slides(0.5, 700);
-            robot.getArm1().setPosition(robot.getArm1HighPos());
-            robot.getArm2().setPosition(robot.getArm2HighPos());
+////                    move motors to mid height
+////            slides(0.5, 700);
+//            robot.getArm1().setPosition(robot.getArm1HighPos());
+//            robot.getArm2().setPosition(robot.getArm2HighPos());
+//
+//            robot.getFourBar1().setPosition(robot.getBar1FrontPos());
+//            robot.getFourBar2().setPosition(robot.getBar2FrontPos());
+//
+//            robot.getTwister().setPosition(robot.getTwisterDownPos());
 
-            robot.getFourBar1().setPosition(robot.getBar1FrontPos());
-            robot.getFourBar2().setPosition(robot.getBar2FrontPos());
-
-            robot.getTwister().setPosition(robot.getTwisterDownPos());
+            robot.getFourBar1().setPosition(.38);
+            robot.getFourBar2().setPosition(.62);
         }
     }
 

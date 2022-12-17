@@ -94,8 +94,8 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getLeftBack().setPower(-power);
     }
 
-    public void moveForwardHigh(double drivePower, double slidesPower, int driveDist, int slidesDist)
-    {
+    public void moveForwardHigh(double drivePower, double slidesPower, int driveDist, int slidesDist) throws InterruptedException {
+        servoArmsHigh();
 
 //        robot.getLeftFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.getRightFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -134,13 +134,15 @@ public class UpliftAutoImpl extends UpliftAuto {
 
         }
 
-        robot.getRightFront().setPower(0);
-        robot.getRightBack().setPower(0);
-        robot.getLeftFront().setPower(0);
-        robot.getLeftBack().setPower(0);
+//        robot.getRightFront().setPower(0);
+//        robot.getRightBack().setPower(0);
+//        robot.getLeftFront().setPower(0);
+//        robot.getLeftBack().setPower(0);
+//
+//        robot.getSlide1().setPower(0);
+//        robot.getSlide2().setPower(0);
 
-        robot.getSlide1().setPower(0);
-        robot.getSlide2().setPower(0);
+        fourBarBack();
     }
 
     public void moveForward(double power, double dist) {
@@ -180,6 +182,30 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getRightBack().setPower(-power);
         robot.getLeftFront().setPower(-power);
         robot.getLeftBack().setPower(-power);
+    }
+
+    public void moveBackwardHigh(double drivePower, int driveDist)
+    {
+
+        robot.getRightFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.getLeftBack().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        robot.getLeftBack().setTargetPosition(-driveDist);
+        robot.getRightFront().setTargetPosition(-driveDist);
+
+        robot.getLeftBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.getRightFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        robot.getRightFront().setPower(-drivePower);
+        robot.getRightBack().setPower(-drivePower);
+        robot.getLeftFront().setPower(-drivePower);
+        robot.getLeftBack().setPower(-drivePower);
+
+        while(opModeIsActive() && robot.getRightFront().isBusy())
+        {
+
+        }
+
     }
 
     public void turnRight(double power, double angle) {
@@ -289,7 +315,7 @@ public class UpliftAutoImpl extends UpliftAuto {
 
         fourBarBack();
 
-        robot.getTwister().setPosition(robot.getTwisterDownPos());
+        robot.getTwister().setPosition(robot.getTwisterUpPos());
     }
 
     public void down(double slidePower, double slideDist)
