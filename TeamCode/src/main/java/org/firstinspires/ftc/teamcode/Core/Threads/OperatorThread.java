@@ -39,7 +39,7 @@ public class OperatorThread extends Thread
         this.blockGrabberInput = false;
 
         this.fourBarState = true;
-        this.block4BarInput = true;
+        this.block4BarInput = false;
 
     }
 
@@ -278,8 +278,8 @@ public class OperatorThread extends Thread
     {
         if(robot.opMode.gamepad2.left_stick_y > .5) // 5 stack height
         {
-            robot.getArm1().setPosition(.5);
-            robot.getArm2().setPosition(.5);
+            robot.getArm1().setPosition(.57);
+            robot.getArm2().setPosition(.43);
         }
     }
 
