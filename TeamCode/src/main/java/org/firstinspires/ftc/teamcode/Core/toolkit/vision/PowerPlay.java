@@ -57,17 +57,17 @@ public class  PowerPlay extends OpenCvPipeline {
 //        box.release();
 //
 //
-        telemetry.addData("Orange Raw Value", OrangeValue);
-
-        telemetry.addData("Orange Percentage", Math.round(OrangeValue * 100) + "%");
-
-        telemetry.addData("Purple Raw Value", (int) PurpleValue);
-
-        telemetry.addData("Purple Percentage", Math.round(PurpleValue * 100) + "%");
-
-        telemetry.addData("Green Raw Value", (int) GreenValue);
-
-        telemetry.addData("Green Percentage", Math.round(GreenValue * 100) + "%");
+//        telemetry.addData("Orange Raw Value", OrangeValue);
+//
+//        telemetry.addData("Orange Percentage", Math.round(OrangeValue * 100) + "%");
+//
+//        telemetry.addData("Purple Raw Value", (int) PurpleValue);
+//
+//        telemetry.addData("Purple Percentage", Math.round(PurpleValue * 100) + "%");
+//
+//        telemetry.addData("Green Raw Value", (int) GreenValue);
+//
+//        telemetry.addData("Green Percentage", Math.round(GreenValue * 100) + "%");
 
         Imgproc.rectangle(input, ROI, new Scalar(0, 255, 0), 4);
 

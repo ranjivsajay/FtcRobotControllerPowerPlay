@@ -26,7 +26,7 @@ public class UpliftRobot
     DcMotor leftFront, rightFront, leftBack, rightBack, slide1, slide2;
     Servo grabber, arm1, arm2, fourBar1, fourBar2, twister;
     DistanceSensor coneDetector, poleDetector;
-    TouchSensor armReset;
+    TouchSensor magnet;
     ColorRangeSensor lineDetector;
     OpenCvCamera webcam;
     BNO055IMU imu;
@@ -91,7 +91,7 @@ public class UpliftRobot
         coneDetector = hardwareMap.get(DistanceSensor.class, "coneDetector");
         poleDetector = hardwareMap.get(DistanceSensor.class, "poleDetector");
 
-        armReset = hardwareMap.get(TouchSensor.class, "armReset");
+        magnet = hardwareMap.get(TouchSensor.class, "magnet");
 
         lineDetector = hardwareMap.get(ColorRangeSensor.class, "lineDetector");
 
@@ -209,9 +209,9 @@ public class UpliftRobot
         return poleDetector;
     }
 
-    public TouchSensor getArmReset()
+    public TouchSensor getMagnet()
     {
-        return armReset;
+        return magnet;
     }
 
     public ColorRangeSensor getLineDetector()
