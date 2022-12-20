@@ -3,8 +3,10 @@ package org.firstinspires.ftc.teamcode.Core.main;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.ColorRangeSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -23,7 +25,9 @@ public class UpliftRobot
 {
     DcMotor leftFront, rightFront, leftBack, rightBack, slide1, slide2;
     Servo grabber, arm1, arm2, fourBar1, fourBar2, twister;
-    TouchSensor magneticSensor;
+    DistanceSensor coneDetector, poleDetector;
+    TouchSensor armReset;
+    ColorRangeSensor lineDetector;
     OpenCvCamera webcam;
     BNO055IMU imu;
 
@@ -71,6 +75,9 @@ public class UpliftRobot
         leftBack = hardwareMap.get(DcMotor.class, "left_back");
         rightBack = hardwareMap.get(DcMotor.class, "right_back");
 
+        arm1 = hardwareMap.get(Servo.class, "arm1");
+        arm2 = hardwareMap.get(Servo.class, "arm2");
+
         slide1 = hardwareMap.get(DcMotor.class, "slide1");
         slide2 = hardwareMap.get(DcMotor.class, "slide2");
 
@@ -81,8 +88,12 @@ public class UpliftRobot
 
         twister = hardwareMap.get(Servo.class,"twister");
 
-        arm1 = hardwareMap.get(Servo.class, "arm1");
-        arm2 = hardwareMap.get(Servo.class, "arm2");
+        coneDetector = hardwareMap.get(DistanceSensor.class, "coneDetector");
+        poleDetector = hardwareMap.get(DistanceSensor.class, "poleDetector");
+
+        armReset = hardwareMap.get(TouchSensor.class, "armReset");
+
+        lineDetector = hardwareMap.get(ColorRangeSensor.class, "lineDetector");
 
 
         imu = hardwareMap.get(BNO055IMU.class, "imu");
@@ -90,8 +101,6 @@ public class UpliftRobot
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
         parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
         imu.initialize(parameters);
-
-        magneticSensor = hardwareMap.get(TouchSensor.class, "magnetic_sensor");
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -131,6 +140,11 @@ public class UpliftRobot
         });
     }
 
+    public OpenCvCamera getWebcam()
+    {
+        return webcam;
+    }
+
     public Servo getFourBar1() {
         return fourBar1;
     }
@@ -142,11 +156,6 @@ public class UpliftRobot
     public Servo getTwister()
     {
         return twister;
-    }
-
-    public OpenCvCamera getWebcam()
-    {
-        return webcam;
     }
 
     public Servo getGrabber()
@@ -190,15 +199,31 @@ public class UpliftRobot
         return slide2;
     }
 
-    public TouchSensor getMagneticSensor()
+    public DistanceSensor getConeDetector()
     {
-        return magneticSensor;
+        return coneDetector;
+    }
+
+    public DistanceSensor getPoleDetector()
+    {
+        return poleDetector;
+    }
+
+    public TouchSensor getArmReset()
+    {
+        return armReset;
+    }
+
+    public ColorRangeSensor getLineDetector()
+    {
+        return lineDetector;
     }
 
     public double getTwisterUpPos()
     {
         return twisterUpPos;
     }
+
     public double getTwisterDownPos()
     {
         return twisterDownPos;

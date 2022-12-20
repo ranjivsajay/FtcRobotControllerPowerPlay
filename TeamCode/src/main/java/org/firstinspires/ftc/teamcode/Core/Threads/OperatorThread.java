@@ -6,6 +6,7 @@ import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.tel
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 
 public class OperatorThread extends Thread
@@ -77,6 +78,8 @@ public class OperatorThread extends Thread
                 openGrabber();
 
                 holdSlidePos();
+
+                senseCone();
 
                 if(robot.opMode.gamepad2.left_bumper)
                 {
@@ -171,6 +174,15 @@ public class OperatorThread extends Thread
         else if (robot.opMode.gamepad2.right_trigger < robot.getGrabberClosePos() && blockGrabberInput)
         {
             blockGrabberInput = false;
+        }
+    }
+
+    public void senseCone()
+    {
+        double value = robot.getConeDetector().getDistance(DistanceUnit.CM);
+        if(value <= 5)
+        {
+            robot.getGrabber().setPosition(robot.getGrabberClosePos());
         }
     }
 
