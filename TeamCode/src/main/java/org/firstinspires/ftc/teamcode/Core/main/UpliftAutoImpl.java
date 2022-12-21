@@ -1,27 +1,36 @@
 package org.firstinspires.ftc.teamcode.Core.main;
 
+import android.graphics.drawable.GradientDrawable;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 public class UpliftAutoImpl extends UpliftAuto {
 
 
-    private double previousAngle = 0;
-    private double integratedAngle = 0;
+//    private double previousAngle = 0;
+//    private double integratedAngle = 0;
 
+    private ElapsedTime timer = new ElapsedTime();
+    private Orientation lastAngles = new Orientation();
+    private double currAngle = 0;
 
     public UpliftRobot robot;
 
 
     @Override
-    public void initHardware()
-    {
+    public void initHardware() {
         robot = new UpliftRobot(this);
 
     }
 
     @Override
-    public void initAction()
-    {
+    public void initAction() {
 
     }
 
@@ -36,14 +45,12 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     }
 
-    public void fourBarFront()
-    {
+    public void fourBarFront() {
         robot.getFourBar1().setPosition(robot.getBar1FrontPos());
         robot.getFourBar2().setPosition(robot.getBar2FrontPos());
     }
 
-    public void fourBarBack()
-    {
+    public void fourBarBack() {
         robot.getFourBar1().setPosition(robot.getBar1BackPos());
         robot.getFourBar2().setPosition(robot.getBar2BackPos());
     }
@@ -58,8 +65,7 @@ public class UpliftAutoImpl extends UpliftAuto {
     public void moveLeft(double power, double dist) {
         double initialPos = robot.getRightFront().getCurrentPosition();
 
-        while (robot.getRightFront().getCurrentPosition() < initialPos + dist)
-        {
+        while (robot.getRightFront().getCurrentPosition() < initialPos + dist) {
             robot.getRightFront().setPower(power);
             robot.getRightBack().setPower(-power);
             robot.getLeftFront().setPower(-power);
@@ -129,8 +135,7 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getSlide1().setPower(-slidesPower);
         robot.getSlide2().setPower(slidesPower);
 
-        while(opModeIsActive() && robot.getRightFront().isBusy())
-        {
+        while (opModeIsActive() && robot.getRightFront().isBusy()) {
 
         }
 
@@ -184,8 +189,7 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getLeftBack().setPower(-power);
     }
 
-    public void moveBackwardHigh(double drivePower, int driveDist)
-    {
+    public void moveBackwardHigh(double drivePower, int driveDist) {
 
         robot.getRightFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.getLeftBack().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -201,76 +205,162 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getLeftFront().setPower(-drivePower);
         robot.getLeftBack().setPower(-drivePower);
 
-        while(opModeIsActive() && robot.getRightFront().isBusy())
-        {
+        while (opModeIsActive() && robot.getRightFront().isBusy()) {
 
         }
 
     }
 
-    public void turnRight(double power, double angle) {
-        double initialAngle = getIntegratedAngle();
+//    public void turnRight(double power, double angle) {
+//        double initialAngle = getIntegratedAngle();
+//
+//        while (getIntegratedAngle() > initialAngle - angle + 5) {
+//            robot.getRightFront().setPower(-power);
+//            robot.getRightBack().setPower(-power);
+//            robot.getLeftFront().setPower(power);
+//            robot.getLeftBack().setPower(power);
+//            telemetry.addData("angle", getIntegratedAngle());
+//            telemetry.update();
+//        }
+//        stopMotors();
+//
+//    }
+//
+//    public void turnLeft(double power, double angle) {
+//        double initialAngle = getIntegratedAngle();
+//
+//        while (getIntegratedAngle() < initialAngle + angle - 10) {
+//            robot.getRightFront().setPower(power);
+//            robot.getRightBack().setPower(power);
+//            robot.getLeftFront().setPower(-power);
+//            robot.getLeftBack().setPower(-power);
+//            telemetry.addData("angle", getIntegratedAngle());
+//            telemetry.update();
+//        }
+//        stopMotors();
+//    }
 
-        while (getIntegratedAngle() > initialAngle - angle + 5) {
-            robot.getRightFront().setPower(-power);
-            robot.getRightBack().setPower(-power);
-            robot.getLeftFront().setPower(power);
-            robot.getLeftBack().setPower(power);
-            telemetry.addData("angle", getIntegratedAngle());
-            telemetry.update();
-        }
-        stopMotors();
-
-    }
-
-    public void turnLeft(double power, double angle) {
-        double initialAngle = getIntegratedAngle();
-
-        while (getIntegratedAngle() < initialAngle + angle - 10) {
-            robot.getRightFront().setPower(power);
-            robot.getRightBack().setPower(power);
-            robot.getLeftFront().setPower(-power);
-            robot.getLeftBack().setPower(-power);
-            telemetry.addData("angle", getIntegratedAngle());
-            telemetry.update();
-        }
-        stopMotors();
-    }
-
-    public void servoArmsHigh()
-    {
+    public void servoArmsHigh() {
         robot.getArm1().setPosition(robot.getArm1HighPos());
         robot.getArm2().setPosition(robot.getArm2HighPos());
     }
 
-    public void servoArmsDown()
-    {
+    public void servoArmsDown() {
         robot.getArm1().setPosition(robot.getArm1LowPos());
         robot.getArm2().setPosition(robot.getArm2LowPos());
     }
 
-    /**
-     * This method returns a value of the Z axis of the REV Expansion Hub IMU.
-     * It transforms the value from (-180, 180) to (-inf, inf).
-     * This code was taken and modified from https://ftcforum.usfirst.org/forum/ftc-technology/53477-rev-imu-questions?p=53481#post53481.
-     *
-     * @return The integrated heading on the interval (-inf, inf).
-     */
-    private double getIntegratedAngle() {
-        double currentAngle = robot.imu.getAngularOrientation().firstAngle;
-        double deltaAngle = currentAngle - previousAngle;
+//    /**
+//     * This method returns a value of the Z axis of the REV Expansion Hub IMU.
+//     * It transforms the value from (-180, 180) to (-inf, inf).
+//     * This code was taken and modified from https://ftcforum.usfirst.org/forum/ftc-technology/53477-rev-imu-questions?p=53481#post53481.
+//     *
+//     * @return The integrated heading on the interval (-inf, inf).
+//     */
+//    private double getIntegratedAngle() {
+//        double currentAngle = robot.imu.getAngularOrientation().firstAngle;
+//        double deltaAngle = currentAngle - previousAngle;
+//
+//        if (deltaAngle < -180) {
+//            deltaAngle += 360;
+//        } else if (deltaAngle >= 180) {
+//            deltaAngle -= 360;
+//        }
+//
+//        integratedAngle += deltaAngle;
+//        previousAngle = currentAngle;
+//
+//        return integratedAngle;
+//    }
 
-        if (deltaAngle < -180) {
-            deltaAngle += 360;
-        } else if (deltaAngle >= 180) {
+    public void resetAngle()
+    {
+        lastAngles = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        currAngle = 0;
+    }
+
+    public double getAngle()
+    {
+        Orientation orientation = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        double deltaAngle = orientation.firstAngle - lastAngles.firstAngle;
+
+        if(deltaAngle > 180)
+        {
             deltaAngle -= 360;
         }
+        else if(deltaAngle <= 180)
+        {
+            deltaAngle += 360;
+        }
 
-        integratedAngle += deltaAngle;
-        previousAngle = currentAngle;
+        currAngle += deltaAngle;
+        lastAngles = orientation;
 
-        return integratedAngle;
+        return currAngle;
     }
+
+    public double getAbsoluteAngle()
+    {
+        return robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
+    }
+
+    public void turnToPID(double targetAngle)
+    {
+        TurnPID pid = new TurnPID(targetAngle, 0.01, 0, 0.003);
+        while(opModeIsActive() && Math.abs(targetAngle - getAbsoluteAngle()) > 1)
+        {
+            double motorPower = pid.update(getAbsoluteAngle());
+            robot.getLeftFront().setPower(-motorPower);
+            robot.getRightFront().setPower(motorPower);
+            robot.getLeftBack().setPower(-motorPower);
+            robot.getRightBack().setPower(motorPower);
+        }
+        stopMotors();
+    }
+
+    public void turnPID(double degrees)
+    {
+        turnToPID(degrees + getAbsoluteAngle());
+    }
+
+    public void turn(double degrees)
+    {
+        resetAngle();
+
+        double error = degrees;
+
+        while(opModeIsActive() && Math.abs(error) > 2)
+        {
+            double motorPower = (error < 0 ? -0.3: 0.3);
+            robot.getLeftFront().setPower(-motorPower);
+            robot.getRightFront().setPower(motorPower);
+            robot.getLeftBack().setPower(-motorPower);
+            robot.getRightBack().setPower(motorPower);
+            error = degrees - getAngle();
+
+        }
+
+        stopMotors();
+    }
+
+    public void turnTo(double degrees)
+    {
+        Orientation orientation = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        double error = degrees - orientation.firstAngle;
+
+        if(error > 180)
+        {
+            error -= 360;
+        }
+        else if(error <= 180)
+        {
+            error += 360;
+        }
+
+        turn(error);
+    }
+
+
 
     public void slides(double power, double dist)
     {

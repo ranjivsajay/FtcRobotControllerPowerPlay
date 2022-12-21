@@ -103,6 +103,7 @@ public class OperatorThread extends Thread
                 }
 
                 robot.opMode.telemetry.addData("magnet", robot.getMagnet().isPressed());
+                robot.opMode.telemetry.addData("odoRight" , robot.getOdoRight().getCurrentPosition());
                 robot.opMode.telemetry.update();
 
 
@@ -175,38 +176,38 @@ public class OperatorThread extends Thread
         }
     }
 
+//    public void senseCone()
+//    {
+//        double value = robot.getConeDetector().getDistance(DistanceUnit.CM);
+//        if(value <= 5)
+//        {
+//            robot.getGrabber().setPosition(robot.getGrabberClosePos());
+//
+//        }
+//    }
+
     public void senseCone()
     {
         double value = robot.getConeDetector().getDistance(DistanceUnit.CM);
-        if(value <= 5)
-        {
-            robot.getGrabber().setPosition(robot.getGrabberClosePos());
-            if(value <= 2)
-            {
-                if(robot.opMode.gamepad2.right_trigger > robot.getGrabberOpenPos() && !blockGrabberInput)
-                {
-                    robot.getGrabber().setPosition(grabberState ? robot.getGrabberOpenPos() : robot.getGrabberClosePos());
-                    grabberState = !grabberState;
-                    blockGrabberInput = true;
-                }
-                else if (robot.opMode.gamepad2.right_trigger < robot.getGrabberClosePos() && blockGrabberInput)
-                {
-                    blockGrabberInput = false;
-                }
-            }
-        }
+//        if(value <= 5 && robot.getGrabber().getPosition() == robot.getGrabberOpenPos())
+//        {
+//            robot.getGrabber().setPosition(robot.getGrabberClosePos());
+//        }
+
+
     }
+
 
     public void reset()
     {
         if (robot.opMode.gamepad2.a) // reset grabber pos
         {
             //move 6 bar motors down
-            while(!robot.getMagnet().isPressed())
-            {
-                robot.getSlide1().setPower(0.2);
-                robot.getSlide2().setPower(-0.2);
-            }
+//            while(!robot.getMagnet().isPressed())
+//            {
+//                robot.getSlide1().setPower(0.2);
+//                robot.getSlide2().setPower(-0.2);
+//            }
 
             robot.getArm1().setPosition(robot.getArm1LowPos());
             robot.getArm2().setPosition(robot.getArm2LowPos());
@@ -234,7 +235,7 @@ public class OperatorThread extends Thread
         if(robot.opMode.gamepad2.dpad_up) // max height backwards
         {
 
-            slides(0.5, 953);
+//            slides(0.5, 953);
             robot.getArm1().setPosition(robot.getArm1HighPos());
             robot.getArm2().setPosition(robot.getArm2HighPos());
 
@@ -251,7 +252,7 @@ public class OperatorThread extends Thread
     {
         if(robot.opMode.gamepad2.dpad_left) // max height forwards
         {
-            slides(0.5, 953);
+//            slides(0.5, 953);
             robot.getArm1().setPosition(robot.getArm1HighPos());
             robot.getArm2().setPosition(robot.getArm2HighPos());
 
@@ -266,7 +267,7 @@ public class OperatorThread extends Thread
     {
         if(robot.opMode.gamepad2.dpad_right) //  medium height backwards
         {
-            slides(0.5, 700);
+//            slides(0.5, 700);
             robot.getArm1().setPosition(robot.getArm1HighPos());
             robot.getArm2().setPosition(robot.getArm2HighPos());
 
@@ -285,7 +286,7 @@ public class OperatorThread extends Thread
     {
         if(robot.opMode.gamepad2.dpad_down) // medium height forwards
         {
-            slides(0.5, 700);
+//            slides(0.5, 700);
             robot.getArm1().setPosition(robot.getArm1HighPos());
             robot.getArm2().setPosition(robot.getArm2HighPos());
 

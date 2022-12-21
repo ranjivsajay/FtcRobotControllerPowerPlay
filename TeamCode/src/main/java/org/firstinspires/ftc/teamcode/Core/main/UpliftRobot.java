@@ -16,10 +16,13 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 //import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread;
 //import org.firstinspires.ftc.teamcode.Core.Threads.OperatorThread;
+import org.firstinspires.ftc.robotcore.internal.android.dex.EncodedValueReader;
 import org.firstinspires.ftc.teamcode.Core.toolkit.vision.PowerPlay;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
+
+import java.util.Base64;
 
 public class UpliftRobot
 {
@@ -29,6 +32,7 @@ public class UpliftRobot
     TouchSensor magnet;
     ColorRangeSensor lineDetector;
     OpenCvCamera webcam;
+    DcMotor odoRight;
     BNO055IMU imu;
 
 
@@ -94,6 +98,8 @@ public class UpliftRobot
         magnet = hardwareMap.get(TouchSensor.class, "magnet");
 
         lineDetector = hardwareMap.get(ColorRangeSensor.class, "lineDetector");
+
+        odoRight = hardwareMap.get(DcMotor.class, "odoRight");
 
 
         imu = hardwareMap.get(BNO055IMU.class, "imu");
@@ -219,6 +225,12 @@ public class UpliftRobot
         return lineDetector;
     }
 
+    public DcMotor getOdoRight()
+    {
+        return odoRight;
+    }
+
+
     public double getTwisterUpPos()
     {
         return twisterUpPos;
@@ -278,6 +290,7 @@ public class UpliftRobot
     {
         return bar2BackPos;
     }
+
 
 
 
