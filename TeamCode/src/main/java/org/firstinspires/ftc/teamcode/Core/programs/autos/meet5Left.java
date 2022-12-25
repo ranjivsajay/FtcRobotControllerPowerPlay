@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Core.programs.autos;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 
@@ -8,7 +9,15 @@ import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 public class meet5Left extends UpliftAutoImpl
 {
     @Override
-    public void turnToPID(double targetAngle) {
-        super.turnToPID(targetAngle);
+    public void initAction()
+    {
+
     }
+
+    @Override
+    public void body() throws InterruptedException
+    {
+        turnToPID(90);
+    }
+
 }
