@@ -25,7 +25,7 @@
 //    robot.getSlide2().setPower(0.4);
 //    Thread.sleep(500);
 //
-//    //robot.getTwister().setPosition(robot.getTwisterUpPos());
+//    robot.getTwister().setPosition(robot.getTwisterUpPos());
 //
 //
 //    turnLeft(.5, 93);
