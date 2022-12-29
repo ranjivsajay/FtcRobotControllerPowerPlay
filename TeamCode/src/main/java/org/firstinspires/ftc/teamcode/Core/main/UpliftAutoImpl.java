@@ -151,7 +151,7 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getLeftBack().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
-    public void moveForwardDown(double drivePower, double slidesPower, int driveDist, double arm1pos, double arm2pos) throws InterruptedException {
+    public void moveForwardDown(double drivePower, double slidesPower, int driveDist, int slidesDist, double arm1pos, double arm2pos) throws InterruptedException {
         robot.getArm1().setPosition(arm1pos);
         robot.getArm2().setPosition(arm2pos);
 
@@ -171,16 +171,16 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getRightFront().setTargetPosition(driveDist);
 //        robot.getRightBack().setTargetPosition(driveDist);
 
-//        robot.getSlide1().setTargetPosition(-slidesDist);
-//        robot.getSlide2().setTargetPosition(slidesDist);
+        robot.getSlide1().setTargetPosition(-slidesDist);
+        robot.getSlide2().setTargetPosition(slidesDist);
 
 //        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.getLeftBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.getRightFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
 //        robot.getRightBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-//        robot.getSlide1().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        robot.getSlide2().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.getSlide1().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.getSlide2().setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         robot.getRightFront().setPower(drivePower);
         robot.getRightBack().setPower(drivePower);

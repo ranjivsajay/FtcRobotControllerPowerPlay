@@ -51,7 +51,7 @@ public class OperatorThread extends Thread
         {
             try
             {
-                toggleGrab();
+//                toggleGrab();
 
                 toggle4Bar();
 
@@ -162,41 +162,41 @@ public class OperatorThread extends Thread
         }
     }
 
-    public void toggleGrab() throws InterruptedException
-    {
-        if(robot.opMode.gamepad2.right_trigger > robot.getGrabberOpenPos() && !blockGrabberInput)
-        {
-        robot.getGrabber().setPosition(grabberState ? robot.getGrabberOpenPos() : robot.getGrabberClosePos());
-        grabberState = !grabberState;
-        blockGrabberInput = true;
-        }
-        else if (robot.opMode.gamepad2.right_trigger < robot.getGrabberClosePos() && blockGrabberInput)
-        {
-            blockGrabberInput = false;
-        }
-    }
-
-//    public void senseCone()
+//    public void toggleGrab() throws InterruptedException
 //    {
-//        double value = robot.getConeDetector().getDistance(DistanceUnit.CM);
-//        if(value <= 5)
+//        if(robot.opMode.gamepad2.right_trigger > robot.getGrabberOpenPos() && !blockGrabberInput)
 //        {
-//            robot.getGrabber().setPosition(robot.getGrabberClosePos());
-//
+//        robot.getGrabber().setPosition(grabberState ? robot.getGrabberOpenPos() : robot.getGrabberClosePos());
+//        grabberState = !grabberState;
+//        blockGrabberInput = true;
+//        }
+//        else if (robot.opMode.gamepad2.right_trigger < robot.getGrabberClosePos() && blockGrabberInput)
+//        {
+//            blockGrabberInput = false;
 //        }
 //    }
 
     public void senseCone()
     {
         double value = robot.getConeDetector().getDistance(DistanceUnit.CM);
-//        if(value <= 5 && robot.getGrabber().getPosition() == robot.getGrabberOpenPos())
-//        {
-//            robot.getGrabber().setPosition(robot.getGrabberClosePos());
-//        }
-
-
+        if(value <= 5 && robot.opMode.gamepad2.right_trigger == 0)
+        {
+            robot.getGrabber().setPosition(robot.getGrabberClosePos());
+        }
+        else
+        {
+            if(robot.opMode.gamepad2.right_trigger > robot.getGrabberOpenPos() && !blockGrabberInput)
+            {
+                robot.getGrabber().setPosition(grabberState ? robot.getGrabberOpenPos() : robot.getGrabberClosePos());
+                grabberState = !grabberState;
+                blockGrabberInput = true;
+            }
+            else if (robot.opMode.gamepad2.right_trigger < robot.getGrabberClosePos() && blockGrabberInput)
+            {
+                blockGrabberInput = false;
+            }
+        }
     }
-
 
     public void reset()
     {

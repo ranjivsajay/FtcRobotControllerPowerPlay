@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Core.programs.autos;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 
 @Autonomous(name = "meet5Left", group = "Opmodes")
@@ -25,6 +26,20 @@ public class meet5Left extends UpliftAutoImpl
         Thread.sleep(200);
 
         turnPID(140);
+//        while(robot.getPoleDetector().getDistance(DistanceUnit.CM) > 5)
+//        {
+//            robot.getRightFront().setPower(0.3);
+//            robot.getRightBack().setPower(0.3);
+//            robot.getLeftFront().setPower(-0.3);
+//            robot.getLeftBack().setPower(-0.3);
+//        }
+//        stopMotors();
+//
+//        while(robot.getPoleDetector().getDistance(DistanceUnit.CM) > 2)
+//        {
+//            moveBackward(0.3);
+//        }
+//        stopMotors();
 
         moveBackward(0.4, 200);
         Thread.sleep(50);
@@ -33,10 +48,18 @@ public class meet5Left extends UpliftAutoImpl
         moveForward(0.4, 200);
         turnToPID(90);
 
-        moveForwardDown(0.5, 0, 700, 0.49, 0.51);
+        moveForwardDown(0.5, 0.3, 700, -900, 0.49, 0.51);
 
         moveForward(0.25, 400);
         robot.getGrabber().setPosition(robot.getGrabberClosePos());
+
+//        while(robot.getConeDetector().getDistance(DistanceUnit.CM) > 0.2)
+//        {
+//            moveForward(0.3);
+//        }
+//        robot.getGrabber().setPosition(robot.getGrabberClosePos());
+
+
 
 
 
