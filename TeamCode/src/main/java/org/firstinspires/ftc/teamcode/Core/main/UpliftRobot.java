@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode.Core.main;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorRangeSensor;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
@@ -30,7 +31,7 @@ public class UpliftRobot
     Servo grabber, arm1, arm2, fourBar1, fourBar2, twister;
     DistanceSensor coneDetector, poleDetector;
     TouchSensor magnet;
-    ColorRangeSensor lineDetector;
+    ColorSensor lineDetector;
     OpenCvCamera webcam;
     DcMotor odoRight;
     BNO055IMU imu;
@@ -220,7 +221,7 @@ public class UpliftRobot
         return magnet;
     }
 
-    public ColorRangeSensor getLineDetector()
+    public ColorSensor getLineDetector()
     {
         return lineDetector;
     }

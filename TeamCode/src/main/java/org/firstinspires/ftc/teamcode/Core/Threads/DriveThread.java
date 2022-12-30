@@ -45,7 +45,7 @@ public class DriveThread extends Thread
                 double angle = 90 - Math.toDegrees(UpliftMath.atan2UL(leftY, leftX));
                 double magnitude = 0.8 * Range.clip(sqrt(Math.pow(leftX, 2) + Math.pow(leftY, 2)), -1, 1);
 
-                teleDrive(angle, magnitude, rightX, robot.opMode.gamepad1.right_trigger, robot);
+                teleDrive(angle, magnitude, rightX, robot.opMode.gamepad1.right_trigger,robot.opMode.gamepad1.left_trigger, robot);
 
                 if(robot.opMode.gamepad1.left_bumper)
                 {
