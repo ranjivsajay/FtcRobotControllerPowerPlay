@@ -47,7 +47,7 @@ public class DriveThread extends Thread
 
                 teleDrive(angle, magnitude, rightX, robot.opMode.gamepad1.right_trigger, robot);
 
-                if(robot.opMode.gamepad1.left_trigger > 0)
+                if(robot.opMode.gamepad1.left_bumper)
                 {
                     robot.getFourBar1().setPosition(.38);
                     robot.getFourBar2().setPosition(.62);
@@ -69,7 +69,7 @@ public class DriveThread extends Thread
     }
 
     public static void teleDrive ( double joystickAngle, double speedVal,
-                                   double turnVal, float slowModeInput, UpliftRobot robot) {
+                                   double turnVal, float slowModeInput, float fastModeInput, UpliftRobot robot) {
         double lfPow = sin(toRadians(joystickAngle) + (0.25 * PI)) * speedVal + turnVal;
         double rfPow = sin(toRadians(joystickAngle) - (0.25 * PI)) * speedVal - turnVal;
         double lbPow = sin(toRadians(joystickAngle) - (0.25 * PI)) * speedVal + turnVal;
@@ -95,6 +95,9 @@ public class DriveThread extends Thread
         float speedFactor = 1.0f;
         if (slowModeInput > 0.1f)
             speedFactor = 0.5f;
+
+        if(fastModeInput > 0.1f)
+            speedFactor = 1.1f;
 
         robot.getLeftFront().setPower(speedFactor * (lfPow / maxVal));
         robot.getLeftBack().setPower(speedFactor * (lbPow / maxVal));
