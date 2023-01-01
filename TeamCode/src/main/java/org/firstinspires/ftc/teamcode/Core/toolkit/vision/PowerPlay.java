@@ -83,8 +83,8 @@ public class  PowerPlay extends OpenCvPipeline {
         {
             location = 1;
         }
-        telemetry.addData("Location:", location);
-        telemetry.update();
+//        telemetry.addData("Location:", location);
+//        telemetry.update();
         return input;
     }
 

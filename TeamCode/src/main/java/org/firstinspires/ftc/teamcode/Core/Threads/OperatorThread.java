@@ -51,7 +51,6 @@ public class OperatorThread extends Thread
         {
             try
             {
-//                toggleGrab();
 
                 toggle4Bar();
 
@@ -74,8 +73,6 @@ public class OperatorThread extends Thread
                 stackHeight3();
 
                 stackHeight2();
-
-                openGrabber();
 
                 holdSlidePos();
 
@@ -108,7 +105,7 @@ public class OperatorThread extends Thread
 
 
                 // todo: validate user responsiveness and set sleep
-                sleep(50);
+//                sleep(50);
             } catch (Exception e) {
                 e.printStackTrace();
 
@@ -178,6 +175,7 @@ public class OperatorThread extends Thread
 
     public void senseCone()
     {
+
         double value = robot.getConeDetector().getDistance(DistanceUnit.CM);
         if(value <= 5 && robot.opMode.gamepad2.right_trigger == 0)
         {
@@ -267,17 +265,18 @@ public class OperatorThread extends Thread
     {
         if(robot.opMode.gamepad2.dpad_right) //  medium height backwards
         {
-//            slides(0.5, 700);
-            robot.getArm1().setPosition(robot.getArm1HighPos());
-            robot.getArm2().setPosition(robot.getArm2HighPos());
+////            slides(0.5, 700);
+//            robot.getArm1().setPosition(robot.getArm1HighPos());
+//            robot.getArm2().setPosition(robot.getArm2HighPos());
+//
+//            robot.getFourBar1().setPosition(robot.getBar1BackPos());
+//            robot.getFourBar2().setPosition(robot.getBar2BackPos());
+//
+//            robot.getTwister().setPosition(robot.getTwisterUpPos());
+//
+//            robot.getFourBar1().setPosition(robot.getBar1FrontPos());
+//            robot.getFourBar2().setPosition(robot.getBar2FrontPos());
 
-            robot.getFourBar1().setPosition(robot.getBar1BackPos());
-            robot.getFourBar2().setPosition(robot.getBar2BackPos());
-
-            robot.getTwister().setPosition(robot.getTwisterUpPos());
-
-            robot.getFourBar1().setPosition(robot.getBar1FrontPos());
-            robot.getFourBar2().setPosition(robot.getBar2FrontPos());
 
         }
     }
@@ -304,8 +303,8 @@ public class OperatorThread extends Thread
     {
         if(robot.opMode.gamepad2.left_stick_y > .5) // 5 stack height
         {
-            robot.getArm1().setPosition(.57);
-            robot.getArm2().setPosition(.43);
+            robot.getArm1().setPosition(robot.getArm1StackPos5());
+            robot.getArm2().setPosition(robot.getArm2StackPos5());
         }
     }
 
@@ -313,8 +312,8 @@ public class OperatorThread extends Thread
     {
         if(robot.opMode.gamepad2.left_stick_x < -0.5) // 4 stack height
         {
-            robot.getArm1().setPosition(.48);
-            robot.getArm2().setPosition(.52);
+            robot.getArm1().setPosition(robot.getArm1StackPos4());
+            robot.getArm2().setPosition(robot.getArm2StackPos4());
         }
     }
 
@@ -323,8 +322,8 @@ public class OperatorThread extends Thread
         if(robot.opMode.gamepad2.left_stick_x > 0.5) // 3 stack height
         {
 
-            robot.getArm1().setPosition(.45);
-            robot.getArm2().setPosition(.55);
+            robot.getArm1().setPosition(robot.getArm1StackPos3());
+            robot.getArm2().setPosition(robot.getArm2StackPos3());
         }
     }
 
@@ -332,25 +331,19 @@ public class OperatorThread extends Thread
     {
         if(robot.opMode.gamepad2.left_stick_y < -0.5) // 2 stack height
         {
-            robot.getArm1().setPosition(.43);
-            robot.getArm2().setPosition(.57);
+            robot.getArm1().setPosition(robot.getArm1StackPos2());
+            robot.getArm2().setPosition(robot.getArm2StackPos2());
         }
     }
 
-    public void openGrabber()
-    {
-        if (robot.opMode.gamepad2.b)
-        {
-            robot.getGrabber().setPosition(robot.getGrabberOpenPos());
-        }
-    }
+
 
     public void holdSlidePos()
     {
         if(robot.opMode.gamepad2.left_trigger > 0)
         {
-            robot.getSlide1().setPower(-0.9);
-            robot.getSlide2().setPower(0.9);
+            robot.getSlide1().setPower(-0.5);
+            robot.getSlide2().setPower(0.5);
         }
     }
 

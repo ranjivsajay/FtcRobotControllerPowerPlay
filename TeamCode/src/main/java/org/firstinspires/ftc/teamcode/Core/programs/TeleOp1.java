@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread;
 import org.firstinspires.ftc.teamcode.Core.Threads.OperatorThread;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
@@ -43,23 +44,17 @@ public class TeleOp1 extends UpliftTele {
 
     @Override
     public void initAction() {
-//        robot.getFourBar1().setPosition(robot.getBar1FrontPos());
-//        robot.getFourBar2().setPosition(robot.getBar2FrontPos());
-
 
         robot.getFourBar1().setPosition(.28);
         robot.getFourBar2().setPosition(.72);
 
-//        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
+        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         robot.getTwister().setPosition(robot.getTwisterDownPos());
 
+        robot.getPoleDetector().close();
+        robot.getLineDetector().close();
+        robot.getLineDetector().enableLed(false);
 
-
-//        robot.getArm1().setPosition(arm1HighPos);
-//        robot.getArm2().setPosition(arm2HighPos);
-
-//        robot.getArm1().setPosition(.45);
-//        robot.getArm2().setPosition(.55);
 
         driverThread.start();
         operatorThread.start();
@@ -70,6 +65,8 @@ public class TeleOp1 extends UpliftTele {
 
     public void bodyLoop() throws InterruptedException {
 
+        telemetry.addData("color ", robot.getLineDetector().blue());
+        telemetry.update();
 
 //        test();
 

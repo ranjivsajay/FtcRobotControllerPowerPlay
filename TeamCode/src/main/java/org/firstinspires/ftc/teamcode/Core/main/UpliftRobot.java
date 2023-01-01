@@ -37,14 +37,14 @@ public class UpliftRobot
     BNO055IMU imu;
 
 
-    double arm1HighPos = .87;
-    double arm2HighPos = .13;
+    double arm1HighPos = .9;
+    double arm2HighPos = .12;
 
     double arm1LowPos = 0.3;
-    double arm2LowPos = 0.7;
+    double arm2LowPos = 0.68;
 
-    double bar1FrontPos = .76;
-    double bar2FrontPos = .24;
+    double bar1FrontPos = .78;
+    double bar2FrontPos = .22;
 
     double bar1BackPos = 0.14;
     double bar2BackPos = 0.86;
@@ -55,8 +55,17 @@ public class UpliftRobot
     double twisterUpPos = .82;
     double twisterDownPos = .18;
 
-    double arm1StackPos = .45;
-    double arm2StackPos = .55;
+    double arm1StackPos5 = .56;
+    double arm2StackPos5 = .43;
+
+    double arm1StackPos4 = .48;
+    double arm2StackPos4 = .52;
+
+    double arm1StackPos3 = .45;
+    double arm2StackPos3 = .55;
+
+    double arm1StackPos2 = .43;
+    double arm2StackPos2 = .57;
 
     public PowerPlay pipeline;
     public LinearOpMode opMode;
@@ -292,9 +301,40 @@ public class UpliftRobot
         return bar2BackPos;
     }
 
+    public double getArm1StackPos5()
+    {
+        return  arm1StackPos5;
+    }
 
+    public double getArm2StackPos5()
+    {
+        return arm2StackPos5;
+    }
 
+    public double getArm1StackPos4() {
+        return arm1StackPos4;
+    }
 
+    public double getArm2StackPos4() {
+        return arm2StackPos4;
+    }
 
+    public double getArm1StackPos3() {
+        return arm1StackPos3;
+    }
+
+    public double getArm2StackPos3() {
+        return arm2StackPos3;
+    }
+
+    public double getArm1StackPos2()
+    {
+        return arm1StackPos2;
+    }
+
+    public double getArm2StackPos2()
+    {
+        return arm2StackPos2;
+    }
 
 }

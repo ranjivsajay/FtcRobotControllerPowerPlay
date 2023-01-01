@@ -53,6 +53,7 @@ public class DriveThread extends Thread
                     robot.getFourBar2().setPosition(.62);
                 }
 
+
                 // todo: validate user responsiveness and set sleep
                 sleep(50);
             } catch (Exception e) {

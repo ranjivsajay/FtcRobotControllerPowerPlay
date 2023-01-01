@@ -8,11 +8,6 @@ import org.firstinspires.ftc.teamcode.Core.Threads.OperatorThread;
 
 public abstract class UpliftTele extends LinearOpMode {
 
-//    protected UpliftRobot robot;
-
-//    DriveThread driverThread;
-//    OperatorThread operatorThread;
-
     public boolean isStarted, isLooping, isFinished;
 
     public abstract void initHardware();
@@ -32,18 +27,12 @@ public abstract class UpliftTele extends LinearOpMode {
         initHardware();
         initAction();
 
-//        createDriveThread(robot);
-//        createOperatorThread(robot);
-
 
         telemetry.addData("Initializing", "Finished");
         telemetry.update();
 
         waitForStart();
         isStarted = true;
-
-//        driverThread.start();
-//        operatorThread.start();
 
 
         telemetry.addData("Body", "Started");
@@ -62,22 +51,7 @@ public abstract class UpliftTele extends LinearOpMode {
 
         exit();
 
-//        operatorThread.end();
-//        driverThread.end();
-
         telemetry.update();
     }
 
-//    public void createDriveThread(UpliftRobot robot1) {
-//        driverThread = new DriveThread(robot1);
-//
-//        telemetry.addData("Driver Thread started", driverThread.toString());
-//    }
-//
-//    public void createOperatorThread(UpliftRobot robot1) {
-//        operatorThread = new OperatorThread(robot1);
-//
-//        telemetry.addData("Operator Thread started", operatorThread.toString());
-//
-//    }
 }

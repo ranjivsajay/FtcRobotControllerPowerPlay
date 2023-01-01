@@ -103,26 +103,26 @@ public class UpliftAutoImpl extends UpliftAuto {
     public void moveForwardUp(double drivePower, double slidesPower, int driveDist, int slidesDist) throws InterruptedException {
         servoArmsHigh();
 
-//        robot.getLeftFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.getLeftFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.getRightFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.getLeftBack().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        robot.getRightBack().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.getRightBack().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         robot.getSlide1().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.getSlide2().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-//        robot.getLeftFront().setTargetPosition(driveDist);
+        robot.getLeftFront().setTargetPosition(driveDist);
         robot.getLeftBack().setTargetPosition(driveDist);
         robot.getRightFront().setTargetPosition(driveDist);
-//        robot.getRightBack().setTargetPosition(driveDist);
+        robot.getRightBack().setTargetPosition(driveDist);
 
         robot.getSlide1().setTargetPosition(-slidesDist);
         robot.getSlide2().setTargetPosition(slidesDist);
 
-//        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.getLeftBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.getRightFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        robot.getRightBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.getRightBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         robot.getSlide1().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.getSlide2().setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -147,8 +147,11 @@ public class UpliftAutoImpl extends UpliftAuto {
         fourBarBack();
         robot.getTwister().setPosition(robot.getTwisterUpPos());
 
+        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.getRightFront().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.getLeftBack().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.getRightBack().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
     }
 
     public void moveForwardDown(double drivePower, double slidesPower, int driveDist, int slidesDist, double arm1pos, double arm2pos) throws InterruptedException {
@@ -158,26 +161,26 @@ public class UpliftAutoImpl extends UpliftAuto {
         fourBarFront();
         robot.getTwister().setPosition(robot.getTwisterDownPos());
 
-//        robot.getLeftFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.getLeftFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.getRightFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.getLeftBack().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        robot.getRightBack().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.getRightBack().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         robot.getSlide1().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.getSlide2().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-//        robot.getLeftFront().setTargetPosition(driveDist);
+        robot.getLeftFront().setTargetPosition(driveDist);
         robot.getLeftBack().setTargetPosition(driveDist);
         robot.getRightFront().setTargetPosition(driveDist);
-//        robot.getRightBack().setTargetPosition(driveDist);
+        robot.getRightBack().setTargetPosition(driveDist);
 
         robot.getSlide1().setTargetPosition(-slidesDist);
         robot.getSlide2().setTargetPosition(slidesDist);
 
-//        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.getLeftBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.getRightFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        robot.getRightBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.getRightBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         robot.getSlide1().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.getSlide2().setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -199,8 +202,10 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getSlide1().setPower(0);
         robot.getSlide2().setPower(0);
 
+        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.getRightFront().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.getLeftBack().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.getRightBack().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     public void moveForward(double power, double dist) {
@@ -359,7 +364,7 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     public void turnToPID(double targetAngle)
     {
-        TurnPID pid = new TurnPID(targetAngle, 0.01, 0, 0.003);
+        TurnPID pid = new TurnPID(targetAngle, 0.012, 0, 0.003);
         while(opModeIsActive() && Math.abs(targetAngle - getAbsoluteAngle()) > 1)
         {
             double motorPower = pid.update(getAbsoluteAngle());
