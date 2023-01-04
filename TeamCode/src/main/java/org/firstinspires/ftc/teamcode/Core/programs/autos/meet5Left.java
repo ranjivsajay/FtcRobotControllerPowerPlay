@@ -18,6 +18,8 @@ public class meet5Left extends UpliftAutoImpl
 
         robot.getFourBar1().setPosition(.28);
         robot.getFourBar2().setPosition(.72);
+
+
     }
 
     @Override
@@ -27,7 +29,7 @@ public class meet5Left extends UpliftAutoImpl
 
 
         moveRight(0.4, 230);
-        moveForwardUp(0.75, 0.4, 2150, 980);
+        moveForwardUp(0.75, 0.4, 2150, 1000);
         Thread.sleep(200);
 
         turnPID(120);
@@ -46,30 +48,53 @@ public class meet5Left extends UpliftAutoImpl
         {
             moveBackward(0.2);
         }
+
         stopMotors();
-        Thread.sleep(50);
+        Thread.sleep(100);
 
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         Thread.sleep(50);
 
-        moveForward(0.4, 270);
-        turnToPID(92);
+        moveForward(0.35, 230 );
+        turnToPID(95);
 
-        robot.getLineDetector().enableLed(true);
-        while(robot.getLineDetector().blue() <= 80)
-        {
-            moveForward(0.3);
-        }
-        stopMotors();
-
-        slides(-0.2,-900);
+//        robot.getLineDetector().enableLed(true);
+//        while(robot.getLineDetector().blue() <= 80)
+//        {
+//            moveForward(0.3);
+//        }
+//        stopMotors();
 
 
+        robot.getSlide1().setPower(0);
+        robot.getSlide2().setPower(0);
+
+        robot.getArm1().setPosition(robot.getArm1StackPos5());
+        robot.getArm2().setPosition(robot.getArm2StackPos5());
+
+        fourBarFront();
+        robot.getTwister().setPosition(robot.getTwisterDownPos());
 
 
 
+//        robot.getSlide1().setTargetPosition(-robot.getSlide1().getCurrentPosition());
+//        robot.getSlide2().setTargetPosition(robot.getSlide2().getCurrentPosition());
 //
-//        moveForwardDown(0.5, 0.3, 700, -900, 0.49, 0.51);
+//        robot.getSlide1().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        robot.getSlide2().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//
+//        robot.getSlide1().setPower(0.2);
+//        robot.getSlide2().setPower(-0.2);
+//
+//        while (opModeIsActive() && robot.getSlide1().isBusy()) {
+//
+//        }
+//
+//        stopMotors();
+
+        moveForward(0.1, 1000);
+
+//        moveForwardDown(0.5, 0.3, 700, -900, robot.getArm1StackPos5(), robot.getArm2StackPos5());
 
 //        moveForward(0.25, 400);
 //        robot.getGrabber().setPosition(robot.getGrabberClosePos());

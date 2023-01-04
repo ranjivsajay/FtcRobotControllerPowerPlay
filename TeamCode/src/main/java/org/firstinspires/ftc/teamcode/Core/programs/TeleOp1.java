@@ -48,9 +48,10 @@ public class TeleOp1 extends UpliftTele {
         robot.getFourBar1().setPosition(.28);
         robot.getFourBar2().setPosition(.72);
 
-        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
+        robot.getGrabber().setPosition(robot.getGrabberClosePos());
         robot.getTwister().setPosition(robot.getTwisterDownPos());
 
+        robot.getConeDetector().close();
         robot.getPoleDetector().close();
         robot.getLineDetector().close();
         robot.getLineDetector().enableLed(false);
@@ -65,7 +66,7 @@ public class TeleOp1 extends UpliftTele {
 
     public void bodyLoop() throws InterruptedException {
 
-        telemetry.addData("color ", robot.getLineDetector().blue());
+        telemetry.addData("dist ", robot.getPoleDetector().getDistance(DistanceUnit.CM));
         telemetry.update();
 
 //        test();

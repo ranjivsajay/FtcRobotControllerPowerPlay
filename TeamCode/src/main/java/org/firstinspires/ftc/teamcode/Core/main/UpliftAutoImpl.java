@@ -140,7 +140,7 @@ public class UpliftAutoImpl extends UpliftAuto {
         }
 
         stopMotors();
-//
+
 //        robot.getSlide1().setPower(0);
 //        robot.getSlide2().setPower(0);
 
@@ -174,8 +174,8 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getRightFront().setTargetPosition(driveDist);
         robot.getRightBack().setTargetPosition(driveDist);
 
-        robot.getSlide1().setTargetPosition(-slidesDist);
-        robot.getSlide2().setTargetPosition(slidesDist);
+        robot.getSlide1().setTargetPosition(slidesDist);
+        robot.getSlide2().setTargetPosition(-slidesDist);
 
         robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.getLeftBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -190,8 +190,8 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getLeftFront().setPower(drivePower);
         robot.getLeftBack().setPower(drivePower);
 
-        robot.getSlide1().setPower(-slidesPower);
-        robot.getSlide2().setPower(slidesPower);
+        robot.getSlide1().setPower(slidesPower);
+        robot.getSlide2().setPower(-slidesPower);
 
         while (opModeIsActive() && robot.getRightFront().isBusy()) {
 

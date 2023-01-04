@@ -51,6 +51,7 @@ public class OperatorThread extends Thread
         {
             try
             {
+                toggleGrab();
 
                 toggle4Bar();
 
@@ -76,7 +77,7 @@ public class OperatorThread extends Thread
 
                 holdSlidePos();
 
-                senseCone();
+//                senseCone();
 
                 if(robot.opMode.gamepad2.left_bumper)
                 {
@@ -99,9 +100,11 @@ public class OperatorThread extends Thread
                     robot.getArm2().setPosition(robot.getArm2HighPos());
                 }
 
-                robot.opMode.telemetry.addData("magnet", robot.getMagnet().isPressed());
-                robot.opMode.telemetry.addData("odoRight" , robot.getOdoRight().getCurrentPosition());
-                robot.opMode.telemetry.update();
+//                robot.opMode.telemetry.addData("magnet", robot.getMagnet().isPressed());
+//                robot.opMode.telemetry.addData("odoRight" , robot.getOdoRight().getCurrentPosition());
+//                robot.opMode.telemetry.update();
+
+
 
 
                 // todo: validate user responsiveness and set sleep
@@ -159,19 +162,19 @@ public class OperatorThread extends Thread
         }
     }
 
-//    public void toggleGrab() throws InterruptedException
-//    {
-//        if(robot.opMode.gamepad2.right_trigger > robot.getGrabberOpenPos() && !blockGrabberInput)
-//        {
-//        robot.getGrabber().setPosition(grabberState ? robot.getGrabberOpenPos() : robot.getGrabberClosePos());
-//        grabberState = !grabberState;
-//        blockGrabberInput = true;
-//        }
-//        else if (robot.opMode.gamepad2.right_trigger < robot.getGrabberClosePos() && blockGrabberInput)
-//        {
-//            blockGrabberInput = false;
-//        }
-//    }
+    public void toggleGrab() throws InterruptedException
+    {
+        if(robot.opMode.gamepad2.right_trigger > robot.getGrabberOpenPos() && !blockGrabberInput)
+        {
+        robot.getGrabber().setPosition(grabberState ? robot.getGrabberOpenPos() : robot.getGrabberClosePos());
+        grabberState = !grabberState;
+        blockGrabberInput = true;
+        }
+        else if (robot.opMode.gamepad2.right_trigger < robot.getGrabberClosePos() && blockGrabberInput)
+        {
+            blockGrabberInput = false;
+        }
+    }
 
     public void senseCone()
     {
@@ -342,8 +345,8 @@ public class OperatorThread extends Thread
     {
         if(robot.opMode.gamepad2.left_trigger > 0)
         {
-            robot.getSlide1().setPower(-0.5);
-            robot.getSlide2().setPower(0.5);
+            robot.getSlide1().setPower(-0.2);
+            robot.getSlide2().setPower(0.2);
         }
     }
 
