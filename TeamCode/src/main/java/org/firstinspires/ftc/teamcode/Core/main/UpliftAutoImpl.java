@@ -152,6 +152,9 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getLeftBack().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.getRightBack().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
+
+
+
     }
 
     public void moveForwardDown(double drivePower, double slidesPower, int driveDist, int slidesDist, double arm1pos, double arm2pos) throws InterruptedException {

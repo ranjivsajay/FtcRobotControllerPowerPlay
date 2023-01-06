@@ -25,8 +25,6 @@ public class meet5Left extends UpliftAutoImpl
     @Override
     public void body() throws InterruptedException
     {
-//        turnToPID(90);
-
 
         moveRight(0.4, 230);
         moveForwardUp(0.75, 0.4, 2150, 1000);
@@ -35,28 +33,37 @@ public class meet5Left extends UpliftAutoImpl
         turnPID(120);
 
 //        robot aligns itself with the pole
-        while(robot.getPoleDetector().getDistance(DistanceUnit.INCH) >= 25)
+        while(robot.getPoleDetector().getDistance(DistanceUnit.INCH) > 25)
         {
-            robot.getRightFront().setPower(0.37);
-            robot.getRightBack().setPower(0.37);
-            robot.getLeftFront().setPower(-0.37);
-            robot.getLeftBack().setPower(-0.37);
+            robot.getRightFront().setPower(0.38);
+            robot.getRightBack().setPower(0.38);
+            robot.getLeftFront().setPower(-0.38);
+            robot.getLeftBack().setPower(-0.38);
         }
         stopMotors();
 
-        while(robot.getPoleDetector().getDistance(DistanceUnit.CM) >= 8)
+        while(robot.getPoleDetector().getDistance(DistanceUnit.CM) > 8)
         {
+//            if(robot.getPoleDetector().getDistance(DistanceUnit.CM))
+//
             moveBackward(0.2);
         }
 
         stopMotors();
-        Thread.sleep(100);
+        Thread.sleep(50);
 
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
-        Thread.sleep(50);
+        Thread.sleep(100);
 
         moveForward(0.35, 230 );
         turnToPID(95);
+        
+        robot.getSlide1().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.getSlide2().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        robot.getSlide1().setPower(0.4);
+        robot.getSlide2().setPower(-0.4);
+        Thread.sleep(750);
 
 //        robot.getLineDetector().enableLed(true);
 //        while(robot.getLineDetector().blue() <= 80)
@@ -66,8 +73,6 @@ public class meet5Left extends UpliftAutoImpl
 //        stopMotors();
 
 
-        robot.getSlide1().setPower(0);
-        robot.getSlide2().setPower(0);
 
         robot.getArm1().setPosition(robot.getArm1StackPos5());
         robot.getArm2().setPosition(robot.getArm2StackPos5());
@@ -75,24 +80,13 @@ public class meet5Left extends UpliftAutoImpl
         fourBarFront();
         robot.getTwister().setPosition(robot.getTwisterDownPos());
 
+        moveForward(0.5, 700);
 
 
-//        robot.getSlide1().setTargetPosition(-robot.getSlide1().getCurrentPosition());
-//        robot.getSlide2().setTargetPosition(robot.getSlide2().getCurrentPosition());
-//
-//        robot.getSlide1().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        robot.getSlide2().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//
-//        robot.getSlide1().setPower(0.2);
-//        robot.getSlide2().setPower(-0.2);
-//
-//        while (opModeIsActive() && robot.getSlide1().isBusy()) {
-//
-//        }
-//
-//        stopMotors();
 
-        moveForward(0.1, 1000);
+
+
+
 
 //        moveForwardDown(0.5, 0.3, 700, -900, robot.getArm1StackPos5(), robot.getArm2StackPos5());
 
