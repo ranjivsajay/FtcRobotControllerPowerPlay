@@ -18,7 +18,7 @@ public class VisionAuto extends UpliftAutoImpl {
     @Override
     public void body() throws InterruptedException
     {
-        int location = robot.pipeline.location;
+        int location = robot.pipeline1.location;
 
 
         if(location == 1)

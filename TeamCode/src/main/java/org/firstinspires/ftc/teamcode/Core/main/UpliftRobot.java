@@ -18,6 +18,7 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 //import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread;
 //import org.firstinspires.ftc.teamcode.Core.Threads.OperatorThread;
 import org.firstinspires.ftc.robotcore.internal.android.dex.EncodedValueReader;
+import org.firstinspires.ftc.teamcode.Core.toolkit.vision.ConeAllignment;
 import org.firstinspires.ftc.teamcode.Core.toolkit.vision.PowerPlay;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
@@ -67,14 +68,14 @@ public class UpliftRobot
     double arm1StackPos2 = .43;
     double arm2StackPos2 = .57;
 
-    public PowerPlay pipeline;
+    public PowerPlay pipeline1;
+    public ConeAllignment pipeline2;
     public LinearOpMode opMode;
     public HardwareMap hardwareMap;
 
     public UpliftRobot(LinearOpMode opMode) {
         this.opMode = opMode;
         getHardware();
-//        PowerPlay pipeline = new PowerPlay(opMode.telemetry);
     }
 
     public void getHardware() {
@@ -138,16 +139,25 @@ public class UpliftRobot
 
         public void initializeCamera()
         {
+
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
 
-        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
+        pipeline1 = new PowerPlay(opMode.telemetry);
+        pipeline2 = new ConeAllignment(opMode.telemetry);
+
+        webcam.setPipeline(pipeline1);
+
+            webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
             public void onOpened()
             {
-                pipeline = new PowerPlay(opMode.telemetry);
-                webcam.setPipeline(pipeline);
+
                 webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+
+//                pipeline2 = new ConeAllignment(opMode.telemetry);
+//                webcam.setPipeline(pipeline2);
+//                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
             }
 
             @Override
