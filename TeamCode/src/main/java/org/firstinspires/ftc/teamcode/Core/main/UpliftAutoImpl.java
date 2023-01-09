@@ -250,25 +250,58 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getLeftBack().setPower(-power);
     }
 
-    public void moveBackwardHigh(double drivePower, int driveDist) {
+    public void moveBackwardHigh(double drivePower, double slidesPower, int driveDist, int slidesDist) {
 
+        servoArmsHigh();
+
+        robot.getLeftFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.getRightFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.getLeftBack().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.getRightBack().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
+        robot.getSlide1().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.getSlide2().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        robot.getLeftFront().setTargetPosition(-driveDist);
         robot.getLeftBack().setTargetPosition(-driveDist);
         robot.getRightFront().setTargetPosition(-driveDist);
+        robot.getRightBack().setTargetPosition(-driveDist);
 
+        robot.getSlide1().setTargetPosition(-slidesDist);
+        robot.getSlide2().setTargetPosition(slidesDist);
+
+        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.getLeftBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.getRightFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.getRightBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        robot.getSlide1().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.getSlide2().setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         robot.getRightFront().setPower(-drivePower);
         robot.getRightBack().setPower(-drivePower);
         robot.getLeftFront().setPower(-drivePower);
         robot.getLeftBack().setPower(-drivePower);
 
+        robot.getSlide1().setPower(-slidesPower);
+        robot.getSlide2().setPower(slidesPower);
+
         while (opModeIsActive() && robot.getRightFront().isBusy()) {
 
         }
+
+        stopMotors();
+
+//        robot.getSlide1().setPower(0);
+//        robot.getSlide2().setPower(0);
+
+        fourBarBack();
+        robot.getTwister().setPosition(robot.getTwisterUpPos());
+
+        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.getRightFront().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.getLeftBack().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.getRightBack().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
     }
 

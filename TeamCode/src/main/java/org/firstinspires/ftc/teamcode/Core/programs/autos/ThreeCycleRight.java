@@ -42,7 +42,7 @@ public class ThreeCycleRight extends UpliftAutoImpl {
 //        turnRight(0.5, 93);
 //        Thread.sleep(400);
 
-        moveBackwardHigh(0.5, 10000);
+//        moveBackwardHigh(0.5, 10000);
 
 //        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
 //        Thread.sleep(500);

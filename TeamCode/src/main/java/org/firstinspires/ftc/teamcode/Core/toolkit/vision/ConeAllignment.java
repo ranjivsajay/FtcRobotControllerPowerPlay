@@ -19,11 +19,11 @@ public class ConeAllignment extends OpenCvPipeline
     public double rightValue;
 
     static final Rect LEFT_ROI = new Rect(
-            new Point(120, 50),
-            new Point(200, 130));
+            new Point(130, 50),
+            new Point(210, 130));
     static final Rect RIGHT_ROI = new Rect(
-            new Point(200, 50),
-            new Point(280, 130));
+            new Point(210, 50),
+            new Point(290, 130));
 
     public ConeAllignment(Telemetry t) {
         telemetry = t;

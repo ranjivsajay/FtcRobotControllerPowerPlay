@@ -81,14 +81,14 @@ public class OperatorThread extends Thread
 
                 if(robot.opMode.gamepad2.left_bumper)
                 {
-                    robot.getFourBar1().setPosition(robot.getFourBar1().getPosition() + 0.05);
-                    robot.getFourBar2().setPosition(robot.getFourBar2().getPosition() - 0.05);
+                    robot.getFourBar1().setPosition(robot.getFourBar1().getPosition() + 0.01);
+                    robot.getFourBar2().setPosition(robot.getFourBar2().getPosition() - 0.01);
                 }
 
                 if(robot.opMode.gamepad2.right_bumper)
                 {
-                    robot.getFourBar1().setPosition(robot.getFourBar1().getPosition() - 0.05);
-                    robot.getFourBar2().setPosition(robot.getFourBar2().getPosition() + 0.05);
+                    robot.getFourBar1().setPosition(robot.getFourBar1().getPosition() - 0.01);
+                    robot.getFourBar2().setPosition(robot.getFourBar2().getPosition() + 0.01);
                 }
 
                 robot.getSlide1().setPower(0.75 * Range.clip(robot.opMode.gamepad2.right_stick_y, -1, 1));
