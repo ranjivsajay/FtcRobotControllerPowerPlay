@@ -250,9 +250,10 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getLeftBack().setPower(-power);
     }
 
-    public void moveBackwardHigh(double drivePower, double slidesPower, int driveDist, int slidesDist) {
+    public void moveBackwardHigh(double drivePower, double slidesPower, int driveDist, int slidesDist) throws InterruptedException {
 
         servoArmsHigh();
+        Thread.sleep(200);
 
         robot.getLeftFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.getRightFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

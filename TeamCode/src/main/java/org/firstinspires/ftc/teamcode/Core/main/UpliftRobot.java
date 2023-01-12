@@ -38,8 +38,8 @@ public class UpliftRobot
     BNO055IMU imu;
 
 
-    double arm1HighPos = .9;
-    double arm2HighPos = .12;
+    double arm1HighPos = .92;
+    double arm2HighPos = .10;
 
     double arm1LowPos = 0.3;
     double arm2LowPos = 0.68;
@@ -56,8 +56,8 @@ public class UpliftRobot
     double twisterUpPos = .82;
     double twisterDownPos = .18;
 
-    double arm1StackPos5 = .56;
-    double arm2StackPos5 = .43;
+    double arm1StackPos5 = .54;
+    double arm2StackPos5 = .45;
 
     double arm1StackPos4 = .48;
     double arm2StackPos4 = .52;
