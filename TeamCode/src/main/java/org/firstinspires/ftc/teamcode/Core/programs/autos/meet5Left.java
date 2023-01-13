@@ -42,16 +42,16 @@ public class meet5Left extends UpliftAutoImpl
         turnPID(120);
 
 //        robot aligns itself with the pole
-        while(robot.getPoleDetector().getDistance(DistanceUnit.CM) > 40)
+        while(robot.getPoleDetector().getDistance(DistanceUnit.CM) > 45)
         {
-            robot.getRightFront().setPower(0.25);
-            robot.getRightBack().setPower(0.25);
-            robot.getLeftFront().setPower(-0.25);
-            robot.getLeftBack().setPower(-0.25);
+            robot.getRightFront().setPower(0.2);
+            robot.getRightBack().setPower(0.2);
+            robot.getLeftFront().setPower(-0.2);
+            robot.getLeftBack().setPower(-0.2);
         }
         stopMotors();
 
-        moveBackward(0.3, 550);
+        moveBackward(0.3, 700);
 
         stopMotors();
         Thread.sleep(50);
@@ -59,7 +59,7 @@ public class meet5Left extends UpliftAutoImpl
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         Thread.sleep(100);
 
-        moveForward(0.35, 300);
+        moveForward(0.35, 450);
         turnToPID(94);
 
         robot.getSlide1().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -129,18 +129,20 @@ public class meet5Left extends UpliftAutoImpl
 
         moveBackwardHigh(0.5,0.5, 880, 1200);
 
-        turnPID(53);
+        turnToPID(143);
+
+//        turnPID(53);
         stopMotors();
 
 
-        moveBackward(0.2, 280);
+        moveBackward(0.2, 330);
         stopMotors();
         Thread.sleep(100);
 
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         Thread.sleep(100);
 
-        moveForward(0.35, 280);
+        moveForward(0.35, 330);
         turnToPID(94);
 
         robot.getSlide1().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -175,18 +177,21 @@ public class meet5Left extends UpliftAutoImpl
 
         moveBackwardHigh(0.5,0.5, 880, 1200);
 
-        turnPID(54);
+
+        turnToPID(143);
+
+//        turnPID(54);
         stopMotors();
 
 
-        moveBackward(0.2, 320);
+        moveBackward(0.2, 330);
         stopMotors();
         Thread.sleep(100);
 
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         Thread.sleep(100);
 
-        moveForward(0.35, 280);
+        moveForward(0.35, 330);
         turnToPID(94);
 
         robot.getSlide1().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -221,18 +226,21 @@ public class meet5Left extends UpliftAutoImpl
 
         moveBackwardHigh(0.5,0.5, 880, 1200);
 
-        turnPID(55);
+
+        turnToPID(143);
+
+//        turnPID(55);
         stopMotors();
 
 
-        moveBackward(0.2, 280);
+        moveBackward(0.2, 330);
         stopMotors();
         Thread.sleep(100);
 
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         Thread.sleep(100);
 
-        moveForward(0.35, 280);
+        moveForward(0.35, 330);
         turnToPID(94);
 
         robot.getSlide1().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
