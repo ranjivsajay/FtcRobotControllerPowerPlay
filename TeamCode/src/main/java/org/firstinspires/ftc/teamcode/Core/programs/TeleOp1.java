@@ -66,7 +66,7 @@ public class TeleOp1 extends UpliftTele {
 
     public void bodyLoop() throws InterruptedException {
 
-        telemetry.addData("dist ", robot.getPoleDetector().getDistance(DistanceUnit.CM));
+        telemetry.addData("color ", robot.getLineDetector().blue());
         telemetry.update();
 
 //        test();

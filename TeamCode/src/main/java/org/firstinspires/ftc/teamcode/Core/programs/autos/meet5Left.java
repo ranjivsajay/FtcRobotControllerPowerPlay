@@ -36,7 +36,7 @@ public class meet5Left extends UpliftAutoImpl
 
 
         moveRight(0.4, 230);
-        moveForwardUp(0.75, 0.4, 2150, 1050);
+        moveForwardUp(0.75, 0.4, 2150, 1000);
         Thread.sleep(200);
 
         turnPID(120);
@@ -51,7 +51,7 @@ public class meet5Left extends UpliftAutoImpl
         }
         stopMotors();
 
-        moveBackward(0.3, 700);
+        moveBackward(0.3, 620);
 
         stopMotors();
         Thread.sleep(50);
@@ -59,8 +59,91 @@ public class meet5Left extends UpliftAutoImpl
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         Thread.sleep(100);
 
-        moveForward(0.35, 450);
-        turnToPID(94);
+        moveForward(0.35, 350);
+        turnToPID(93);
+
+        robot.getSlide1().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.getSlide2().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        robot.getSlide1().setPower(0.4);
+        robot.getSlide2().setPower(-0.4);
+        Thread.sleep(750);
+
+        //robot aligns itself with the stack of cones
+        if(robot.pipeline2.leftValue > robot.pipeline2.rightValue)
+        {
+            while(robot.pipeline2.leftValue > robot.pipeline2.rightValue)
+            {
+                moveLeft(0.2);
+            }
+            if(robot.pipeline2.rightValue > robot.pipeline2.leftValue)
+            {
+                while(robot.pipeline2.rightValue > robot.pipeline2.leftValue)
+                {
+                    moveRight(0.25);
+                }
+
+            }
+
+        }
+        else if(robot.pipeline2.rightValue > robot.pipeline2.leftValue)
+        {
+            while(robot.pipeline2.rightValue > robot.pipeline2.leftValue)
+            {
+                moveRight(0.25);
+            }
+
+        }
+
+        //moves forward till it senses line 1st time
+        robot.getLineDetector().enableLed(true);
+        while(robot.getLineDetector().blue() <= 65)
+        {
+            moveForward(0.5);
+        }
+
+//        robot.getLineDetector().enableLed(false);
+        stopMotors();
+
+        robot.getArm1().setPosition(robot.getArm1StackPos5());
+        robot.getArm2().setPosition(robot.getArm2StackPos5());
+
+        fourBarFront();
+        robot.getTwister().setPosition(robot.getTwisterDownPos());
+
+
+
+        moveForward(0.2, 180);
+        Thread.sleep(500);
+
+
+        robot.getGrabber().setPosition(robot.getGrabberClosePos());
+        Thread.sleep(500);
+
+
+        moveBackwardHigh(0.5,0.5, 880, 1250);
+
+//        turnToPID(143);
+        while(robot.getPoleDetector().getDistance(DistanceUnit.CM) > 45)
+        {
+            robot.getRightFront().setPower(0.2);
+            robot.getRightBack().setPower(0.2);
+            robot.getLeftFront().setPower(-0.2);
+            robot.getLeftBack().setPower(-0.2);
+        }
+
+        stopMotors();
+
+
+        moveBackward(0.35, 330);
+        stopMotors();
+        Thread.sleep(100);
+
+        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
+        Thread.sleep(100);
+
+        moveForward(0.35, 330);
+        turnToPID(93);
 
         robot.getSlide1().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.getSlide2().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -96,65 +179,11 @@ public class meet5Left extends UpliftAutoImpl
         }
         robot.getWebcam().setPipeline(robot.pipeline1);
 
-        //moves forward till it senses line 1st time
-        robot.getLineDetector().enableLed(true);
-        while(robot.getLineDetector().blue() <= 70)
-        {
-            moveForward(0.5);
-        }
 
-//        robot.getLineDetector().enableLed(false);
-        stopMotors();
-
-        robot.getArm1().setPosition(robot.getArm1StackPos5());
-        robot.getArm2().setPosition(robot.getArm2StackPos5());
-
-        fourBarFront();
-        robot.getTwister().setPosition(robot.getTwisterDownPos());
-
-
-//        while(robot.getConeDetector().getDistance(DistanceUnit.CM) > 0.2)
-//        {
-//            moveForward(0.3);
-//        }
-//        stopMotors();
-
-        moveForward(0.2, 230);
-        Thread.sleep(300);
-
-
-        robot.getGrabber().setPosition(robot.getGrabberClosePos());
-        Thread.sleep(300);
-
-
-        moveBackwardHigh(0.5,0.5, 880, 1200);
-
-        turnToPID(143);
-
-//        turnPID(53);
-        stopMotors();
-
-
-        moveBackward(0.2, 330);
-        stopMotors();
-        Thread.sleep(100);
-
-        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
-        Thread.sleep(100);
-
-        moveForward(0.35, 330);
-        turnToPID(94);
-
-        robot.getSlide1().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        robot.getSlide2().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        robot.getSlide1().setPower(0.4);
-        robot.getSlide2().setPower(-0.4);
-        Thread.sleep(750);
 
         //moves forward till it senses line 2nd time
         robot.getLineDetector().enableLed(true);
-        while(robot.getLineDetector().blue() <= 70)
+        while(robot.getLineDetector().blue() <= 65)
         {
             moveForward(0.5);
         }
@@ -167,7 +196,7 @@ public class meet5Left extends UpliftAutoImpl
         fourBarFront();
         robot.getTwister().setPosition(robot.getTwisterDownPos());
 
-        moveForward(0.2, 230);
+        moveForward(0.2, 180);
         Thread.sleep(300);
 
 
@@ -175,16 +204,21 @@ public class meet5Left extends UpliftAutoImpl
         Thread.sleep(300);
 
 
-        moveBackwardHigh(0.5,0.5, 880, 1200);
+        moveBackwardHigh(0.5,0.5, 880, 1250);
 
 
-        turnToPID(143);
-
-//        turnPID(54);
+//        turnToPID(143);
+        while(robot.getPoleDetector().getDistance(DistanceUnit.CM) > 45)
+        {
+            robot.getRightFront().setPower(0.2);
+            robot.getRightBack().setPower(0.2);
+            robot.getLeftFront().setPower(-0.2);
+            robot.getLeftBack().setPower(-0.2);
+        }
         stopMotors();
 
 
-        moveBackward(0.2, 330);
+        moveBackward(0.35, 330);
         stopMotors();
         Thread.sleep(100);
 
@@ -192,7 +226,7 @@ public class meet5Left extends UpliftAutoImpl
         Thread.sleep(100);
 
         moveForward(0.35, 330);
-        turnToPID(94);
+        turnToPID(93);
 
         robot.getSlide1().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.getSlide2().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -200,76 +234,75 @@ public class meet5Left extends UpliftAutoImpl
         robot.getSlide1().setPower(0.4);
         robot.getSlide2().setPower(-0.4);
         Thread.sleep(750);
-
-        //moves forward till it senses line 3rd time
-        robot.getLineDetector().enableLed(true);
-        while(robot.getLineDetector().blue() <= 70)
-        {
-            moveForward(0.5);
-        }
-
-        stopMotors();
-
-        robot.getArm1().setPosition(robot.getArm1StackPos3());
-        robot.getArm2().setPosition(robot.getArm2StackPos3());
-
-        fourBarFront();
-        robot.getTwister().setPosition(robot.getTwisterDownPos());
-
-        moveForward(0.2, 230);
-        Thread.sleep(300);
-
-
-        robot.getGrabber().setPosition(robot.getGrabberClosePos());
-        Thread.sleep(300);
-
-
-        moveBackwardHigh(0.5,0.5, 880, 1200);
-
-
-        turnToPID(143);
-
-//        turnPID(55);
-        stopMotors();
-
-
-        moveBackward(0.2, 330);
-        stopMotors();
-        Thread.sleep(100);
-
-        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
-        Thread.sleep(100);
-
-        moveForward(0.35, 330);
-        turnToPID(94);
-
-        robot.getSlide1().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        robot.getSlide2().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        robot.getSlide1().setPower(0.4);
-        robot.getSlide2().setPower(-0.4);
-        Thread.sleep(750);
-
-
-        if(parkLocation == 1)
-        {
-            moveForward(1, 1050);
-
-        }
-
-        else if(parkLocation == 2)
-        {
-
-        }
-
-        else if(parkLocation == 3)
-        {
-            moveBackward(.95, 650);
-
-
-        }
-
-
+//
+//        //moves forward till it senses line 3rd time
+//        robot.getLineDetector().enableLed(true);
+//        while(robot.getLineDetector().blue() <= 70)
+//        {
+//            moveForward(0.5);
+//        }
+//
+//        stopMotors();
+//
+//        robot.getArm1().setPosition(robot.getArm1StackPos3());
+//        robot.getArm2().setPosition(robot.getArm2StackPos3());
+//
+//        fourBarFront();
+//        robot.getTwister().setPosition(robot.getTwisterDownPos());
+//
+//        moveForward(0.2, 230);
+//        Thread.sleep(300);
+//
+//
+//        robot.getGrabber().setPosition(robot.getGrabberClosePos());
+//        Thread.sleep(300);
+//
+//
+//        moveBackwardHigh(0.5,0.5, 880, 1200);
+//
+//
+//        turnToPID(143);
+//
+////        turnPID(55);
+//        stopMotors();
+//
+//
+//        moveBackward(0.2, 330);
+//        stopMotors();
+//        Thread.sleep(100);
+//
+//        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
+//        Thread.sleep(100);
+//
+//        moveForward(0.35, 330);
+//        turnToPID(94);
+//
+//        robot.getSlide1().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        robot.getSlide2().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//
+//        robot.getSlide1().setPower(0.4);
+//        robot.getSlide2().setPower(-0.4);
+//        Thread.sleep(750);
+//
+//
+//        if(parkLocation == 1)
+//        {
+//            moveForward(1, 1050);
+//
+//        }
+//
+//        else if(parkLocation == 2)
+//        {
+//
+//        }
+//
+//        else if(parkLocation == 3)
+//        {
+//            moveBackward(.95, 650);
+//
+//
+//        }
+//
     }
 
 }

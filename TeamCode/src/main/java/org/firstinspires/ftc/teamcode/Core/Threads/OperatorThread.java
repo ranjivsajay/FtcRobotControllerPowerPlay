@@ -51,7 +51,7 @@ public class OperatorThread extends Thread
         {
             try
             {
-                toggleGrab();
+//                toggleGrab();
 
                 toggle4Bar();
 
@@ -98,6 +98,16 @@ public class OperatorThread extends Thread
                 {
                     robot.getArm1().setPosition(robot.getArm1HighPos());
                     robot.getArm2().setPosition(robot.getArm2HighPos());
+                }
+
+                if (robot.opMode.gamepad2.right_trigger > .1)
+                {
+                    robot.getGrabber().setPosition(robot.getGrabberClosePos());
+                }
+
+                if (robot.opMode.gamepad2.b)
+                {
+                    robot.getGrabber().setPosition(robot.getGrabberOpenPos());
                 }
 
 //                robot.opMode.telemetry.addData("magnet", robot.getMagnet().isPressed());
@@ -162,19 +172,19 @@ public class OperatorThread extends Thread
         }
     }
 
-    public void toggleGrab() throws InterruptedException
-    {
-        if(robot.opMode.gamepad2.right_trigger > robot.getGrabberOpenPos() && !blockGrabberInput)
-        {
-        robot.getGrabber().setPosition(grabberState ? robot.getGrabberOpenPos() : robot.getGrabberClosePos());
-        grabberState = !grabberState;
-        blockGrabberInput = true;
-        }
-        else if (robot.opMode.gamepad2.right_trigger < robot.getGrabberClosePos() && blockGrabberInput)
-        {
-            blockGrabberInput = false;
-        }
-    }
+//    public void toggleGrab() throws InterruptedException
+//    {
+//        if(robot.opMode.gamepad2.right_trigger > robot.getGrabberOpenPos() && !blockGrabberInput)
+//        {
+//        robot.getGrabber().setPosition(grabberState ? robot.getGrabberOpenPos() : robot.getGrabberClosePos());
+//        grabberState = !grabberState;
+//        blockGrabberInput = true;
+//        }
+//        else if (robot.opMode.gamepad2.right_trigger < robot.getGrabberClosePos() && blockGrabberInput)
+//        {
+//            blockGrabberInput = false;
+//        }
+//    }
 
     public void senseCone()
     {
@@ -288,17 +298,20 @@ public class OperatorThread extends Thread
     {
         if(robot.opMode.gamepad2.dpad_down) // medium height forwards
         {
-//            slides(0.5, 700);
-            robot.getArm1().setPosition(robot.getArm1HighPos());
-            robot.getArm2().setPosition(robot.getArm2HighPos());
+////            slides(0.5, 700);
+//            robot.getArm1().setPosition(robot.getArm1HighPos());
+//            robot.getArm2().setPosition(robot.getArm2HighPos());
+//
+//            robot.getFourBar1().setPosition(robot.getBar1FrontPos());
+//            robot.getFourBar2().setPosition(robot.getBar2FrontPos());
+//
+//            robot.getTwister().setPosition(robot.getTwisterDownPos());
+//
+//            robot.getFourBar1().setPosition(.38);
+//            robot.getFourBar2().setPosition(.62);
 
             robot.getFourBar1().setPosition(robot.getBar1FrontPos());
             robot.getFourBar2().setPosition(robot.getBar2FrontPos());
-
-            robot.getTwister().setPosition(robot.getTwisterDownPos());
-
-            robot.getFourBar1().setPosition(.38);
-            robot.getFourBar2().setPosition(.62);
         }
     }
 
