@@ -66,7 +66,7 @@ public class TeleOp1 extends UpliftTele {
 
     public void bodyLoop() throws InterruptedException {
 
-        telemetry.addData("color ", robot.getLineDetector().blue());
+        telemetry.addData("color ", robot.getLineDetector().red());
         telemetry.update();
 
 //        test();

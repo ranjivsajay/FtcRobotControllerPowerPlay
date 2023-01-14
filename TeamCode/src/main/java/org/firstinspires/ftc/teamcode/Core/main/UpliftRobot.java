@@ -8,8 +8,6 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
-import com.qualcomm.robotcore.hardware.GyroSensor;
-import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
@@ -17,14 +15,12 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 //import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread;
 //import org.firstinspires.ftc.teamcode.Core.Threads.OperatorThread;
-import org.firstinspires.ftc.robotcore.internal.android.dex.EncodedValueReader;
-import org.firstinspires.ftc.teamcode.Core.toolkit.vision.ConeAllignment;
+import org.firstinspires.ftc.teamcode.Core.toolkit.vision.ConeAlignmentBlue;
+import org.firstinspires.ftc.teamcode.Core.toolkit.vision.ConeAlignmentRed;
 import org.firstinspires.ftc.teamcode.Core.toolkit.vision.PowerPlay;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
-
-import java.util.Base64;
 
 public class UpliftRobot
 {
@@ -56,8 +52,8 @@ public class UpliftRobot
     double twisterUpPos = .82;
     double twisterDownPos = .18;
 
-    double arm1StackPos5 = .51;
-    double arm2StackPos5 = .47;
+    double arm1StackPos5 = .52;
+    double arm2StackPos5 = .46;
 
     double arm1StackPos4 = .46;
     double arm2StackPos4 = .5;
@@ -69,7 +65,8 @@ public class UpliftRobot
     double arm2StackPos2 = .57;
 
     public PowerPlay pipeline1;
-    public ConeAllignment pipeline2;
+    public ConeAlignmentBlue pipeline2;
+    public ConeAlignmentRed pipeline3;
     public LinearOpMode opMode;
     public HardwareMap hardwareMap;
 
@@ -144,7 +141,8 @@ public class UpliftRobot
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
 
         pipeline1 = new PowerPlay(opMode.telemetry);
-        pipeline2 = new ConeAllignment(opMode.telemetry);
+        pipeline2 = new ConeAlignmentBlue(opMode.telemetry);
+        pipeline3 = new ConeAlignmentRed(opMode.telemetry);
 
         webcam.setPipeline(pipeline1);
 
@@ -154,9 +152,9 @@ public class UpliftRobot
             {
 
                 webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
-
-//                pipeline2 = new ConeAllignment(opMode.telemetry);
-//                webcam.setPipeline(pipeline2);
+//
+//                pipeline3 = new ConeAlignmentRed(opMode.telemetry);
+//                webcam.setPipeline(pipeline3);
 //                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
             }
 
