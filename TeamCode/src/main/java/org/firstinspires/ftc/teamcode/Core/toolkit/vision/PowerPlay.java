@@ -73,15 +73,15 @@ public class  PowerPlay extends OpenCvPipeline {
 
 //
 //
-        if (PurpleValue > OrangeValue && PurpleValue > GreenValue)
+        if (GreenValue > OrangeValue && GreenValue > PurpleValue)
         {
-            location = 2;
+            location = 1;
         } else if (OrangeValue > PurpleValue && OrangeValue > GreenValue)
         {
             location = 3;
         } else
         {
-            location = 1;
+            location = 2;
         }
         telemetry.addData("Location:", location);
         telemetry.update();

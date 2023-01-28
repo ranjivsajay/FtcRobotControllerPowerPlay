@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Core.main;
 
 
+import com.qualcomm.hardware.adafruit.AdafruitBNO055IMU;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorRangeSensor;
@@ -12,6 +13,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
+import org.checkerframework.checker.units.qual.A;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 //import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread;
 //import org.firstinspires.ftc.teamcode.Core.Threads.OperatorThread;
@@ -34,17 +36,19 @@ public class UpliftRobot
     BNO055IMU imu;
 
 
-    double arm1HighPos = .92;
-    double arm2HighPos = .10;
+    double arm1HighPos = .88;
+    double arm2HighPos = .12;
 
     double arm1LowPos = 0.3;
     double arm2LowPos = 0.68;
 
-    double bar1FrontPos = .78;
-    double bar2FrontPos = .22;
+    double bar1FrontPos = .21;
+//    double bar2FrontPos = .21;
+double bar2FrontPos = .78;
 
-    double bar1BackPos = 0.14;
-    double bar2BackPos = 0.86;
+    double bar1BackPos = .8;
+//    double bar2BackPos = 0.83;
+double bar2BackPos = .2;
 
     double grabberOpenPos = 0.0;
     double grabberClosePos = 0.21;
@@ -52,17 +56,17 @@ public class UpliftRobot
     double twisterUpPos = .82;
     double twisterDownPos = .18;
 
-    double arm1StackPos5 = .52;
-    double arm2StackPos5 = .46;
+    double arm1StackPos5 = .5;
+    double arm2StackPos5 = .5;
 
-    double arm1StackPos4 = .46;
-    double arm2StackPos4 = .5;
+    double arm1StackPos4 = .45;
+    double arm2StackPos4 = .55;
 
-    double arm1StackPos3 = .45;
-    double arm2StackPos3 = .55;
+    double arm1StackPos3 = .43;
+    double arm2StackPos3 = .57;
 
-    double arm1StackPos2 = .43;
-    double arm2StackPos2 = .57;
+    double arm1StackPos2 = .4;
+    double arm2StackPos2 = .6;
 
     public PowerPlay pipeline1;
     public ConeAlignmentBlue pipeline2;
@@ -129,8 +133,6 @@ public class UpliftRobot
 
         arm2.setDirection(Servo.Direction.REVERSE);
         arm1.setDirection(Servo.Direction.REVERSE);
-
-
 
     }
 

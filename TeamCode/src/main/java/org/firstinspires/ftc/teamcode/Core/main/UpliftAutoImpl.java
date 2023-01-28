@@ -145,6 +145,8 @@ public class UpliftAutoImpl extends UpliftAuto {
 //        robot.getSlide2().setPower(0);
 
         fourBarBack();
+
+
         robot.getTwister().setPosition(robot.getTwisterUpPos());
 
         robot.getLeftFront().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -401,7 +403,7 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     public void turnToPID(double targetAngle)
     {
-        TurnPID pid = new TurnPID(targetAngle, 0.012, 0, 0.003);
+        TurnPID pid = new TurnPID(targetAngle, 0.013, 0, 0.003);
         while(opModeIsActive() && Math.abs(targetAngle - getAbsoluteAngle()) > 1)
         {
             double motorPower = pid.update(getAbsoluteAngle());

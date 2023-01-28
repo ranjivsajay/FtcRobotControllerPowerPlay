@@ -45,14 +45,14 @@ public class TeleOp1 extends UpliftTele {
     @Override
     public void initAction() {
 
-        robot.getFourBar1().setPosition(.28);
-        robot.getFourBar2().setPosition(.72);
+        robot.getFourBar1().setPosition(.62);
+        robot.getFourBar2().setPosition(.38);
 
         robot.getGrabber().setPosition(robot.getGrabberClosePos());
         robot.getTwister().setPosition(robot.getTwisterDownPos());
 
-        robot.getConeDetector().close();
-        robot.getPoleDetector().close();
+       // robot.getConeDetector().close();
+//        robot.getPoleDetector().close();
         robot.getLineDetector().close();
         robot.getLineDetector().enableLed(false);
 
@@ -66,7 +66,8 @@ public class TeleOp1 extends UpliftTele {
 
     public void bodyLoop() throws InterruptedException {
 
-        telemetry.addData("color ", robot.getLineDetector().red());
+        telemetry.addData("dist ", robot.getConeDetector().getDistance(DistanceUnit.CM));
+        telemetry.addData("magnet:" , robot.getMagnet().getValue());
         telemetry.update();
 
 //        test();
