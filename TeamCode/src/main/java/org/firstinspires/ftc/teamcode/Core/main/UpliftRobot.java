@@ -42,9 +42,9 @@ public class UpliftRobot
     double arm1LowPos = 0.3;
     double arm2LowPos = 0.68;
 
-    double bar1FrontPos = .21;
+    double bar1FrontPos = .14;
 //    double bar2FrontPos = .21;
-double bar2FrontPos = .78;
+    double bar2FrontPos = .86;
 
     double bar1BackPos = .8;
 //    double bar2BackPos = 0.83;
@@ -56,11 +56,11 @@ double bar2BackPos = .2;
     double twisterUpPos = .82;
     double twisterDownPos = .18;
 
-    double arm1StackPos5 = .5;
-    double arm2StackPos5 = .5;
+    double arm1StackPos5 = .51;
+    double arm2StackPos5 = .47;
 
-    double arm1StackPos4 = .45;
-    double arm2StackPos4 = .55;
+    double arm1StackPos4 = .48;
+    double arm2StackPos4 = .54;
 
     double arm1StackPos3 = .43;
     double arm2StackPos3 = .57;

@@ -119,7 +119,7 @@ public class meet5LeftBlue extends UpliftAutoImpl
         robot.getTwister().setPosition(robot.getTwisterDownPos());
         turnToPID(92);
         Thread.sleep(500);
-        moveForward(.5, 300);
+        moveForward(.5, 500);
         while(robot.getConeDetector().getDistance(DistanceUnit.CM) > 8)
         {
             moveForward(0.3);
@@ -176,7 +176,7 @@ public class meet5LeftBlue extends UpliftAutoImpl
 //        turnToPID(93);
         Thread.sleep(500);
 
-        moveForward(.5, 300);
+        moveForward(.5, 500);
         while(robot.getConeDetector().getDistance(DistanceUnit.CM) > 8)
         {
             moveForward(0.3);
@@ -190,7 +190,7 @@ public class meet5LeftBlue extends UpliftAutoImpl
         Thread.sleep(500);
 
         moveBackwardHigh(0.5,0.5, 630, 1200);
-        turnToPID(128.5);
+        turnToPID(135);
 
 //        robot aligns itself with the pole
         while(robot.getPoleDetector().getDistance(DistanceUnit.CM) > 37)
@@ -232,7 +232,7 @@ public class meet5LeftBlue extends UpliftAutoImpl
 //        turnToPID(93);
         Thread.sleep(500);
 
-        moveForward(.5, 300);
+        moveForward(.5, 500);
         while(robot.getConeDetector().getDistance(DistanceUnit.CM) > 8)
         {
             moveForward(0.3);
