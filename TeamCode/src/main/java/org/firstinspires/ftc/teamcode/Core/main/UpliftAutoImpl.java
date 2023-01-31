@@ -155,62 +155,42 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getRightBack().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
-
-
     }
 
-    public void moveForwardDown(double drivePower, double slidesPower, int driveDist, int slidesDist, double arm1pos, double arm2pos) throws InterruptedException {
-        robot.getArm1().setPosition(arm1pos);
-        robot.getArm2().setPosition(arm2pos);
+    public void moveForwardAndTurn(double drivePower, int driveDist, double targetAngle)
+    {
+        double error = targetAngle - robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.RADIANS).firstAngle;
 
-        fourBarFront();
-        robot.getTwister().setPosition(robot.getTwisterDownPos());
+        double rotX = 0 * Math.cos(-error) - drivePower * Math.sin(-error);
+        double rotY = 0 * Math.sin(-error) + drivePower * Math.cos(-error);
+        double denominator = Math.max(Math.abs(rotY) + Math.abs(rotX), 1);
+
 
         robot.getLeftFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.getRightFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.getLeftBack().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.getRightBack().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        robot.getSlide1().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.getSlide2().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
         robot.getLeftFront().setTargetPosition(driveDist);
         robot.getLeftBack().setTargetPosition(driveDist);
         robot.getRightFront().setTargetPosition(driveDist);
         robot.getRightBack().setTargetPosition(driveDist);
-
-        robot.getSlide1().setTargetPosition(slidesDist);
-        robot.getSlide2().setTargetPosition(-slidesDist);
 
         robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.getLeftBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.getRightFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.getRightBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        robot.getSlide1().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.getSlide2().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        robot.getRightFront().setPower(drivePower);
-        robot.getRightBack().setPower(drivePower);
-        robot.getLeftFront().setPower(drivePower);
-        robot.getLeftBack().setPower(drivePower);
-
-        robot.getSlide1().setPower(slidesPower);
-        robot.getSlide2().setPower(-slidesPower);
+        robot.getRightFront().setPower((rotY - rotX) / denominator);
+        robot.getRightBack().setPower((rotY - rotX) / denominator);
+        robot.getLeftFront().setPower((rotY + rotX) / denominator);
+        robot.getLeftBack().setPower((rotY + rotX) / denominator);
 
         while (opModeIsActive() && robot.getRightFront().isBusy()) {
 
         }
 
         stopMotors();
-
-        robot.getSlide1().setPower(0);
-        robot.getSlide2().setPower(0);
-
-        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        robot.getRightFront().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        robot.getLeftBack().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        robot.getRightBack().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     public void moveForward(double power, double dist) {
@@ -370,92 +350,92 @@ public class UpliftAutoImpl extends UpliftAuto {
 //        return integratedAngle;
 //    }
 
-    public void resetAngle()
-    {
-        lastAngles = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-        currAngle = 0;
-    }
-
-    public double getAngle()
-    {
-        Orientation orientation = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-        double deltaAngle = orientation.firstAngle - lastAngles.firstAngle;
-
-        if(deltaAngle > 180)
-        {
-            deltaAngle -= 360;
-        }
-        else if(deltaAngle <= 180)
-        {
-            deltaAngle += 360;
-        }
-
-        currAngle += deltaAngle;
-        lastAngles = orientation;
-
-        return currAngle;
-    }
-
-    public double getAbsoluteAngle()
-    {
-        return robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
-    }
-
-    public void turnToPID(double targetAngle)
-    {
-        TurnPID pid = new TurnPID(targetAngle, 0.013, 0, 0.003);
-        while(opModeIsActive() && Math.abs(targetAngle - getAbsoluteAngle()) > 1)
-        {
-            double motorPower = pid.update(getAbsoluteAngle());
-            robot.getLeftFront().setPower(-motorPower);
-            robot.getRightFront().setPower(motorPower);
-            robot.getLeftBack().setPower(-motorPower);
-            robot.getRightBack().setPower(motorPower);
-        }
-        stopMotors();
-    }
-
-    public void turnPID(double degrees)
-    {
-        turnToPID(degrees + getAbsoluteAngle());
-    }
-
-    public void turn(double degrees)
-    {
-        resetAngle();
-
-        double error = degrees;
-
-        while(opModeIsActive() && Math.abs(error) > 2)
-        {
-            double motorPower = (error < 0 ? -0.3: 0.3);
-            robot.getLeftFront().setPower(-motorPower);
-            robot.getRightFront().setPower(motorPower);
-            robot.getLeftBack().setPower(-motorPower);
-            robot.getRightBack().setPower(motorPower);
-            error = degrees - getAngle();
-
-        }
-
-        stopMotors();
-    }
-
-    public void turnTo(double degrees)
-    {
-        Orientation orientation = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-        double error = degrees - orientation.firstAngle;
-
-        if(error > 180)
-        {
-            error -= 360;
-        }
-        else if(error <= 180)
-        {
-            error += 360;
-        }
-
-        turn(error);
-    }
+//    public void resetAngle()
+//    {
+//        lastAngles = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+//        currAngle = 0;
+//    }
+//
+//    public double getAngle()
+//    {
+//        Orientation orientation = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+//        double deltaAngle = orientation.firstAngle - lastAngles.firstAngle;
+//
+//        if(deltaAngle > 180)
+//        {
+//            deltaAngle -= 360;
+//        }
+//        else if(deltaAngle <= 180)
+//        {
+//            deltaAngle += 360;
+//        }
+//
+//        currAngle += deltaAngle;
+//        lastAngles = orientation;
+//
+//        return currAngle;
+//    }
+//
+//    public double getAbsoluteAngle()
+//    {
+//        return robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
+//    }
+//
+//    public void turnToPID(double targetAngle)
+//    {
+//        TurnPID pid = new TurnPID(targetAngle, 0.013, 0, 0.003);
+//        while(opModeIsActive() && Math.abs(targetAngle - getAbsoluteAngle()) > 1)
+//        {
+//            double motorPower = pid.update(getAbsoluteAngle());
+//            robot.getLeftFront().setPower(-motorPower);
+//            robot.getRightFront().setPower(motorPower);
+//            robot.getLeftBack().setPower(-motorPower);
+//            robot.getRightBack().setPower(motorPower);
+//        }
+//        stopMotors();
+//    }
+//
+//    public void turnPID(double degrees)
+//    {
+//        turnToPID(degrees + getAbsoluteAngle());
+//    }
+//
+//    public void turn(double degrees)
+//    {
+//        resetAngle();
+//
+//        double error = degrees;
+//
+//        while(opModeIsActive() && Math.abs(error) > 2)
+//        {
+//            double motorPower = (error < 0 ? -0.3: 0.3);
+//            robot.getLeftFront().setPower(-motorPower);
+//            robot.getRightFront().setPower(motorPower);
+//            robot.getLeftBack().setPower(-motorPower);
+//            robot.getRightBack().setPower(motorPower);
+//            error = degrees - getAngle();
+//
+//        }
+//
+//        stopMotors();
+//    }
+//
+//    public void turnTo(double degrees)
+//    {
+//        Orientation orientation = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+//        double error = degrees - orientation.firstAngle;
+//
+//        if(error > 180)
+//        {
+//            error -= 360;
+//        }
+//        else if(error <= 180)
+//        {
+//            error += 360;
+//        }
+//
+//        turn(error);
+//    }
 
 
 
