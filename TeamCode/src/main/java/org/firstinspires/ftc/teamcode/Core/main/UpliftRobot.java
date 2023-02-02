@@ -33,9 +33,9 @@ public class UpliftRobot
     ColorSensor lineDetector;
     OpenCvCamera webcam;
     DcMotor odoRight;
-//    BNO055IMU imu;
+    BNO055IMU imu;
 
-    AdafruitBNO055IMU gyro;
+//    AdafruitBNO055IMU gyro;
 
 
 
@@ -116,17 +116,17 @@ double bar2BackPos = .2;
 
         odoRight = hardwareMap.get(DcMotor.class, "odoRight");
 
-        gyro = hardwareMap.get(AdafruitBNO055IMU.class, "gyro");
-        AdafruitBNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-        parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
-        parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-        gyro.initialize(parameters);
-
-//        imu = hardwareMap.get(BNO055IMU.class, "imu");
-//        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-//        parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+//        gyro = hardwareMap.get(AdafruitBNO055IMU.class, "gyro");
+//        AdafruitBNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+//        parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
 //        parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-//        imu.initialize(parameters);
+//        gyro.initialize(parameters);
+
+        imu = hardwareMap.get(BNO055IMU.class, "imu");
+        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+        parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+        parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        imu.initialize(parameters);
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);

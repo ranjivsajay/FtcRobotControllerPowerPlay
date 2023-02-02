@@ -157,9 +157,9 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     }
 
-    public void moveForwardAndTurn(double drivePower, int driveDist, double targetAngle)
+    public void moveAndTurn(double drivePower, int driveDist, double targetAngle)
     {
-        double error = targetAngle - robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.RADIANS).firstAngle;
+        double error = targetAngle - robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.RADIANS).firstAngle;
 
         double rotX = 0 * Math.cos(-error) - drivePower * Math.sin(-error);
         double rotY = 0 * Math.sin(-error) + drivePower * Math.cos(-error);
@@ -181,10 +181,10 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getRightFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.getRightBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        robot.getRightFront().setPower((rotY - rotX) / denominator);
-        robot.getRightBack().setPower((rotY - rotX) / denominator);
-        robot.getLeftFront().setPower((rotY + rotX) / denominator);
-        robot.getLeftBack().setPower((rotY + rotX) / denominator);
+        robot.getRightFront().setPower((rotY - rotX - 0.5) / denominator);
+        robot.getRightBack().setPower((rotY + rotX - 0.5) / denominator);
+        robot.getLeftFront().setPower((rotY + rotX + 0.5) / denominator);
+        robot.getLeftBack().setPower((rotY - rotX + 0.5) / denominator);
 
         while (opModeIsActive() && robot.getRightFront().isBusy()) {
 
