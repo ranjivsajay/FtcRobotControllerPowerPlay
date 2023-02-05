@@ -223,10 +223,10 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getLeftBack().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.getRightBack().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        robot.getLeftFront().setTargetPosition(driveDist);
-        robot.getLeftBack().setTargetPosition(driveDist);
-        robot.getRightFront().setTargetPosition(driveDist);
-        robot.getRightBack().setTargetPosition(driveDist);
+        robot.getLeftFront().setTargetPosition(driveDist + 1000);
+        robot.getLeftBack().setTargetPosition(driveDist + 1000);
+        robot.getRightFront().setTargetPosition(driveDist - 1000);
+        robot.getRightBack().setTargetPosition(driveDist - 1000);
 
 
         robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -240,31 +240,79 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getLeftFront().setPower(drivePower);
         robot.getLeftBack().setPower(drivePower);
 
-        // calculate motor power
-        double ADPower = translationPower * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) + Math.cos(translationAngle));
-        double BCPower = translationPower * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) - Math.cos(translationAngle));
+//        // calculate motor power
+//        double ADPower = translationPower * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) + Math.cos(translationAngle));
+//        double BCPower = translationPower * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) - Math.cos(translationAngle));
+//
+//        double turningScale = Math.max(Math.abs(ADPower + turnPower), Math.abs(ADPower - turnPower));
+//
+//        turningScale = Math.max(turningScale, Math.max(Math.abs(BCPower + turnPower), Math.abs(BCPower - turnPower)));
+//
+//        // adjust turn power scale correctly
+//        if (Math.abs(turningScale) < 1.0) {
+//            turningScale = 1.0;
+//        }
+//
+//        // set the motors, and divide them by turningScale to make sure none of them go over the top, which would alter the translation angle
+//        robot.getLeftFront().setPower((ADPower - turningScale ) / turningScale);
+//        robot.getLeftBack().setPower((BCPower - turningScale) / turningScale);
+//        robot.getRightBack().setPower((ADPower + turningScale) / turningScale);
+//       robot.getRightFront().setPower((BCPower + turningScale) / turningScale);
 
-        double turningScale = Math.max(Math.abs(ADPower + turnPower), Math.abs(ADPower - turnPower));
-
-        turningScale = Math.max(turningScale, Math.max(Math.abs(BCPower + turnPower), Math.abs(BCPower - turnPower)));
-
-        // adjust turn power scale correctly
-        if (Math.abs(turningScale) < 1.0) {
-            turningScale = 1.0;
-        }
-
-        // set the motors, and divide them by turningScale to make sure none of them go over the top, which would alter the translation angle
-        robot.getLeftFront().setPower((ADPower - turningScale) / turningScale);
-        robot.getLeftBack().setPower((BCPower - turningScale) / turningScale);
-        robot.getRightBack().setPower((ADPower + turningScale) / turningScale);
-       robot.getRightFront().setPower((BCPower + turningScale) / turningScale);
-
-        while (opModeIsActive() && robot.getRightFront().isBusy()) {
+        while (opModeIsActive() && robot.getRightFront().isBusy() && robot.getLeftBack().isBusy()) {
 
         }
 
         stopMotors();
     }
+
+    public void moveTurnT(int daAngle)
+    {
+        double angle = robot.imu.getAngularOrientation().firstAngle;
+        double finalAngle = daAngle - angle;
+
+        while(finalAngle > daAngle)
+        {
+            robot.getRightFront().setPower(0.3);
+            robot.getRightBack().setPower(0.3);
+            robot.getLeftFront().setPower(0.8);
+            robot.getLeftBack().setPower(0.8);
+        }
+
+        stopMotors();
+
+
+
+
+
+//        robot.getLeftFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        robot.getRightFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        robot.getLeftBack().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        robot.getRightBack().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//
+//        robot.getLeftFront().setTargetPosition(dist);
+//        robot.getLeftBack().setTargetPosition(dist);
+//        robot.getRightFront().setTargetPosition(dist + 500);
+//        robot.getRightBack().setTargetPosition(dist + 500);
+//
+//
+//        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        robot.getLeftBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        robot.getRightFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        robot.getRightBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//
+//        robot.getRightFront().setPower(0.8);
+//        robot.getRightBack().setPower(0.8);
+//        robot.getLeftFront().setPower(1);
+//        robot.getLeftBack().setPower(1);
+//
+//        while (opModeIsActive() && robot.getRightFront().isBusy() && robot.getLeftBack().isBusy()) {
+//
+//        }
+//
+//        stopMotors();
+    }
+
     public void moveForward(double power, double dist) {
         double initialPos = robot.getRightFront().getCurrentPosition();
 
@@ -448,29 +496,29 @@ public class UpliftAutoImpl extends UpliftAuto {
 //        return currAngle;
 //    }
 //
-//    public double getAbsoluteAngle()
-//    {
-//        return robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
-//    }
+    public double getAbsoluteAngle()
+    {
+        return robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
+    }
 //
-//    public void turnToPID(double targetAngle)
-//    {
-//        TurnPID pid = new TurnPID(targetAngle, 0.013, 0, 0.003);
-//        while(opModeIsActive() && Math.abs(targetAngle - getAbsoluteAngle()) > 1)
-//        {
-//            double motorPower = pid.update(getAbsoluteAngle());
-//            robot.getLeftFront().setPower(-motorPower);
-//            robot.getRightFront().setPower(motorPower);
-//            robot.getLeftBack().setPower(-motorPower);
-//            robot.getRightBack().setPower(motorPower);
-//        }
-//        stopMotors();
-//    }
-//
-//    public void turnPID(double degrees)
-//    {
-//        turnToPID(degrees + getAbsoluteAngle());
-//    }
+    public void turnToPID(double targetAngle)
+    {
+        TurnPID pid = new TurnPID(targetAngle, 0.013, 0, 0.003);
+        while(opModeIsActive() && Math.abs(targetAngle - getAbsoluteAngle()) > 1)
+        {
+            double motorPower = pid.update(getAbsoluteAngle());
+            robot.getLeftFront().setPower(-motorPower);
+            robot.getRightFront().setPower(motorPower);
+            robot.getLeftBack().setPower(-motorPower);
+            robot.getRightBack().setPower(motorPower);
+        }
+        stopMotors();
+    }
+
+    public void turnPID(double degrees)
+    {
+        turnToPID(degrees + getAbsoluteAngle());
+    }
 //
 //    public void turn(double degrees)
 //    {

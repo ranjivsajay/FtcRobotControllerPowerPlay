@@ -59,8 +59,8 @@ double bar2BackPos = .2;
     double twisterUpPos = .82;
     double twisterDownPos = .18;
 
-    double arm1StackPos5 = .51;
-    double arm2StackPos5 = .47;
+    double arm1StackPos5 = .5;
+    double arm2StackPos5 = .5;
 
     double arm1StackPos4 = .48;
     double arm2StackPos4 = .54;
