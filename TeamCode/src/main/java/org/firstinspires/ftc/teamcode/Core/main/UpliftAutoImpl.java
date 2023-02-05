@@ -156,6 +156,27 @@ public class UpliftAutoImpl extends UpliftAuto {
 
 
     }
+    public void fieldCentricMove(double x, double y, double rot) {
+        // Get the current orientation of the robot
+        Orientation currentOrientation = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        double currentAngle = currentOrientation.firstAngle;
+
+        // Transform the target x and y position into the field-centric coordinate system
+        double fieldCentricX = x * Math.cos(Math.toRadians(currentAngle)) - y * Math.sin(Math.toRadians(currentAngle));
+        double fieldCentricY = x * Math.sin(Math.toRadians(currentAngle)) + y * Math.cos(Math.toRadians(currentAngle));
+
+        double frontLeftSpeed = fieldCentricY + rot;
+        double frontRightSpeed = fieldCentricY - rot;
+        double rearLeftSpeed = fieldCentricY + rot;
+        double rearRightSpeed = fieldCentricY - rot;
+
+        // Set the speeds for each wheel
+        robot.getLeftFront().setPower(frontLeftSpeed);
+        robot.getRightFront().setPower(frontRightSpeed);
+        robot.getLeftBack().setPower(rearLeftSpeed);
+        robot.getRightBack().setPower(rearRightSpeed);
+
+    }
 
     public void moveAndTurn(double drivePower, int driveDist, double targetAngle)
     {
@@ -171,20 +192,23 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getLeftBack().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.getRightBack().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        robot.getLeftFront().setTargetPosition(driveDist);
-        robot.getLeftBack().setTargetPosition(driveDist);
-        robot.getRightFront().setTargetPosition(driveDist);
-        robot.getRightBack().setTargetPosition(driveDist);
+
 
         robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.getLeftBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.getRightFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.getRightBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
+//        robot.getLeftFront().setPower(Math.sin(targetAngle+(.25 * 3.1415926535)) * drivePower);
+//        robot.getLeftBack().setPower(Math.sin(targetAngle-(.25 * 3.1415926535)) * drivePower);
+//        robot.getRightFront().setPower(Math.sin(targetAngle-(.25 * 3.1415926535)) * drivePower);
+//        robot.getRightBack().setPower(Math.sin(targetAngle+(.25 * 3.1415926535)) * drivePower);
+
         robot.getRightFront().setPower((rotY - rotX - 0.5) / denominator);
         robot.getRightBack().setPower((rotY + rotX - 0.5) / denominator);
         robot.getLeftFront().setPower((rotY + rotX + 0.5) / denominator);
         robot.getLeftBack().setPower((rotY - rotX + 0.5) / denominator);
+
 
         while (opModeIsActive() && robot.getRightFront().isBusy()) {
 
@@ -193,6 +217,54 @@ public class UpliftAutoImpl extends UpliftAuto {
         stopMotors();
     }
 
+    public void sahilFieldCentric(double translationAngle, double translationPower, double turnPower, int driveDist, double drivePower) {
+        robot.getLeftFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.getRightFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.getLeftBack().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.getRightBack().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        robot.getLeftFront().setTargetPosition(driveDist);
+        robot.getLeftBack().setTargetPosition(driveDist);
+        robot.getRightFront().setTargetPosition(driveDist);
+        robot.getRightBack().setTargetPosition(driveDist);
+
+
+        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.getLeftBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.getRightFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.getRightBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+
+        robot.getRightFront().setPower(drivePower);
+        robot.getRightBack().setPower(drivePower);
+        robot.getLeftFront().setPower(drivePower);
+        robot.getLeftBack().setPower(drivePower);
+
+        // calculate motor power
+        double ADPower = translationPower * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) + Math.cos(translationAngle));
+        double BCPower = translationPower * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) - Math.cos(translationAngle));
+
+        double turningScale = Math.max(Math.abs(ADPower + turnPower), Math.abs(ADPower - turnPower));
+
+        turningScale = Math.max(turningScale, Math.max(Math.abs(BCPower + turnPower), Math.abs(BCPower - turnPower)));
+
+        // adjust turn power scale correctly
+        if (Math.abs(turningScale) < 1.0) {
+            turningScale = 1.0;
+        }
+
+        // set the motors, and divide them by turningScale to make sure none of them go over the top, which would alter the translation angle
+        robot.getLeftFront().setPower((ADPower - turningScale) / turningScale);
+        robot.getLeftBack().setPower((BCPower - turningScale) / turningScale);
+        robot.getRightBack().setPower((ADPower + turningScale) / turningScale);
+       robot.getRightFront().setPower((BCPower + turningScale) / turningScale);
+
+        while (opModeIsActive() && robot.getRightFront().isBusy()) {
+
+        }
+
+        stopMotors();
+    }
     public void moveForward(double power, double dist) {
         double initialPos = robot.getRightFront().getCurrentPosition();
 
