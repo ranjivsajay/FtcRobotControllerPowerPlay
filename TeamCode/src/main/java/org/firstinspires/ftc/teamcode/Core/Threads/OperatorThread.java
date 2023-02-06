@@ -177,9 +177,9 @@ public class OperatorThread extends Thread
         //allows the 4bar to move to its forwards and backwards position with the same button
         if(robot.opMode.gamepad2.x && !block4BarInput)
         {
-            robot.getFourBar1().setPosition(fourBarState ? robot.getBar1FrontPos() : .62);
+            robot.getFourBar1().setPosition(fourBarState ? robot.getBar1FrontPos() : .5);
 //            robot.getFourBar2().setPosition(fourBarState ? robot.getBar2FrontPos() : 0.62);
-            robot.getFourBar2().setPosition(fourBarState ? robot.getBar2FrontPos() : .38);
+            robot.getFourBar2().setPosition(fourBarState ? robot.getBar2FrontPos() : .5);
             fourBarState = !fourBarState;
             block4BarInput = true;
         }
@@ -243,6 +243,7 @@ public class OperatorThread extends Thread
             robot.getFourBar1().setPosition(robot.getBar1FrontPos());
             robot.getFourBar2().setPosition(robot.getBar2FrontPos());
 
+            robot.getTwister().setPosition(robot.getTwisterDownPos());
             robot.getTwister().setPosition(robot.getTwisterDownPos());
         }
     }

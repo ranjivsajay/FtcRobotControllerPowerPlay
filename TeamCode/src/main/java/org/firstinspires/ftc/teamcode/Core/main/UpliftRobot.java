@@ -39,19 +39,23 @@ public class UpliftRobot
 
 
 
-    double arm1HighPos = .88;
+    double arm1HighPos = .94;
     double arm2HighPos = .12;
 
-    double arm1LowPos = 0.3;
+    double arm1LowPos = 0.34;
     double arm2LowPos = 0.68;
 
-    double bar1FrontPos = .14;
-//    double bar2FrontPos = .21;
-    double bar2FrontPos = .86;
+//    double bar1FrontPos = .14;
+//    double bar2FrontPos = .86;
+//
+//    double bar1BackPos = .8;
+//    double bar2BackPos = .2;
 
-    double bar1BackPos = .8;
-//    double bar2BackPos = 0.83;
-double bar2BackPos = .2;
+    double bar1FrontPos = .845;
+    double bar2FrontPos = .155;
+
+    double bar1BackPos = .3;
+    double bar2BackPos = .7;
 
     double grabberOpenPos = 0.0;
     double grabberClosePos = 0.21;
@@ -59,17 +63,17 @@ double bar2BackPos = .2;
     double twisterUpPos = .82;
     double twisterDownPos = .18;
 
-    double arm1StackPos5 = .5;
-    double arm2StackPos5 = .5;
+    double arm1StackPos5 = .56;
+    double arm2StackPos5 = .48;
 
     double arm1StackPos4 = .48;
-    double arm2StackPos4 = .54;
+    double arm2StackPos4 = .55;
 
     double arm1StackPos3 = .43;
-    double arm2StackPos3 = .57;
+    double arm2StackPos3 = .6;
 
     double arm1StackPos2 = .4;
-    double arm2StackPos2 = .6;
+    double arm2StackPos2 = .63;
 
     public PowerPlay pipeline1;
     public ConeAlignmentBlue pipeline2;
