@@ -226,8 +226,7 @@ public class OperatorThread extends Thread
         }
     }
 
-    public void reset()
-    {
+    public void reset() throws InterruptedException {
         if (robot.opMode.gamepad2.a) // reset grabber pos
         {
             //move 6 bar motors down
@@ -236,15 +235,18 @@ public class OperatorThread extends Thread
 //                robot.getSlide1().setPower(0.2);
 //                robot.getSlide2().setPower(-0.2);
 //            }
+            robot.getTwister().setPosition(robot.getTwisterDownPos());
+            robot.getTwister().setPosition(robot.getTwisterDownPos());
+            robot.getFourBar1().setPosition(robot.getBar1FrontPos());
+            robot.getFourBar2().setPosition(robot.getBar2FrontPos());
+            Thread.sleep(500);
 
             robot.getArm1().setPosition(robot.getArm1LowPos());
             robot.getArm2().setPosition(robot.getArm2LowPos());
+            Thread.sleep(500);
 
-            robot.getFourBar1().setPosition(robot.getBar1FrontPos());
-            robot.getFourBar2().setPosition(robot.getBar2FrontPos());
 
-            robot.getTwister().setPosition(robot.getTwisterDownPos());
-            robot.getTwister().setPosition(robot.getTwisterDownPos());
+          
         }
     }
 
@@ -265,12 +267,15 @@ public class OperatorThread extends Thread
         {
 
 //            slides(0.5, 953);
+
+            robot.getFourBar1().setPosition(robot.getBar1BackPos());
+            robot.getFourBar2().setPosition(robot.getBar2BackPos());
+
             robot.getArm1().setPosition(robot.getArm1HighPos());
             robot.getArm2().setPosition(robot.getArm2HighPos());
 
 
-            robot.getFourBar1().setPosition(robot.getBar1BackPos());
-            robot.getFourBar2().setPosition(robot.getBar2BackPos());
+
 
             robot.getTwister().setPosition(robot.getTwisterUpPos());
 

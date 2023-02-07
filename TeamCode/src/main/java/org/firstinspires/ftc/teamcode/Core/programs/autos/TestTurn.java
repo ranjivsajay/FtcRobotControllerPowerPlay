@@ -9,7 +9,7 @@ public class TestTurn extends UpliftAutoImpl {
     @Override
     public void body() throws InterruptedException {
 
-        fieldCentricMove(0.5, 0, 0.5, 90);
+        fieldCentricMove(0.5, 0.5, 0.5, -90);
 
     }
 }

@@ -402,12 +402,17 @@ public class UpliftAutoImpl extends UpliftAuto {
     }
 
     public void fieldCentricMove(double drive, double strafe, double turn, double targetAngle) {
+
+        resetAngle();
+
+        double error = targetAngle;
+
         // Get the current orientation of the robot
         double heading = Math.toRadians(getAngle());
 
         // Transform the target x and y position into the field-centric coordinate system
-        double fieldCentricX = drive * Math.tan(heading) - strafe * Math.sin(heading);
-        double fieldCentricY = drive * Math.tan(heading) + strafe * Math.cos(heading);
+        double fieldCentricX = drive * Math.sin(heading) - (strafe * Math.sin(heading));
+        double fieldCentricY = drive * Math.cos(heading) + (strafe * Math.cos(heading));
 
         double frontLeftSpeed = fieldCentricY + fieldCentricX + turn;
         double frontRightSpeed = fieldCentricY - fieldCentricX - turn;
@@ -415,12 +420,14 @@ public class UpliftAutoImpl extends UpliftAuto {
         double backRightSpeed = fieldCentricY + fieldCentricX - turn;
 
         // Set the speeds for each wheel
-        while(opModeIsActive() && Math.abs(targetAngle - getAbsoluteAngle()) > 1)
+        while(opModeIsActive() && Math.abs(error) > 2)
         {
             robot.getLeftFront().setPower(frontLeftSpeed);
             robot.getRightFront().setPower(frontRightSpeed);
             robot.getLeftBack().setPower(backLeftSpeed);
             robot.getRightBack().setPower(backRightSpeed);
+            error = targetAngle - getAngle();
+
         }
         stopMotors();
 
