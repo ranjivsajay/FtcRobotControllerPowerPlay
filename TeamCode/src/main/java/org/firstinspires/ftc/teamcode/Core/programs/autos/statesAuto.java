@@ -29,7 +29,7 @@ public class statesAuto extends UpliftAutoImpl
         robot.getWebcam().setPipeline(robot.pipeline2);
 
         moveRight(.6, 230);
-        moveForwardUp(.8, 0.4, 2150, 1000);
+        moveForwardUp(.85, 0.4, 2150, 1000);
         Thread.sleep(200);
 
         turnPID(148.5);

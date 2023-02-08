@@ -30,8 +30,8 @@ public class TeleOp1 extends UpliftTele {
 //    boolean threadOn = false;
 //
 
-    double arm1HighPos = .4;
-    double arm2HighPos = .0;
+    //double arm1HighPos = .4;
+    //double arm2HighPos = .0;
 
     @Override
     public void initHardware() {
