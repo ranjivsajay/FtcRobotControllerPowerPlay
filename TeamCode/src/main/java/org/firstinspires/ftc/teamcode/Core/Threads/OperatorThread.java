@@ -239,11 +239,11 @@ public class OperatorThread extends Thread
             robot.getTwister().setPosition(robot.getTwisterDownPos());
             robot.getFourBar1().setPosition(robot.getBar1FrontPos());
             robot.getFourBar2().setPosition(robot.getBar2FrontPos());
-            Thread.sleep(100);
+            Thread.sleep(500);
 
             robot.getArm1().setPosition(robot.getArm1LowPos());
             robot.getArm2().setPosition(robot.getArm2LowPos());
-
+            Thread.sleep(500);
 
 
           
