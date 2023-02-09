@@ -414,10 +414,11 @@ public class UpliftAutoImpl extends UpliftAuto {
         double fieldCentricX = drive * Math.sin(heading) - (strafe * Math.sin(heading));
         double fieldCentricY = drive * Math.cos(heading) + (strafe * Math.cos(heading));
 
-        double frontLeftSpeed = fieldCentricY + fieldCentricX + turn;
-        double frontRightSpeed = fieldCentricY - fieldCentricX - turn;
-        double backLeftSpeed = fieldCentricY - fieldCentricX + turn;
-        double backRightSpeed = fieldCentricY + fieldCentricX - turn;
+        double denominator = Math.max(Math.abs(fieldCentricY) + Math.abs(fieldCentricX) + Math.abs(turn), 1);
+        double frontLeftSpeed = (fieldCentricY + fieldCentricX + turn) / denominator;
+        double frontRightSpeed = (fieldCentricY - fieldCentricX - turn) / denominator;
+        double backLeftSpeed = (fieldCentricY - fieldCentricX + turn) / denominator;
+        double backRightSpeed = (fieldCentricY + fieldCentricX - turn) / denominator;
 
         // Set the speeds for each wheel
         while(opModeIsActive() && Math.abs(error) > 2)
