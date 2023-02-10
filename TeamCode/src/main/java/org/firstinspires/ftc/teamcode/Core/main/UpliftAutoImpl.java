@@ -46,8 +46,8 @@ public class UpliftAutoImpl extends UpliftAuto {
     }
 
     public void fourBarFront() {
-        robot.getFourBar1().setPosition(robot.getBar1FrontPos());
-        robot.getFourBar2().setPosition(robot.getBar2FrontPos());
+        robot.getFourBar1().setPosition(.8);
+        robot.getFourBar2().setPosition(.2);
     }
 
     public void fourBarBack() {
@@ -403,16 +403,12 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     public void fieldCentricMove(double drive, double strafe, double turn, double targetAngle) {
 
-        resetAngle();
-
-        double error = targetAngle;
-
         // Get the current orientation of the robot
         double heading = Math.toRadians(getAngle());
 
         // Transform the target x and y position into the field-centric coordinate system
-        double fieldCentricX = drive * Math.sin(heading) - (strafe * Math.sin(heading));
-        double fieldCentricY = drive * Math.cos(heading) + (strafe * Math.cos(heading));
+        double fieldCentricX = drive * Math.cos(-heading) - (strafe * Math.sin(-heading));
+        double fieldCentricY = drive * Math.sin(-heading) + (strafe * Math.cos(-heading));
 
         double denominator = Math.max(Math.abs(fieldCentricY) + Math.abs(fieldCentricX) + Math.abs(turn), 1);
         double frontLeftSpeed = (fieldCentricY + fieldCentricX + turn) / denominator;
@@ -421,17 +417,15 @@ public class UpliftAutoImpl extends UpliftAuto {
         double backRightSpeed = (fieldCentricY + fieldCentricX - turn) / denominator;
 
         // Set the speeds for each wheel
-        while(opModeIsActive() && Math.abs(error) > 2)
+        while(opModeIsActive() && Math.abs(targetAngle - getAbsoluteAngle()) > 1)
         {
             robot.getLeftFront().setPower(frontLeftSpeed);
             robot.getRightFront().setPower(frontRightSpeed);
             robot.getLeftBack().setPower(backLeftSpeed);
             robot.getRightBack().setPower(backRightSpeed);
-            error = targetAngle - getAngle();
 
         }
         stopMotors();
-
 
     }
 

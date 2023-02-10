@@ -31,14 +31,16 @@ public class statesAuto extends UpliftAutoImpl
         moveRight(.6, 230);
         moveBackward(.6,150);
         Thread.sleep(200);
-        moveForwardUp(.8, 0.4, 2250, 1000);
+        moveForwardUp(.8, 0.4, 2250, 950);
         Thread.sleep(200);
 
 //        turnPID(148.5);
         turnPID(150);
 
+        moveForward(.4, 300);
 
-        moveBackward(.4, 700);
+        moveBackward(.4, 950);
+
         stopMotors();
         Thread.sleep(300);
 //        moveForward(.4 , 40);
@@ -51,66 +53,70 @@ public class statesAuto extends UpliftAutoImpl
         Thread.sleep(500);
 
         moveForward(0.35, 350);
-        turnToPID(93);
+        robot.getGrabber().setPosition(robot.getGrabberClosePos());
+
+        turnToPID(91);
 
         robot.getSlide1().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.getSlide2().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        robot.getSlide1().setPower(0.4);
-        robot.getSlide2().setPower(-0.4);
-        Thread.sleep(750);
+        robot.getSlide1().setPower(0.3);
+        robot.getSlide2().setPower(-0.3);
+        Thread.sleep(600);
+        moveLeft(.6,50);
 //
-        //robot aligns itself with the stack of cones
-        if(robot.pipeline2.leftValue > robot.pipeline2.rightValue)
-        {
-            while(robot.pipeline2.leftValue > robot.pipeline2.rightValue)
-            {
-                moveLeft(0.3);
-            }
-            if(robot.pipeline2.rightValue > robot.pipeline2.leftValue)
-            {
-                while(robot.pipeline2.rightValue > robot.pipeline2.leftValue)
-                {
-                    moveRight(0.3);
-                }
-
-            }
-
-        }
-        else if(robot.pipeline2.rightValue > robot.pipeline2.leftValue)
-        {
-            while(robot.pipeline2.rightValue > robot.pipeline2.leftValue)
-            {
-                moveRight(0.25);
-            }
-            if(robot.pipeline2.leftValue > robot.pipeline2.rightValue)
-            {
-                while(robot.pipeline2.leftValue > robot.pipeline2.rightValue)
-                {
-                    moveLeft(0.3);
-                }
-                if(robot.pipeline2.rightValue > robot.pipeline2.leftValue + 20)
-                {
-                    while(robot.pipeline2.rightValue > robot.pipeline2.leftValue + 20)
-                    {
-                        moveRight(0.3);
-                    }
-
-                }
-
-            }
-
-        }
-        turnToPID(92);
+//        //robot aligns itself with the stack of cones
+//        if(robot.pipeline2.leftValue > robot.pipeline2.rightValue)
+//        {
+//            while(robot.pipeline2.leftValue > robot.pipeline2.rightValue)
+//            {
+//                moveLeft(0.3);
+//            }
+//            if(robot.pipeline2.rightValue > robot.pipeline2.leftValue)
+//            {
+//                while(robot.pipeline2.rightValue > robot.pipeline2.leftValue)
+//                {
+//                    moveRight(0.3);
+//                }
+//
+//            }
+//
+//        }
+//        else if(robot.pipeline2.rightValue > robot.pipeline2.leftValue)
+//        {
+//            while(robot.pipeline2.rightValue > robot.pipeline2.leftValue)
+//            {
+//                moveRight(0.25);
+//            }
+//            if(robot.pipeline2.leftValue > robot.pipeline2.rightValue)
+//            {
+//                while(robot.pipeline2.leftValue > robot.pipeline2.rightValue)
+//                {
+//                    moveLeft(0.3);
+//                }
+//                if(robot.pipeline2.rightValue > robot.pipeline2.leftValue + 20)
+//                {
+//                    while(robot.pipeline2.rightValue > robot.pipeline2.leftValue + 20)
+//                    {
+//                        moveRight(0.3);
+//                    }
+//
+//                }
+//
+//            }
+//
+//        }
+        turnToPID(91);
         stopMotors();
         robot.getWebcam().setPipeline(robot.pipeline1);
 
         robot.getArm1().setPosition(robot.getArm1StackPos5());
         robot.getArm2().setPosition(robot.getArm2StackPos5());
 
-        fourBarFront();
         robot.getTwister().setPosition(robot.getTwisterDownPos());
-        turnToPID(92);
+        fourBarFront();
+
+        turnToPID(91);
         Thread.sleep(500);
         moveForward(.5, 500);
         while(robot.getConeDetector().getDistance(DistanceUnit.CM) > 8)
@@ -130,6 +136,63 @@ public class statesAuto extends UpliftAutoImpl
         Thread.sleep(500);
 
         moveBackwardHigh(0.5,0.5, 800, 1200);
+        turnToPID(135);
+
+
+        moveBackward(0.7, 830);
+        Thread.sleep(300);
+
+        robot.getFourBar1().setPosition(.1);
+        robot.getFourBar2().setPosition(.9);
+        Thread.sleep(300);
+
+        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
+        Thread.sleep(200);
+
+
+        moveForward(0.35, 350);
+        turnToPID(93);
+
+        robot.getSlide1().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.getSlide2().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        robot.getSlide1().setPower(0.3);
+        robot.getSlide2().setPower(-0.3);
+        Thread.sleep(600);
+//
+
+
+        turnToPID(92);
+        stopMotors();
+        robot.getWebcam().setPipeline(robot.pipeline1);
+
+        robot.getArm1().setPosition(robot.getArm1StackPos4());
+        robot.getArm2().setPosition(robot.getArm2StackPos4());
+
+        fourBarFront();
+        robot.getTwister().setPosition(robot.getTwisterDownPos());
+
+        moveLeft(.6,200);
+        turnToPID(91);
+        Thread.sleep(500);
+        moveForward(.5, 500);
+        while(robot.getConeDetector().getDistance(DistanceUnit.CM) > 8)
+        {
+            moveForward(0.3);
+        }
+        stopMotors();
+//
+//
+        robot.getGrabber().setPosition(robot.getGrabberClosePos());
+        Thread.sleep(500);
+
+
+
+        robot.getFourBar1().setPosition( 0.4);
+        robot.getFourBar2().setPosition( 0.6);
+        Thread.sleep(500);
+
+        moveBackwardHigh(0.5,0.5, 900, 1200);
         turnToPID(135);
 
 
