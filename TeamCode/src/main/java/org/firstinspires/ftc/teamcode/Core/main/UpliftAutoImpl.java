@@ -403,6 +403,7 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     public void fieldCentricMove(double drive, double strafe, double turn) {
 
+
         // Get the current orientation of the robot
         double heading = Math.toRadians(getAbsoluteAngle());
 
@@ -421,8 +422,8 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getLeftBack().setPower(backLeftSpeed);
         robot.getRightBack().setPower(backRightSpeed);
 
-
     }
+
 
 
 

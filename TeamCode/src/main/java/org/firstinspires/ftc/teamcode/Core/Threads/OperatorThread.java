@@ -255,8 +255,8 @@ public class OperatorThread extends Thread
     {
         if (robot.opMode.gamepad2.y) // raise servo on 6bar
         {
-            robot.getArm2().setPosition(robot.getArm2HighPos());
-            robot.getArm1().setPosition(robot.getArm1HighPos());
+            robot.getArm2().setPosition(.2);
+            robot.getArm1().setPosition(.8);
         }
 
     }

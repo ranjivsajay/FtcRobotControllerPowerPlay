@@ -60,13 +60,13 @@ public class UpliftRobot
     double bar2BackPos = .82;
 
     double grabberOpenPos = .035;
-    double grabberClosePos = 0.18;
+    double grabberClosePos = 0.24;
 
     double twisterUpPos = .84;
     double twisterDownPos = .16;
 
-    double arm1StackPos5 = .45;
-    double arm2StackPos5 = .55;
+    double arm1StackPos5 = .48;
+    double arm2StackPos5 = .5;
 
     double arm1StackPos4 = .425;
     double arm2StackPos4 = .575;

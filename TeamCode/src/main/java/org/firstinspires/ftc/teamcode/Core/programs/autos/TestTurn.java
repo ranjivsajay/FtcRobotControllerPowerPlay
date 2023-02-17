@@ -9,10 +9,10 @@ public class TestTurn extends UpliftAutoImpl {
     @Override
     public void body() throws InterruptedException {
 
-        while(opModeIsActive() && Math.abs(90 - getAbsoluteAngle()) > 1)
+        while(opModeIsActive() && Math.abs(45 - getAbsoluteAngle()) > 1)
         {
 
-            fieldCentricMove(-0.4, -0.07, -0.2);
+            fieldCentricMove(-0.54, -0.07, -0.2);
 
         }
         stopMotors();
@@ -21,3 +21,6 @@ public class TestTurn extends UpliftAutoImpl {
 
     }
 }
+
+
+
