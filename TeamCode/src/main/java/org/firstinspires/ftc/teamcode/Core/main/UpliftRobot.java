@@ -65,11 +65,11 @@ public class UpliftRobot
     double twisterUpPos = .84;
     double twisterDownPos = .16;
 
-    double arm1StackPos5 = .48;
-    double arm2StackPos5 = .5;
+    double arm1StackPos5 = .47;
+    double arm2StackPos5 = .53;
 
-    double arm1StackPos4 = .425;
-    double arm2StackPos4 = .575;
+    double arm1StackPos4 = .43;
+    double arm2StackPos4 = .57;
 
     double arm1StackPos3 = .375;
     double arm2StackPos3 = .625;
