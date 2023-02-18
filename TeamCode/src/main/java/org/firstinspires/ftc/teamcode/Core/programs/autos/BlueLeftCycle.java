@@ -192,7 +192,7 @@ public class BlueLeftCycle extends UpliftAutoImpl {
 
 
         moveBackward(0.5, 400);
-        Thread.sleep(500);
+        Thread.sleep(300);
 
 //        robot.getFourBar1().setPosition(.1);
 //        robot.getFourBar2().setPosition(.9);
@@ -205,7 +205,7 @@ public class BlueLeftCycle extends UpliftAutoImpl {
       // third cone
 
 
-        moveForward(0.2, 370);
+        moveForward(0.3, 370);
         robot.getGrabber().setPosition(robot.getGrabberClosePos());
 
         turnToPID(92);
@@ -215,7 +215,7 @@ public class BlueLeftCycle extends UpliftAutoImpl {
 
         robot.getSlide1().setPower(0.3);
         robot.getSlide2().setPower(-0.3);
-        Thread.sleep(600);
+        Thread.sleep(400);
         moveLeft(.6,50);
 
         //robot aligns itself with the stack of cones
@@ -289,7 +289,7 @@ public class BlueLeftCycle extends UpliftAutoImpl {
         while(opModeIsActive() && Math.abs(135 - getAbsoluteAngle()) > 1)
         {
 
-            fieldCentricMove(-0.07, 0.54, -0.17);
+            fieldCentricMove(-0.07, 0.54, -0.16);
 
         }
         stopMotors();
