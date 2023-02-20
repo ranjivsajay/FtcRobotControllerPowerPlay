@@ -156,6 +156,54 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     }
 
+    public void fieldCentricMoveandUp(double drive, double strafe, double turn, double slidesPower, int slidesDist) throws InterruptedException {
+        servoArmsHigh();
+
+        // Get the current orientation of the robot
+        double heading = Math.toRadians(getAbsoluteAngle());
+
+        double fieldCentricX = strafe * Math.cos(-heading) - (drive * Math.sin(-heading));
+        double fieldCentricY = strafe * Math.sin(-heading) + (drive * Math.cos(-heading));
+
+        double denominator = Math.max(Math.abs(fieldCentricY) + Math.abs(fieldCentricX) + Math.abs(turn), 1);
+        double frontLeftSpeed = (fieldCentricY + fieldCentricX + turn) / denominator;
+        double frontRightSpeed = (fieldCentricY - fieldCentricX - turn) / denominator;
+        double backLeftSpeed = (fieldCentricY - fieldCentricX + turn) / denominator;
+        double backRightSpeed = (fieldCentricY + fieldCentricX - turn) / denominator;
+        robot.getSlide1().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.getSlide2().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.getSlide1().setTargetPosition(-slidesDist);
+        robot.getSlide2().setTargetPosition(slidesDist);
+        robot.getSlide1().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.getSlide2().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+
+        // Set the speeds for each wheel
+
+        robot.getLeftFront().setPower(frontLeftSpeed);
+        robot.getRightFront().setPower(frontRightSpeed);
+        robot.getLeftBack().setPower(backLeftSpeed);
+        robot.getRightBack().setPower(backRightSpeed);
+        robot.getSlide1().setPower(-slidesPower);
+        robot.getSlide2().setPower(slidesPower);
+
+        while (opModeIsActive() && robot.getRightFront().isBusy()) {
+
+        }
+
+        stopMotors();
+
+//        robot.getSlide1().setPower(0);
+//        robot.getSlide2().setPower(0);
+
+        fourBarBack();
+
+
+        robot.getTwister().setPosition(robot.getTwisterUpPos());
+    }
+
+
+
     public void moveForward(double power, double dist) {
         double initialPos = robot.getRightFront().getCurrentPosition();
 
@@ -417,10 +465,39 @@ public class UpliftAutoImpl extends UpliftAuto {
         double backRightSpeed = (fieldCentricY + fieldCentricX - turn) / denominator;
 
         // Set the speeds for each wheel
+
         robot.getLeftFront().setPower(frontLeftSpeed);
         robot.getRightFront().setPower(frontRightSpeed);
         robot.getLeftBack().setPower(backLeftSpeed);
         robot.getRightBack().setPower(backRightSpeed);
+
+
+    }
+
+    public void fieldCentricMoveUp(double drive, double strafe, double turn) {
+
+
+        // Get the current orientation of the robot
+        double heading = Math.toRadians(getAbsoluteAngle());
+
+        double fieldCentricX = strafe * Math.cos(-heading) - (drive * Math.sin(-heading));
+        double fieldCentricY = strafe * Math.sin(-heading) + (drive * Math.cos(-heading));
+
+        double denominator = Math.max(Math.abs(fieldCentricY) + Math.abs(fieldCentricX) + Math.abs(turn), 1);
+        double frontLeftSpeed = (fieldCentricY + fieldCentricX + turn) / denominator;
+        double frontRightSpeed = (fieldCentricY - fieldCentricX - turn) / denominator;
+        double backLeftSpeed = (fieldCentricY - fieldCentricX + turn) / denominator;
+        double backRightSpeed = (fieldCentricY + fieldCentricX - turn) / denominator;
+
+        // Set the speeds for each wheel
+
+        robot.getLeftFront().setPower(frontLeftSpeed);
+        robot.getRightFront().setPower(frontRightSpeed);
+        robot.getLeftBack().setPower(backLeftSpeed);
+        robot.getRightBack().setPower(backRightSpeed);
+
+
+
 
     }
 

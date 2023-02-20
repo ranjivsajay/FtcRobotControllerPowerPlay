@@ -42,8 +42,8 @@ public class UpliftRobot
     double arm1HighPos = .87;
     double arm2HighPos = .15;
 
-    double arm1LowPos = 0.23;
-    double arm2LowPos = 0.77;
+    double arm1LowPos = 0.26;
+    double arm2LowPos = 0.74;
 
 
 
@@ -65,17 +65,17 @@ public class UpliftRobot
     double twisterUpPos = .84;
     double twisterDownPos = .16;
 
-    double arm1StackPos5 = .4;
-    double arm2StackPos5 = .55;
+    double arm1StackPos5 = .43;
+    double arm2StackPos5 = .52;
 
-    double arm1StackPos4 = .35;
-    double arm2StackPos4 = .6;
+    double arm1StackPos4 = .38;
+    double arm2StackPos4 = .57;
 
-    double arm1StackPos3 = .3;
-    double arm2StackPos3 = .65;
+    double arm1StackPos3 = .33;
+    double arm2StackPos3 = .62;
 
-    double arm1StackPos2 = .25;
-    double arm2StackPos2 = .7;
+    double arm1StackPos2 = .28;
+    double arm2StackPos2 = .67;
 
     public PowerPlay pipeline1;
     public ConeAlignmentBlue pipeline2;
