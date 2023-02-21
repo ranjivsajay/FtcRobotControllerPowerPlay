@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 
-@Autonomous(name = "Left 1 + 3", group = "Opmodes")
-public class LeftOnePlusThree extends UpliftAutoImpl {
+@Autonomous(name = "1 + 3", group = "Opmodes")
+public class BlueLeftOnePlusThree extends UpliftAutoImpl {
     @Override
     public void initAction() {
 
