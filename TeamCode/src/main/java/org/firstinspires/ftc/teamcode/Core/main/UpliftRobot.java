@@ -77,6 +77,9 @@ public class UpliftRobot
     double arm1StackPos2 = .27;
     double arm2StackPos2 = .68;
 
+    double arm1StackPos1 = .22;
+    double arm2StackPos1 = .73;
+
     public PowerPlay pipeline1;
     public ConeAlignmentBlue pipeline2;
     public ConeAlignmentRed pipeline3;
@@ -359,6 +362,16 @@ public class UpliftRobot
     public double getArm2StackPos2()
     {
         return arm2StackPos2;
+    }
+
+    public double getArm1StackPos1()
+    {
+        return arm1StackPos1;
+    }
+
+    public double getArm2StackPos1()
+    {
+        return arm2StackPos1;
     }
 
 }

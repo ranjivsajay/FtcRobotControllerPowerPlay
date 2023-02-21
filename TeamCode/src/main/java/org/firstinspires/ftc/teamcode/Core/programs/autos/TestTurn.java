@@ -25,8 +25,8 @@ public class TestTurn extends UpliftAutoImpl {
     @Override
     public void body() throws InterruptedException {
 
-        telemetry.addData("Angle ", getAbsoluteAngle());
-        telemetry.update();
+        int parkLocation = robot.pipeline1.location;
+        robot.getWebcam().setPipeline(robot.pipeline2);
 
         while (opModeIsActive() && Math.abs(88 - getAbsoluteAngle()) > 1) {
 
@@ -59,14 +59,14 @@ public class TestTurn extends UpliftAutoImpl {
         }
         stopMotors();
 
-        moveBackward(.7,125);
-        robot.getFourBar1().setPosition(.1);
-        robot.getFourBar2().setPosition(.9);
+        moveBackward(.7, 125);
+        Thread.sleep(300);
+        robot.getFourBar1().setPosition(.12);
+        robot.getFourBar2().setPosition(.88);
         Thread.sleep(300);
 
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         Thread.sleep(200);
-
 
 
         robot.getSlide1().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -80,6 +80,7 @@ public class TestTurn extends UpliftAutoImpl {
             fieldCentricMove(-0.28, -0.54, 0.29);
 
         }
+
         stopMotors();
 
         turnToPID(92);
@@ -91,12 +92,15 @@ public class TestTurn extends UpliftAutoImpl {
 
         Thread.sleep(100);
 
-        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
 
         robot.getTwister().setPosition(robot.getTwisterDownPos());
         fourBarFront();
+        Thread.sleep(300);
+        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         turnToPID(92);
         Thread.sleep(100);
+
+        moveForward(.5, 200);
 
         while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8) {
             moveForward(0.25);
@@ -107,14 +111,13 @@ public class TestTurn extends UpliftAutoImpl {
         robot.getGrabber().setPosition(robot.getGrabberClosePos());
         Thread.sleep(300);
 
-        robot.getFourBar1().setPosition(0.4);
-        robot.getFourBar2().setPosition(0.6);
-        Thread.sleep(200);
+        robot.getFourBar1().setPosition(0.45);
+        robot.getFourBar2().setPosition(0.55);
+        Thread.sleep(300);
 
         servoArmsHigh();
 
         fourBarBack();
-        robot.getTwister().setPosition(robot.getTwisterUpPos());
 
         robot.getSlide1().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.getSlide2().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -135,14 +138,15 @@ public class TestTurn extends UpliftAutoImpl {
         }
         stopMotors();
 
-        moveBackward(.7,300);
+        robot.getTwister().setPosition(robot.getTwisterUpPos());
+
+        moveBackward(.6, 300);
         robot.getFourBar1().setPosition(.1);
         robot.getFourBar2().setPosition(.9);
         Thread.sleep(300);
 
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         Thread.sleep(200);
-
 
 
         robot.getSlide1().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -159,6 +163,7 @@ public class TestTurn extends UpliftAutoImpl {
         stopMotors();
 
         turnToPID(92);
+
 
         robot.getGrabber().setPosition(robot.getGrabberClosePos());
 
@@ -167,10 +172,11 @@ public class TestTurn extends UpliftAutoImpl {
 
         Thread.sleep(100);
 
-        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
 
         robot.getTwister().setPosition(robot.getTwisterDownPos());
         fourBarFront();
+        Thread.sleep(300);
+        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         turnToPID(92);
         Thread.sleep(100);
 
@@ -183,14 +189,13 @@ public class TestTurn extends UpliftAutoImpl {
         robot.getGrabber().setPosition(robot.getGrabberClosePos());
         Thread.sleep(300);
 
-        robot.getFourBar1().setPosition(0.4);
-        robot.getFourBar2().setPosition(0.6);
-        Thread.sleep(200);
+        robot.getFourBar1().setPosition(0.52);
+        robot.getFourBar2().setPosition(0.48);
+        Thread.sleep(300);
 
         servoArmsHigh();
 
         fourBarBack();
-        robot.getTwister().setPosition(robot.getTwisterUpPos());
 
         robot.getSlide1().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.getSlide2().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -211,14 +216,15 @@ public class TestTurn extends UpliftAutoImpl {
         }
         stopMotors();
 
-        moveBackward(.7,300);
+        robot.getTwister().setPosition(robot.getTwisterUpPos());
+
+        moveBackward(.7, 300);
         robot.getFourBar1().setPosition(.1);
         robot.getFourBar2().setPosition(.9);
         Thread.sleep(300);
 
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         Thread.sleep(200);
-
 
 
         robot.getSlide1().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -235,6 +241,7 @@ public class TestTurn extends UpliftAutoImpl {
         stopMotors();
 
         turnToPID(92);
+
 
         robot.getGrabber().setPosition(robot.getGrabberClosePos());
 
@@ -243,10 +250,11 @@ public class TestTurn extends UpliftAutoImpl {
 
         Thread.sleep(100);
 
-        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
 
         robot.getTwister().setPosition(robot.getTwisterDownPos());
         fourBarFront();
+        Thread.sleep(300);
+        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         turnToPID(92);
         Thread.sleep(100);
 
@@ -259,14 +267,13 @@ public class TestTurn extends UpliftAutoImpl {
         robot.getGrabber().setPosition(robot.getGrabberClosePos());
         Thread.sleep(300);
 
-        robot.getFourBar1().setPosition(0.4);
-        robot.getFourBar2().setPosition(0.6);
-        Thread.sleep(200);
+        robot.getFourBar1().setPosition(0.45);
+        robot.getFourBar2().setPosition(0.55);
+        Thread.sleep(300);
 
         servoArmsHigh();
 
         fourBarBack();
-        robot.getTwister().setPosition(robot.getTwisterUpPos());
 
         robot.getSlide1().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.getSlide2().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -287,16 +294,15 @@ public class TestTurn extends UpliftAutoImpl {
         }
         stopMotors();
 
-        moveBackward(.7,300);
+        robot.getTwister().setPosition(robot.getTwisterUpPos());
+
+        moveBackward(.7, 300);
         robot.getFourBar1().setPosition(.1);
         robot.getFourBar2().setPosition(.9);
         Thread.sleep(300);
 
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         Thread.sleep(200);
-
-
-
         robot.getSlide1().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.getSlide2().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
@@ -311,6 +317,7 @@ public class TestTurn extends UpliftAutoImpl {
         stopMotors();
 
         turnToPID(92);
+
 
         robot.getGrabber().setPosition(robot.getGrabberClosePos());
 
@@ -319,10 +326,11 @@ public class TestTurn extends UpliftAutoImpl {
 
         Thread.sleep(100);
 
-        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
 
         robot.getTwister().setPosition(robot.getTwisterDownPos());
         fourBarFront();
+        Thread.sleep(300);
+        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         turnToPID(92);
         Thread.sleep(100);
 
@@ -335,14 +343,13 @@ public class TestTurn extends UpliftAutoImpl {
         robot.getGrabber().setPosition(robot.getGrabberClosePos());
         Thread.sleep(300);
 
-        robot.getFourBar1().setPosition(0.4);
-        robot.getFourBar2().setPosition(0.6);
-        Thread.sleep(200);
+        robot.getFourBar1().setPosition(0.45);
+        robot.getFourBar2().setPosition(0.55);
+        Thread.sleep(300);
 
         servoArmsHigh();
 
         fourBarBack();
-        robot.getTwister().setPosition(robot.getTwisterUpPos());
 
         robot.getSlide1().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.getSlide2().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -363,14 +370,15 @@ public class TestTurn extends UpliftAutoImpl {
         }
         stopMotors();
 
-        moveBackward(.7,300);
+        robot.getTwister().setPosition(robot.getTwisterUpPos());
+
+        moveBackward(.7, 300);
         robot.getFourBar1().setPosition(.1);
         robot.getFourBar2().setPosition(.9);
         Thread.sleep(300);
 
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         Thread.sleep(200);
-
 
 
         robot.getSlide1().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -388,19 +396,108 @@ public class TestTurn extends UpliftAutoImpl {
 
         turnToPID(92);
 
+
         robot.getGrabber().setPosition(robot.getGrabberClosePos());
 
-        robot.getArm1().setPosition(robot.getArm1LowPos());
-        robot.getArm2().setPosition(robot.getArm2LowPos());
+        robot.getArm1().setPosition(robot.getArm1StackPos1());
+        robot.getArm2().setPosition(robot.getArm2StackPos1());
 
         Thread.sleep(100);
 
-        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
-
+        robot.getGrabber().setPosition(robot.getGrabberClosePos());
         robot.getTwister().setPosition(robot.getTwisterDownPos());
         fourBarFront();
+        Thread.sleep(300);
+        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         turnToPID(92);
         Thread.sleep(100);
+
+        while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8) {
+            moveForward(0.25);
+        }
+        stopMotors();
+//
+//
+        robot.getGrabber().setPosition(robot.getGrabberClosePos());
+        Thread.sleep(300);
+
+        robot.getFourBar1().setPosition(0.45);
+        robot.getFourBar2().setPosition(0.55);
+        Thread.sleep(300);
+
+        servoArmsHigh();
+
+        fourBarBack();
+
+        robot.getSlide1().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.getSlide2().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        robot.getSlide1().setTargetPosition(-1000);
+        robot.getSlide2().setTargetPosition(1000);
+
+        robot.getSlide1().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.getSlide2().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        robot.getSlide1().setPower(-0.6);
+        robot.getSlide2().setPower(0.6);
+
+        while (opModeIsActive() && Math.abs(135 - getAbsoluteAngle()) > 1) {
+
+            fieldCentricMove(-0.07, 0.6, -0.2);
+
+        }
+        stopMotors();
+
+        robot.getTwister().setPosition(robot.getTwisterUpPos());
+
+        moveBackward(.7, 300);
+        robot.getFourBar1().setPosition(.1);
+        robot.getFourBar2().setPosition(.9);
+        Thread.sleep(300);
+
+        robot.getGrabber().setPosition(robot.getGrabberOpenPos());
+        Thread.sleep(200);
+
+        while (opModeIsActive() && Math.abs(105 - getAbsoluteAngle()) > 1) {
+
+            fieldCentricMove(-0.3, -0.54, 0.29);
+
+        }
+        stopMotors();
+
+        robot.getGrabber().setPosition(robot.getGrabberClosePos());
+
+        robot.getSlide1().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.getSlide2().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        robot.getSlide1().setPower(0.1);
+        robot.getSlide2().setPower(-0.1);
+        Thread.sleep(400);
+
+        turnToPID(93);
+
+
+        robot.getFourBar1().setPosition(0.4);
+        robot.getFourBar2().setPosition(0.6);
+        Thread.sleep(500);
+
+        robot.getWebcam().setPipeline(robot.pipeline1);
+
+        if (parkLocation == 1) {
+            moveForward(.5, 500);
+        } else if (parkLocation == 2) {
+            moveBackward(.5, 300);
+
+        } else if (parkLocation == 3) {
+            moveBackward(.7, 1250);
+            stopMotors();
+
+        }
+
+
+
+
+//
 
 
 
