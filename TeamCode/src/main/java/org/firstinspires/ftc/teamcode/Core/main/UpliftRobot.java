@@ -59,23 +59,23 @@ public class UpliftRobot
     double bar1BackPos = .18;
     double bar2BackPos = .82;
 
-    double grabberOpenPos = .035;
+    double grabberOpenPos = .033;
     double grabberClosePos = 0.24;
 
     double twisterUpPos = .84;
     double twisterDownPos = .16;
 
-    double arm1StackPos5 = .43;
-    double arm2StackPos5 = .52;
+    double arm1StackPos5 = .42;
+    double arm2StackPos5 = .53;
 
-    double arm1StackPos4 = .38;
-    double arm2StackPos4 = .57;
+    double arm1StackPos4 = .37;
+    double arm2StackPos4 = .58;
 
-    double arm1StackPos3 = .33;
-    double arm2StackPos3 = .62;
+    double arm1StackPos3 = .32;
+    double arm2StackPos3 = .63;
 
-    double arm1StackPos2 = .28;
-    double arm2StackPos2 = .67;
+    double arm1StackPos2 = .27;
+    double arm2StackPos2 = .68;
 
     public PowerPlay pipeline1;
     public ConeAlignmentBlue pipeline2;
