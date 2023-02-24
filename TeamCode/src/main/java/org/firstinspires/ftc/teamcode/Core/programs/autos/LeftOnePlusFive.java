@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 
-@Autonomous(name = "TestFieldCentric", group = "Opmodes")
-public class TestTurn extends UpliftAutoImpl {
+@Autonomous(name = "Left 1 + 5", group = "Opmodes")
+public class LeftOnePlusFive extends UpliftAutoImpl {
 
     @Override
     public void initAction()
@@ -179,7 +179,7 @@ public class TestTurn extends UpliftAutoImpl {
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         turnToPID(92);
         Thread.sleep(100);
-
+        moveForward(.5, 200);
         while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8) {
             moveForward(0.25);
         }
@@ -257,7 +257,7 @@ public class TestTurn extends UpliftAutoImpl {
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         turnToPID(92);
         Thread.sleep(100);
-
+        moveForward(.5, 200);
         while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8) {
             moveForward(0.25);
         }
@@ -289,7 +289,7 @@ public class TestTurn extends UpliftAutoImpl {
 
         while (opModeIsActive() && Math.abs(135 - getAbsoluteAngle()) > 1) {
 
-            fieldCentricMove(-0.07, 0.6, -0.2);
+            fieldCentricMove(-0.07, 0.61, -0.2);
 
         }
         stopMotors();
@@ -333,7 +333,7 @@ public class TestTurn extends UpliftAutoImpl {
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         turnToPID(92);
         Thread.sleep(100);
-
+        moveForward(.5, 200);
         while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8) {
             moveForward(0.25);
         }
@@ -365,7 +365,7 @@ public class TestTurn extends UpliftAutoImpl {
 
         while (opModeIsActive() && Math.abs(135 - getAbsoluteAngle()) > 1) {
 
-            fieldCentricMove(-0.07, 0.6, -0.2);
+            fieldCentricMove(-0.07, 0.61, -0.2);
 
         }
         stopMotors();
@@ -411,7 +411,7 @@ public class TestTurn extends UpliftAutoImpl {
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         turnToPID(92);
         Thread.sleep(100);
-
+        moveForward(.5, 200);
         while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8) {
             moveForward(0.25);
         }
@@ -443,7 +443,7 @@ public class TestTurn extends UpliftAutoImpl {
 
         while (opModeIsActive() && Math.abs(135 - getAbsoluteAngle()) > 1) {
 
-            fieldCentricMove(-0.07, 0.6, -0.2);
+            fieldCentricMove(-0.07, 0.61, -0.2);
 
         }
         stopMotors();
@@ -484,12 +484,12 @@ public class TestTurn extends UpliftAutoImpl {
         robot.getWebcam().setPipeline(robot.pipeline1);
 
         if (parkLocation == 1) {
-            moveForward(.5, 500);
+            moveForward(.5, 700);
         } else if (parkLocation == 2) {
-            moveBackward(.5, 300);
+            moveBackward(.5, 400);
 
         } else if (parkLocation == 3) {
-            moveBackward(.7, 1250);
+            moveBackward(.7, 1500);
             stopMotors();
 
         }

@@ -319,6 +319,14 @@ public class OperatorThread extends Thread
     {
         if(robot.opMode.gamepad2.dpad_down) // medium height forwards
         {
+
+            robot.getArm1().setPosition(robot.getArm1StackPos5());
+            robot.getArm2().setPosition(robot.getArm2StackPos5());
+
+            robot.getFourBar1().setPosition(0);
+            robot.getFourBar2().setPosition(1);
+
+            robot.getGrabber().setPosition(robot.getGrabberOpenPos());
 ////            slides(0.5, 700);
 //            robot.getArm1().setPosition(robot.getArm1HighPos());
 //            robot.getArm2().setPosition(robot.getArm2HighPos());

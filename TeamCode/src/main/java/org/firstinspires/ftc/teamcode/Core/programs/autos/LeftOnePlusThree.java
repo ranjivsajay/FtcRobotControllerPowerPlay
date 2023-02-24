@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 
-@Autonomous(name = "1 + 3", group = "Opmodes")
-public class BlueLeftOnePlusThree extends UpliftAutoImpl {
+@Autonomous(name = "Left 1 + 3", group = "Opmodes")
+public class LeftOnePlusThree extends UpliftAutoImpl {
     @Override
     public void initAction() {
 
@@ -74,7 +74,7 @@ public class BlueLeftOnePlusThree extends UpliftAutoImpl {
         fourBarFront();
         turnToPID(93);
         Thread.sleep(500);
-
+        moveForward(.5, 200);
         while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8) {
             moveForward(0.3);
         }
@@ -130,7 +130,7 @@ public class BlueLeftOnePlusThree extends UpliftAutoImpl {
         fourBarFront();
         turnToPID(93);
         Thread.sleep(500);
-
+        moveForward(.5, 200);
         while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8) {
             moveForward(0.3);
         }
@@ -186,7 +186,7 @@ public class BlueLeftOnePlusThree extends UpliftAutoImpl {
         fourBarFront();
         turnToPID(93);
         Thread.sleep(500);
-
+        moveForward(.5, 200);
         while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8) {
             moveForward(0.3);
         }
@@ -242,12 +242,12 @@ public class BlueLeftOnePlusThree extends UpliftAutoImpl {
         robot.getWebcam().setPipeline(robot.pipeline1);
 
         if (parkLocation == 1) {
-            moveForward(.5,500);
+            moveForward(.5,700);
         } else if (parkLocation == 2) {
-            moveBackward(.5, 300);
+            moveBackward(.5, 400);
 
         } else if (parkLocation == 3) {
-            moveBackward(.6, 1250);
+            moveBackward(.6, 1500);
 
 
 //        }

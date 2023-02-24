@@ -33,7 +33,7 @@ public class UpliftRobot
     ColorSensor lineDetector;
     OpenCvCamera webcam;
     DcMotor odoRight;
-    BNO055IMU imu;
+    public BNO055IMU imu;
 
 //    AdafruitBNO055IMU gyro;
 
@@ -74,11 +74,11 @@ public class UpliftRobot
     double arm1StackPos3 = .32;
     double arm2StackPos3 = .63;
 
-    double arm1StackPos2 = .27;
-    double arm2StackPos2 = .68;
+    double arm1StackPos2 = .28;
+    double arm2StackPos2 = .67;
 
-    double arm1StackPos1 = .22;
-    double arm2StackPos1 = .73;
+    double arm1StackPos1 = .21;
+    double arm2StackPos1 = .74;
 
     public PowerPlay pipeline1;
     public ConeAlignmentBlue pipeline2;

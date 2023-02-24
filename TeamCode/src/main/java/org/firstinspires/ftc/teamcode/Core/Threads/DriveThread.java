@@ -11,6 +11,9 @@ import static java.lang.Math.toRadians;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftTele;
 import org.firstinspires.ftc.teamcode.Core.toolkit.UpliftMath;
@@ -38,14 +41,32 @@ public class DriveThread extends Thread
         {
             try
             {
-                double leftY =(.7 * Range.clip(-robot.opMode.gamepad1.left_stick_y, -1, 1));
-                double rightX = (.7 * Range.clip(robot.opMode.gamepad1.right_stick_x, -1, 1));
-                double leftX = ( .7 * Range.clip(robot.opMode.gamepad1.left_stick_x, -1, 1));
-
+                double leftY =(Range.clip(-robot.opMode.gamepad1.left_stick_y, -1, 1));
+                double rightX = (Range.clip(robot.opMode.gamepad1.right_stick_x, -1, 1));
+                double leftX = (Range.clip(robot.opMode.gamepad1.left_stick_x, -1, 1));
+//
                 double angle = 90 - Math.toDegrees(UpliftMath.atan2UL(leftY, leftX));
                 double magnitude = 0.8 * Range.clip(sqrt(Math.pow(leftX, 2) + Math.pow(leftY, 2)), -1, 1);
-
+//
                 teleDrive(angle, magnitude, rightX, robot.opMode.gamepad1.right_trigger,robot.opMode.gamepad1.left_trigger, robot);
+
+                double heading = Math.toRadians(robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle);
+
+//                double fieldCentricX = leftX * Math.cos(-heading) - (leftY * Math.sin(-heading));
+//                double fieldCentricY = leftX * Math.sin(-heading) + (leftY * Math.cos(-heading));
+
+//                double denominator = Math.max(Math.abs(fieldCentricY) + Math.abs(fieldCentricX) + Math.abs(rightX), 1);
+//                double frontLeftSpeed = (fieldCentricY + fieldCentricX + rightX) / denominator;
+//                double frontRightSpeed = (fieldCentricY - fieldCentricX - rightX) / denominator;
+//                double backLeftSpeed = (fieldCentricY - fieldCentricX + rightX) / denominator;
+//                double backRightSpeed = (fieldCentricY + fieldCentricX - rightX) / denominator;
+
+                // Set the speeds for each wheel
+
+//                robot.getLeftFront().setPower(frontLeftSpeed);
+//                robot.getRightFront().setPower(frontRightSpeed);
+//                robot.getLeftBack().setPower(backLeftSpeed);
+//                robot.getRightBack().setPower(backRightSpeed);
 
                 if(robot.opMode.gamepad1.left_bumper)
                 {
