@@ -25,7 +25,8 @@ public class OperatorThread extends Thread
     private boolean fourBarState;
     private boolean block4BarInput;
 
-
+    private boolean fourBarStates;
+    private boolean block4BarInputs;
 
     private boolean twisterState;
     private boolean blockTwisterInput;
@@ -41,6 +42,9 @@ public class OperatorThread extends Thread
 
         this.fourBarState = true;
         this.block4BarInput = false;
+
+        this.fourBarStates = true;
+        this.block4BarInputs = false;
 
     }
 
@@ -297,23 +301,14 @@ public class OperatorThread extends Thread
         }
     }
 
-    public void mediumBackwards()
-    {
-        if(robot.opMode.gamepad2.dpad_right) //  medium height backwards
+    public void mediumBackwards() {
+        if (robot.opMode.gamepad2.dpad_right) //  medium height backwards
         {
-////            slides(0.5, 700);
-//            robot.getArm1().setPosition(robot.getArm1HighPos());
-//            robot.getArm2().setPosition(robot.getArm2HighPos());
-//
-//            robot.getFourBar1().setPosition(robot.getBar1BackPos());
-//            robot.getFourBar2().setPosition(robot.getBar2BackPos());
-//
-//            robot.getTwister().setPosition(robot.getTwisterUpPos());
-//
-//            robot.getFourBar1().setPosition(robot.getBar1FrontPos());
-//            robot.getFourBar2().setPosition(robot.getBar2FrontPos());
+            robot.getTwister().setPosition(robot.getTwisterUpPos());
+
         }
     }
+
 
     public void mediumForwards()
     {
@@ -323,8 +318,8 @@ public class OperatorThread extends Thread
             robot.getArm1().setPosition(robot.getArm1StackPos5());
             robot.getArm2().setPosition(robot.getArm2StackPos5());
 
-            robot.getFourBar1().setPosition(0);
-            robot.getFourBar2().setPosition(1);
+            robot.getFourBar1().setPosition(1);
+            robot.getFourBar2().setPosition(0);
 
             robot.getGrabber().setPosition(robot.getGrabberOpenPos());
 ////            slides(0.5, 700);
