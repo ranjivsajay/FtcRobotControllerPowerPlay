@@ -71,8 +71,7 @@ public class LeftOnePlusThree extends UpliftAutoImpl {
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
 
         robot.getTwister().setPosition(robot.getTwisterDownPos());
-        robot.getFourBar1().setPosition(.85);
-        robot.getFourBar2().setPosition(.15);
+        fourBarFront();
         turnToPID(93);
         Thread.sleep(500);
         moveForward(.5, 200);
@@ -128,8 +127,7 @@ public class LeftOnePlusThree extends UpliftAutoImpl {
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
 
         robot.getTwister().setPosition(robot.getTwisterDownPos());
-        robot.getFourBar1().setPosition(.85);
-        robot.getFourBar2().setPosition(.15);
+        fourBarFront();
         turnToPID(93);
         Thread.sleep(500);
         moveForward(.5, 200);
@@ -185,8 +183,7 @@ public class LeftOnePlusThree extends UpliftAutoImpl {
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
 
         robot.getTwister().setPosition(robot.getTwisterDownPos());
-        robot.getFourBar1().setPosition(.85);
-        robot.getFourBar2().setPosition(.15);
+        fourBarFront();
         turnToPID(93);
         Thread.sleep(500);
         moveForward(.5, 200);

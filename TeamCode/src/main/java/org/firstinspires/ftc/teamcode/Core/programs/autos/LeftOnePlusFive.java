@@ -60,10 +60,10 @@ public class LeftOnePlusFive extends UpliftAutoImpl {
         stopMotors();
 
         moveBackward(.7, 125);
-        Thread.sleep(200);
+        Thread.sleep(300);
         robot.getFourBar1().setPosition(.12);
         robot.getFourBar2().setPosition(.88);
-        Thread.sleep(250);
+        Thread.sleep(300);
 
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         Thread.sleep(200);
@@ -77,12 +77,12 @@ public class LeftOnePlusFive extends UpliftAutoImpl {
 
         while (opModeIsActive() && Math.abs(105 - getAbsoluteAngle()) > 1) {
 
-            fieldCentricMove(-0.2, -0.54, 0.29);
+            fieldCentricMove(-0.28, -0.54, 0.29);
 
         }
 
         stopMotors();
-//      moveRight(.5,150);
+
         turnToPID(92);
 
         robot.getGrabber().setPosition(robot.getGrabberClosePos());
@@ -94,14 +94,13 @@ public class LeftOnePlusFive extends UpliftAutoImpl {
 
 
         robot.getTwister().setPosition(robot.getTwisterDownPos());
-        robot.getFourBar1().setPosition(.8);
-        robot.getFourBar2().setPosition(.2);
+        fourBarFront();
         Thread.sleep(300);
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         turnToPID(92);
         Thread.sleep(100);
 
-        moveForward(.5, 150);
+        moveForward(.5, 200);
 
         while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8) {
             moveForward(0.25);
@@ -114,7 +113,7 @@ public class LeftOnePlusFive extends UpliftAutoImpl {
 
         robot.getFourBar1().setPosition(0.45);
         robot.getFourBar2().setPosition(0.55);
-        Thread.sleep(200);
+        Thread.sleep(300);
 
         servoArmsHigh();
 
@@ -158,7 +157,7 @@ public class LeftOnePlusFive extends UpliftAutoImpl {
 
         while (opModeIsActive() && Math.abs(105 - getAbsoluteAngle()) > 1) {
 
-            fieldCentricMove(-0.3, -0.54, 0.29);
+            fieldCentricMove(-0.28, -0.54, 0.29);
 
         }
         stopMotors();
@@ -175,13 +174,12 @@ public class LeftOnePlusFive extends UpliftAutoImpl {
 
 
         robot.getTwister().setPosition(robot.getTwisterDownPos());
-        robot.getFourBar1().setPosition(.8);
-        robot.getFourBar2().setPosition(.2);
-        Thread.sleep(200);
+        fourBarFront();
+        Thread.sleep(300);
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         turnToPID(92);
         Thread.sleep(100);
-        moveForward(.5, 280);
+        moveForward(.5, 200);
         while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8) {
             moveForward(0.25);
         }
@@ -254,8 +252,7 @@ public class LeftOnePlusFive extends UpliftAutoImpl {
 
 
         robot.getTwister().setPosition(robot.getTwisterDownPos());
-        robot.getFourBar1().setPosition(.8);
-        robot.getFourBar2().setPosition(.2);
+        fourBarFront();
         Thread.sleep(300);
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         turnToPID(92);
@@ -299,10 +296,10 @@ public class LeftOnePlusFive extends UpliftAutoImpl {
 
         robot.getTwister().setPosition(robot.getTwisterUpPos());
 
-        moveBackward(.7, 350);
+        moveBackward(.7, 300);
         robot.getFourBar1().setPosition(.1);
         robot.getFourBar2().setPosition(.9);
-        Thread.sleep(250);
+        Thread.sleep(300);
 
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         Thread.sleep(200);
@@ -314,7 +311,7 @@ public class LeftOnePlusFive extends UpliftAutoImpl {
 
         while (opModeIsActive() && Math.abs(105 - getAbsoluteAngle()) > 1) {
 
-            fieldCentricMove(-0.3, -0.54, 0.29);
+            fieldCentricMove(-0.28, -0.54, 0.29);
 
         }
         stopMotors();
@@ -331,8 +328,7 @@ public class LeftOnePlusFive extends UpliftAutoImpl {
 
 
         robot.getTwister().setPosition(robot.getTwisterDownPos());
-        robot.getFourBar1().setPosition(.8);
-        robot.getFourBar2().setPosition(.2);
+        fourBarFront();
         Thread.sleep(300);
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         turnToPID(92);
@@ -345,7 +341,7 @@ public class LeftOnePlusFive extends UpliftAutoImpl {
 //
 //
         robot.getGrabber().setPosition(robot.getGrabberClosePos());
-        Thread.sleep(500);
+        Thread.sleep(300);
 
         robot.getFourBar1().setPosition(0.45);
         robot.getFourBar2().setPosition(0.55);
@@ -410,8 +406,7 @@ public class LeftOnePlusFive extends UpliftAutoImpl {
 
         robot.getGrabber().setPosition(robot.getGrabberClosePos());
         robot.getTwister().setPosition(robot.getTwisterDownPos());
-        robot.getFourBar1().setPosition(.8);
-        robot.getFourBar2().setPosition(.2);
+        fourBarFront();
         Thread.sleep(300);
         robot.getGrabber().setPosition(robot.getGrabberOpenPos());
         turnToPID(92);
@@ -424,7 +419,7 @@ public class LeftOnePlusFive extends UpliftAutoImpl {
 //
 //
         robot.getGrabber().setPosition(robot.getGrabberClosePos());
-        Thread.sleep(400);
+        Thread.sleep(300);
 
         robot.getFourBar1().setPosition(0.45);
         robot.getFourBar2().setPosition(0.55);
@@ -494,10 +489,15 @@ public class LeftOnePlusFive extends UpliftAutoImpl {
             moveBackward(.5, 400);
 
         } else if (parkLocation == 3) {
-            moveBackward(1, 1300);
+            moveBackward(.7, 1500);
             stopMotors();
 
         }
+
+
+
+
+//
 
 
 
