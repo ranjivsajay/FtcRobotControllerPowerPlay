@@ -248,7 +248,7 @@ public class OperatorThread extends Thread
 //            Thread.sleep(500);
 
 
-          
+
         }
     }
 
@@ -303,10 +303,7 @@ public class OperatorThread extends Thread
     {
         if(robot.opMode.gamepad2.dpad_right) //  medium height backwards
         {
-<<<<<<< Updated upstream
-=======
             robot.getTwister().setPosition(robot.getTwisterUpPos());
->>>>>>> Stashed changes
 ////            slides(0.5, 700);
 //            robot.getArm1().setPosition(robot.getArm1HighPos());
 //            robot.getArm2().setPosition(robot.getArm2HighPos());
@@ -329,8 +326,8 @@ public class OperatorThread extends Thread
             robot.getArm1().setPosition(robot.getArm1StackPos5());
             robot.getArm2().setPosition(robot.getArm2StackPos5());
 
-            robot.getFourBar1().setPosition(0);
-            robot.getFourBar2().setPosition(1);
+            robot.getFourBar1().setPosition(1);
+            robot.getFourBar2().setPosition(0);
 
             robot.getGrabber().setPosition(robot.getGrabberOpenPos());
 ////            slides(0.5, 700);

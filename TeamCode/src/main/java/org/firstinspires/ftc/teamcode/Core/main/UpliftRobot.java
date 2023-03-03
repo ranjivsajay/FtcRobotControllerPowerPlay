@@ -42,11 +42,7 @@ public class UpliftRobot
     double arm1HighPos = .87;
     double arm2HighPos = .15;
 
-<<<<<<< Updated upstream
-    double arm1LowPos = 0.26;
-=======
     double arm1LowPos = 0.24 ;
->>>>>>> Stashed changes
     double arm2LowPos = 0.74;
 
 
@@ -69,20 +65,20 @@ public class UpliftRobot
     double twisterUpPos = .84;
     double twisterDownPos = .16;
 
-    double arm1StackPos5 = .42;
-    double arm2StackPos5 = .53;
+    double arm1StackPos5 = .39;
+    double arm2StackPos5 = .56;
 
-    double arm1StackPos4 = .37;
-    double arm2StackPos4 = .58;
+    double arm1StackPos4 = .35;
+    double arm2StackPos4 = .60;
 
-    double arm1StackPos3 = .32;
-    double arm2StackPos3 = .63;
+    double arm1StackPos3 = .30;
+    double arm2StackPos3 = .65;
 
-    double arm1StackPos2 = .28;
-    double arm2StackPos2 = .67;
+    double arm1StackPos2 = .26;
+    double arm2StackPos2 = .69;
 
-    double arm1StackPos1 = .18;
-    double arm2StackPos1 = .77;
+    double arm1StackPos1 = .16;
+    double arm2StackPos1 = .79;
 
     public PowerPlay pipeline1;
     public ConeAlignmentBlue pipeline2;
@@ -157,8 +153,8 @@ public class UpliftRobot
 
     }
 
-        public void initializeCamera()
-        {
+    public void initializeCamera()
+    {
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
@@ -169,7 +165,7 @@ public class UpliftRobot
 
         webcam.setPipeline(pipeline1);
 
-            webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
+        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
             public void onOpened()
             {
