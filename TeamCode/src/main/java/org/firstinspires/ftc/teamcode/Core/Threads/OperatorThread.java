@@ -95,8 +95,10 @@ public class OperatorThread extends Thread
                 }
                 double angle;
                 int minTic = 150;
-                robot.getSlide1().setPower(0.75 * Range.clip(robot.opMode.gamepad2.right_stick_y, -1, 1));
-                robot.getSlide2().setPower(0.75 * Range.clip(-robot.opMode.gamepad2.right_stick_y, -1, 1));
+//                robot.getSlide1().setPower(0.85 * Range.clip(robot.opMode.gamepad2.right_stick_y, -1, 1));
+//                robot.getSlide2().setPower(0.85 * Range.clip(-robot.opMode.gamepad2.right_stick_y, -1, 1));
+                robot.getSlide1().setPower(Range.clip(robot.opMode.gamepad2.right_stick_y, -1, 1));
+                robot.getSlide2().setPower(Range.clip(-robot.opMode.gamepad2.right_stick_y, -1, 1));
                 if(robot.getSlide2().getCurrentPosition() > minTic)
                 {
 
@@ -237,8 +239,8 @@ public class OperatorThread extends Thread
 //            }
             robot.getTwister().setPosition(robot.getTwisterDownPos());
             robot.getTwister().setPosition(robot.getTwisterDownPos());
-            robot.getFourBar1().setPosition(0.8);
-            robot.getFourBar2().setPosition(0.2);
+            robot.getFourBar1().setPosition(0.82);
+            robot.getFourBar2().setPosition(0.18);
 //            Thread.sleep(500);
 
             robot.getArm1().setPosition(robot.getArm1LowPos());
@@ -256,7 +258,7 @@ public class OperatorThread extends Thread
         if (robot.opMode.gamepad2.y) // raise servo on 6bar
         {
             robot.getArm2().setPosition(.22);
-            robot.getArm1().setPosition(.78);
+            robot.getArm1().setPosition(.75);
         }
 
     }
@@ -301,6 +303,10 @@ public class OperatorThread extends Thread
     {
         if(robot.opMode.gamepad2.dpad_right) //  medium height backwards
         {
+<<<<<<< Updated upstream
+=======
+            robot.getTwister().setPosition(robot.getTwisterUpPos());
+>>>>>>> Stashed changes
 ////            slides(0.5, 700);
 //            robot.getArm1().setPosition(robot.getArm1HighPos());
 //            robot.getArm2().setPosition(robot.getArm2HighPos());
@@ -378,8 +384,8 @@ public class OperatorThread extends Thread
     {
         if(robot.opMode.gamepad2.left_stick_y < -0.5) // 2 stack height
         {
-            robot.getArm1().setPosition(robot.getArm1StackPos2());
-            robot.getArm2().setPosition(robot.getArm2StackPos2());
+            robot.getArm1().setPosition(robot.getArm1StackPos2()-.01);
+            robot.getArm2().setPosition(robot.getArm2StackPos2()+.01);
         }
     }
 

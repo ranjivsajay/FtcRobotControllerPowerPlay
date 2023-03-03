@@ -42,7 +42,11 @@ public class UpliftRobot
     double arm1HighPos = .87;
     double arm2HighPos = .15;
 
+<<<<<<< Updated upstream
     double arm1LowPos = 0.26;
+=======
+    double arm1LowPos = 0.24 ;
+>>>>>>> Stashed changes
     double arm2LowPos = 0.74;
 
 
@@ -77,8 +81,8 @@ public class UpliftRobot
     double arm1StackPos2 = .28;
     double arm2StackPos2 = .67;
 
-    double arm1StackPos1 = .21;
-    double arm2StackPos1 = .74;
+    double arm1StackPos1 = .18;
+    double arm2StackPos1 = .77;
 
     public PowerPlay pipeline1;
     public ConeAlignmentBlue pipeline2;
