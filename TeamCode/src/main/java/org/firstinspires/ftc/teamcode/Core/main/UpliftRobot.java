@@ -20,6 +20,7 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.Core.toolkit.vision.ConeAlignmentBlue;
 import org.firstinspires.ftc.teamcode.Core.toolkit.vision.ConeAlignmentRed;
 import org.firstinspires.ftc.teamcode.Core.toolkit.vision.PowerPlay;
+import org.firstinspires.ftc.teamcode.Core.toolkit.vision.PowerPlay2;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
@@ -28,9 +29,8 @@ public class UpliftRobot
 {
     DcMotor leftFront, rightFront, leftBack, rightBack, slide1, slide2;
     Servo grabber, arm1, arm2, fourBar1, fourBar2, twister;
-    DistanceSensor coneDetector, poleDetector;
+    DistanceSensor coneDetector;
     TouchSensor magnet;
-    ColorSensor lineDetector;
     OpenCvCamera webcam;
     DcMotor odoRight;
     public BNO055IMU imu;
@@ -39,11 +39,11 @@ public class UpliftRobot
 
 
 
-    double arm1HighPos = .87;
-    double arm2HighPos = .15;
+    double arm1HighPos = .95;
+    double arm2HighPos = 0.05;
 
-    double arm1LowPos = 0.24 ;
-    double arm2LowPos = 0.74;
+    double arm1LowPos = 0.33 ;
+    double arm2LowPos = 0.67;
 
 
 
@@ -65,22 +65,45 @@ public class UpliftRobot
     double twisterUpPos = .84;
     double twisterDownPos = .16;
 
-    double arm1StackPos5 = .39;
-    double arm2StackPos5 = .56;
+    double arm1StackPos5 = .57;
+    double arm2StackPos5 = .38;
 
-    double arm1StackPos4 = .35;
-    double arm2StackPos4 = .60;
+    double arm1StackPos4 = .56;
+    double arm2StackPos4 = .44;
 
-    double arm1StackPos3 = .30;
-    double arm2StackPos3 = .65;
+    double arm1StackPos3 = .51;
+    double arm2StackPos3 = .48;
 
-    double arm1StackPos2 = .26;
-    double arm2StackPos2 = .69;
+    double arm1StackPos2 = .41;
+    double arm2StackPos2 = .52;
 
-    double arm1StackPos1 = .16;
-    double arm2StackPos1 = .79;
+    double arm1StackPos1 = .35;
+    double arm2StackPos1 = .65;
+
+
+//    double arm1HighPos = .87;
+//    double arm2HighPos = .15;
+//
+//    double arm1LowPos = 0.24 ;
+//    double arm2LowPos = 0.74;
+
+//    double arm1StackPos5 = .39;
+//    double arm2StackPos5 = .56;
+//
+//    double arm1StackPos4 = .35;
+//    double arm2StackPos4 = .60;
+//
+//    double arm1StackPos3 = .30;
+//    double arm2StackPos3 = .65;
+//
+//    double arm1StackPos2 = .26;
+//    double arm2StackPos2 = .69;
+//
+//    double arm1StackPos1 = .14;
+//    double arm2StackPos1 = .81;
 
     public PowerPlay pipeline1;
+    public PowerPlay2 pipeline4;
     public ConeAlignmentBlue pipeline2;
     public ConeAlignmentRed pipeline3;
     public LinearOpMode opMode;
@@ -117,11 +140,11 @@ public class UpliftRobot
         twister = hardwareMap.get(Servo.class,"twister");
 
         coneDetector = hardwareMap.get(DistanceSensor.class, "coneDetector");
-        poleDetector = hardwareMap.get(DistanceSensor.class, "poleDetector");
+
 
         magnet = hardwareMap.get(TouchSensor.class, "magnet");
 
-        lineDetector = hardwareMap.get(ColorRangeSensor.class, "lineDetector");
+
 
         odoRight = hardwareMap.get(DcMotor.class, "odoRight");
 
@@ -162,8 +185,9 @@ public class UpliftRobot
         pipeline1 = new PowerPlay(opMode.telemetry);
         pipeline2 = new ConeAlignmentBlue(opMode.telemetry);
         pipeline3 = new ConeAlignmentRed(opMode.telemetry);
+        pipeline4 = new PowerPlay2(opMode.telemetry);
 
-        webcam.setPipeline(pipeline1);
+        webcam.setPipeline(pipeline4);
 
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
@@ -247,20 +271,13 @@ public class UpliftRobot
         return coneDetector;
     }
 
-    public DistanceSensor getPoleDetector()
-    {
-        return poleDetector;
-    }
+
 
     public TouchSensor getMagnet()
     {
         return magnet;
     }
 
-    public ColorSensor getLineDetector()
-    {
-        return lineDetector;
-    }
 
     public DcMotor getOdoRight()
     {

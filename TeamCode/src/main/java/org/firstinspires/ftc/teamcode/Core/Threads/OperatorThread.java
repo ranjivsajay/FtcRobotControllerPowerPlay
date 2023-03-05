@@ -239,8 +239,10 @@ public class OperatorThread extends Thread
 //            }
             robot.getTwister().setPosition(robot.getTwisterDownPos());
             robot.getTwister().setPosition(robot.getTwisterDownPos());
-            robot.getFourBar1().setPosition(0.82);
-            robot.getFourBar2().setPosition(0.18);
+            robot.getFourBar1().setPosition(0.8);
+            robot.getFourBar2().setPosition(0.2);
+//            robot.getFourBar1().setPosition(robot.getBar1FrontPos());
+//            robot.getFourBar2().setPosition(robot.getBar2FrontPos());
 //            Thread.sleep(500);
 
             robot.getArm1().setPosition(robot.getArm1LowPos());
@@ -257,8 +259,8 @@ public class OperatorThread extends Thread
     {
         if (robot.opMode.gamepad2.y) // raise servo on 6bar
         {
-            robot.getArm2().setPosition(.22);
-            robot.getArm1().setPosition(.75);
+            robot.getArm2().setPosition(.1);
+            robot.getArm1().setPosition(.9);
         }
 
     }
