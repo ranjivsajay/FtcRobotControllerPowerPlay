@@ -48,10 +48,10 @@ public class TeleOp1 extends UpliftTele {
 
 
 
+        robot.getArm1().setPosition(robot.getArm1StackPos5());
+        robot.getArm2().setPosition(robot.getArm2StackPos5());
 
-
-        robot.getFourBar1().setPosition(.25);
-        robot.getFourBar2().setPosition(.75);
+        robot.getFourBar2().setPosition(.25);
 
         robot.getGrabber().setPosition(robot.getGrabberClosePos());
         robot.getTwister().setPosition(robot.getTwisterDownPos());
@@ -63,11 +63,11 @@ public class TeleOp1 extends UpliftTele {
     }
 
     @Override
-
+  
     public void bodyLoop() throws InterruptedException {
 
-        telemetry.addData("dist ", robot.getConeDetector().getDistance(DistanceUnit.CM));
-        telemetry.addData("magnet:" , robot.getMagnet().getValue());
+        telemetry.addData("dist ", robot.getConeDetector().getDistance(DistanceUnit.METER));
+       // telemetry.addData("magnet:" , robot.getMagnet().getValue());
         telemetry.update();
 
 //        test();

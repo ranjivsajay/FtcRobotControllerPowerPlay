@@ -15,14 +15,12 @@ public class ConeAlignmentBlue extends OpenCvPipeline
     Mat mat = new Mat();
 
     public double leftValue;
-    public double rightValue;
+
 
     static final Rect LEFT_ROI = new Rect(
-            new Point(120, 50),
-            new Point(200, 130));
-    static final Rect RIGHT_ROI = new Rect(
-            new Point(200, 50),
-            new Point(280, 130));
+            new Point(160, 50),
+            new Point(220, 130));
+
 
     public ConeAlignmentBlue(Telemetry t) {
         telemetry = t;
@@ -40,16 +38,13 @@ public class ConeAlignmentBlue extends OpenCvPipeline
         Core.inRange(mat, blueLowHSV, blueHighHSV, mat);
 
         Mat left = mat.submat(LEFT_ROI);
-        Mat right = mat.submat(RIGHT_ROI);
 
         leftValue = Core.sumElems(left).val[0] / 255;
-        rightValue = Core.sumElems(right).val[0] / 255;
+
 
         Imgproc.rectangle(input, LEFT_ROI, new Scalar(0, 255, 0), 4);
-        Imgproc.rectangle(input, RIGHT_ROI, new Scalar(0, 255, 0), 4);
 
-        telemetry.addData("Left Raw Value", leftValue);
-        telemetry.addData("Right Raw Value", rightValue);
+        telemetry.addData("Left Raw Value", (leftValue / 255) * 6.4);
 
         telemetry.update();
 

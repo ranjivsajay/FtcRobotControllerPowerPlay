@@ -29,7 +29,7 @@ public class UpliftRobot
 {
     DcMotor leftFront, rightFront, leftBack, rightBack, slide1, slide2;
     Servo grabber, arm1, arm2, fourBar1, fourBar2, twister;
-    DistanceSensor coneDetector;
+    DistanceSensor coneDetector, poleDetector;
     TouchSensor magnet;
     OpenCvCamera webcam;
     DcMotor odoRight;
@@ -65,20 +65,20 @@ public class UpliftRobot
     double twisterUpPos = .84;
     double twisterDownPos = .16;
 
-    double arm1StackPos5 = .57;
-    double arm2StackPos5 = .38;
+    double arm1StackPos5 = .6;
+    double arm2StackPos5 = .4;
 
-    double arm1StackPos4 = .56;
-    double arm2StackPos4 = .44;
+    double arm1StackPos4 = arm1StackPos5 - 0.03;
+    double arm2StackPos4 = arm2StackPos5 - 0.03;
 
-    double arm1StackPos3 = .51;
-    double arm2StackPos3 = .48;
+    double arm1StackPos3 = arm1StackPos4 - 0.03;
+    double arm2StackPos3 = arm2StackPos4 - 0.03;
 
-    double arm1StackPos2 = .41;
-    double arm2StackPos2 = .52;
+    double arm1StackPos2 = arm1StackPos3 - 0.03;
+    double arm2StackPos2 = arm2StackPos3 - 0.03;
 
-    double arm1StackPos1 = .35;
-    double arm2StackPos1 = .65;
+    double arm1StackPos1 = arm1StackPos2 - 0.03;
+    double arm2StackPos1 = arm2StackPos2 - 0.03;
 
 
 //    double arm1HighPos = .87;
@@ -141,6 +141,9 @@ public class UpliftRobot
 
         coneDetector = hardwareMap.get(DistanceSensor.class, "coneDetector");
 
+        poleDetector = hardwareMap.get(DistanceSensor.class, "poleDetector");
+
+
 
         magnet = hardwareMap.get(TouchSensor.class, "magnet");
 
@@ -187,7 +190,7 @@ public class UpliftRobot
         pipeline3 = new ConeAlignmentRed(opMode.telemetry);
         pipeline4 = new PowerPlay2(opMode.telemetry);
 
-        webcam.setPipeline(pipeline4);
+        webcam.setPipeline(pipeline2);
 
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
@@ -271,7 +274,9 @@ public class UpliftRobot
         return coneDetector;
     }
 
-
+    public DistanceSensor getPoleDetector() {
+        return poleDetector;
+    }
 
     public TouchSensor getMagnet()
     {

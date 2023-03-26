@@ -46,8 +46,7 @@ public class UpliftAutoImpl extends UpliftAuto {
     }
 
     public void fourBarFront() {
-        robot.getFourBar1().setPosition(.8);
-        robot.getFourBar2().setPosition(.2);
+        robot.getFourBar2().setPosition(.25);
     }
 
     public void fourBarBack() {
@@ -399,6 +398,18 @@ public class UpliftAutoImpl extends UpliftAuto {
         while(opModeIsActive() && Math.abs(targetAngle - getAbsoluteAngle()) > 1)
         {
             double motorPower = pid.update(getAbsoluteAngle());
+            robot.getLeftFront().setPower(-motorPower);
+            robot.getRightFront().setPower(motorPower);
+            robot.getLeftBack().setPower(-motorPower);
+            robot.getRightBack().setPower(motorPower);
+        }
+        stopMotors();
+    }
+
+    public void pTurnTo(double targetAngle, double motorPower)
+    {
+        while(opModeIsActive() && Math.abs(targetAngle - getAbsoluteAngle()) > 1)
+        {
             robot.getLeftFront().setPower(-motorPower);
             robot.getRightFront().setPower(motorPower);
             robot.getLeftBack().setPower(-motorPower);

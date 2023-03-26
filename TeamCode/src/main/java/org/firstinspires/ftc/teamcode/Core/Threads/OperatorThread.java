@@ -238,11 +238,10 @@ public class OperatorThread extends Thread
 //                robot.getSlide2().setPower(-0.2);
 //            }
             robot.getTwister().setPosition(robot.getTwisterDownPos());
-            robot.getTwister().setPosition(robot.getTwisterDownPos());
-            robot.getFourBar1().setPosition(0.8);
-            robot.getFourBar2().setPosition(0.2);
-//            robot.getFourBar1().setPosition(robot.getBar1FrontPos());
-//            robot.getFourBar2().setPosition(robot.getBar2FrontPos());
+//            robot.getFourBar1().setPosition(0.8);
+//            robot.getFourBar2().setPosition(0.2);
+            robot.getFourBar1().setPosition(robot.getBar1FrontPos());
+            robot.getFourBar2().setPosition(robot.getBar2FrontPos());
 //            Thread.sleep(500);
 
             robot.getArm1().setPosition(robot.getArm1LowPos());
