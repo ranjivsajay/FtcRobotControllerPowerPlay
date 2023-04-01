@@ -63,7 +63,7 @@ public class TeleOp1 extends UpliftTele {
     }
 
     @Override
-  
+
     public void bodyLoop() throws InterruptedException {
 
         telemetry.addData("dist ", robot.getConeDetector().getDistance(DistanceUnit.METER));

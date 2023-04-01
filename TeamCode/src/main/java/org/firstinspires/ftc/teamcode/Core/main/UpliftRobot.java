@@ -28,7 +28,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 public class UpliftRobot
 {
     DcMotor leftFront, rightFront, leftBack, rightBack, slide1, slide2;
-    Servo grabber, arm1, arm2, fourBar1, fourBar2, twister;
+    Servo grabber1, grabber2, armLeft, armRight, fourBar, twister, extensionLeft, extensionRight, odoMid, gRotation, gPosition;
     DistanceSensor coneDetector, poleDetector;
     TouchSensor magnet;
     OpenCvCamera webcam;
@@ -45,31 +45,23 @@ public class UpliftRobot
     double arm1LowPos = 0.33 ;
     double arm2LowPos = 0.67;
 
+    double barFrontPos = .77;
+    double barBackPos = .18;
 
+    double grabber1OpenPos = .033;
+    double grabber1ClosePos = 0.24;
 
-//    double bar1FrontPos = .14;
-//    double bar2FrontPos = .86;
-//
-//    double bar1BackPos = .8;
-//    double bar2BackPos = .2;
-
-    double bar1FrontPos = .77;
-    double bar2FrontPos = .23;
-
-    double bar1BackPos = .18;
-    double bar2BackPos = .82;
-
-    double grabberOpenPos = .033;
-    double grabberClosePos = 0.24;
+    double grabber2OpenPos = 0.5;
+    double grabber2ClosePos = 0.5;
 
     double twisterUpPos = .84;
     double twisterDownPos = .16;
 
-    double arm1StackPos5 = .6;
-    double arm2StackPos5 = .4;
+    double arm1PickUpPos = .6;
+    double arm2PickUpPos = .4;
 
-    double arm1StackPos4 = arm1StackPos5 - 0.03;
-    double arm2StackPos4 = arm2StackPos5 - 0.03;
+    double arm1StackPos4 = arm1PickUpPos - 0.03;
+    double arm2StackPos4 = arm2PickUpPos - 0.03;
 
     double arm1StackPos3 = arm1StackPos4 - 0.03;
     double arm2StackPos3 = arm2StackPos4 - 0.03;
@@ -81,26 +73,44 @@ public class UpliftRobot
     double arm2StackPos1 = arm2StackPos2 - 0.03;
 
 
-//    double arm1HighPos = .87;
-//    double arm2HighPos = .15;
-//
-//    double arm1LowPos = 0.24 ;
-//    double arm2LowPos = 0.74;
+    double rotationStack5 = 0.5;
+    double rotationStack4 = rotationStack5 - 0.1;
+    double rotationStack3 = rotationStack4 - 0.1;
+    double rotationStack2 = rotationStack3 - 0.1;
+    double rotationStack1 = rotationStack2 - 0.1;
 
-//    double arm1StackPos5 = .39;
-//    double arm2StackPos5 = .56;
-//
-//    double arm1StackPos4 = .35;
-//    double arm2StackPos4 = .60;
-//
-//    double arm1StackPos3 = .30;
-//    double arm2StackPos3 = .65;
-//
-//    double arm1StackPos2 = .26;
-//    double arm2StackPos2 = .69;
-//
-//    double arm1StackPos1 = .14;
-//    double arm2StackPos1 = .81;
+    double positionStack5 = 0.5;
+    double positionStack4 = positionStack5 + 0.1;
+    double positionStack3 = positionStack4 + 0.1;
+    double positionStack2 = positionStack3 + 0.1;
+    double positionStack1 = positionStack2 + 0.1;
+
+
+
+    double extensionLeftIn = 0.5;
+    double extensionRightIn = 0.5;
+
+    double extensionLeftOut = 0.5;
+    double extensionRightOut = 0.5;
+
+    double extensionLeftTransfer = 0.5;
+    double extensionRightTransfer = 0.5;
+
+    double extensionLeftCyclePos = 0.5;
+    double extensionRightCyclePos = 0.5;
+
+    double odoMidUp = 0.5;
+    double odoMidDown = 0.5;
+
+    double gPositionTransfer = 0.5;
+    double gRotationTransfer = 0.5;
+
+
+
+
+
+
+
 
     public PowerPlay pipeline1;
     public PowerPlay2 pipeline4;
@@ -126,18 +136,28 @@ public class UpliftRobot
         leftBack = hardwareMap.get(DcMotor.class, "left_back");
         rightBack = hardwareMap.get(DcMotor.class, "right_back");
 
-        arm1 = hardwareMap.get(Servo.class, "arm1");
-        arm2 = hardwareMap.get(Servo.class, "arm2");
+        armLeft = hardwareMap.get(Servo.class, "armLeft");
+        armRight = hardwareMap.get(Servo.class, "armRight");
 
         slide1 = hardwareMap.get(DcMotor.class, "slide1");
         slide2 = hardwareMap.get(DcMotor.class, "slide2");
 
-        grabber = hardwareMap.get(Servo.class, "grabber");
+        grabber1 = hardwareMap.get(Servo.class, "grabber1");
+        grabber2 = hardwareMap.get(Servo.class, "grabber2");
 
-        fourBar1 = hardwareMap.get(Servo.class,"fourBar1");
-        fourBar2= hardwareMap.get(Servo.class,"fourBar2");
+        fourBar = hardwareMap.get(Servo.class,"fourBar");
 
         twister = hardwareMap.get(Servo.class,"twister");
+
+        extensionLeft = hardwareMap.get(Servo.class, "extensionLeft");
+        extensionRight = hardwareMap.get(Servo.class, "extensionRight");
+
+        odoMid = hardwareMap.get(Servo.class, "odoMid");
+
+        gPosition = hardwareMap.get(Servo.class, "gPosition");
+
+        gRotation = hardwareMap.get(Servo.class, "gRotation");
+
 
         coneDetector = hardwareMap.get(DistanceSensor.class, "coneDetector");
 
@@ -174,8 +194,8 @@ public class UpliftRobot
         slide1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         slide2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        arm2.setDirection(Servo.Direction.REVERSE);
-        arm1.setDirection(Servo.Direction.REVERSE);
+        armRight.setDirection(Servo.Direction.REVERSE);
+        armLeft.setDirection(Servo.Direction.REVERSE);
 
     }
 
@@ -215,12 +235,28 @@ public class UpliftRobot
         return webcam;
     }
 
-    public Servo getFourBar1() {
-        return fourBar1;
+    public Servo getGrabber1()
+    {
+        return grabber1;
     }
 
-    public Servo getFourBar2() {
-        return fourBar2;
+    public Servo getGrabber2()
+    {
+        return grabber2;
+    }
+
+    public Servo getArmLeft()
+    {
+        return armLeft;
+    }
+
+    public Servo getArmRight()
+    {
+        return armRight;
+    }
+
+    public Servo getFourBar() {
+        return fourBar;
     }
 
     public Servo getTwister()
@@ -228,20 +264,28 @@ public class UpliftRobot
         return twister;
     }
 
-    public Servo getGrabber()
+
+
+    public Servo getExtensionRight()
     {
-        return grabber;
+        return extensionRight;
     }
 
-    public Servo getArm1()
+    public Servo getOdoMid()
     {
-        return arm1;
+        return odoMid;
     }
 
-    public Servo getArm2()
+    public Servo getgPosition()
     {
-        return arm2;
+        return gPosition;
     }
+
+    public Servo getgRotation()
+    {
+        return gRotation;
+    }
+
 
     public DcMotor getLeftFront() {
         return leftFront;
@@ -284,12 +328,6 @@ public class UpliftRobot
     }
 
 
-    public DcMotor getOdoRight()
-    {
-        return odoRight;
-    }
-
-
     public double getTwisterUpPos()
     {
         return twisterUpPos;
@@ -300,14 +338,24 @@ public class UpliftRobot
         return twisterDownPos;
     }
 
-    public double getGrabberOpenPos()
+    public double getGrabber1OpenPos()
     {
-        return grabberOpenPos;
+        return grabber1OpenPos;
     }
 
-    public double getGrabberClosePos()
+    public double getGrabber1ClosePos()
     {
-        return grabberClosePos;
+        return grabber1ClosePos;
+    }
+
+    public double getGrabber2OpenPos()
+    {
+        return grabber2OpenPos;
+    }
+
+    public double getGrabber2ClosePos()
+    {
+        return grabber2ClosePos;
     }
 
     public double getArm1HighPos()
@@ -330,34 +378,24 @@ public class UpliftRobot
         return arm2LowPos;
     }
 
-    public double getBar1FrontPos()
+    public double getBarFrontPos()
     {
-        return bar1FrontPos;
+        return barFrontPos;
     }
 
-    public double getBar2FrontPos()
+    public double getBarBackPos()
     {
-        return bar2FrontPos;
-    }
-
-    public double getBar1BackPos()
-    {
-        return bar1BackPos;
-    }
-
-    public double getBar2BackPos()
-    {
-        return bar2BackPos;
+        return barBackPos;
     }
 
     public double getArm1StackPos5()
     {
-        return  arm1StackPos5;
+        return  arm1PickUpPos;
     }
 
     public double getArm2StackPos5()
     {
-        return arm2StackPos5;
+        return arm2PickUpPos;
     }
 
     public double getArm1StackPos4() {
@@ -395,5 +433,66 @@ public class UpliftRobot
     {
         return arm2StackPos1;
     }
+
+    public double getExtensionLeftIn()
+    {
+        return extensionLeftIn;
+    }
+
+    public double getExtensionRightIn()
+    {
+        return extensionRightIn;
+    }
+
+    public double getExtensionLeftOut()
+    {
+        return extensionLeftOut;
+    }
+
+    public double getExtensionRightOut()
+    {
+        return extensionRightOut;
+    }
+
+    public double getExtensionLeftTransfer()
+    {
+        return extensionLeftTransfer;
+    }
+
+    public double getExtensionRightTransfer()
+    {
+        return extensionRightTransfer;
+    }
+
+    public double getExtensionLeftCyclePos()
+    {
+        return extensionLeftCyclePos;
+    }
+
+    public double getExtensionRightCyclePos()
+    {
+        return extensionRightCyclePos;
+    }
+
+    public double getOdoMidUp()
+    {
+        return odoMidUp;
+    }
+
+    public double getOdoMidDown()
+    {
+        return odoMidDown;
+    }
+
+    public double getgPositionTransfer()
+    {
+        return gPositionTransfer;
+    }
+
+    public double getgRotationTransfer()
+    {
+        return gRotationTransfer;
+    }
+
 
 }

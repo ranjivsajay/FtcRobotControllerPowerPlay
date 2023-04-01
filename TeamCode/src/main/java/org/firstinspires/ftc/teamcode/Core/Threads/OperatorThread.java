@@ -304,7 +304,9 @@ public class OperatorThread extends Thread
     {
         if(robot.opMode.gamepad2.dpad_right) //  medium height backwards
         {
-            robot.getTwister().setPosition(robot.getTwisterUpPos());
+//            robot.getTwister().setPosition(robot.getTwisterUpPos());
+
+            robot.getFourBar2().setPosition(0.5);
 ////            slides(0.5, 700);
 //            robot.getArm1().setPosition(robot.getArm1HighPos());
 //            robot.getArm2().setPosition(robot.getArm2HighPos());
