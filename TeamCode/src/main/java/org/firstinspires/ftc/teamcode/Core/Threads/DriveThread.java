@@ -50,28 +50,20 @@ public class DriveThread extends Thread
 //
                 teleDrive(angle, magnitude, rightX, robot.opMode.gamepad1.right_trigger,robot.opMode.gamepad1.left_trigger, robot);
 
-                double heading = Math.toRadians(robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle);
-
-//                double fieldCentricX = leftX * Math.cos(-heading) - (leftY * Math.sin(-heading));
-//                double fieldCentricY = leftX * Math.sin(-heading) + (leftY * Math.cos(-heading));
-
-//                double denominator = Math.max(Math.abs(fieldCentricY) + Math.abs(fieldCentricX) + Math.abs(rightX), 1);
-//                double frontLeftSpeed = (fieldCentricY + fieldCentricX + rightX) / denominator;
-//                double frontRightSpeed = (fieldCentricY - fieldCentricX - rightX) / denominator;
-//                double backLeftSpeed = (fieldCentricY - fieldCentricX + rightX) / denominator;
-//                double backRightSpeed = (fieldCentricY + fieldCentricX - rightX) / denominator;
-
-                // Set the speeds for each wheel
-
-//                robot.getLeftFront().setPower(frontLeftSpeed);
-//                robot.getRightFront().setPower(frontRightSpeed);
-//                robot.getLeftBack().setPower(backLeftSpeed);
-//                robot.getRightBack().setPower(backRightSpeed);
 
                 if(robot.opMode.gamepad1.left_bumper)
                 {
                     robot.getFourBar1().setPosition(.38);
                     robot.getFourBar2().setPosition(.62);
+                }
+
+                if(robot.opMode.gamepad1.dpad_up)
+                {
+                    robot.getLeftFront().setPower(0.1);
+                    robot.getLeftBack().setPower(0.1);
+                    robot.getRightBack().setPower(0.1);
+                    robot.getRightFront().setPower(0.1);
+                    Thread.sleep(10000);
                 }
 
 

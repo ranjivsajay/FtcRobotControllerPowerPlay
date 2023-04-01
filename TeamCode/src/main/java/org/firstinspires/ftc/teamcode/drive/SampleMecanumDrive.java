@@ -137,6 +137,7 @@ public class SampleMecanumDrive extends MecanumDrive {
         setLocalizer(local);
 
 
+
         trajectorySequenceRunner = new TrajectorySequenceRunner(
                 follower, HEADING_PID, batteryVoltageSensor,
                 lastEncPositions, lastEncVels, lastTrackingEncPositions, lastTrackingEncVels
