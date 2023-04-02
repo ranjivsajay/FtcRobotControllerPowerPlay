@@ -6,6 +6,7 @@ import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
 import static java.lang.Math.toRadians;
 
+import com.acmerobotics.dashboard.message.redux.StopOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
@@ -48,13 +49,40 @@ public class TeleOp1 extends UpliftTele {
 
 
 
-        robot.getArm1().setPosition(robot.getArm1StackPos5());
-        robot.getArm2().setPosition(robot.getArm2StackPos5());
+//        robot.getArm1().setPosition(robot.getArm1StackPos5());
+//        robot.getArm2().setPosition(robot.getArm2StackPos5());
+//
+//        robot.getFourBar2().setPosition(.25);
+//
+//        robot.getGrabber().setPosition(robot.getGrabberClosePos());
+//        robot.getTwister().setPosition(robot.getTwisterDownPos());
 
-        robot.getFourBar2().setPosition(.25);
+        //testing grabber 2 pos
+//        robot.getgPosition().setPosition(robot.getPostitionStack1());
+//        sleep(2000);
+//        robot.getgPosition().setPosition(robot.getPostitionStack2());
+//        sleep(2000);
+//        robot.getgPosition().setPosition(robot.getPostitionStack3());
+//        sleep(2000);
+//        robot.getgPosition().setPosition(robot.getPostitionStack4());
+//        sleep(2000);
+//        robot.getgPosition().setPosition(robot.getPostitionStack5());
+//        sleep(2000);
+//        robot.getgPosition().setPosition(robot.getgPositionStore());
 
-        robot.getGrabber().setPosition(robot.getGrabberClosePos());
-        robot.getTwister().setPosition(robot.getTwisterDownPos());
+        //testing extension
+//          robot.getExtensionRight().setPosition(robot.getExtensionRightIn());
+//          robot.getExtensionLeft().setPosition(robot.getExtensionLeftIn());
+//          sleep(2000);
+//          robot.getExtensionRight().setPosition(.3);
+//          robot.getExtensionLeft().setPosition(.7);
+
+        robot.getOdoMid().setPosition(robot.getOdoMidDown());
+        sleep(2000);
+        robot.getOdoMid().setPosition(robot.getOdoMidUp());
+
+        robot.getOdo
+
 
 
         driverThread.start();

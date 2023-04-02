@@ -51,11 +51,11 @@ public class DriveThread extends Thread
                 teleDrive(angle, magnitude, rightX, robot.opMode.gamepad1.right_trigger,robot.opMode.gamepad1.left_trigger, robot);
 
 
-                if(robot.opMode.gamepad1.left_bumper)
-                {
-                    robot.getFourBar1().setPosition(.38);
-                    robot.getFourBar2().setPosition(.62);
-                }
+//                if(robot.opMode.gamepad1.left_bumper)
+//                {
+//                    robot.getFourBar1().setPosition(.38);
+//                    robot.getFourBar2().setPosition(.62);
+//                }
 
                 if(robot.opMode.gamepad1.dpad_up)
                 {

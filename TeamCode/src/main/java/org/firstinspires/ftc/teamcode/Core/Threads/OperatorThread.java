@@ -84,14 +84,14 @@ public class OperatorThread extends Thread
 
                 if(robot.opMode.gamepad2.left_bumper)
                 {
-                    robot.getFourBar1().setPosition(robot.getFourBar1().getPosition() + 0.01);
-                    robot.getFourBar2().setPosition(robot.getFourBar2().getPosition() - 0.01);
+//                    robot.getFourBar1().setPosition(robot.getFourBar1().getPosition() + 0.01);
+//                    robot.getFourBar2().setPosition(robot.getFourBar2().getPosition() - 0.01);
                 }
 
                 if(robot.opMode.gamepad2.right_bumper)
                 {
-                    robot.getFourBar1().setPosition(robot.getFourBar1().getPosition() - 0.01);
-                    robot.getFourBar2().setPosition(robot.getFourBar2().getPosition() + 0.01);
+//                    robot.getFourBar1().setPosition(robot.getFourBar1().getPosition() - 0.01);
+//                    robot.getFourBar2().setPosition(robot.getFourBar2().getPosition() + 0.01);
                 }
                 double angle;
                 int minTic = 150;
@@ -113,18 +113,18 @@ public class OperatorThread extends Thread
 
                 if(robot.getMagnet().isPressed())
                 {
-                    robot.getArm1().setPosition(robot.getArm1HighPos());
-                    robot.getArm2().setPosition(robot.getArm2HighPos());
+                    robot.getArmLeft().setPosition(robot.getArm1HighPos());
+                    robot.getArmRight().setPosition(robot.getArm2HighPos());
                 }
 
                 if (robot.opMode.gamepad2.right_trigger > .1)
                 {
-                    robot.getGrabber().setPosition(robot.getGrabberClosePos());
+                    robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
                 }
 
                 if (robot.opMode.gamepad2.b)
                 {
-                    robot.getGrabber().setPosition(robot.getGrabberOpenPos());
+                    robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
                 }
 
 //                robot.opMode.telemetry.addData("magnet", robot.getMagnet().isPressed());
@@ -179,9 +179,9 @@ public class OperatorThread extends Thread
         //allows the 4bar to move to its forwards and backwards position with the same button
         if(robot.opMode.gamepad2.x && !block4BarInput)
         {
-            robot.getFourBar1().setPosition(fourBarState ? 0.8 : .5);
+            robot.getFourBar().setPosition(fourBarState ? 0.8 : .5);
 //            robot.getFourBar2().setPosition(fourBarState ? robot.getBar2FrontPos() : 0.62);
-            robot.getFourBar2().setPosition(fourBarState ? 0.2 : .5);
+            robot.getFourBar().setPosition(fourBarState ? 0.2 : .5);
             fourBarState = !fourBarState;
             block4BarInput = true;
         }
@@ -211,17 +211,17 @@ public class OperatorThread extends Thread
         double value = robot.getConeDetector().getDistance(DistanceUnit.CM);
         if(value <= 5 && robot.opMode.gamepad2.right_trigger == 0)
         {
-            robot.getGrabber().setPosition(robot.getGrabberClosePos());
+            robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
         }
         else
         {
-            if(robot.opMode.gamepad2.right_trigger > robot.getGrabberOpenPos() && !blockGrabberInput)
+            if(robot.opMode.gamepad2.right_trigger > robot.getGrabber1OpenPos() && !blockGrabberInput)
             {
-                robot.getGrabber().setPosition(grabberState ? robot.getGrabberOpenPos() : robot.getGrabberClosePos());
+                robot.getGrabber1().setPosition(grabberState ? robot.getGrabber1OpenPos() : robot.getGrabber1ClosePos());
                 grabberState = !grabberState;
                 blockGrabberInput = true;
             }
-            else if (robot.opMode.gamepad2.right_trigger < robot.getGrabberClosePos() && blockGrabberInput)
+            else if (robot.opMode.gamepad2.right_trigger < robot.getGrabber1ClosePos() && blockGrabberInput)
             {
                 blockGrabberInput = false;
             }
@@ -240,12 +240,12 @@ public class OperatorThread extends Thread
             robot.getTwister().setPosition(robot.getTwisterDownPos());
 //            robot.getFourBar1().setPosition(0.8);
 //            robot.getFourBar2().setPosition(0.2);
-            robot.getFourBar1().setPosition(robot.getBar1FrontPos());
-            robot.getFourBar2().setPosition(robot.getBar2FrontPos());
+            robot.getFourBar().setPosition(robot.getBarFrontPos());
+            robot.getFourBar().setPosition(robot.getBarFrontPos());
 //            Thread.sleep(500);
 
-            robot.getArm1().setPosition(robot.getArm1LowPos());
-            robot.getArm2().setPosition(robot.getArm2LowPos());
+            robot.getArmLeft().setPosition(robot.getArm1LowPos());
+            robot.getArmRight().setPosition(robot.getArm2LowPos());
 //            Thread.sleep(500);
 
 
@@ -258,8 +258,8 @@ public class OperatorThread extends Thread
     {
         if (robot.opMode.gamepad2.y) // raise servo on 6bar
         {
-            robot.getArm2().setPosition(.1);
-            robot.getArm1().setPosition(.9);
+            robot.getArmRight().setPosition(.1);
+            robot.getArmLeft().setPosition(.9);
         }
 
     }
@@ -271,11 +271,10 @@ public class OperatorThread extends Thread
 
 //            slides(0.5, 953);
 
-            robot.getFourBar1().setPosition(robot.getBar1BackPos());
-            robot.getFourBar2().setPosition(robot.getBar2BackPos());
+            robot.getFourBar().setPosition(robot.getBarBackPos());
 
-            robot.getArm1().setPosition(robot.getArm1HighPos());
-            robot.getArm2().setPosition(robot.getArm2HighPos());
+            robot.getArmLeft().setPosition(robot.getArm1HighPos());
+            robot.getArmRight().setPosition(robot.getArm2HighPos());
 
 
 
@@ -290,11 +289,10 @@ public class OperatorThread extends Thread
         if(robot.opMode.gamepad2.dpad_left) // max height forwards
         {
 //            slides(0.5, 953);
-            robot.getArm1().setPosition(robot.getArm1HighPos());
-            robot.getArm2().setPosition(robot.getArm2HighPos());
+            robot.getArmLeft().setPosition(robot.getArm1HighPos());
+            robot.getArmRight().setPosition(robot.getArm2HighPos());
 
-            robot.getFourBar1().setPosition(robot.getBar1FrontPos());
-            robot.getFourBar2().setPosition(robot.getBar2FrontPos());
+            robot.getFourBar().setPosition(robot.getBarFrontPos());
 
             robot.getTwister().setPosition(robot.getTwisterDownPos());
         }
@@ -306,7 +304,7 @@ public class OperatorThread extends Thread
         {
 //            robot.getTwister().setPosition(robot.getTwisterUpPos());
 
-            robot.getFourBar2().setPosition(0.5);
+            robot.getFourBar().setPosition(0.5);
 ////            slides(0.5, 700);
 //            robot.getArm1().setPosition(robot.getArm1HighPos());
 //            robot.getArm2().setPosition(robot.getArm2HighPos());
@@ -326,13 +324,12 @@ public class OperatorThread extends Thread
         if(robot.opMode.gamepad2.dpad_down) // medium height forwards
         {
 
-            robot.getArm1().setPosition(robot.getArm1StackPos5());
-            robot.getArm2().setPosition(robot.getArm2StackPos5());
+            robot.getArmLeft().setPosition(robot.getArm1StackPos5());
+            robot.getArmRight().setPosition(robot.getArm2StackPos5());
 
-            robot.getFourBar1().setPosition(1);
-            robot.getFourBar2().setPosition(0);
+            robot.getFourBar().setPosition(1);
 
-            robot.getGrabber().setPosition(robot.getGrabberOpenPos());
+            robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
 ////            slides(0.5, 700);
 //            robot.getArm1().setPosition(robot.getArm1HighPos());
 //            robot.getArm2().setPosition(robot.getArm2HighPos());
@@ -355,8 +352,8 @@ public class OperatorThread extends Thread
     {
         if(robot.opMode.gamepad2.left_stick_y > .5) // 5 stack height
         {
-            robot.getArm1().setPosition(robot.getArm1StackPos5());
-            robot.getArm2().setPosition(robot.getArm2StackPos5());
+            robot.getArmLeft().setPosition(robot.getArm1StackPos5());
+            robot.getArmRight().setPosition(robot.getArm2StackPos5());
 
         }
     }
@@ -365,8 +362,8 @@ public class OperatorThread extends Thread
     {
         if(robot.opMode.gamepad2.left_stick_x < -0.5) // 4 stack height
         {
-            robot.getArm1().setPosition(robot.getArm1StackPos4());
-            robot.getArm2().setPosition(robot.getArm2StackPos4());
+            robot.getArmLeft().setPosition(robot.getArm1StackPos4());
+            robot.getArmRight().setPosition(robot.getArm2StackPos4());
         }
     }
 
@@ -375,8 +372,8 @@ public class OperatorThread extends Thread
         if(robot.opMode.gamepad2.left_stick_x > 0.5) // 3 stack height
         {
 
-            robot.getArm1().setPosition(robot.getArm1StackPos3());
-            robot.getArm2().setPosition(robot.getArm2StackPos3());
+            robot.getArmLeft().setPosition(robot.getArm1StackPos3());
+            robot.getArmRight().setPosition(robot.getArm2StackPos3());
         }
     }
 
@@ -384,8 +381,8 @@ public class OperatorThread extends Thread
     {
         if(robot.opMode.gamepad2.left_stick_y < -0.5) // 2 stack height
         {
-            robot.getArm1().setPosition(robot.getArm1StackPos2()-.01);
-            robot.getArm2().setPosition(robot.getArm2StackPos2()+.01);
+            robot.getArmLeft().setPosition(robot.getArm1StackPos2()-.01);
+            robot.getArmRight().setPosition(robot.getArm2StackPos2()+.01);
         }
     }
 

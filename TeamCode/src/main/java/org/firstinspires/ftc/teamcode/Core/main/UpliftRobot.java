@@ -73,22 +73,23 @@ public class UpliftRobot
     double arm2StackPos1 = arm2StackPos2 - 0.03;
 
 
-    double rotationStack5 = 0.5;
-    double rotationStack4 = rotationStack5 - 0.1;
-    double rotationStack3 = rotationStack4 - 0.1;
-    double rotationStack2 = rotationStack3 - 0.1;
-    double rotationStack1 = rotationStack2 - 0.1;
+    double rotationStack1 = 0;
+    double rotationStack2 = rotationStack1 + 0.1;
+    double rotationStack3 = rotationStack2 + 0.1;
+    double rotationStack4 = rotationStack3 + 0.1;
+    double rotationStack5 = rotationStack4 + 0.1;
 
-    double positionStack5 = 0.5;
-    double positionStack4 = positionStack5 + 0.1;
-    double positionStack3 = positionStack4 + 0.1;
-    double positionStack2 = positionStack3 + 0.1;
-    double positionStack1 = positionStack2 + 0.1;
+    double positionStack1 = .98;
+    double positionStack2 = positionStack1 - 0.06;
+    double positionStack3 = positionStack2 - 0.06;
+    double positionStack4 = positionStack3 - 0.06;
+    double positionStack5 = positionStack4 - 0.06;
+    double gPositionStore = 0.57;
 
 
 
-    double extensionLeftIn = 0.5;
-    double extensionRightIn = 0.5;
+    double extensionLeftIn = 1;
+    double extensionRightIn = 0;
 
     double extensionLeftOut = 0.5;
     double extensionRightOut = 0.5;
@@ -99,8 +100,8 @@ public class UpliftRobot
     double extensionLeftCyclePos = 0.5;
     double extensionRightCyclePos = 0.5;
 
-    double odoMidUp = 0.5;
-    double odoMidDown = 0.5;
+    double odoMidUp = 0.35;
+    double odoMidDown = 1;
 
     double gPositionTransfer = 0.5;
     double gRotationTransfer = 0.5;
@@ -269,6 +270,11 @@ public class UpliftRobot
     public Servo getExtensionRight()
     {
         return extensionRight;
+    }
+
+    public Servo getExtensionLeft()
+    {
+            return extensionLeft;
     }
 
     public Servo getOdoMid()
@@ -494,5 +500,51 @@ public class UpliftRobot
         return gRotationTransfer;
     }
 
+    public double getPostitionStack1()
+    {
+            return positionStack1;
+    }
+    public double getPostitionStack2()
+    {
+        return positionStack2;
+    }
+    public double getPostitionStack3()
+    {
+        return positionStack3;
+    }
+    public double getPostitionStack4()
+    {
+        return positionStack4;
+    }
+    public double getPostitionStack5()
+    {
+        return positionStack5;
+    }
+    public double getgPositionStore()
+    {
+        return gPositionStore;
+    }
 
-}
+    public double getRotationStack1()
+    {
+        return rotationStack1;
+    }
+    public double getRotationStack2()
+    {
+        return rotationStack2;
+    }
+    public double getRotationStack3()
+    {
+        return rotationStack3;
+    }
+    public double getRotationStack4()
+    {
+        return rotationStack4;
+    }
+    public double getRotationStack5()
+    {
+        return rotationStack5;
+    }
+
+
+    }
