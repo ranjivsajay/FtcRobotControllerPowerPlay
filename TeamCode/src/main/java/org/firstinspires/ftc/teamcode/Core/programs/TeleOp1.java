@@ -45,13 +45,13 @@ public class TeleOp1 extends UpliftTele {
 
 
 
-//        robot.getArm1().setPosition(robot.getArm1StackPos5());
-//        robot.getArm2().setPosition(robot.getArm2StackPos5());
-//
-//        robot.getFourBar2().setPosition(.25);
-//
-//        robot.getGrabber().setPosition(robot.getGrabberClosePos());
-//        robot.getTwister().setPosition(robot.getTwisterDownPos());
+
+        robot.getFourBar().setPosition(.75);
+        robot.getArmLeft().setPosition(robot.getArm1LowPos());
+        robot.getArmRight().setPosition(robot.getArm2LowPos());
+
+        robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
+        robot.getTwister().setPosition(robot.getTwisterDownPos());
 
         //testing grabber 2 pos
 //        robot.getgPosition().setPosition(robot.getPositionStack1());
@@ -73,9 +73,9 @@ public class TeleOp1 extends UpliftTele {
 //          robot.getExtensionRight().setPosition(.3);
 //          robot.getExtensionLeft().setPosition(.7);
 
-        robot.getOdoMid().setPosition(robot.getOdoMidDown());
-        sleep(2000);
-        robot.getOdoMid().setPosition(robot.getOdoMidUp());
+//        robot.getOdoMid().setPosition(robot.getOdoMidDown());
+//        sleep(2000);
+//        robot.getOdoMid().setPosition(robot.getOdoMidUp());
 
 
 
