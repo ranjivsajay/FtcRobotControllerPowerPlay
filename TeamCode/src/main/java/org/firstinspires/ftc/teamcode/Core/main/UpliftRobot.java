@@ -39,8 +39,9 @@ public class UpliftRobot
 
 
 
-    double arm1HighPos = .95;
-    double arm2HighPos = 0.05;
+    double armLeftHighPos = .95;
+
+    double armRightHighPos = 0.05;
 
     double arm1LowPos = 0.33 ;
     double arm2LowPos = 0.67;
@@ -364,14 +365,14 @@ public class UpliftRobot
         return grabber2ClosePos;
     }
 
-    public double getArm1HighPos()
+    public double getArmLeftHighPos()
     {
-        return arm1HighPos;
+        return armLeftHighPos;
     }
 
-    public double getArm2HighPos()
+    public double getArmRightHighPos()
     {
-        return arm2HighPos;
+        return armRightHighPos;
     }
 
     public double getArm1LowPos()
@@ -500,23 +501,23 @@ public class UpliftRobot
         return gRotationTransfer;
     }
 
-    public double getPostitionStack1()
+    public double getPositionStack1()
     {
             return positionStack1;
     }
-    public double getPostitionStack2()
+    public double getPositionStack2()
     {
         return positionStack2;
     }
-    public double getPostitionStack3()
+    public double getPositionStack3()
     {
         return positionStack3;
     }
-    public double getPostitionStack4()
+    public double getPositionStack4()
     {
         return positionStack4;
     }
-    public double getPostitionStack5()
+    public double getPositionStack5()
     {
         return positionStack5;
     }
