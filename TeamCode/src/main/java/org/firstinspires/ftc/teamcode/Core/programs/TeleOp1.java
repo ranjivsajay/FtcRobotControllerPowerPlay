@@ -42,10 +42,6 @@ public class TeleOp1 extends UpliftTele {
     @Override
     public void initAction() {
 
-        robot.getOdoMid().setPosition(robot.getOdoMidUp());
-        //        sleep(2000);
-
-
 
 
 
@@ -57,6 +53,8 @@ public class TeleOp1 extends UpliftTele {
 //
 //        robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
 //        robot.getTwister().setPosition(robot.getTwisterDownPos());
+//
+//        robot.getgPosition().setPosition(robot.getPositionStack5());
 
         //testing grabber 2 pos
 //        robot.getgPosition().setPosition(robot.getPositionStack1());
@@ -72,11 +70,12 @@ public class TeleOp1 extends UpliftTele {
 //        robot.getgPosition().setPosition(robot.getgPositionStore());
 
         //testing extension
-//          robot.getExtensionRight().setPosition(robot.getExtensionRightIn());
-//          robot.getExtensionLeft().setPosition(robot.getExtensionLeftIn());
-//          sleep(2000);
-//          robot.getExtensionRight().setPosition(.3);
-//          robot.getExtensionLeft().setPosition(.7);
+          robot.getExtensionRight().setPosition(robot.getExtensionRightIn());
+          robot.getExtensionLeft().setPosition(robot.getExtensionLeftIn());
+          sleep(2000);
+          robot.getExtensionRight().setPosition(robot.getExtensionRightOut());
+          robot.getExtensionLeft().setPosition(robot.getExtensionLeftOut())
+          ;
 
 //        robot.getOdoMid().setPosition(robot.getOdoMidDown());
 //        sleep(2000);
@@ -93,7 +92,7 @@ public class TeleOp1 extends UpliftTele {
 
     public void bodyLoop() throws InterruptedException {
 
-        telemetry.addData("magnet:" , robot.getMagnet().getValue());
+        //telemetry.addData("magnet:" , robot.getMagnet().getValue());
         telemetry.update();
 
 

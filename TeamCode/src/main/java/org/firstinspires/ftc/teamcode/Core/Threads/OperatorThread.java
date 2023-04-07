@@ -51,6 +51,7 @@ public class OperatorThread extends Thread
         {
             try
             {
+                hold();
 
                 toggle4Bar();
 
@@ -91,11 +92,11 @@ public class OperatorThread extends Thread
 
 
 
-                if(robot.getMagnet().isPressed())
-                {
-//                    robot.getArmLeft().setPosition(robot.getArm1HighPos());
-//                    robot.getArmRight().setPosition(robot.getArm2HighPos());
-                }
+//                if(robot.getMagnet().isPressed())
+//                {
+////                    robot.getArmLeft().setPosition(robot.getArm1HighPos());
+////                    robot.getArmRight().setPosition(robot.getArm2HighPos());
+//                }
 
                 if (robot.opMode.gamepad2.right_trigger > .1)
                 {
@@ -196,11 +197,11 @@ public class OperatorThread extends Thread
 
         if (robot.opMode.gamepad2.a) // reset 6Bar
         {
-            while(!robot.getMagnet().isPressed())
-            {
-                robot.getSlide1().setPower(0.5);
-                robot.getSlide2().setPower(-0.5);
-            }
+            //   while(!robot.getMagnet().isPressed())
+//            {
+//                robot.getSlide1().setPower(0.5);
+//                robot.getSlide2().setPower(-0.5);
+//            }
 
             robot.getSlide1().setPower(0);
             robot.getSlide2().setPower(0);
@@ -232,7 +233,7 @@ public class OperatorThread extends Thread
         {
             robot.getFourBar().setPosition(robot.getBarBackPos());
 
-            robot.getTwister().setPosition(robot.getTwisterDownPos());
+            robot.getTwister().setPosition(robot.getTwisterUpPos());
 
             armHigh();
 
@@ -246,7 +247,7 @@ public class OperatorThread extends Thread
         {
             robot.getFourBar().setPosition(robot.getBarFrontPos());
 
-            robot.getTwister().setPosition(robot.getTwisterUpPos());
+            robot.getTwister().setPosition(robot.getTwisterDownPos());
 
             armHigh();
 
@@ -260,7 +261,7 @@ public class OperatorThread extends Thread
         {
             robot.getFourBar().setPosition(robot.getBarBackPos());
 
-            robot.getTwister().setPosition(robot.getTwisterDownPos());
+            robot.getTwister().setPosition(robot.getTwisterUpPos());
 
             armHigh();
 
@@ -274,7 +275,7 @@ public class OperatorThread extends Thread
         {
             robot.getFourBar().setPosition(robot.getBarFrontPos());
 
-            robot.getTwister().setPosition(robot.getTwisterUpPos());
+            robot.getTwister().setPosition(robot.getTwisterDownPos());
 
             armHigh();
 
@@ -316,6 +317,15 @@ public class OperatorThread extends Thread
         {
             robot.getArmLeft().setPosition(robot.getArm1StackPos2());
             robot.getArmRight().setPosition(robot.getArm2StackPos2());
+        }
+    }
+
+    public void hold()
+    {
+        if(robot.opMode.gamepad2.left_trigger > 0)
+        {
+            robot.getSlide1().setPower(-0.2);
+            robot.getSlide2().setPower(0.2);
         }
     }
 

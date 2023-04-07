@@ -30,12 +30,11 @@ public class UpliftRobot
     DcMotor leftFront, rightFront, leftBack, rightBack, slide1, slide2;
     Servo grabber1, grabber2, armLeft, armRight, fourBar, twister, extensionLeft, extensionRight, odoMid, gRotation, gPosition;
     DistanceSensor coneDetector, poleDetector;
-    TouchSensor magnet;
+//    TouchSensor magnet;
     OpenCvCamera webcam;
     DcMotor odoRight;
     public BNO055IMU imu;
 
-//    AdafruitBNO055IMU gyro;
 
 
 
@@ -167,7 +166,7 @@ public class UpliftRobot
 
 
 
-        magnet = hardwareMap.get(TouchSensor.class, "magnet");
+//        magnet = hardwareMap.get(TouchSensor.class, "magnet");
 
 
 
@@ -329,10 +328,10 @@ public class UpliftRobot
         return poleDetector;
     }
 
-    public TouchSensor getMagnet()
-    {
-        return magnet;
-    }
+//    public TouchSensor getMagnet()
+//    {
+////        return magnet;
+//    }
 
 
     public double getTwisterUpPos()

@@ -66,6 +66,23 @@ public class DriveThread extends Thread
                     Thread.sleep(10000);
                 }
 
+                if(robot.opMode.gamepad1.dpad_right)
+                {
+                    robot.getLeftFront().setPower(1);
+                    robot.getLeftBack().setPower(-1);
+                    robot.getRightBack().setPower(1);
+                    robot.getRightFront().setPower(-1);
+                    Thread.sleep(5000);
+                }
+
+                if(robot.opMode.gamepad1.dpad_left)
+                {
+                    robot.getLeftFront().setPower(-1);
+                    robot.getLeftBack().setPower(1);
+                    robot.getRightBack().setPower(-1);
+                    robot.getRightFront().setPower(1);
+                    Thread.sleep(5000);
+                }
 
                 // todo: validate user responsiveness and set sleep
                 sleep(50);
