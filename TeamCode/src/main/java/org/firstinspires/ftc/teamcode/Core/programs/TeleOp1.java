@@ -43,8 +43,9 @@ public class TeleOp1 extends UpliftTele {
     public void initAction() {
 
 
-
-
+        robot.getFourBar().setPosition(.75);
+        robot.getArmLeft().setPosition(robot.getArm1LowPos());
+        robot.getArmRight().setPosition(robot.getArm2LowPos());
 
 
 //        robot.getFourBar().setPosition(.75);
@@ -54,7 +55,9 @@ public class TeleOp1 extends UpliftTele {
 //        robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
 //        robot.getTwister().setPosition(robot.getTwisterDownPos());
 //
-//        robot.getgPosition().setPosition(robot.getPositionStack5());
+//        robot.getgPosition().setPosition(robot.getPositionStack5()
+        robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
+        robot.getTwister().setPosition(robot.getTwisterDownPos());
 
         //testing grabber 2 pos
 //        robot.getgPosition().setPosition(robot.getPositionStack1());
@@ -111,6 +114,20 @@ public class TeleOp1 extends UpliftTele {
         robot.getSlide2().setPower(Range.clip(-gamepad2.right_stick_y, -1, 1));
 
 
+//        reset6bar();
+
+        highForwards();
+        highBackwards();
+
+        mediumForwards();
+        mediumBackwards();
+
+        
+
+
+
+        holdSlidePos();
+
 
     }
 
@@ -141,8 +158,161 @@ public class TeleOp1 extends UpliftTele {
     public static void teleDrive(double joystickAngle, double speedVal,
                                  double turnVal, float slowModeInput, UpliftRobot robot) {
 
+        double lfPow = sin(toRadians(joystickAngle) + (0.25 * PI)) * speedVal + turnVal;
+        double rfPow = sin(toRadians(joystickAngle) - (0.25 * PI)) * speedVal - turnVal;
+        double lbPow = sin(toRadians(joystickAngle) - (0.25 * PI)) * speedVal + turnVal;
+        double rbPow = sin(toRadians(joystickAngle) + (0.25 * PI)) * speedVal - turnVal;
+
+        // find max total input out of the 4 motors
+        double maxVal = abs(lfPow);
+        if (abs(rfPow) > maxVal) {
+            maxVal = abs(rfPow);
+        }
+        if (abs(lbPow) > maxVal) {
+            maxVal = abs(lbPow);
+        }
+        if (abs(rbPow) > maxVal) {
+            maxVal = abs(rbPow);
+        }
+
+        if (maxVal < (1 / sqrt(2))) {
+            maxVal = 1 / sqrt(2);
+        }
+
+        // set the scaled powers
+        float speedFactor = 1.0f;
+        if (slowModeInput > 0.1f)
+            speedFactor = 0.5f;
+
+        robot.getLeftFront().setPower(speedFactor * (lfPow / maxVal));
+        robot.getLeftBack().setPower(speedFactor * (lbPow / maxVal));
+        robot.getRightBack().setPower(speedFactor * (rbPow / maxVal));
+        robot.getRightFront().setPower(speedFactor * (rfPow / maxVal));
+
+    }
+
+    public void slidesPower(double power) {
+        robot.getSlide1().setPower(-power);
+        robot.getSlide2().setPower(power);
+    }
 
 
+    public void slidesDist(double power, int dist)
+    {
+        robot.getSlide1().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.getSlide2().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        robot.getSlide1().setTargetPosition(-dist);
+        robot.getSlide2().setTargetPosition(dist);
+
+        slidesPower(power);
+
+        robot.getSlide1().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.getSlide2().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        while(robot.getSlide1().isBusy() && robot.getSlide2().isBusy())
+        {
+            telemetry.addData("status", "arm moving");
+            telemetry.update();
+        }
+
+        robot.getSlide1().setPower(0);
+        robot.getSlide2().setPower(0);
+
+
+
+
+    }
+
+//    public void reset6bar()
+//    {
+//        while(!robot.getMagnet().isPressed())
+//        {
+//            robot.getSlide1().setPower(0.5);
+//            robot.getSlide2().setPower(-0.5);
+//        }
+//
+//        robot.getSlide1().setPower(0);
+//        robot.getSlide2().setPower(0);
+//
+//    }
+
+    public void armHigh()
+    {
+        robot.getArmLeft().setPosition(robot.getArmLeftHighPos());
+        robot.getArmRight().setPosition(robot.getArmRightHighPos());
+    }
+
+
+    public void highForwards()
+    {
+        if(gamepad2.dpad_up)
+        {
+            robot.getFourBar().setPosition(robot.getBarFrontPos());
+
+            robot.getTwister().setPosition(robot.getTwisterUpPos());
+
+            armHigh();
+
+            slidesDist(0.5, 953);
+
+        }
+    }
+
+    public void highBackwards()
+    {
+        if(gamepad2.dpad_down)
+        {
+            robot.getFourBar().setPosition(robot.getBarBackPos());
+
+            robot.getTwister().setPosition(robot.getTwisterDownPos());
+
+            armHigh();
+
+            slidesDist(0.5, 953);
+
+        }
+    }
+
+    public void mediumForwards()
+    {
+        if(gamepad2.dpad_right)
+        {
+            robot.getFourBar().setPosition(robot.getBarFrontPos());
+
+            robot.getTwister().setPosition(robot.getTwisterUpPos());
+
+            armHigh();
+
+            slidesDist(0.5, 500);
+
+        }
+    }
+
+    public void mediumBackwards()
+    {
+        if(gamepad2.dpad_left)
+        {
+            robot.getFourBar().setPosition(robot.getBarBackPos());
+
+            robot.getTwister().setPosition(robot.getTwisterDownPos());
+
+            armHigh();
+
+            slidesDist(0.5, 500);
+
+        }
+    }
+
+
+
+    public void holdSlidePos()
+    {
+        if(gamepad2.left_trigger > 0)
+        {
+            robot.getSlide1().setPower(-0.15);
+            robot.getSlide2().setPower(0.15);
+        }
     }
 }
 
