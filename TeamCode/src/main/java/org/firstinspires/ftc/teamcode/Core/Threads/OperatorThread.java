@@ -260,8 +260,8 @@ public class OperatorThread extends Thread
             robot.getFourBar().setPosition(robot.getBarFrontPos());
 //            Thread.sleep(500);
 
-            robot.getArmLeft().setPosition(robot.getArm1LowPos());
-            robot.getArmRight().setPosition(robot.getArm2LowPos());
+            robot.getArmLeft().setPosition(robot.getArmLeftLowPos());
+            robot.getArmRight().setPosition(robot.getArmRightLowPos());
 //            Thread.sleep(500);
 
 

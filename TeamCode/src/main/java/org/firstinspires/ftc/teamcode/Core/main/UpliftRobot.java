@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorRangeSensor;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -27,7 +28,8 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 public class UpliftRobot
 {
-    DcMotor leftFront, rightFront, leftBack, rightBack, slide1, slide2;
+    DcMotorEx leftFront, rightFront, leftBack, rightBack;
+    DcMotor slide1, slide2;
     Servo grabber1, grabber2, armLeft, armRight, fourBar, twister, extensionLeft, extensionRight, odoMid, gRotation, gPosition;
     DistanceSensor coneDetector, poleDetector;
 //    TouchSensor magnet;
@@ -42,8 +44,8 @@ public class UpliftRobot
 
     double armRightHighPos = 0.05;
 
-    double arm1LowPos = 0.33 ;
-    double arm2LowPos = 0.67;
+    double armLeftLowPos = 0.33 ;
+    double armRightLowPos = 0.67;
 
     double barFrontPos = .25;
     double barBackPos = .85;
@@ -132,10 +134,10 @@ public class UpliftRobot
         initializeCamera();
 
 
-        leftFront = hardwareMap.get(DcMotor.class, "left_front");
-        rightFront = hardwareMap.get(DcMotor.class, "right_front");
-        leftBack = hardwareMap.get(DcMotor.class, "left_back");
-        rightBack = hardwareMap.get(DcMotor.class, "right_back");
+        leftFront = hardwareMap.get(DcMotorEx.class, "left_front");
+        rightFront = hardwareMap.get(DcMotorEx.class, "right_front");
+        leftBack = hardwareMap.get(DcMotorEx.class, "left_back");
+        rightBack = hardwareMap.get(DcMotorEx.class, "right_back");
 
         armLeft = hardwareMap.get(Servo.class, "armLeft");
         armRight = hardwareMap.get(Servo.class, "armRight");
@@ -374,14 +376,14 @@ public class UpliftRobot
         return armRightHighPos;
     }
 
-    public double getArm1LowPos()
+    public double getArmLeftLowPos()
     {
-        return arm1LowPos;
+        return armLeftLowPos;
     }
 
-    public double getArm2LowPos()
+    public double getArmRightLowPos()
     {
-        return arm2LowPos;
+        return armRightLowPos;
     }
 
     public double getBarFrontPos()
