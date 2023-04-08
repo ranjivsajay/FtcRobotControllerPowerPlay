@@ -3,6 +3,9 @@ package org.firstinspires.ftc.teamcode.Core.programs.autos;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 
@@ -35,7 +38,7 @@ public class test extends UpliftAutoImpl
 
         double coneDist = 500;
 
-        double turnAngle = robot.imu.getAngularOrientation().firstAngle;
+        double turnAngle = robot.imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
 
         robot.getLeftFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.getRightFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -58,7 +61,7 @@ public class test extends UpliftAutoImpl
             if(robot.getConeDetector().getDistance(DistanceUnit.METER) < coneDist)
             {
                 coneDist = robot.getConeDetector().getDistance(DistanceUnit.METER);
-                turnAngle = robot.imu.getAngularOrientation().firstAngle;
+                turnAngle = robot.imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
             }
             telemetry.addData("distance", coneDist);
             telemetry.update();

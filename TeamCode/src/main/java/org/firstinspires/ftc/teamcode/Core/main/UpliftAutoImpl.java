@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 public class UpliftAutoImpl extends UpliftAuto {
@@ -361,14 +362,14 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     public void resetAngle()
     {
-        lastAngles = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        lastAngles = robot.imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         currAngle = 0;
     }
 
     public double getAngle()
     {
 
-        Orientation orientation = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        Orientation orientation = robot.imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         double deltaAngle = orientation.firstAngle - lastAngles.firstAngle;
 
         if(deltaAngle > 180)
@@ -388,7 +389,7 @@ public class UpliftAutoImpl extends UpliftAuto {
 //
     public double getAbsoluteAngle()
     {
-        return robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
+        return robot.imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
     }
 //
     public void turnToPID(double targetAngle)
@@ -444,7 +445,7 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     public void turnTo(double degrees)
     {
-        Orientation orientation = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        Orientation orientation = robot.imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         double error = degrees - orientation.firstAngle;
 
         if(error > 180)
@@ -534,6 +535,47 @@ public class UpliftAutoImpl extends UpliftAuto {
 
 
     }
+
+    public void turnToPole(int distance, double power)
+    {
+        double poleDist = 500;
+
+        double turnAngle = robot.imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
+
+        robot.getLeftFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.getRightFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        robot.getLeftFront().setTargetPosition(-distance);
+        robot.getRightFront().setTargetPosition(distance);
+
+        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.getRightFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        robot.getLeftFront().setPower(-power);
+        robot.getRightFront().setPower(power);
+        robot.getLeftBack().setPower(-power);
+        robot.getRightBack().setPower(power);
+
+        while(opModeIsActive() && robot.getRightFront().isBusy())
+        {
+            if(robot.getPoleDetector().getDistance(DistanceUnit.MM) < poleDist)
+            {
+                poleDist = robot.getPoleDetector().getDistance(DistanceUnit.MM);
+                turnAngle = robot.imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
+            }
+            telemetry.addData("dist", poleDist);
+            telemetry.addData("angle", turnAngle);
+            telemetry.update();
+        }
+
+        stopMotors();
+
+        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.getRightFront().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        turnToPID(turnAngle);
+    }
+
 
     public void low()
     {

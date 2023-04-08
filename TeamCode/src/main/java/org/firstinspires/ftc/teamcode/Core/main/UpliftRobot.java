@@ -1,27 +1,21 @@
 package org.firstinspires.ftc.teamcode.Core.main;
 
 
-import com.qualcomm.hardware.adafruit.AdafruitBNO055IMU;
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.ColorRangeSensor;
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.TouchSensor;
 
-import org.checkerframework.checker.units.qual.A;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 //import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread;
 //import org.firstinspires.ftc.teamcode.Core.Threads.OperatorThread;
-import org.firstinspires.ftc.teamcode.Core.toolkit.vision.ConeAlignmentBlue;
-import org.firstinspires.ftc.teamcode.Core.toolkit.vision.ConeAlignmentRed;
 import org.firstinspires.ftc.teamcode.Core.toolkit.vision.PowerPlay;
-import org.firstinspires.ftc.teamcode.Core.toolkit.vision.PowerPlay2;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
@@ -35,7 +29,7 @@ public class UpliftRobot
 //    TouchSensor magnet;
     OpenCvCamera webcam;
     DcMotor odoRight;
-    public BNO055IMU imu;
+    public IMU imu;
 
 
 
@@ -103,7 +97,7 @@ public class UpliftRobot
     double extensionRightCyclePos = 0.5;
 
     double odoMidUp = 0.38;
-    double odoMidDown = .5;
+    double odoMidDown = .52;
 
     double gPositionTransfer = 0.5;
     double gRotationTransfer = 0.5;
@@ -116,9 +110,6 @@ public class UpliftRobot
 
 
     public PowerPlay pipeline1;
-    public PowerPlay2 pipeline4;
-    public ConeAlignmentBlue pipeline2;
-    public ConeAlignmentRed pipeline3;
     public LinearOpMode opMode;
     public HardwareMap hardwareMap;
 
@@ -180,11 +171,14 @@ public class UpliftRobot
 //        parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
 //        gyro.initialize(parameters);
 
-        imu = hardwareMap.get(BNO055IMU.class, "imu");
-        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-        parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
-        parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-        imu.initialize(parameters);
+        imu = hardwareMap.get(IMU.class, "imu");
+
+        imu.initialize(new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.RIGHT, RevHubOrientationOnRobot.UsbFacingDirection.UP)));
+        imu.resetYaw();
+//        IMU.Parameters parameters = new BNO055IMU.Parameters();
+//        parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+//        parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+//        imu.initialize(parameters);
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -209,11 +203,8 @@ public class UpliftRobot
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
 
         pipeline1 = new PowerPlay(opMode.telemetry);
-        pipeline2 = new ConeAlignmentBlue(opMode.telemetry);
-        pipeline3 = new ConeAlignmentRed(opMode.telemetry);
-        pipeline4 = new PowerPlay2(opMode.telemetry);
 
-        webcam.setPipeline(pipeline2);
+        webcam.setPipeline(pipeline1);
 
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
