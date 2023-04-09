@@ -47,19 +47,45 @@ public class OdoLeftMiddle extends UpliftAutoImpl
 
             Trajectory traj1 = drive.trajectoryBuilder(startPose)
                     .lineToLinearHeading(new Pose2d(20, 6, Math.toRadians(90)))
+                    .addTemporalMarker(2,() -> {
+                        servoArmsHigh();
+                        robot.getFourBar().setPosition(robot.getBarBackPos());
+                        robot.getTwister().setPosition(robot.getTwisterUpPos());
+            })
                     .build();
 
-            Trajectory traj2 = drive.trajectoryBuilder(traj1.end())
-                    .lineToLinearHeading(new Pose2d(54, -1, Math.toRadians(45)))
-                    .build();
+           Trajectory traj2 = drive.trajectoryBuilder(traj1.end())
+                   .lineToLinearHeading(new Pose2d(54, -1, Math.toRadians(52)))
+//                   .addTemporalMarker(8,() -> {
+//                robot.getSlide1().setPower(0);
+//                robot.getSlide2().setPower(0);
+//                robot.getFourBar().setPosition(robot.getBarFrontPos());
+//                robot.getArmRight().setPosition(robot.getArm2StackPos5());
+//                robot.getArmLeft().setPosition(robot.getArm1StackPos5());
+//                robot.getTwister().setPosition(robot.getTwisterUpPos());
+//                robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
+//
+//            })
+                  .build();
+
+           Trajectory traj3 = drive.trajectoryBuilder(traj2.end())
+                   .lineToLinearHeading(new Pose2d(50,15,Math.toRadians(92)))
+
+                           .build();
 
             drive.followTrajectory(traj1);
-
             drive.followTrajectory(traj2);
+            moveBackward(.5,270);
+            Thread.sleep(500);
+            robot.getFourBar().setPosition(.95);
+            robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
+            Thread.sleep(500);
+            moveForward(.5,270);
+            Thread.sleep(3000);
+            drive.followTrajectory(traj3);
 
-            servoArmsHigh();
 
-            sleep(5000);
+
 
 
 
