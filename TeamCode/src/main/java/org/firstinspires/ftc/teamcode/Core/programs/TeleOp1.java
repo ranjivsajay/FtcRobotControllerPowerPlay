@@ -43,21 +43,24 @@ public class TeleOp1 extends UpliftTele {
     public void initAction() {
 
 
-        robot.getFourBar().setPosition(.75);
-        robot.getArmLeft().setPosition(robot.getArmLeftLowPos());
-        robot.getArmRight().setPosition(robot.getArmRightLowPos());
-
-
 //        robot.getFourBar().setPosition(.75);
-//        robot.getArmLeft().setPosition(robot.getArm1LowPos());
-//        robot.getArmRight().setPosition(robot.getArm2LowPos());
-//
+//        robot.getArmLeft().setPosition(robot.getArmLeftLowPos());
+//        robot.getArmRight().setPosition(robot.getArmRightLowPos());
 //        robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
 //        robot.getTwister().setPosition(robot.getTwisterDownPos());
-//
-//        robot.getgPosition().setPosition(robot.getPositionStack5()
-        robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
-        robot.getTwister().setPosition(robot.getTwisterDownPos());
+        robot.getExtensionLeft().setPosition(robot.getExtensionLeftIn());
+        robot.getExtensionRight().setPosition(robot.getExtensionRightIn());
+        robot.getgRotation().setPosition(robot.getgRotationsStore());
+        sleep(5000);
+        robot.getgRotation().setPosition(robot.getRotationStack1());
+        sleep(2000);
+        robot.getgRotation().setPosition(robot.getRotationStack2());
+        sleep(2000);
+        robot.getgRotation().setPosition(robot.getRotationStack3());
+        sleep(2000);
+        robot.getgRotation().setPosition(robot.getRotationStack4());
+        sleep(2000);
+        robot.getgRotation().setPosition(robot.getRotationStack5());
 
         //testing grabber 2 pos
 //        robot.getgPosition().setPosition(robot.getPositionStack1());
@@ -73,15 +76,14 @@ public class TeleOp1 extends UpliftTele {
 //        robot.getgPosition().setPosition(robot.getgPositionStore());
 
         //testing extension
-          robot.getExtensionRight().setPosition(robot.getExtensionRightIn());
-          robot.getExtensionLeft().setPosition(robot.getExtensionLeftIn());
-          sleep(2000);
-          robot.getExtensionRight().setPosition(robot.getExtensionRightOut());
-          robot.getExtensionLeft().setPosition(robot.getExtensionLeftOut())
-          ;
+//          robot.getExtensionRight().setPosition(robot.getExtensionRightIn());
+//          robot.getExtensionLeft().setPosition(robot.getExtensionLeftIn());
+//          sleep(2000);
+//          robot.getExtensionRight().setPosition(robot.getExtensionRightOut());
+//          robot.getExtensionLeft().setPosition(robot.getExtensionLeftOut());
+//            robot.getgRotation().setPosition(robot.getRotationStack5());
 
-//        robot.getOdoMid().setPosition(robot.getOdoMidDown());
-//        sleep(2000);
+//
 //        robot.getOdoMid().setPosition(robot.getOdoMidUp());
 
 

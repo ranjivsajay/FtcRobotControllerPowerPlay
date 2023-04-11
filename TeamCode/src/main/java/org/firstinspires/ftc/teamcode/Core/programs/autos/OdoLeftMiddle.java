@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Core.programs.autos;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
+import com.acmerobotics.roadrunner.trajectory.TrajectoryBuilder;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -45,20 +46,23 @@ public class OdoLeftMiddle extends UpliftAutoImpl
             Pose2d startPose = new Pose2d(0, 0, Math.toRadians(0));
             drive.setPoseEstimate(startPose);
 
+
+
             Trajectory traj1 = drive.trajectoryBuilder(startPose)
-                    .lineToLinearHeading(new Pose2d(20, 6, Math.toRadians(90)))
-                    .addTemporalMarker(2,() -> {
-                        servoArmsHigh();
-                        robot.getFourBar().setPosition(robot.getBarBackPos());
-                        robot.getTwister().setPosition(robot.getTwisterUpPos());
-            })
+                  .lineToLinearHeading(new Pose2d(30, 6, Math.toRadians(70)))
+                    //.lineToLinearHeading(new Pose2d(60,0,Math.toRadians(45)))
+                 //   .addTemporalMarker(2,() -> {
+                   //     servoArmsHigh();
+                     //   robot.getFourBar().setPosition(0.8);
+                       // robot.getTwister().setPosition(robot.getTwisterUpPos());
+         //   })
                     .build();
 
            Trajectory traj2 = drive.trajectoryBuilder(traj1.end())
-                   .lineToLinearHeading(new Pose2d(54, -1, Math.toRadians(52)))
-//                   .addTemporalMarker(8,() -> {
-//                robot.getSlide1().setPower(0);
-//                robot.getSlide2().setPower(0);
+                   .lineToLinearHeading(new Pose2d(54, -1, Math.toRadians(45)))
+//                   .addTemporalMarker(9,() -> {
+//                robot.getSlide1().setPower(-.5);
+//                robot.getSlide2().setPower(.5);
 //                robot.getFourBar().setPosition(robot.getBarFrontPos());
 //                robot.getArmRight().setPosition(robot.getArm2StackPos5());
 //                robot.getArmLeft().setPosition(robot.getArm1StackPos5());
@@ -73,16 +77,18 @@ public class OdoLeftMiddle extends UpliftAutoImpl
 
                            .build();
 
-            drive.followTrajectory(traj1);
+
+              drive.followTrajectory(traj1);
             drive.followTrajectory(traj2);
-            moveBackward(.5,270);
-            Thread.sleep(500);
-            robot.getFourBar().setPosition(.95);
-            robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
-            Thread.sleep(500);
-            moveForward(.5,270);
-            Thread.sleep(3000);
-            drive.followTrajectory(traj3);
+//            moveBackward(.7,325);
+//            Thread.sleep(500);
+//           robot.getFourBar().setPosition(.95);
+//            robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
+//            Thread.sleep(500);
+//            moveForward(.7,325);
+//            Thread.sleep(3000);
+//            drive.followTrajectory(traj3);
+
 
 
 

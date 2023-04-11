@@ -69,17 +69,18 @@ public class UpliftRobot
     double arm2StackPos1 = arm2StackPos2 - 0.03;
 
 
-    double rotationStack1 = 0;
-    double rotationStack2 = rotationStack1 + 0.1;
-    double rotationStack3 = rotationStack2 + 0.1;
-    double rotationStack4 = rotationStack3 + 0.1;
-    double rotationStack5 = rotationStack4 + 0.1;
+    double rotationStack1 = 0.5;
+    double rotationStack2 = rotationStack1 + 0.02;
+    double rotationStack3 = rotationStack2 + 0.02;
+    double rotationStack4 = rotationStack3 + 0.02;
+    double rotationStack5 = rotationStack4 + 0.02;
+    double gRotationsStore = 0;
 
     double positionStack1 = .98;
-    double positionStack2 = positionStack1 - 0.06;
-    double positionStack3 = positionStack2 - 0.06;
-    double positionStack4 = positionStack3 - 0.06;
-    double positionStack5 = positionStack4 - 0.06;
+    double positionStack2 = positionStack1 - 0.02;
+    double positionStack3 = positionStack2 - 0.02;
+    double positionStack4 = positionStack3 - 0.02;
+    double positionStack5 = positionStack4 - 0.02;
     double gPositionStore = 0.57;
 
 
@@ -87,8 +88,8 @@ public class UpliftRobot
     double extensionLeftIn = 1;
     double extensionRightIn = 0;
 
-    double extensionLeftOut = 0.5;
-    double extensionRightOut = 0.5;
+    double extensionLeftOut = 0.6;
+    double extensionRightOut = 0.4;
 
     double extensionLeftTransfer = 0.5;
     double extensionRightTransfer = 0.5;
@@ -101,6 +102,9 @@ public class UpliftRobot
 
     double gPositionTransfer = 0.5;
     double gRotationTransfer = 0.5;
+
+
+
 
 
 
@@ -163,7 +167,7 @@ public class UpliftRobot
 
 
 
-        odoRight = hardwareMap.get(DcMotor.class, "odoRight");
+//        odoRight = hardwareMap.get(DcMotor.class, "odoRight");
 
 //        gyro = hardwareMap.get(AdafruitBNO055IMU.class, "gyro");
 //        AdafruitBNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
@@ -538,6 +542,7 @@ public class UpliftRobot
     {
         return rotationStack5;
     }
+    public double getgRotationsStore() {return gRotationsStore;}
 
 
     }
