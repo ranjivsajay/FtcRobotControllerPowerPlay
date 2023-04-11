@@ -50,30 +50,37 @@ public class TeleOp1 extends UpliftTele {
 //        robot.getTwister().setPosition(robot.getTwisterDownPos());
         robot.getExtensionLeft().setPosition(robot.getExtensionLeftIn());
         robot.getExtensionRight().setPosition(robot.getExtensionRightIn());
-        robot.getgRotation().setPosition(robot.getgRotationsStore());
-        sleep(5000);
-        robot.getgRotation().setPosition(robot.getRotationStack1());
-        sleep(2000);
-        robot.getgRotation().setPosition(robot.getRotationStack2());
-        sleep(2000);
-        robot.getgRotation().setPosition(robot.getRotationStack3());
-        sleep(2000);
-        robot.getgRotation().setPosition(robot.getRotationStack4());
-        sleep(2000);
-        robot.getgRotation().setPosition(robot.getRotationStack5());
+       // robot.getgRotation().setPosition(robot.getgRotationsStore());
+
+      //  sleep(5000);
+//        robot.getgRotation().setPosition(robot.getRotationStack1());
+//        sleep(5000);
+//        robot.getgRotation().setPosition(robot.getRotationStack2());
+//        sleep(5000);
+//        robot.getgRotation().setPosition(robot.getRotationStack3());
+//        sleep(5000);
+//        robot.getgRotation().setPosition(robot.getRotationStack4());
+//        sleep(5000);
+//        robot.getgRotation().setPosition(robot.getRotationStack5());
 
         //testing grabber 2 pos
-//        robot.getgPosition().setPosition(robot.getPositionStack1());
-//        sleep(2000);
-//        robot.getgPosition().setPosition(robot.getPositionStack2());
-//        sleep(2000);
-//        robot.getgPosition().setPosition(robot.getPositionStack3());
-//        sleep(2000);
-//        robot.getgPosition().setPosition(robot.getPositionStack4());
-//        sleep(2000);
-//        robot.getgPosition().setPosition(robot.getPositionStack5());
-//        sleep(2000);
-//        robot.getgPosition().setPosition(robot.getgPositionStore());
+        robot.getgPosition().setPosition(robot.getgPositionStore());
+        robot.getgRotation().setPosition(robot.getgRotationsStore());
+        sleep(5000);
+        robot.getgPosition().setPosition(robot.getPositionStack5());
+        robot.getgRotation().setPosition(robot.getRotationStack5());
+        sleep(5000);
+        robot.getgPosition().setPosition(robot.getPositionStack4());
+        robot.getgRotation().setPosition(robot.getRotationStack4());
+        sleep(5000);
+        robot.getgPosition().setPosition(robot.getPositionStack3());
+        robot.getgRotation().setPosition(robot.getRotationStack3());
+        sleep(5000);
+        robot.getgPosition().setPosition(robot.getPositionStack2());
+        robot.getgRotation().setPosition(robot.getRotationStack2());
+        sleep(5000);
+        robot.getgPosition().setPosition(robot.getPositionStack1());
+        robot.getgRotation().setPosition(robot.getRotationStack1());
 
         //testing extension
 //          robot.getExtensionRight().setPosition(robot.getExtensionRightIn());

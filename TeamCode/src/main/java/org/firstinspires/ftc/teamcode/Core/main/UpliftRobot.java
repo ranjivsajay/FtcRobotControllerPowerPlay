@@ -68,20 +68,19 @@ public class UpliftRobot
     double arm1StackPos1 = arm1StackPos2 - 0.03;
     double arm2StackPos1 = arm2StackPos2 - 0.03;
 
-
-    double rotationStack1 = 0.5;
-    double rotationStack2 = rotationStack1 + 0.02;
-    double rotationStack3 = rotationStack2 + 0.02;
-    double rotationStack4 = rotationStack3 + 0.02;
-    double rotationStack5 = rotationStack4 + 0.02;
+    double rotationStack5 = .33;
+    double rotationStack4 = rotationStack5 -.02 ;
+    double rotationStack3 = rotationStack4 - 0.02;
+    double rotationStack2 = rotationStack3 - 0.03;
+    double rotationStack1 = rotationStack2 - 0.02;
     double gRotationsStore = 0;
 
-    double positionStack1 = .98;
-    double positionStack2 = positionStack1 - 0.02;
-    double positionStack3 = positionStack2 - 0.02;
-    double positionStack4 = positionStack3 - 0.02;
-    double positionStack5 = positionStack4 - 0.02;
-    double gPositionStore = 0.57;
+    double positionStack1 = .56;
+    double positionStack2 = positionStack1 - 0.05;
+    double positionStack3 = positionStack2 - 0.05;
+    double positionStack4 = positionStack3 - 0.05;
+    double positionStack5 = positionStack4 - 0.05;
+    double gPositionStore = 0;
 
 
 
