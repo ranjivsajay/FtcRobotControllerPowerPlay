@@ -47,11 +47,14 @@ public class UpliftRobot
     double grabber1OpenPos = .033;
     double grabber1ClosePos = 0.24;
 
-    double grabber2OpenPos = 0.5;
-    double grabber2ClosePos = 0.5;
+    double grabber2OpenPos = .24;
+    double grabber2ClosePos = .033;
 
     double twisterUpPos = .84;
     double twisterDownPos = .16;
+
+    double arm1TransferPos = .91;
+    double arm2TransferPos = .09;
 
     double arm1PickUpPos = .6;
     double arm2PickUpPos = .4;
@@ -68,18 +71,18 @@ public class UpliftRobot
     double arm1StackPos1 = arm1StackPos2 - 0.03;
     double arm2StackPos1 = arm2StackPos2 - 0.03;
 
-    double rotationStack5 = .33;
+    double rotationStack5 = .48;
     double rotationStack4 = rotationStack5 -.02 ;
     double rotationStack3 = rotationStack4 - 0.02;
-    double rotationStack2 = rotationStack3 - 0.03;
-    double rotationStack1 = rotationStack2 - 0.02;
-    double gRotationsStore = 0;
+    double rotationStack2 = rotationStack3 + 0.01;
+    double rotationStack1 = rotationStack2 - 0;
+    double gRotationsStore = 0.2;
 
-    double positionStack1 = .56;
-    double positionStack2 = positionStack1 - 0.05;
-    double positionStack3 = positionStack2 - 0.05;
-    double positionStack4 = positionStack3 - 0.05;
-    double positionStack5 = positionStack4 - 0.05;
+    double positionStack1 = .6;
+    double positionStack2 = positionStack1 - 0.07;
+    double positionStack3 = positionStack2 - 0.06;
+    double positionStack4 = positionStack3 - 0.09;
+    double positionStack5 = positionStack4 - 0.12;
     double gPositionStore = 0;
 
 
@@ -90,8 +93,8 @@ public class UpliftRobot
     double extensionLeftOut = 0.6;
     double extensionRightOut = 0.4;
 
-    double extensionLeftTransfer = 0.5;
-    double extensionRightTransfer = 0.5;
+    double extensionLeftTransfer = 0.95;
+    double extensionRightTransfer = 0.05;
 
     double extensionLeftCyclePos = 0.5;
     double extensionRightCyclePos = 0.5;
@@ -100,7 +103,7 @@ public class UpliftRobot
     double odoMidDown = .52;
 
     double gPositionTransfer = 0.5;
-    double gRotationTransfer = 0.5;
+    double gRotationTransfer = 0.15;
 
 
 
@@ -394,6 +397,9 @@ public class UpliftRobot
     {
         return  arm1PickUpPos;
     }
+    public double getArm1TranferPos(){return arm1TransferPos;}
+    public double getArm2TranferPos(){return arm2TransferPos;}
+
 
     public double getArm2StackPos5()
     {

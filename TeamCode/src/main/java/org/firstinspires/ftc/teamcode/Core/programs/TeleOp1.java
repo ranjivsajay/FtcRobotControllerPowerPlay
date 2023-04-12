@@ -48,8 +48,8 @@ public class TeleOp1 extends UpliftTele {
 //        robot.getArmRight().setPosition(robot.getArmRightLowPos());
 //        robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
 //        robot.getTwister().setPosition(robot.getTwisterDownPos());
-        robot.getExtensionLeft().setPosition(robot.getExtensionLeftIn());
-        robot.getExtensionRight().setPosition(robot.getExtensionRightIn());
+//        robot.getExtensionLeft().setPosition(robot.getExtensionLeftIn());
+//        robot.getExtensionRight().setPosition(robot.getExtensionRightIn());
        // robot.getgRotation().setPosition(robot.getgRotationsStore());
 
       //  sleep(5000);
@@ -64,23 +64,23 @@ public class TeleOp1 extends UpliftTele {
 //        robot.getgRotation().setPosition(robot.getRotationStack5());
 
         //testing grabber 2 pos
-        robot.getgPosition().setPosition(robot.getgPositionStore());
-        robot.getgRotation().setPosition(robot.getgRotationsStore());
-        sleep(5000);
-        robot.getgPosition().setPosition(robot.getPositionStack5());
-        robot.getgRotation().setPosition(robot.getRotationStack5());
-        sleep(5000);
-        robot.getgPosition().setPosition(robot.getPositionStack4());
-        robot.getgRotation().setPosition(robot.getRotationStack4());
-        sleep(5000);
-        robot.getgPosition().setPosition(robot.getPositionStack3());
-        robot.getgRotation().setPosition(robot.getRotationStack3());
-        sleep(5000);
-        robot.getgPosition().setPosition(robot.getPositionStack2());
-        robot.getgRotation().setPosition(robot.getRotationStack2());
-        sleep(5000);
-        robot.getgPosition().setPosition(robot.getPositionStack1());
-        robot.getgRotation().setPosition(robot.getRotationStack1());
+//        robot.getgPosition().setPosition(robot.getgPositionStore());
+//        robot.getgRotation().setPosition(robot.getgRotationsStore());
+//        sleep(5000);
+//        robot.getgPosition().setPosition(robot.getPositionStack1());
+//        robot.getgRotation().setPosition(robot.getRotationStack1());
+//        sleep(5000);
+//        robot.getgPosition().setPosition(robot.getPositionStack2());
+//        robot.getgRotation().setPosition(robot.getRotationStack2());
+//        sleep(5000);
+//        robot.getgPosition().setPosition(robot.getPositionStack3());
+//        robot.getgRotation().setPosition(robot.getRotationStack3());
+//        sleep(5000);
+//        robot.getgPosition().setPosition(robot.getPositionStack4());
+//        robot.getgRotation().setPosition(robot.getRotationStack4());
+//        sleep(5000);
+//        robot.getgPosition().setPosition(robot.getPositionStack5());
+//        robot.getgRotation().setPosition(robot.getRotationStack5());
 
         //testing extension
 //          robot.getExtensionRight().setPosition(robot.getExtensionRightIn());
@@ -89,6 +89,47 @@ public class TeleOp1 extends UpliftTele {
 //          robot.getExtensionRight().setPosition(robot.getExtensionRightOut());
 //          robot.getExtensionLeft().setPosition(robot.getExtensionLeftOut());
 //            robot.getgRotation().setPosition(robot.getRotationStack5());
+
+        //testing grabber
+        robot.getArmLeft().setPosition(robot.getArmLeftHighPos());
+        robot.getArmRight().setPosition(robot.getArmRightHighPos());
+        robot.getFourBar().setPosition(robot.getBarFrontPos());
+        sleep(2000);
+
+        robot.getExtensionLeft().setPosition(robot.getExtensionLeftTransfer());
+        robot.getExtensionRight().setPosition(robot.getExtensionRightTransfer());
+        robot.getgPosition().setPosition(robot.getPositionStack5());
+        robot.getgRotation().setPosition(robot.getRotationStack5());
+        sleep(2000);
+        robot.getGrabber2().setPosition(robot.getGrabber2OpenPos());
+        sleep(2000);
+        robot.getGrabber2().setPosition(robot.getGrabber2ClosePos());
+        sleep(2000);
+
+
+
+        robot.getTwister().setPosition(robot.getTwisterDownPos());
+        robot.getArmLeft().setPosition(robot.getArm1TranferPos());
+        robot.getArmRight().setPosition(robot.getArm2TranferPos());
+        robot.getFourBar().setPosition(0.08);
+        robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
+        sleep(2000);
+
+        robot.getgPosition().setPosition(.17);
+        robot.getgRotation().setPosition(robot.getgRotationTransfer());
+
+//        sleep(2000);
+        robot.getgPosition().setPosition(robot.getPositionStack5());
+        sleep(2000);
+
+
+        sleep(2000);
+        robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
+        sleep(500);
+        robot.getGrabber2().setPosition(robot.getGrabber2OpenPos());
+
+        sleep(2000);
+        armHigh();
 
 //
 //        robot.getOdoMid().setPosition(robot.getOdoMidUp());

@@ -52,7 +52,7 @@ public class OdoLeftMiddle extends UpliftAutoImpl
                   .lineToLinearHeading(new Pose2d(30, 6, Math.toRadians(70)))
                     //.lineToLinearHeading(new Pose2d(60,0,Math.toRadians(45)))
                  //   .addTemporalMarker(2,() -> {
-                   //     servoArmsHigh();
+                        //servoArmsHigh();
                      //   robot.getFourBar().setPosition(0.8);
                        // robot.getTwister().setPosition(robot.getTwisterUpPos());
          //   })
