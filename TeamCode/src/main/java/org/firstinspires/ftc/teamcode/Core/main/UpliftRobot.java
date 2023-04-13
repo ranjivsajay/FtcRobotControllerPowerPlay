@@ -15,6 +15,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 //import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread;
 //import org.firstinspires.ftc.teamcode.Core.Threads.OperatorThread;
+import org.firstinspires.ftc.teamcode.Core.toolkit.vision.ConesPipeline;
 import org.firstinspires.ftc.teamcode.Core.toolkit.vision.PowerPlay;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
@@ -35,7 +36,6 @@ public class UpliftRobot
 
 
     double armLeftHighPos = .95;
-
     double armRightHighPos = 0.05;
 
     double armLeftLowPos = 0.33 ;
@@ -100,7 +100,7 @@ public class UpliftRobot
     double extensionRightCyclePos = 0.5;
 
     double odoMidUp = 0.38;
-    double odoMidDown = .52;
+    double odoMidDown = .535;
 
     double gPositionTransfer = 0.5;
     double gRotationTransfer = 0.15;
@@ -116,6 +116,8 @@ public class UpliftRobot
 
 
     public PowerPlay pipeline1;
+    public ConesPipeline pipeline2;
+
     public LinearOpMode opMode;
     public HardwareMap hardwareMap;
 
@@ -209,15 +211,16 @@ public class UpliftRobot
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
 
         pipeline1 = new PowerPlay(opMode.telemetry);
+        pipeline2 = new ConesPipeline();
 
-        webcam.setPipeline(pipeline1);
+        webcam.setPipeline(pipeline2);
 
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
             public void onOpened()
             {
 
-                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+                webcam.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
 //
 //                pipeline3 = new ConeAlignmentRed(opMode.telemetry);
 //                webcam.setPipeline(pipeline3);

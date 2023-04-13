@@ -62,7 +62,7 @@ public class ConesPipeline extends OpenCvPipeline {
     private double error = 0.0;
 
     // RED OR NOT (BLUE)
-    public boolean detectRed = true;
+    public boolean detectRed = false;
 
     private boolean savePictureFlag = false;
 
@@ -134,17 +134,17 @@ public class ConesPipeline extends OpenCvPipeline {
                 }
                 if(Imgproc.contourArea(biggestBlueContour) > CONTOUR_AREA_CONES) {
 
-                    redRect = Imgproc.boundingRect(biggestBlueContour);
+                    blueRect = Imgproc.boundingRect(biggestBlueContour);
                     error = 400 - (blueRect.width / 2 + blueRect.x);
 
                     Log.i("error: ", "" + error);
-                    Log.i("height/width: ", "" + blueRect.height/blueRect.width);
+                  //  Log.i("height/width: ", "" + blueRect.height/blueRect.width);
                     if(error <= 10 && error >= -10){
                         error = 0.0;
                     }
                     Imgproc.rectangle(submat, blueRect, CONTOUR_COLOR_CONES, 2);
                     Imgproc.putText(submat, "Red Cone", new Point(blueRect.x, blueRect.y < 10 ?
-                            (blueRect.y+blueRect.height+20) : (blueRect.y - 8)), Imgproc.FONT_HERSHEY_SIMPLEX, 0.8, TEXT_COLOR_CONES, 1);
+                            (blueRect.y+blueRect.height+20) : (blueRect.y - 8)), Imgproc.FONT_HERSHEY_SIMPLEX, 2, TEXT_COLOR_CONES, 1);
                 }
             }
 

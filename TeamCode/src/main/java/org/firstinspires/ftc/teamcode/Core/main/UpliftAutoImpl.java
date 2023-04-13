@@ -542,19 +542,19 @@ public class UpliftAutoImpl extends UpliftAuto {
 
         double turnAngle = robot.imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
 
-        robot.getLeftFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        robot.getLeftFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.getRightFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        robot.getLeftFront().setTargetPosition(-distance);
-        robot.getRightFront().setTargetPosition(distance);
+//        robot.getLeftFront().setTargetPosition(-distance);
+        robot.getRightFront().setTargetPosition(-distance);
 
-        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.getRightFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        robot.getLeftFront().setPower(-power);
-        robot.getRightFront().setPower(power);
-        robot.getLeftBack().setPower(-power);
-        robot.getRightBack().setPower(power);
+        robot.getLeftFront().setPower(power);
+        robot.getRightFront().setPower(-power);
+        robot.getLeftBack().setPower(power);
+        robot.getRightBack().setPower(-power);
 
         while(opModeIsActive() && robot.getRightFront().isBusy())
         {

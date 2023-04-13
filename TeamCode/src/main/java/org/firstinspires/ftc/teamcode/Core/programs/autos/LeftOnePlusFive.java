@@ -1,47 +1,40 @@
-//package org.firstinspires.ftc.teamcode.Core.programs.autos;
-//
-//import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-//import com.qualcomm.robotcore.hardware.DcMotor;
-//
-//import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-//import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
-//
-//@Autonomous(name = "Left 1 + 5", group = "Opmodes")
-//public class LeftOnePlusFive extends UpliftAutoImpl {
-//
-//        @Override
-//        public void initAction()
-//        {
-//                telemetry.addData("Angle ", getAbsoluteAngle());
-//                telemetry.update();
-//                robot.getTwister().setPosition(robot.getTwisterDownPos());
-//                robot.getGrabber().setPosition(robot.getGrabberClosePos());
-//
-////                robot.getFourBar1().setPosition(0.25);
-////                robot.getFourBar2().setPosition(0.75);
-//
-//                fourBarFront();
-//
-//                robot.getArm1().setPosition(robot.getArm1StackPos5());
-//                robot.getArm2().setPosition(robot.getArm2StackPos5());
-//
-//
-//
-//        }
-//        @Override
-//        public void body() throws InterruptedException {
-//
-//                int parkLocation = robot.pipeline1.location;
-////                robot.getWebcam().setPipeline(robot.pipeline2);
-//
-//                while (opModeIsActive() && Math.abs(88 - getAbsoluteAngle()) > 1) {
-//
-//                        fieldCentricMove(0.75, .1, -0.3);
-//                        servoArmsHigh();
-//
-//                }
-//                stopMotors();
-//
+package org.firstinspires.ftc.teamcode.Core.programs.autos;
+
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.DcMotor;
+
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
+
+@Autonomous(name = "Left 1 + 5", group = "Opmodes")
+public class LeftOnePlusFive extends UpliftAutoImpl {
+
+        @Override
+        public void initAction()
+        {
+                telemetry.addData("Angle ", getAbsoluteAngle());
+                telemetry.update();
+
+
+
+
+
+        }
+        @Override
+        public void body() throws InterruptedException {
+
+
+                int parkLocation = robot.pipeline1.location;
+//                robot.getWebcam().setPipeline(robot.pipeline2);
+
+                while (opModeIsActive() && Math.abs(90 - getAbsoluteAngle()) > 1) {
+
+                        fieldCentricMove(0.75, 0, -0.3);
+                        servoArmsHigh();
+
+                }
+                stopMotors();
+
 //                fourBarBack();
 //                robot.getTwister().setPosition(robot.getTwisterUpPos());
 //
@@ -67,14 +60,20 @@
 //
 //                moveBackward(.5, 200);
 //                Thread.sleep(300);
+
+
+
+
+
+
 //                robot.getFourBar1().setPosition(.05);
 //                robot.getFourBar2().setPosition(.95);
 //                Thread.sleep(400);
 //
-//                robot.getGrabber().setPosition(robot.getGrabberOpenPos());
+//                robot.getGrabber(1).setPosition(robot.getGrabber1OpenPos());
 //                Thread.sleep(200);
-//
-//
+
+
 //                robot.getSlide1().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 //                robot.getSlide2().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 //
@@ -504,20 +503,20 @@
 //                        stopMotors();
 //
 //                }
+
+
+
+
 //
-//
-//
-//
-////
-//
-//
-//
-//
-//
-//
-//
-//        }
-//}
-//
-//
-//
+
+
+
+
+
+
+
+        }
+}
+
+
+

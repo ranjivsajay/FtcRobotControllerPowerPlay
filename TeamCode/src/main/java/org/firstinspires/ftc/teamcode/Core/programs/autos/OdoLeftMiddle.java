@@ -24,7 +24,7 @@ public class OdoLeftMiddle extends UpliftAutoImpl
 
 
 
-        @Override
+    @Override
         public void initAction() {
 
             robot.getFourBar().setPosition(.75);
@@ -41,53 +41,51 @@ public class OdoLeftMiddle extends UpliftAutoImpl
 
         @Override
         public void body() throws InterruptedException {
+
             SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
+           // Pose2d startPose = new Pose2d(-63, 36, Math.toRadians(0));
             Pose2d startPose = new Pose2d(0, 0, Math.toRadians(0));
             drive.setPoseEstimate(startPose);
 
+            while (opModeIsActive() && Math.abs(92 - getAbsoluteAngle()) > 1) {
 
+                fieldCentricMove(0.6, 0.18, -0.3);
+                servoArmsHigh();
+                robot.getTwister().setPosition(robot.getTwisterUpPos());
+
+            }
+            stopMotors();
 
             Trajectory traj1 = drive.trajectoryBuilder(startPose)
-                  .lineToLinearHeading(new Pose2d(30, 6, Math.toRadians(70)))
-                    //.lineToLinearHeading(new Pose2d(60,0,Math.toRadians(45)))
-                 //   .addTemporalMarker(2,() -> {
-                        //servoArmsHigh();
-                     //   robot.getFourBar().setPosition(0.8);
-                       // robot.getTwister().setPosition(robot.getTwisterUpPos());
-         //   })
+                    .strafeRight(12)
                     .build();
+            drive.followTrajectory(traj1);
 
-           Trajectory traj2 = drive.trajectoryBuilder(traj1.end())
-                   .lineToLinearHeading(new Pose2d(54, -1, Math.toRadians(45)))
-//                   .addTemporalMarker(9,() -> {
-//                robot.getSlide1().setPower(-.5);
-//                robot.getSlide2().setPower(.5);
-//                robot.getFourBar().setPosition(robot.getBarFrontPos());
-//                robot.getArmRight().setPosition(robot.getArm2StackPos5());
-//                robot.getArmLeft().setPosition(robot.getArm1StackPos5());
-//                robot.getTwister().setPosition(robot.getTwisterUpPos());
-//                robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
-//
-//            })
-                  .build();
+            turnToPole(300, 0.1);
 
-           Trajectory traj3 = drive.trajectoryBuilder(traj2.end())
-                   .lineToLinearHeading(new Pose2d(50,15,Math.toRadians(92)))
+            while(robot.getPoleDetector().getDistance(DistanceUnit.CM) > 5)
+            {
+                moveBackward(0.2);
+            }
+            stopMotors();
 
-                           .build();
+            robot.getFourBar().setPosition(robot.getBarBackPos());
+            robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
 
+            Thread.sleep(500);
 
-              drive.followTrajectory(traj1);
+            Trajectory traj2 = drive.trajectoryBuilder(traj1.end(), Math.toRadians(90))
+                    .forward(4)
+                    .build();
             drive.followTrajectory(traj2);
-//            moveBackward(.7,325);
-//            Thread.sleep(500);
-//           robot.getFourBar().setPosition(.95);
-//            robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
-//            Thread.sleep(500);
-//            moveForward(.7,325);
-//            Thread.sleep(3000);
-//            drive.followTrajectory(traj3);
+
+            Trajectory traj3 = drive.trajectoryBuilder(traj2.end(), Math.toRadians(90))
+                    .strafeRight(5)
+                    .build();
+            drive.followTrajectory(traj3);
+
+
 
 
 
