@@ -16,6 +16,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.toolkit.UpliftMath;
+import org.firstinspires.ftc.teamcode.Core.toolkit.vision.ConesPipeline;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
 @Autonomous(name = "OdoLeftMiddle", group = "Opmodes")
@@ -41,6 +42,9 @@ public class OdoLeftMiddle extends UpliftAutoImpl
 
         @Override
         public void body() throws InterruptedException {
+
+            int parkLocation = robot.pipeline1.location;
+                robot.getWebcam().setPipeline(robot.pipeline2);
 
             SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
@@ -80,10 +84,38 @@ public class OdoLeftMiddle extends UpliftAutoImpl
                     .build();
             drive.followTrajectory(traj2);
 
-            Trajectory traj3 = drive.trajectoryBuilder(traj2.end(), Math.toRadians(90))
-                    .strafeRight(5)
+            Trajectory traj3 = drive.trajectoryBuilder(traj2.end())
+                    .strafeRight(3)
                     .build();
             drive.followTrajectory(traj3);
+
+            turnToPID(92);
+
+            //robot aligns itself with the stack of cones
+            moveRight(0.3);
+            if (robot.pipeline2.getError() == 10){
+                stopMotors();
+            }
+
+
+//            while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8) {
+//                moveForward(0.25);
+//                robot.getArmLeft().setPosition(robot.getArm1StackPos5());
+//                robot.getArmRight().setPosition(robot.getArm2StackPos5());
+//
+//
+//                robot.getTwister().setPosition(robot.getTwisterDownPos());
+//                fourBarFront();
+//                Thread.sleep(300);
+//                robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
+//                turnToPID(92);;
+//            }
+//            stopMotors();
+//            robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
+
+
+
+
 
 
 
