@@ -68,6 +68,7 @@ public class TeleOp1 extends UpliftTele {
     public void bodyLoop() throws InterruptedException {
 
         telemetry.addData("error:" , robot.pipeline2.getError());
+        telemetry.addData("grabber pos" , robot.getFourBar().getPosition());
         telemetry.update();
 
 

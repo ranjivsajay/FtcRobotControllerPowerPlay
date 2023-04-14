@@ -101,48 +101,48 @@ public class OdoLeftMiddle extends UpliftAutoImpl
             stopMotors();
 
 
-            robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
-
-            robot.getArmLeft().setPosition(robot.getArm1StackPos5());
-            robot.getArmRight().setPosition(robot.getArm2StackPos5());
-
-            Thread.sleep(100);
-
-            robot.getTwister().setPosition(robot.getTwisterDownPos());
-            fourBarFront();
-            Thread.sleep(300);
-            robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
-            Thread.sleep(100);
-
-
-            Trajectory traj4 = drive.trajectoryBuilder(traj3.end(),Math.toRadians(90))
-                    .forward(2)
-                    .build();
-            drive.followTrajectory(traj4);
-            turnToPID(90);
-
-            while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8) {
-                moveForward(0.25);
-            }
-            stopMotors();
-
-
-            robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
-            Thread.sleep(200);
-
-            robot.getFourBar().setPosition(0.55);
-            Thread.sleep(300);
-
-            servoArmsHigh();
-
-//            fourBarBack();
-
-            while (opModeIsActive() && Math.abs(70 - getAbsoluteAngle()) > 1) {
-
-                fieldCentricMove(-0.15, 0.85, 0.2);
-
-            }
-            stopMotors();
+//            robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
+//
+//            robot.getArmLeft().setPosition(robot.getArm1StackPos5());
+//            robot.getArmRight().setPosition(robot.getArm2StackPos5());
+//
+//            Thread.sleep(100);
+//
+//            robot.getTwister().setPosition(robot.getTwisterDownPos());
+//            fourBarFront();
+//            Thread.sleep(300);
+//            robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
+//            Thread.sleep(100);
+//
+//
+//            Trajectory traj4 = drive.trajectoryBuilder(traj3.end(),Math.toRadians(90))
+//                    .forward(2)
+//                    .build();
+//            drive.followTrajectory(traj4);
+//            turnToPID(90);
+//
+//            while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8) {
+//                moveForward(0.25);
+//            }
+//            stopMotors();
+//
+//
+//            robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
+//            Thread.sleep(200);
+//
+//            robot.getFourBar().setPosition(0.55);
+//            Thread.sleep(300);
+//
+//            servoArmsHigh();
+//
+////            fourBarBack();
+//
+//            while (opModeIsActive() && Math.abs(70 - getAbsoluteAngle()) > 1) {
+//
+//                fieldCentricMove(-0.15, 0.85, 0.2);
+//
+//            }
+//            stopMotors();
 
 
 

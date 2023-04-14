@@ -69,7 +69,7 @@ public class OperatorThread extends Thread
 
                 mediumBackwards();
 
-                mediumForwards();
+                coneRighting();
 
                 stackHeight5();
 
@@ -85,14 +85,12 @@ public class OperatorThread extends Thread
 
                 if(robot.opMode.gamepad2.left_bumper)
                 {
-//                    robot.getFourBar1().setPosition(robot.getFourBar1().getPosition() + 0.01);
-//                    robot.getFourBar2().setPosition(robot.getFourBar2().getPosition() - 0.01);
+                    robot.getFourBar().setPosition(robot.getFourBar().getPosition() + 0.001);
                 }
 
                 if(robot.opMode.gamepad2.right_bumper)
                 {
-//                    robot.getFourBar1().setPosition(robot.getFourBar1().getPosition() - 0.01);
-//                    robot.getFourBar2().setPosition(robot.getFourBar2().getPosition() + 0.01);
+                    robot.getFourBar().setPosition(robot.getFourBar().getPosition() - 0.001);
                 }
                 double angle;
                 int minTic = 150;
@@ -100,15 +98,7 @@ public class OperatorThread extends Thread
 //                robot.getSlide2().setPower(0.85 * Range.clip(-robot.opMode.gamepad2.right_stick_y, -1, 1));
                 robot.getSlide1().setPower(Range.clip(robot.opMode.gamepad2.right_stick_y, -1, 1));
                 robot.getSlide2().setPower(Range.clip(-robot.opMode.gamepad2.right_stick_y, -1, 1));
-                if(robot.getSlide2().getCurrentPosition() > minTic)
-                {
-
-//                    angle = (robot.getSlide2().getCurrentPosition()/7.75) - 19.354;
-//                    robot.getArm1().setPosition(robot.getArm1().getPosition() + (0.02 * angle));
-//                    robot.getArm2().setPosition(robot.getArm2().getPosition() - (0.02 * angle));
-//                    minTic += 25;
-
-                }
+                
 
 
 
@@ -201,13 +191,13 @@ public class OperatorThread extends Thread
 
 //    public void toggleGrab() throws InterruptedException
 //    {
-//        if(robot.opMode.gamepad2.right_trigger > robot.getGrabberOpenPos() && !blockGrabberInput)
+//        if(robot.opMode.gamepad2.right_trigger > robot.getGrabber1OpenPos() && !blockGrabberInput)
 //        {
-//        robot.getGrabber().setPosition(grabberState ? robot.getGrabberOpenPos() : robot.getGrabberClosePos());
+//        robot.getGrabber1().setPosition(grabberState ? robot.getGrabber1OpenPos() : robot.getGrabber1ClosePos());
 //        grabberState = !grabberState;
 //        blockGrabberInput = true;
 //        }
-//        else if (robot.opMode.gamepad2.right_trigger < robot.getGrabberClosePos() && blockGrabberInput)
+//        else if (robot.opMode.gamepad2.right_trigger < robot.getGrabber1ClosePos() && blockGrabberInput)
 //        {
 //            blockGrabberInput = false;
 //        }
@@ -290,8 +280,8 @@ public class OperatorThread extends Thread
             robot.getFourBar().setPosition(robot.getBarBackPos());
 
             robot.getTwister().setPosition(robot.getTwisterUpPos());
-//            robot.getArmLeft().setPosition(robot.getArm1HighPos());
-//            robot.getArmRight().setPosition(robot.getArm2HighPos());
+            robot.getArmLeft().setPosition(robot.getArmLeftHighPos());
+            robot.getArmRight().setPosition(robot.getArmRightHighPos());
 
 
 
@@ -349,7 +339,7 @@ public class OperatorThread extends Thread
         }
     }
 
-    public void mediumForwards()
+    public void coneRighting()
     {
         if(robot.opMode.gamepad2.dpad_down) // medium height forwards
         {
@@ -359,7 +349,7 @@ public class OperatorThread extends Thread
             robot.getArmLeft().setPosition(robot.getArm1StackPos5());
             robot.getArmRight().setPosition(robot.getArm2StackPos5());
 
-            robot.getFourBar().setPosition(1);
+            robot.getFourBar().setPosition(.05);
 
             robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
 ////            slides(0.5, 700);
