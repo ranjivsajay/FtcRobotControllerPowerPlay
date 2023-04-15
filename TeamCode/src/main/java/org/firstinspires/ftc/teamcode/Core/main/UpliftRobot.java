@@ -100,7 +100,7 @@ public class UpliftRobot
 //    double extensionRightCyclePos = 0.5;
 
     double odoMidUp = 0.38;
-    double odoMidDown = .535;
+    double odoMidDown = .53;
 
 //    double gPositionTransfer = 0.5;
 //    double gRotationTransfer = 0.15;
