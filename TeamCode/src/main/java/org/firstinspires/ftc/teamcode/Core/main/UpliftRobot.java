@@ -56,8 +56,8 @@ public class UpliftRobot
 //    double arm1TransferPos = .91;
 //    double arm2TransferPos = .09;
 
-    double arm1PickUpPos = .6;
-    double arm2PickUpPos = .4;
+    double arm1PickUpPos = .61;
+    double arm2PickUpPos = .39;
 
     double arm1StackPos4 = arm1PickUpPos - 0.03;
     double arm2StackPos4 = arm2PickUpPos + 0.03;

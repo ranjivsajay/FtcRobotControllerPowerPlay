@@ -573,7 +573,7 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getLeftFront().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.getRightFront().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        turnToPID(turnAngle);
+        turnToPID(turnAngle + 2);
     }
 
 
