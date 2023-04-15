@@ -27,52 +27,82 @@ public class test extends UpliftAutoImpl
 //
 //        fourBarFront();
 
-
+robot.getWebcam().setPipeline(robot.pipeline2);
 
     }
 
     @Override
     public void body() throws InterruptedException
     {
+robot.getWebcam().setPipeline(robot.pipeline2);
 
-
-        double coneDist = 500;
-
-        double turnAngle = robot.imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
-
-        robot.getLeftFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.getRightFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        robot.getLeftFront().setTargetPosition(350);
-        robot.getRightFront().setTargetPosition(-350);
-
-
-        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.getRightFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-
-        robot.getLeftFront().setPower(0.15);
-        robot.getRightFront().setPower(-0.15);
-        robot.getLeftBack().setPower(0.15);
-        robot.getRightBack().setPower(-0.15);
-
-        while(opModeIsActive() && robot.getRightFront().isBusy())
+        while(opModeIsActive())
         {
-            if(robot.getConeDetector().getDistance(DistanceUnit.METER) < coneDist)
-            {
-                coneDist = robot.getConeDetector().getDistance(DistanceUnit.METER);
-                turnAngle = robot.imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
-            }
-            telemetry.addData("distance", coneDist);
-            telemetry.update();
+            double var = robot.pipeline2.getError() * 0.003;
+            moveRight(-var);
         }
-
         stopMotors();
 
-        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        robot.getRightFront().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//            robot.getArmLeft().setPosition(robot.getArm1StackPos5());
+//            robot.getArmRight().setPosition(robot.getArm2StackPos5());
+////
+//            Thread.sleep(100);
+//
+//            robot.getTwister().setPosition(robot.getTwisterDownPos());
+//            fourBarFront();
+//            Thread.sleep(300);
+//            robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
+//            Thread.sleep(100);
+//
+//            turnToPID(90);
+//
+//            while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8) {
+//                moveForward(0.25);
+//            }
+//            stopMotors();
+////
+////
+//            robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
+//            Thread.sleep(200);
 
-        turnToPID(turnAngle);
+
+//        double coneDist = 500;
+//
+//        double turnAngle = robot.imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
+//
+//        robot.getLeftFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        robot.getRightFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//
+//        robot.getLeftFront().setTargetPosition(350);
+//        robot.getRightFront().setTargetPosition(-350);
+//
+//
+//        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        robot.getRightFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//
+//
+//        robot.getLeftFront().setPower(0.15);
+//        robot.getRightFront().setPower(-0.15);
+//        robot.getLeftBack().setPower(0.15);
+//        robot.getRightBack().setPower(-0.15);
+//
+//        while(opModeIsActive() && robot.getRightFront().isBusy())
+//        {
+//            if(robot.getConeDetector().getDistance(DistanceUnit.METER) < coneDist)
+//            {
+//                coneDist = robot.getConeDetector().getDistance(DistanceUnit.METER);
+//                turnAngle = robot.imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
+//            }
+//            telemetry.addData("distance", coneDist);
+//            telemetry.update();
+//        }
+//
+//        stopMotors();
+//
+//        robot.getLeftFront().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        robot.getRightFront().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//
+//        turnToPID(turnAngle);
 
 //        double poleDist = 500;
 //        double turnAngle = robot.imu.getAngularOrientation().firstAngle;
