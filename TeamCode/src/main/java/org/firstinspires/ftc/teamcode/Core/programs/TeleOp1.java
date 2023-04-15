@@ -43,20 +43,20 @@ public class TeleOp1 extends UpliftTele {
     public void initAction() {
 
 
-//        robot.getFourBar().setPosition(robot.getBarFrontPos());
-//        sleep(2000);
-//        robot.getArmLeft().setPosition(robot.getArmLeftHighPos());
-//        robot.getArmRight().setPosition(robot.getArmRightHighPos());
-        robot.getFourBar().setPosition(.75);
+//
+  //      robot.getFourBar().setPosition(.75);
 
+        robot.getFourBar().setPosition(robot.getBarFrontPos());
+        robot.getArmLeft().setPosition(robot.getArm1StackPos5());
+        robot.getArmRight().setPosition(robot.getArm2StackPos5());
+        robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
 
-
-
-
+        telemetry.addData("cone distance sensor", robot.getConeDetector().getDistance(DistanceUnit.CM));
+        telemetry.update();
 //
        // robot.getOdoMid().setPosition(robot.getOdoMidUp());
 
-        robot.getWebcam().setPipeline(robot.pipeline2);
+     //   robot.getWebcam().setPipeline(robot.pipeline2);
 
         driverThread.start();
         operatorThread.start();
@@ -67,11 +67,12 @@ public class TeleOp1 extends UpliftTele {
 
     public void bodyLoop() throws InterruptedException {
 
-        telemetry.addData("error:" , robot.pipeline2.getError());
-        telemetry.addData("grabber pos" , robot.getFourBar().getPosition());
+       // telemetry.addData("error:" , robot.pipeline2.getError());
+     //   telemetry.addData("grabber pos" , robot.getFourBar().getPosition());
+     //   telemetry.update();
+
+        telemetry.addData("cone distance sensor" , robot.getConeDetector().getDistance(DistanceUnit.CM));
         telemetry.update();
-
-
 
         double leftY = (.7 * Range.clip(-gamepad1.left_stick_y, -1, 1));
         double rightX = (.7 * Range.clip(gamepad1.right_stick_x, -1, 1));

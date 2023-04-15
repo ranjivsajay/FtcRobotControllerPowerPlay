@@ -213,7 +213,7 @@ public class UpliftRobot
         pipeline1 = new PowerPlay(opMode.telemetry);
         pipeline2 = new ConesPipeline();
 
-        webcam.setPipeline(pipeline2);
+        webcam.setPipeline(pipeline1);
 
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override

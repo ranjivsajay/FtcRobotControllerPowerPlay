@@ -14,8 +14,8 @@ public class  PowerPlay extends OpenCvPipeline {
     Mat mat = new Mat();
     public int location;
     static final Rect ROI = new Rect(
-            new Point(120, 50),
-            new Point(200, 130));
+            new Point(400, 50),
+            new Point(550, 200));
 
     public PowerPlay(Telemetry t) {
         telemetry = t;
@@ -31,7 +31,7 @@ public class  PowerPlay extends OpenCvPipeline {
         Scalar purplehighHSV = new Scalar(140, 255, 255);
 
         Scalar greenlowHSV = new Scalar(30, 80, 60);
-        Scalar greenhighHSV = new Scalar(60, 255, 255);
+        Scalar greenhighHSV = new Scalar(110, 255, 255);
 
         Scalar orangelowHSV = new Scalar(10, 80, 60);
         Scalar orangehighHSV = new Scalar(30, 255, 255);
