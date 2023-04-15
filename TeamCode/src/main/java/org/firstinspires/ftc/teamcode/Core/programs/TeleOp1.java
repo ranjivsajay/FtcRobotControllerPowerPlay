@@ -43,11 +43,11 @@ public class TeleOp1 extends UpliftTele {
     public void initAction() {
 
 
-        robot.getFourBar().setPosition(robot.getBarFrontPos());
-        sleep(2000);
-        robot.getArmLeft().setPosition(robot.getArmLeftHighPos());
-        robot.getArmRight().setPosition(robot.getArmRightHighPos());
-        robot.getFourBar().setPosition(robot.getBarBackPos());
+//        robot.getFourBar().setPosition(robot.getBarFrontPos());
+//        sleep(2000);
+//        robot.getArmLeft().setPosition(robot.getArmLeftHighPos());
+//        robot.getArmRight().setPosition(robot.getArmRightHighPos());
+        robot.getFourBar().setPosition(.75);
 
 
 
@@ -56,7 +56,7 @@ public class TeleOp1 extends UpliftTele {
 //
        // robot.getOdoMid().setPosition(robot.getOdoMidUp());
 
-
+        robot.getWebcam().setPipeline(robot.pipeline2);
 
         driverThread.start();
         operatorThread.start();

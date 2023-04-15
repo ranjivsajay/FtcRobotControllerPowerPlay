@@ -165,7 +165,7 @@ public class ConesPipeline extends OpenCvPipeline {
             savePictureFlag = false;
         }
 
-        return submat;
+        return source0;
     }
 
     public double getError(){
