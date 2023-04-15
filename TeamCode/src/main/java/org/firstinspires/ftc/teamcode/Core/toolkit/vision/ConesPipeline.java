@@ -135,10 +135,10 @@ public class ConesPipeline extends OpenCvPipeline {
                 if(Imgproc.contourArea(biggestBlueContour) > CONTOUR_AREA_CONES) {
 
                     blueRect = Imgproc.boundingRect(biggestBlueContour);
-                    error = 400 - (blueRect.width / 2 + blueRect.x);
+                    error = 450 - (blueRect.width / 2 + blueRect.x);
 
                     Log.i("error: ", "" + error);
-                  //  Log.i("height/width: ", "" + blueRect.height/blueRect.width);
+                    Log.i("height/width: ", "" + blueRect.height/blueRect.width);
                     if(error <= 10 && error >= -10){
                         error = 0.0;
                     }
@@ -165,7 +165,7 @@ public class ConesPipeline extends OpenCvPipeline {
             savePictureFlag = false;
         }
 
-        return source0;
+        return submat;
     }
 
     public double getError(){

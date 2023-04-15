@@ -41,7 +41,7 @@ public class UpliftRobot
     double armLeftLowPos = 0.33 ;
     double armRightLowPos = 0.67;
 
-    double barFrontPos = .25;
+    double barFrontPos = .27;
     double barBackPos = .85;
 
     double grabber1OpenPos = .033;
