@@ -139,7 +139,7 @@ public class ConesPipeline extends OpenCvPipeline {
 
                     Log.i("error: ", "" + error);
                     Log.i("height/width: ", "" + blueRect.height/blueRect.width);
-                    if(error <= 10 && error >= -10){
+                    if(error <= 7.5 && error >= -7.5){
                         error = 0.0;
                     }
                     Imgproc.rectangle(submat, blueRect, CONTOUR_COLOR_CONES, 2);
