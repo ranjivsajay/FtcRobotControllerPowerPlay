@@ -51,7 +51,6 @@ public class OperatorThread extends Thread
         {
             try
             {
-                hold();
 
 
 
@@ -85,12 +84,13 @@ public class OperatorThread extends Thread
 
                 if(robot.opMode.gamepad2.left_bumper)
                 {
-                    robot.getFourBar().setPosition(robot.getFourBar().getPosition() + 0.001);
+                    robot.getFourBar().setPosition(robot.getBarFrontPos());
+                    robot.getTwister().setPosition(robot.getTwisterDownPos());
                 }
 
                 if(robot.opMode.gamepad2.right_bumper)
                 {
-                    robot.getFourBar().setPosition(robot.getFourBar().getPosition() - 0.001);
+                    robot.getFourBar().setPosition(.75);
                 }
                 double angle;
                 int minTic = 150;
@@ -98,7 +98,7 @@ public class OperatorThread extends Thread
 //                robot.getSlide2().setPower(0.85 * Range.clip(-robot.opMode.gamepad2.right_stick_y, -1, 1));
                 robot.getSlide1().setPower(Range.clip(robot.opMode.gamepad2.right_stick_y, -1, 1));
                 robot.getSlide2().setPower(Range.clip(-robot.opMode.gamepad2.right_stick_y, -1, 1));
-                
+
 
 
 
@@ -117,6 +117,7 @@ public class OperatorThread extends Thread
 
                 if (robot.opMode.gamepad2.right_trigger > .1)
                 {
+
                     robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
                 }
 
@@ -124,6 +125,8 @@ public class OperatorThread extends Thread
                 {
                     robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
                 }
+
+                
 
 //                robot.opMode.telemetry.addData("magnet", robot.getMagnet().isPressed());
 //                robot.opMode.telemetry.addData("odoRight" , robot.getOdoRight().getCurrentPosition());
@@ -157,19 +160,19 @@ public class OperatorThread extends Thread
     }
 
 
-    public void slides(double power, int dist)
-    {
-
-        double initialPos2 = robot.getSlide2().getCurrentPosition();
-
-        while (Math.abs(robot.getSlide2().getCurrentPosition() - (initialPos2 + dist)) > 50)
-        {
-            robot.getSlide1().setPower(-0.9 * power);
-            robot.getSlide2().setPower(power);
-        }
-        robot.getSlide1().setPower(0);
-        robot.getSlide2().setPower(0);
-    }
+//    public void slides(double power, int dist)
+//    {
+//
+//        double initialPos2 = robot.getSlide2().getCurrentPosition();
+//
+//        while (Math.abs(robot.getSlide2().getCurrentPosition() - (initialPos2 + dist)) > 50)
+//        {
+//            robot.getSlide1().setPower(-0.9 * power);
+//            robot.getSlide2().setPower(power);
+//        }
+//        robot.getSlide1().setPower(0);
+//        robot.getSlide2().setPower(0);
+//    }
 
 
     public void toggle4Bar()
@@ -182,6 +185,7 @@ public class OperatorThread extends Thread
             robot.getFourBar().setPosition(fourBarState ? 0.25 : .75);
             fourBarState = !fourBarState;
             block4BarInput = true;
+           // while(robot.opMode.gamepad2.x && robot.getArmLeftLowPos().)
         }
         else if(!robot.opMode.gamepad2.x && block4BarInput)
         {
@@ -246,8 +250,8 @@ public class OperatorThread extends Thread
             robot.getTwister().setPosition(robot.getTwisterDownPos());
 //            robot.getFourBar1().setPosition(0.8);
 //            robot.getFourBar2().setPosition(0.2);
-            robot.getFourBar().setPosition(robot.getBarFrontPos());
-            robot.getFourBar().setPosition(robot.getBarFrontPos());
+            robot.getFourBar().setPosition(robot.getBarFrontPos()+ .03);
+
 //            Thread.sleep(500);
 
             robot.getArmLeft().setPosition(robot.getArmLeftLowPos());
@@ -264,8 +268,13 @@ public class OperatorThread extends Thread
     {
         if (robot.opMode.gamepad2.y) // raise servo on 6bar
         {
-            robot.getArmRight().setPosition(.1);
-            robot.getArmLeft().setPosition(.9);
+            robot.getArmRight().setPosition(.05);
+            robot.getArmLeft().setPosition(.95);
+//            robot.getArmRight().setPosition(.05);
+//            robot.getArmLeft().setPosition(.95);
+           robot.getFourBar().setPosition(.3);
+//
+//            robot.getTwister().setPosition(robot.getTwisterUpPos());
         }
 
     }
@@ -280,14 +289,12 @@ public class OperatorThread extends Thread
             robot.getFourBar().setPosition(robot.getBarBackPos());
 
             robot.getTwister().setPosition(robot.getTwisterUpPos());
-            robot.getArmLeft().setPosition(robot.getArmLeftHighPos());
-            robot.getArmRight().setPosition(robot.getArmRightHighPos());
+//            robot.getArmLeft().setPosition(robot.getArmLeftHighPos());
+//            robot.getArmRight().setPosition(robot.getArmRightHighPos());
 
-
-
-
-            robot.getTwister().setPosition(robot.getTwisterUpPos());
-
+//            servoArmsHigh();
+            robot.getArmRight().setPosition(.05);
+            robot.getArmLeft().setPosition(.95);
         }
     }
 

@@ -42,8 +42,6 @@ public class TeleOp1 extends UpliftTele {
     @Override
     public void initAction() {
 
-
-//
   //      robot.getFourBar().setPosition(.75);
 
         robot.getFourBar().setPosition(robot.getBarFrontPos());
@@ -54,7 +52,7 @@ public class TeleOp1 extends UpliftTele {
 //        telemetry.addData("cone distance sensor", robot.getConeDetector().getDistance(DistanceUnit.CM));
 //        telemetry.update();
 ////
-       // robot.getOdoMid().setPosition(robot.getOdoMidUp());
+        robot.getOdoMid().setPosition(robot.getOdoMidUp());
 
      //   robot.getWebcam().setPipeline(robot.pipeline2);
 
