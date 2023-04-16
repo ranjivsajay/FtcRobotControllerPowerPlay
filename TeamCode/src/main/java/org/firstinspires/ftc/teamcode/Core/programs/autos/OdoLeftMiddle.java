@@ -38,13 +38,17 @@ public class OdoLeftMiddle extends UpliftAutoImpl {
 
 //        robot.getOdoMid().setPosition(robot.getOdoMidDown());
 //        robot.getWebcam().setPipeline(robot.pipeline2);
-        
+
     }
 
     @Override
     public void body() throws InterruptedException {
 
+
         int parkLocation = robot.pipeline1.location;
+
+
+
         robot.pipeline1.doCones(true);
 
 
@@ -309,6 +313,8 @@ public class OdoLeftMiddle extends UpliftAutoImpl {
         fourBarBack();
         robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
 
+        Thread.sleep(200);
+
         while (opModeIsActive() && Math.abs(90 - getAbsoluteAngle()) > 1) {
 
             fieldCentricMove(0.15, -0.2, -0.2);
@@ -332,17 +338,25 @@ public class OdoLeftMiddle extends UpliftAutoImpl {
         turnToPID(90);
 
 
-        if (parkLocation == 1) {
-            moveForward(0.6, 400);
-            stopMotors();
-        } else if (parkLocation == 2) {
+        if (parkLocation == 1)
+        {
+            moveForward(0.6, 500);
+
+        } else if (parkLocation == 2)
+        {
             moveBackward(0.6,150);
-            stopMotors();
 
-        } else if (parkLocation == 3) {
-            moveBackward(0.6,800);
-            stopMotors();
+        } else if (parkLocation == 3)
+        {
+            moveRight(0.3, 500);
+        }
+        stopMotors();
 
+
+        while(opModeIsActive())
+        {
+            telemetry.addData("location", parkLocation);
+            telemetry.update();
         }
 
 
