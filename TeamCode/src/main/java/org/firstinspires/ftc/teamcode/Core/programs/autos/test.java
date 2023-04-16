@@ -31,54 +31,14 @@ public class test extends UpliftAutoImpl
         robot.getArmRight().setPosition(robot.getArm2StackPos5());
         robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
         robot.getTwister().setPosition(robot.getTwisterDownPos());
-        robot.getWebcam().setPipeline(robot.pipeline2);
+        robot.getWebcam().setPipeline(robot.pipeline1);
 
     }
 
     @Override
     public void body() throws InterruptedException
     {
-        telemetry.addData("power", robot.getLeftFront().getPower());
-        telemetry.update();
-
-        while(opModeIsActive() && robot.pipeline2.getError() != 0)
-        {
-            double var = robot.pipeline2.getError() * 0.0042;
-            moveRight(-var);
-            while(robot.getLeftFront().isBusy())
-            {
-                if (Math.abs(robot.getLeftFront().getPower() ) < .2)
-                    stopMotors();
-            }
-
-        }
-        stopMotors();
-
-
-        if(robot.pipeline2.getError() == 0)
-        {
-            while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8)
-            {
-                moveForward(0.25);
-            }
-
-            stopMotors();
-        }
-        else
-        {
-            while(opModeIsActive() && robot.pipeline2.getError() != 0)
-            {
-                double var = robot.pipeline2.getError() * 0.0042;
-                moveRight(-var);
-                while(robot.getLeftFront().isBusy())
-                {
-                    if (Math.abs(robot.getLeftFront().getPower() ) < .2)
-                        stopMotors();
-                }
-            }
-            stopMotors();
-        }
-
+        turnToPole(300, 0.2);
 
 
     }

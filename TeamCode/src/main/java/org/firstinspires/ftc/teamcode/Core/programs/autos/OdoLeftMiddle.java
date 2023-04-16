@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
@@ -35,15 +36,17 @@ public class OdoLeftMiddle extends UpliftAutoImpl {
         robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
         robot.getTwister().setPosition(robot.getTwisterDownPos());
 
-        robot.getOdoMid().setPosition(robot.getOdoMidDown());
-
+//        robot.getOdoMid().setPosition(robot.getOdoMidDown());
+//        robot.getWebcam().setPipeline(robot.pipeline2);
+        
     }
 
     @Override
     public void body() throws InterruptedException {
 
         int parkLocation = robot.pipeline1.location;
-        robot.getWebcam().setPipeline(robot.pipeline2);
+        robot.pipeline1.doCones(true);
+
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
@@ -60,10 +63,11 @@ public class OdoLeftMiddle extends UpliftAutoImpl {
         }
         stopMotors();
 
-        Trajectory traj1 = drive.trajectoryBuilder(startPose)
-                .strafeRight(11)
-                .build();
-        drive.followTrajectory(traj1);
+//        Trajectory traj1 = drive.trajectoryBuilder(startPose)
+//                .strafeRight(11)
+//                .build();
+//        drive.followTrajectory(traj1);
+        moveRight(0.5, 600);
 
         turnToPole(300, 0.2);
 
@@ -77,15 +81,21 @@ public class OdoLeftMiddle extends UpliftAutoImpl {
 
         Thread.sleep(500);
 
-        Trajectory traj2 = drive.trajectoryBuilder(traj1.end(), Math.toRadians(90))
-                .forward(4)
-                .build();
-        drive.followTrajectory(traj2);
+//        Trajectory traj2 = drive.trajectoryBuilder(traj1.end(), Math.toRadians(90))
+//                .forward(4)
+//                .build();
+//        drive.followTrajectory(traj2);
 
-        Trajectory traj3 = drive.trajectoryBuilder(traj2.end())
-                .strafeRight(6)
-                .build();
-        drive.followTrajectory(traj3);
+        moveForward(0.5, 150);
+
+        moveRight(0.5, 200);
+
+
+
+//        Trajectory traj3 = drive.trajectoryBuilder(new Pose2d())
+//                .strafeRight(6)
+//                .build();
+//        drive.followTrajectory(traj3);
 
         turnToPID(90);
 
@@ -95,8 +105,8 @@ public class OdoLeftMiddle extends UpliftAutoImpl {
         robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
         robot.getTwister().setPosition(robot.getTwisterDownPos());
 
-        sleep(1000);
-        robot.getWebcam().setPipeline(robot.pipeline2);
+        Thread.sleep(800);
+       // robot.getWebcam().setPipeline(robot.pipeline2);
 
 
 //            if (robot.getConeDetector().getDistance(DistanceUnit.CM) < 54) {
@@ -108,157 +118,236 @@ public class OdoLeftMiddle extends UpliftAutoImpl {
 //                stopMotors();
 //            }
 
-        //robot aligns itself with the stack of cones
-        while(opModeIsActive() && robot.pipeline2.getError() != 0)
+//        robot aligns itself with the stack of cones
+        while(opModeIsActive() && robot.pipeline1.getError() != 0)
         {
-            double var = robot.pipeline2.getError() * 0.0042;
+            double var = robot.pipeline1.getError() * 0.0052;
             moveRight(-var);
-            while(robot.getLeftFront().isBusy())
-            {
-                if (Math.abs(robot.getLeftFront().getPower() ) < .2)
-                    stopMotors();
-            }
 
         }
         stopMotors();
 
-
-        if(robot.pipeline2.getError() == 0)
+        while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8)
         {
-            while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8)
-            {
-                moveForward(0.25);
-            }
-
-            stopMotors();
-        }
-        else
-        {
-            while(opModeIsActive() && robot.pipeline2.getError() != 0)
-            {
-                double var = robot.pipeline2.getError() * 0.0042;
-                moveRight(-var);
-                while(robot.getLeftFront().isBusy())
-                {
-                    if (Math.abs(robot.getLeftFront().getPower() ) < .2)
-                        stopMotors();
-                }
-            }
-            stopMotors();
-        }
-
-
-
-
-
-            robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
-
-            Thread.sleep(300);
-
-
-            servoArmsHigh();
-            robot.getFourBar().setPosition(0.75);
-            Thread.sleep(300);
-
-
-            robot.getTwister().setPosition(robot.getTwisterUpPos());
-
-            while (opModeIsActive() && Math.abs(69 - getAbsoluteAngle()) > 1) {
-
-                fieldCentricMove(-0.08, 0.9, 0.2);
-
-            }
-            stopMotors();
-
-            turnToPole(300, 0.2);
-
-            while (robot.getPoleDetector().getDistance(DistanceUnit.CM) > 4) {
-                moveBackward(0.2);
-            }
-            stopMotors();
-
-            fourBarBack();
-            robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
-
-            while (opModeIsActive() && Math.abs(90 - getAbsoluteAngle()) > 1) {
-
-                fieldCentricMove(0.05, -0.2, -0.2);
-
-            }
-            stopMotors();
-
-            //robot aligns itself with the stack of cones
-            while (opModeIsActive() && robot.pipeline2.getError() != 0) {
-                double var = robot.pipeline2.getError() * 0.0042;
-                moveRight(-var);
-            }
-            stopMotors();
-
-            turnToPID(90);
-
-            robot.getFourBar().setPosition(robot.getBarFrontPos());
-            robot.getArmLeft().setPosition(robot.getArm1StackPos5());
-            robot.getArmRight().setPosition(robot.getArm2StackPos5());
-            robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
-            robot.getTwister().setPosition(robot.getTwisterDownPos());
-
-            sleep(300);
-
-
-        while(opModeIsActive() && robot.pipeline2.getError() != 0)
-        {
-            double var = robot.pipeline2.getError() * 0.0042;
-            moveRight(-var);
-            while(robot.getLeftFront().isBusy())
-            {
-                if (Math.abs(robot.getLeftFront().getPower() ) < .2)
-                    stopMotors();
-            }
-
+            moveForward(.35);
         }
         stopMotors();
 
 
-        if(robot.pipeline2.getError() == 0)
+
+
+
+
+        robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
+
+        Thread.sleep(300);
+
+
+        servoArmsHigh();
+        robot.getFourBar().setPosition(0.75);
+      //  Thread.sleep(300);
+
+
+     //   robot.getTwister().setPosition(robot.getTwisterUpPos());
+
+        while (opModeIsActive() && Math.abs(69 - getAbsoluteAngle()) > 1) {
+
+            fieldCentricMove(-0.08, 0.92, 0.2);
+
+        }
+        stopMotors();
+
+        turnToPole(300, 0.2);
+        robot.getTwister().setPosition(robot.getTwisterUpPos());
+
+        robot.pipeline1.doCones(true);
+        while (robot.getPoleDetector().getDistance(DistanceUnit.CM) > 4) {
+            moveBackward(0.2);
+        }
+        stopMotors();
+
+        fourBarBack();
+        robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
+
+        while (opModeIsActive() && Math.abs(90 - getAbsoluteAngle()) > 1) {
+
+            fieldCentricMove(0.14, -0.2, -0.2);
+
+        }
+        stopMotors();
+
+//        while(opModeIsActive())
+//        {
+//            telemetry.addData("error", robot.pipeline1.getError());
+//            telemetry.update();
+//        }
+
+        turnToPID(90);
+
+        robot.getFourBar().setPosition(robot.getBarFrontPos());
+        robot.getArmLeft().setPosition(robot.getArm1StackPos4());
+        robot.getArmRight().setPosition(robot.getArm2StackPos4());
+        robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
+        robot.getTwister().setPosition(robot.getTwisterDownPos());
+
+        Thread.sleep(800);
+
+//        robot aligns itself with the stack of cones
+        while(opModeIsActive() && robot.pipeline1.getError() != 0)
         {
-            while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8)
-            {
-                moveForward(0.25);
-            }
+            double var = robot.pipeline1.getError() * 0.0052;
+            moveRight(-var);
 
-            stopMotors();
         }
-        else
+        stopMotors();
+
+        turnToPID(90);
+
+
+        while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8)
         {
-            while(opModeIsActive() && robot.pipeline2.getError() != 0)
-            {
-                double var = robot.pipeline2.getError() * 0.0042;
-                moveRight(-var);
-                while(robot.getLeftFront().isBusy())
-                {
-                    if (Math.abs(robot.getLeftFront().getPower() ) < .2)
-                        stopMotors();
-                }
-            }
+            moveForward(.35);
+        }
+        stopMotors();
+
+
+        robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
+
+        Thread.sleep(300);
+
+
+        servoArmsHigh();
+        robot.getFourBar().setPosition(0.75);
+      //  Thread.sleep(500);
+
+
+      //  robot.getTwister().setPosition(robot.getTwisterUpPos());
+
+        while (opModeIsActive() && Math.abs(69 - getAbsoluteAngle()) > 1) {
+
+            fieldCentricMove(-0.08, 0.92, 0.2);
+
+        }
+        stopMotors();
+
+        turnToPole(300, 0.2);
+        robot.getTwister().setPosition(robot.getTwisterUpPos());
+
+        robot.pipeline1.doCones(true);
+        while (robot.getPoleDetector().getDistance(DistanceUnit.CM) > 4) {
+            moveBackward(0.2);
+        }
+        stopMotors();
+
+
+        fourBarBack();
+        robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
+
+        while (opModeIsActive() && Math.abs(90 - getAbsoluteAngle()) > 1) {
+
+            fieldCentricMove(0.15, -0.2, -0.2);
+
+        }
+        stopMotors();
+
+        turnToPID(90);
+
+        robot.getFourBar().setPosition(robot.getBarFrontPos());
+        robot.getArmLeft().setPosition(robot.getArm1StackPos3());
+        robot.getArmRight().setPosition(robot.getArm2StackPos3());
+        robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
+        robot.getTwister().setPosition(robot.getTwisterDownPos());
+
+        Thread.sleep(800);
+
+//        robot aligns itself with the stack of cones
+        while(opModeIsActive() && robot.pipeline1.getError() != 0)
+        {
+            double var = robot.pipeline1.getError() * 0.0052;
+            moveRight(-var);
+
+        }
+        stopMotors();
+
+        turnToPID(90);
+
+
+        while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8)
+        {
+            moveForward(.35);
+        }
+        stopMotors();
+
+
+        robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
+
+        Thread.sleep(500);
+
+
+        servoArmsHigh();
+        robot.getFourBar().setPosition(0.75);
+       // Thread.sleep(500);
+
+
+      //  robot.getTwister().setPosition(robot.getTwisterUpPos());
+
+        while (opModeIsActive() && Math.abs(69 - getAbsoluteAngle()) > 1) {
+
+            fieldCentricMove(-0.08, 0.92, 0.2);
+
+        }
+        stopMotors();
+
+        turnToPole(300, 0.2);
+        robot.getTwister().setPosition(robot.getTwisterUpPos());
+        robot.pipeline1.doCones(true);
+        while (robot.getPoleDetector().getDistance(DistanceUnit.CM) > 4) {
+            moveBackward(0.2);
+        }
+        stopMotors();
+
+        fourBarBack();
+        robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
+
+        while (opModeIsActive() && Math.abs(90 - getAbsoluteAngle()) > 1) {
+
+            fieldCentricMove(0.15, -0.2, -0.2);
+
+        }
+        stopMotors();
+
+        Thread.sleep(800);
+
+//        robot aligns itself with the stack of cones
+        while(opModeIsActive() && robot.pipeline1.getError() != 0)
+        {
+            double var = robot.pipeline1.getError() * 0.0052;
+            moveRight(-var);
+
+        }
+        stopMotors();
+        robot.pipeline1.doCones(false);
+
+
+        turnToPID(90);
+
+
+        if (parkLocation == 1) {
+            moveForward(0.6, 400);
             stopMotors();
-        }
+        } else if (parkLocation == 2) {
+            moveBackward(0.6,150);
+            stopMotors();
 
-
-
-
-            robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
-
-            Thread.sleep(300);
-
-
-            servoArmsHigh();
-            robot.getFourBar().setPosition(0.75);
-            Thread.sleep(300);
-
-
-            robot.getTwister().setPosition(robot.getTwisterUpPos());
-
+        } else if (parkLocation == 3) {
+            moveBackward(0.6,800);
+            stopMotors();
 
         }
+
 
     }
+
+
+
+}

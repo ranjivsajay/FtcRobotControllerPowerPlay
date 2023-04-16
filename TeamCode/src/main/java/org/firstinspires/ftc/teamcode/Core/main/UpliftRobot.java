@@ -16,6 +16,7 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 //import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread;
 //import org.firstinspires.ftc.teamcode.Core.Threads.OperatorThread;
 import org.firstinspires.ftc.teamcode.Core.toolkit.vision.ConesPipeline;
+import org.firstinspires.ftc.teamcode.Core.toolkit.vision.MainVisionDrive;
 import org.firstinspires.ftc.teamcode.Core.toolkit.vision.PowerPlay;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
@@ -56,8 +57,8 @@ public class UpliftRobot
 //    double arm1TransferPos = .91;
 //    double arm2TransferPos = .09;
 
-    double arm1PickUpPos = .6;
-    double arm2PickUpPos = .4;
+    double arm1PickUpPos = .63;
+    double arm2PickUpPos = .37;
 
     double arm1StackPos4 = arm1PickUpPos - 0.03;
     double arm2StackPos4 = arm2PickUpPos + 0.03;
@@ -115,8 +116,7 @@ public class UpliftRobot
 
 
 
-    public PowerPlay pipeline1;
-    public ConesPipeline pipeline2;
+    public MainVisionDrive pipeline1;
 
     public LinearOpMode opMode;
     public HardwareMap hardwareMap;
@@ -210,10 +210,10 @@ public class UpliftRobot
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
 
-        pipeline1 = new PowerPlay(opMode.telemetry);
-        pipeline2 = new ConesPipeline();
+        pipeline1 = new MainVisionDrive(opMode.telemetry);
 
-        webcam.setPipeline(pipeline2);
+
+        webcam.setPipeline(pipeline1);
 
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override

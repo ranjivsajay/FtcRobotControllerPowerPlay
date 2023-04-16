@@ -66,11 +66,11 @@ public class TeleOp1 extends UpliftTele {
     public void bodyLoop() throws InterruptedException {
 
        // telemetry.addData("error:" , robot.pipeline2.getError());
-     //   telemetry.addData("grabber pos" , robot.getFourBar().getPosition());
-     //   telemetry.update();
-
-//        telemetry.addData("cone distance sensor" , robot.getConeDetector().getDistance(DistanceUnit.CM));
+//        telemetry.addData("grabber pos" , robot.getFourBar().getPosition());
 //        telemetry.update();
+
+        telemetry.addData("pole distance sensor" , robot.getPoleDetector().getDistance(DistanceUnit.MM));
+        telemetry.update();
 
         double leftY = (.7 * Range.clip(-gamepad1.left_stick_y, -1, 1));
         double rightX = (.7 * Range.clip(gamepad1.right_stick_x, -1, 1));
