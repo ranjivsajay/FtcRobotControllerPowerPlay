@@ -21,84 +21,82 @@ import org.firstinspires.ftc.teamcode.Core.toolkit.vision.ConesPipeline;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
 @Autonomous(name = "OdoLeftMiddle", group = "Opmodes")
-public class OdoLeftMiddle extends UpliftAutoImpl
-{
-
+public class OdoLeftMiddle extends UpliftAutoImpl {
 
 
     @Override
-        public void initAction() {
+    public void initAction() {
 
-            robot.getFourBar().setPosition(.75);
+        robot.getFourBar().setPosition(.75);
 
-            robot.getArmLeft().setPosition(robot.getArmLeftLowPos());
-            robot.getArmRight().setPosition(robot.getArmRightLowPos());
+        robot.getArmLeft().setPosition(robot.getArmLeftLowPos());
+        robot.getArmRight().setPosition(robot.getArmRightLowPos());
 
-            robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
-            robot.getTwister().setPosition(robot.getTwisterDownPos());
+        robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
+        robot.getTwister().setPosition(robot.getTwisterDownPos());
 
-            robot.getOdoMid().setPosition(robot.getOdoMidDown());
+        robot.getOdoMid().setPosition(robot.getOdoMidDown());
+
+    }
+
+    @Override
+    public void body() throws InterruptedException {
+
+        int parkLocation = robot.pipeline1.location;
+        robot.getWebcam().setPipeline(robot.pipeline2);
+
+        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+
+        // Pose2d startPose = new Pose2d(-63, 36, Math.toRadians(0));
+        Pose2d startPose = new Pose2d(0, 0, Math.toRadians(0));
+        drive.setPoseEstimate(startPose);
+
+        while (opModeIsActive() && Math.abs(92 - getAbsoluteAngle()) > 1) {
+
+            fieldCentricMove(0.6, 0.18, -0.3);
+            servoArmsHigh();
+            robot.getTwister().setPosition(robot.getTwisterUpPos());
 
         }
+        stopMotors();
 
-        @Override
-        public void body() throws InterruptedException {
+        Trajectory traj1 = drive.trajectoryBuilder(startPose)
+                .strafeRight(11)
+                .build();
+        drive.followTrajectory(traj1);
 
-            int parkLocation = robot.pipeline1.location;
-            robot.getWebcam().setPipeline(robot.pipeline2);
+        turnToPole(300, 0.2);
 
-            SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+        while (robot.getPoleDetector().getDistance(DistanceUnit.CM) > 4) {
+            moveBackward(0.2);
+        }
+        stopMotors();
 
-            // Pose2d startPose = new Pose2d(-63, 36, Math.toRadians(0));
-            Pose2d startPose = new Pose2d(0, 0, Math.toRadians(0));
-            drive.setPoseEstimate(startPose);
+        robot.getFourBar().setPosition(robot.getBarBackPos());
+        robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
 
-            while (opModeIsActive() && Math.abs(92 - getAbsoluteAngle()) > 1) {
+        Thread.sleep(500);
 
-                fieldCentricMove(0.6, 0.18, -0.3);
-                servoArmsHigh();
-                robot.getTwister().setPosition(robot.getTwisterUpPos());
+        Trajectory traj2 = drive.trajectoryBuilder(traj1.end(), Math.toRadians(90))
+                .forward(4)
+                .build();
+        drive.followTrajectory(traj2);
 
-            }
-            stopMotors();
+        Trajectory traj3 = drive.trajectoryBuilder(traj2.end())
+                .strafeRight(6)
+                .build();
+        drive.followTrajectory(traj3);
 
-            Trajectory traj1 = drive.trajectoryBuilder(startPose)
-                    .strafeRight(11)
-                    .build();
-            drive.followTrajectory(traj1);
+        turnToPID(90);
 
-            turnToPole(300, 0.2);
+        robot.getFourBar().setPosition(robot.getBarFrontPos());
+        robot.getArmLeft().setPosition(robot.getArm1StackPos5());
+        robot.getArmRight().setPosition(robot.getArm2StackPos5());
+        robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
+        robot.getTwister().setPosition(robot.getTwisterDownPos());
 
-            while (robot.getPoleDetector().getDistance(DistanceUnit.CM) > 4) {
-                moveBackward(0.2);
-            }
-            stopMotors();
-
-            robot.getFourBar().setPosition(robot.getBarBackPos());
-            robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
-
-            Thread.sleep(500);
-
-            Trajectory traj2 = drive.trajectoryBuilder(traj1.end(), Math.toRadians(90))
-                    .forward(4)
-                    .build();
-            drive.followTrajectory(traj2);
-
-            Trajectory traj3 = drive.trajectoryBuilder(traj2.end())
-                    .strafeRight(6)
-                    .build();
-            drive.followTrajectory(traj3);
-
-            turnToPID(90);
-
-            robot.getFourBar().setPosition(robot.getBarFrontPos());
-            robot.getArmLeft().setPosition(robot.getArm1StackPos5());
-            robot.getArmRight().setPosition(robot.getArm2StackPos5());
-            robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
-            robot.getTwister().setPosition(robot.getTwisterDownPos());
-
-            sleep(1000);
-            robot.getWebcam().setPipeline(robot.pipeline2);
+        sleep(1000);
+        robot.getWebcam().setPipeline(robot.pipeline2);
 
 
 //            if (robot.getConeDetector().getDistance(DistanceUnit.CM) < 54) {
@@ -110,44 +108,46 @@ public class OdoLeftMiddle extends UpliftAutoImpl
 //                stopMotors();
 //            }
 
-            //robot aligns itself with the stack of cones
+        //robot aligns itself with the stack of cones
+        while(opModeIsActive() && robot.pipeline2.getError() != 0)
+        {
+            double var = robot.pipeline2.getError() * 0.0042;
+            moveRight(-var);
+            while(robot.getLeftFront().isBusy())
+            {
+                if (Math.abs(robot.getLeftFront().getPower() ) < .2)
+                    stopMotors();
+            }
+
+        }
+        stopMotors();
+
+
+        if(robot.pipeline2.getError() == 0)
+        {
+            while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8)
+            {
+                moveForward(0.25);
+            }
+
+            stopMotors();
+        }
+        else
+        {
             while(opModeIsActive() && robot.pipeline2.getError() != 0)
             {
                 double var = robot.pipeline2.getError() * 0.0042;
                 moveRight(-var);
-//                while(robot.getLeftFront().isBusy())
-//                {
-//                    if (Math.abs(robot.getLeftFront().getPower() ) < .2)
-//                        stopMotors();
-//                }
-
+                while(robot.getLeftFront().isBusy())
+                {
+                    if (Math.abs(robot.getLeftFront().getPower() ) < .2)
+                        stopMotors();
+                }
             }
             stopMotors();
+        }
 
 
-            if(robot.pipeline2.getError() == 0)
-            {
-                while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8)
-                {
-                    moveForward(0.25);
-                }
-
-                stopMotors();
-            }
-            else
-            {
-                while(opModeIsActive() && robot.pipeline2.getError() != 0)
-                {
-                    double var = robot.pipeline2.getError() * 0.0042;
-                    moveRight(-var);
-//                    while(robot.getLeftFront().isBusy())
-//                    {
-//                        if (Math.abs(robot.getLeftFront().getPower() ) < .2)
-//                            stopMotors();
-//                    }
-                }
-                stopMotors();
-            }
 
 
 
@@ -188,8 +188,7 @@ public class OdoLeftMiddle extends UpliftAutoImpl
             stopMotors();
 
             //robot aligns itself with the stack of cones
-            while(opModeIsActive() && robot.pipeline2.getError() != 0)
-            {
+            while (opModeIsActive() && robot.pipeline2.getError() != 0) {
                 double var = robot.pipeline2.getError() * 0.0042;
                 moveRight(-var);
             }
@@ -206,29 +205,46 @@ public class OdoLeftMiddle extends UpliftAutoImpl
             sleep(300);
 
 
-            if(robot.pipeline2.getError() == 0)
+        while(opModeIsActive() && robot.pipeline2.getError() != 0)
+        {
+            double var = robot.pipeline2.getError() * 0.0042;
+            moveRight(-var);
+            while(robot.getLeftFront().isBusy())
             {
-                while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8)
-                {
-                    moveForward(0.25);
-                }
+                if (Math.abs(robot.getLeftFront().getPower() ) < .2)
+                    stopMotors();
+            }
 
-                stopMotors();
-            }
-            else
+        }
+        stopMotors();
+
+
+        if(robot.pipeline2.getError() == 0)
+        {
+            while (robot.getConeDetector().getDistance(DistanceUnit.CM) > 8)
             {
-                while(opModeIsActive() && robot.pipeline2.getError() != 0)
-                {
-                    double var = robot.pipeline2.getError() * 0.0042;
-                    moveRight(-var);
-//                    while(robot.getLeftFront().isBusy())
-//                    {
-//                        if (Math.abs(robot.getLeftFront().getPower() ) < .2)
-//                            stopMotors();
-//                    }
-                }
-                stopMotors();
+                moveForward(0.25);
             }
+
+            stopMotors();
+        }
+        else
+        {
+            while(opModeIsActive() && robot.pipeline2.getError() != 0)
+            {
+                double var = robot.pipeline2.getError() * 0.0042;
+                moveRight(-var);
+                while(robot.getLeftFront().isBusy())
+                {
+                    if (Math.abs(robot.getLeftFront().getPower() ) < .2)
+                        stopMotors();
+                }
+            }
+            stopMotors();
+        }
+
+
+
 
             robot.getGrabber1().setPosition(robot.getGrabber1ClosePos());
 
@@ -243,26 +259,6 @@ public class OdoLeftMiddle extends UpliftAutoImpl
             robot.getTwister().setPosition(robot.getTwisterUpPos());
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
 
-}
+    }

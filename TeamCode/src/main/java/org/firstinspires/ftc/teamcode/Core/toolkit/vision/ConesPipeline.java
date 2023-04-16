@@ -1,10 +1,15 @@
 package org.firstinspires.ftc.teamcode.Core.toolkit.vision;;
 
 import static org.opencv.core.Core.inRange;
+import static org.opencv.core.Core.rotate;
 
 import android.os.Build;
 import android.util.Log;
 
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Point;
@@ -21,6 +26,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class ConesPipeline extends OpenCvPipeline {
+
+
     /*
    --------------------------------------------------------------------------------------------------------
    VISION FOR CONES
@@ -68,6 +75,7 @@ public class ConesPipeline extends OpenCvPipeline {
 
     @Override
     public Mat processFrame(Mat source0) {
+
         Mat submat = source0.submat(new Rect (0,0,800,200));
 
         Imgproc.cvtColor(submat, labCones, Imgproc.COLOR_RGB2YCrCb);
