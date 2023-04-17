@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.Core.toolkit.UpliftMath;
 import org.firstinspires.ftc.teamcode.Core.toolkit.vision.ConesPipeline;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
-@Autonomous(name = "OdoLeftMiddle", group = "Opmodes")
+@Autonomous(name = "LeftMiddle", group = "Opmodes")
 public class OdoLeftMiddle extends UpliftAutoImpl {
 
 
@@ -325,39 +325,61 @@ public class OdoLeftMiddle extends UpliftAutoImpl {
         Thread.sleep(800);
 
 //        robot aligns itself with the stack of cones
-        while(opModeIsActive() && robot.pipeline1.getError() != 0)
-        {
-            double var = robot.pipeline1.getError() * 0.0052;
-            moveRight(-var);
-
-        }
+//        while(opModeIsActive() && robot.pipeline1.getError() != 0)
+//        {
+//            double var = robot.pipeline1.getError() * 0.0052;
+//            moveRight(-var);
+//
+//        }
+//        stopMotors();
+//        robot.pipeline1.doCones(false);
         stopMotors();
-        robot.pipeline1.doCones(false);
-
 
         turnToPID(90);
 
-
+        telemetry.addData("starting if" , 1);
+//        telemetry.update();
         if (parkLocation == 1)
         {
-            moveForward(0.6, 500);
+//            moveForward(0.6, 300);
+            robot.getRightFront().setPower(.5);
+            robot.getLeftFront().setPower(.5);
+            robot.getRightBack().setPower(.5);
+            robot.getLeftBack().setPower(.5);
+            sleep(700);
+            stopMotors();
+            telemetry.addData("location1" , 1);
+//            telemetry.update();
 
         } else if (parkLocation == 2)
         {
-            moveBackward(0.6,150);
+//            moveBackward(0.6,150);
+            telemetry.addData("location 2" , 1);
+//            telemetry.update();
 
-        } else if (parkLocation == 3)
+        } else //(parkLocation == 3)
         {
-            moveRight(0.3, 500);
+//           moveBackward(.6,500);
+            robot.getRightFront().setPower(-.5);
+            robot.getLeftFront().setPower(-.5);
+            robot.getRightBack().setPower(-.5);
+            robot.getLeftBack().setPower(-.5);
+//            sleep(1000);
+            telemetry.addData("location3" , 1);
+//            telemetry.update();
         }
+        telemetry.addData("finish if" , 1);
+        telemetry.update();
+
+        sleep(3000);
         stopMotors();
 
 
-        while(opModeIsActive())
-        {
-            telemetry.addData("location", parkLocation);
-            telemetry.update();
-        }
+//        while(opModeIsActive())
+//        {
+//            telemetry.addData("finalLocation", parkLocation);
+////            telemetry.update();
+//        }
 
 
     }
