@@ -353,7 +353,12 @@ public class OdoLeftMiddle extends UpliftAutoImpl {
 
         } else if (parkLocation == 2)
         {
-//            moveBackward(0.6,150);
+            robot.getRightFront().setPower(-.5);
+            robot.getLeftFront().setPower(-.5);
+            robot.getRightBack().setPower(-.5);
+            robot.getLeftBack().setPower(-.5);
+            sleep(300);
+            stopMotors();
             telemetry.addData("location 2" , 1);
 //            telemetry.update();
 
@@ -364,7 +369,8 @@ public class OdoLeftMiddle extends UpliftAutoImpl {
             robot.getLeftFront().setPower(-.5);
             robot.getRightBack().setPower(-.5);
             robot.getLeftBack().setPower(-.5);
-//            sleep(1000);
+            sleep(1000);
+            stopMotors();
             telemetry.addData("location3" , 1);
 //            telemetry.update();
         }

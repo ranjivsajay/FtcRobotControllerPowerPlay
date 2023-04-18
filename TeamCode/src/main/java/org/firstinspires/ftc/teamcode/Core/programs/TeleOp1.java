@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread;
 import org.firstinspires.ftc.teamcode.Core.Threads.OperatorThread;
@@ -58,6 +59,7 @@ public class TeleOp1 extends UpliftTele {
 
         driverThread.start();
         operatorThread.start();
+        telemetry.addData("right stick y", gamepad2.right_stick_y);
 
     }
 
@@ -82,8 +84,10 @@ public class TeleOp1 extends UpliftTele {
         teleDrive(angle, magnitude, rightX, gamepad1.right_trigger, robot);
 
 
-        robot.getSlide1().setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
-        robot.getSlide2().setPower(Range.clip(-gamepad2.right_stick_y, -1, 1));
+//        robot.getSlide1().setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
+//        robot.getSlide2().setPower(Range.clip(-gamepad2.right_stick_y, -1, 1));
+
+
 
 
 //        reset6bar();

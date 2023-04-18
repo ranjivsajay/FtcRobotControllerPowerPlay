@@ -126,7 +126,7 @@ public class OperatorThread extends Thread
                     robot.getGrabber1().setPosition(robot.getGrabber1OpenPos());
                 }
 
-                
+
 
 //                robot.opMode.telemetry.addData("magnet", robot.getMagnet().isPressed());
 //                robot.opMode.telemetry.addData("odoRight" , robot.getOdoRight().getCurrentPosition());
